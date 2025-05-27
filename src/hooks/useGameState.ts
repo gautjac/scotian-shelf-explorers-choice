@@ -1,0 +1,93 @@
+
+import { useState, useCallback } from 'react';
+import { GameState, Language, MarineSpecies } from '../types';
+import { marineSpecies } from '../data/content';
+
+const initialGameState: GameState = {
+  currentScenarioId: 'plastic-pollution',
+  language: 'en',
+  completedScenarios: [],
+  speciesHealth: marineSpecies.reduce((acc, species) => ({
+    ...acc,
+    [species.id]: 'stable' as MarineSpecies['healthStatus']
+  }), {}),
+  sessionStartTime: Date.now(),
+  choicesMade: []
+};
+
+export const useGameState = () => {
+  const [gameState, setGameState] = useState<GameState>(initialGameState);
+
+  const updateLanguage = useCallback((language: Language['code']) => {
+    setGameState(prev => ({ ...prev, language }));
+  }, []);
+
+  const makeChoice = useCallback((scenarioId: string, choiceId: string, impact: 'positive' | 'negative' | 'neutral') => {
+    setGameState(prev => {
+      const newSpeciesHealth = { ...prev.speciesHealth };
+      
+      // Update species health based on choice impact
+      Object.keys(newSpeciesHealth).forEach(speciesId => {
+        if (impact === 'positive') {
+          if (newSpeciesHealth[speciesId] === 'critical') newSpeciesHealth[speciesId] = 'declining';
+          else if (newSpeciesHealth[speciesId] === 'declining') newSpeciesHealth[speciesId] = 'stable';
+          else if (newSpeciesHealth[speciesId] === 'stable') newSpeciesHealth[speciesId] = 'thriving';
+        } else if (impact === 'negative') {
+          if (newSpeciesHealth[speciesId] === 'thriving') newSpeciesHealth[speciesId] = 'stable';
+          else if (newSpeciesHealth[speciesId] === 'stable') newSpeciesHealth[speciesId] = 'declining';
+          else if (newSpeciesHealth[speciesId] === 'declining') newSpeciesHealth[speciesId] = 'critical';
+        }
+      });
+
+      return {
+        ...prev,
+        speciesHealth: newSpeciesHealth,
+        choicesMade: [...prev.choicesMade, {
+          scenarioId,
+          choiceId,
+          timestamp: Date.now()
+        }],
+        completedScenarios: [...prev.completedScenarios, scenarioId]
+      };
+    });
+  }, []);
+
+  const advanceScenario = useCallback((nextScenarioId?: string) => {
+    if (nextScenarioId) {
+      setGameState(prev => ({ ...prev, currentScenarioId: nextScenarioId }));
+    }
+  }, []);
+
+  const resetGame = useCallback(() => {
+    setGameState({
+      ...initialGameState,
+      language: gameState.language, // Keep current language
+      sessionStartTime: Date.now()
+    });
+  }, [gameState.language]);
+
+  const getCurrentSpecies = useCallback(() => {
+    return marineSpecies.map(species => ({
+      ...species,
+      healthStatus: gameState.speciesHealth[species.id]
+    }));
+  }, [gameState.speciesHealth]);
+
+  // Auto-reset after 3 minutes of inactivity (for kiosk mode)
+  const [lastActivity, setLastActivity] = useState(Date.now());
+
+  const trackActivity = useCallback(() => {
+    setLastActivity(Date.now());
+  }, []);
+
+  return {
+    gameState,
+    updateLanguage,
+    makeChoice,
+    advanceScenario,
+    resetGame,
+    getCurrentSpecies,
+    trackActivity,
+    lastActivity
+  };
+};
