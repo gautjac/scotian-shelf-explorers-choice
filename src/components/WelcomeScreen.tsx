@@ -10,21 +10,21 @@ interface WelcomeScreenProps {
 
 const welcomeText = {
   en: {
-    title: 'Your Choices, Their Future',
+    title: 'Guardians of the Scotian Shelf',
     subtitle: 'Discover how human actions impact marine life on the Scotian Shelf',
     description: 'Explore interactive scenarios and see how your decisions affect the ocean ecosystem off Nova Scotia\'s coast. Make choices, learn from consequences, and replay to discover different outcomes.',
     startButton: 'Begin Your Journey',
     instruction: 'Touch to start exploring'
   },
   fr: {
-    title: 'Vos choix, leur avenir',
+    title: 'Gardiens du plateau continental scotian',
     subtitle: 'Découvrez comment les actions humaines impactent la vie marine du plateau continental scotian',
     description: 'Explorez des scénarios interactifs et voyez comment vos décisions affectent l\'écosystème océanique au large des côtes de la Nouvelle-Écosse. Faites des choix, apprenez des conséquences et rejouez pour découvrir différents résultats.',
     startButton: 'Commencer votre voyage',
     instruction: 'Touchez pour commencer l\'exploration'
   },
   mi: {
-    title: 'Kil koqoey elkewek, nka ukamskusuwakon',
+    title: 'Ankamkewe\'k Kespukek',
     subtitle: 'Wejkukuom talimkewe\'k samqwanikatl Kespukek',
     description: 'Kjinuatukewey koqoey elkewek aq nemi\'j samqwan Kespukek. Koqoey kisi elkewek, kenuk wejkukewek, aq aqq nikma koqoey nemiwultimk.',
     startButton: 'Mawita\'n',
