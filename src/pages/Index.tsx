@@ -1,11 +1,10 @@
-
 import { useState, useEffect } from 'react';
 import { WelcomeScreen } from '../components/WelcomeScreen';
 import { ScenarioPreview } from '../components/ScenarioPreview';
 import { ScenarioCard } from '../components/ScenarioCard';
 import { ConsequenceModal } from '../components/ConsequenceModal';
 import { CompletionScreen } from '../components/CompletionScreen';
-import { SpeciesHealthBar } from '../components/SpeciesHealthBar';
+import { HealthMeters } from '../components/HealthMeters';
 import { LanguageSelector } from '../components/LanguageSelector';
 import { useGameState } from '../hooks/useGameState';
 import { scenarios } from '../data/content';
@@ -161,12 +160,12 @@ const Index = () => {
   if (gamePhase === 'playing' && currentScenario) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-[#0072A0] via-[#0C556B] to-[#0B424E] p-6 lg:p-8">
-        {/* Header with language selector and species health - optimized spacing */}
+        {/* Header with language selector and health meters - optimized spacing */}
         <div className="max-w-7xl mx-auto mb-10 lg:mb-12">
           <div className="flex flex-col xl:flex-row gap-8 items-start">
             <div className="flex-1">
-              <SpeciesHealthBar 
-                species={getCurrentSpecies()} 
+              <HealthMeters 
+                healthMetrics={gameState.healthMetrics} 
                 language={gameState.language}
               />
             </div>

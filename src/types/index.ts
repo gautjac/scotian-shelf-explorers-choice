@@ -31,11 +31,18 @@ export interface MarineSpecies {
   healthStatus: 'thriving' | 'stable' | 'declining' | 'critical';
 }
 
+export interface HealthMetrics {
+  ecosystem: number; // 0-100
+  economic: number;  // 0-100
+  community: number; // 0-100
+}
+
 export interface GameState {
   currentScenarioId: string;
   language: Language['code'];
   completedScenarios: string[];
   speciesHealth: Record<string, MarineSpecies['healthStatus']>;
+  healthMetrics: HealthMetrics;
   sessionStartTime: number;
   choicesMade: Array<{
     scenarioId: string;

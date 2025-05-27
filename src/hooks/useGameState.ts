@@ -1,6 +1,6 @@
 
 import { useState, useCallback } from 'react';
-import { GameState, Language, MarineSpecies } from '../types';
+import { GameState, Language, MarineSpecies, HealthMetrics } from '../types';
 import { marineSpecies } from '../data/content';
 
 const initialGameState: GameState = {
@@ -11,6 +11,11 @@ const initialGameState: GameState = {
     ...acc,
     [species.id]: 'stable' as MarineSpecies['healthStatus']
   }), {}),
+  healthMetrics: {
+    ecosystem: 70,
+    economic: 70,
+    community: 70
+  },
   sessionStartTime: Date.now(),
   choicesMade: []
 };
@@ -25,6 +30,7 @@ export const useGameState = () => {
   const makeChoice = useCallback((scenarioId: string, choiceId: string, impact: 'positive' | 'negative' | 'neutral') => {
     setGameState(prev => {
       const newSpeciesHealth = { ...prev.speciesHealth };
+      const newHealthMetrics = { ...prev.healthMetrics };
       
       // Update species health based on choice impact
       Object.keys(newSpeciesHealth).forEach(speciesId => {
@@ -39,9 +45,16 @@ export const useGameState = () => {
         }
       });
 
+      // Update health metrics based on choice impact
+      const impactValue = impact === 'positive' ? 10 : impact === 'negative' ? -10 : 0;
+      newHealthMetrics.ecosystem = Math.max(0, Math.min(100, newHealthMetrics.ecosystem + impactValue));
+      newHealthMetrics.economic = Math.max(0, Math.min(100, newHealthMetrics.economic + impactValue));
+      newHealthMetrics.community = Math.max(0, Math.min(100, newHealthMetrics.community + impactValue));
+
       return {
         ...prev,
         speciesHealth: newSpeciesHealth,
+        healthMetrics: newHealthMetrics,
         choicesMade: [...prev.choicesMade, {
           scenarioId,
           choiceId,
