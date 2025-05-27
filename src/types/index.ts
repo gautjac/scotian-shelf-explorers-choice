@@ -10,6 +10,8 @@ export interface Choice {
   text: string;
   impact: 'positive' | 'negative' | 'neutral';
   consequence: string;
+  pros: string;
+  cons: string;
   nextScenarioId?: string;
 }
 

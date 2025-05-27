@@ -66,20 +66,28 @@ const Index = () => {
     const choice = currentScenario?.choices.find(c => c.id === choiceId);
     if (choice) {
       setSelectedChoice(choice);
-      makeChoice(gameState.currentScenarioId, choiceId, choice.impact);
       setGamePhase('consequence');
     }
     trackActivity();
   };
 
-  const handleContinue = () => {
-    if (selectedChoice?.nextScenarioId) {
-      advanceScenario(selectedChoice.nextScenarioId);
-      setGamePhase('playing');
-    } else {
-      setGamePhase('completed');
+  const handleConfirmChoice = () => {
+    if (selectedChoice) {
+      makeChoice(gameState.currentScenarioId, selectedChoice.id, selectedChoice.impact);
+      if (selectedChoice.nextScenarioId) {
+        advanceScenario(selectedChoice.nextScenarioId);
+        setGamePhase('playing');
+      } else {
+        setGamePhase('completed');
+      }
+      setSelectedChoice(null);
     }
+    trackActivity();
+  };
+
+  const handleReturnToChoices = () => {
     setSelectedChoice(null);
+    setGamePhase('playing');
     trackActivity();
   };
 
@@ -165,7 +173,8 @@ const Index = () => {
         <ConsequenceModal
           choice={selectedChoice}
           language={gameState.language}
-          onContinue={handleContinue}
+          onConfirm={handleConfirmChoice}
+          onReturn={handleReturnToChoices}
           isVisible={true}
         />
       )}
