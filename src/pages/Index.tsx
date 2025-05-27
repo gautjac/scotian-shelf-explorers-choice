@@ -179,7 +179,7 @@ const Index = () => {
         </div>
 
         {/* Main scenario */}
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto mb-12">
           <ScenarioCard
             scenario={currentScenario}
             language={gameState.language}
@@ -187,24 +187,26 @@ const Index = () => {
           />
         </div>
 
-        {/* Action buttons - larger for touch */}
-        <div className="fixed bottom-8 right-8 flex flex-col gap-4">
-          <button
-            onClick={handleBackToPreview}
-            className="bg-[#0B424E]/30 backdrop-blur-sm text-white px-6 py-4 lg:px-8 lg:py-6 rounded-2xl font-medium text-base lg:text-lg hover:bg-[#0B424E]/40 active:bg-[#0B424E]/50 transition-colors duration-200 min-h-[60px] lg:min-h-[70px] shadow-lg"
-          >
-            {gameState.language === 'en' && 'Return to Scenarios'}
-            {gameState.language === 'fr' && 'Retour aux scénarios'}
-            {gameState.language === 'mi' && 'Kluskap koqoey'}
-          </button>
-          <button
-            onClick={handleRestart}
-            className="bg-[#0B424E]/30 backdrop-blur-sm text-white px-6 py-4 lg:px-8 lg:py-6 rounded-2xl font-medium text-base lg:text-lg hover:bg-[#0B424E]/40 active:bg-[#0B424E]/50 transition-colors duration-200 min-h-[60px] lg:min-h-[70px] shadow-lg"
-          >
-            {gameState.language === 'en' && 'Start Over'}
-            {gameState.language === 'fr' && 'Recommencer'}
-            {gameState.language === 'mi' && 'Pilei mawita\'sin'}
-          </button>
+        {/* Action buttons - moved under choices and centered */}
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <button
+              onClick={handleBackToPreview}
+              className="bg-[#0B424E]/30 backdrop-blur-sm text-white px-8 py-6 lg:px-10 lg:py-8 rounded-2xl font-medium text-lg lg:text-xl hover:bg-[#0B424E]/40 active:bg-[#0B424E]/50 transition-colors duration-200 min-h-[70px] lg:min-h-[80px] shadow-lg min-w-[200px] lg:min-w-[250px]"
+            >
+              {gameState.language === 'en' && 'Return to Scenarios'}
+              {gameState.language === 'fr' && 'Retour aux scénarios'}
+              {gameState.language === 'mi' && 'Kluskap koqoey'}
+            </button>
+            <button
+              onClick={handleRestart}
+              className="bg-[#0B424E]/30 backdrop-blur-sm text-white px-8 py-6 lg:px-10 lg:py-8 rounded-2xl font-medium text-lg lg:text-xl hover:bg-[#0B424E]/40 active:bg-[#0B424E]/50 transition-colors duration-200 min-h-[70px] lg:min-h-[80px] shadow-lg min-w-[200px] lg:min-w-[250px]"
+            >
+              {gameState.language === 'en' && 'Start Over'}
+              {gameState.language === 'fr' && 'Recommencer'}
+              {gameState.language === 'mi' && 'Pilei mawita\'sin'}
+            </button>
+          </div>
         </div>
       </div>
     );
