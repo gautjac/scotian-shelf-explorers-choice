@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { WelcomeScreen } from '../components/WelcomeScreen';
+import { ScenarioPreview } from '../components/ScenarioPreview';
 import { ScenarioCard } from '../components/ScenarioCard';
 import { ConsequenceModal } from '../components/ConsequenceModal';
 import { CompletionScreen } from '../components/CompletionScreen';
@@ -10,7 +11,7 @@ import { useGameState } from '../hooks/useGameState';
 import { scenarios } from '../data/content';
 import { Choice } from '../types';
 
-type GamePhase = 'welcome' | 'playing' | 'consequence' | 'completed';
+type GamePhase = 'welcome' | 'preview' | 'playing' | 'consequence' | 'completed';
 
 const Index = () => {
   const {
@@ -57,8 +58,18 @@ const Index = () => {
   const currentScenarios = scenarios[gameState.language];
   const currentScenario = currentScenarios?.find(s => s.id === gameState.currentScenarioId);
 
+  const handleShowPreview = () => {
+    setGamePhase('preview');
+    trackActivity();
+  };
+
   const handleStart = () => {
     setGamePhase('playing');
+    trackActivity();
+  };
+
+  const handleBackToWelcome = () => {
+    setGamePhase('welcome');
     trackActivity();
   };
 
@@ -107,7 +118,18 @@ const Index = () => {
       <WelcomeScreen
         currentLanguage={gameState.language}
         onLanguageChange={handleLanguageChange}
+        onStart={handleShowPreview}
+      />
+    );
+  }
+
+  if (gamePhase === 'preview') {
+    return (
+      <ScenarioPreview
+        scenarios={currentScenarios}
+        language={gameState.language}
         onStart={handleStart}
+        onBack={handleBackToWelcome}
       />
     );
   }
