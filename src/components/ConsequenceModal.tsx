@@ -17,7 +17,7 @@ const impactEmojis = {
 
 const impactColors = {
   positive: 'from-green-500 to-teal-600',
-  negative: 'from-red-500 to-orange-600',
+  negative: 'from-[#0072A0] to-[#0C556B]',
   neutral: 'from-blue-500 to-indigo-600'
 };
 
