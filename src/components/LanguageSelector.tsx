@@ -9,19 +9,27 @@ interface LanguageSelectorProps {
   className?: string;
 }
 
+const languageColors = {
+  mi: 'bg-[#FBD026] text-black hover:bg-[#FBD026]/90 active:bg-[#FBD026]/80', // Mi'kmaw - Yellow
+  en: 'bg-[#00AE9F] text-white hover:bg-[#00AE9F]/90 active:bg-[#00AE9F]/80', // English - Teal
+  fr: 'bg-[#AD4557] text-white hover:bg-[#AD4557]/90 active:bg-[#AD4557]/80'  // French - Red/Maroon
+};
+
 export const LanguageSelector = ({ currentLanguage, onLanguageChange, className = '' }: LanguageSelectorProps) => {
   return (
     <div className={`flex items-center gap-4 ${className}`}>
-      <Languages className="w-8 h-8 lg:w-10 lg:h-10 text-slate-600" />
+      <Languages className="w-8 h-8 lg:w-10 lg:h-10 text-white" />
       <div className="flex gap-3">
         {languages.map((lang) => (
           <button
             key={lang.code}
             onClick={() => onLanguageChange(lang.code)}
-            className={`px-6 py-4 lg:px-8 lg:py-5 rounded-xl text-lg lg:text-xl font-medium transition-all duration-200 min-h-[60px] lg:min-h-[70px] min-w-[100px] lg:min-w-[120px] ${
+            className={`w-[120px] h-[120px] lg:w-[140px] lg:h-[140px] rounded-lg text-lg lg:text-xl font-bold transition-all duration-200 shadow-lg ${
+              languageColors[lang.code]
+            } ${
               currentLanguage === lang.code
-                ? 'bg-blue-600 text-white shadow-md'
-                : 'bg-slate-200 text-slate-700 hover:bg-slate-300 active:bg-slate-400'
+                ? 'ring-4 ring-white/50 scale-105'
+                : ''
             }`}
           >
             {lang.nativeName}
