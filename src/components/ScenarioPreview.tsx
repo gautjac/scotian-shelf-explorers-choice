@@ -1,5 +1,6 @@
 
 import { Language, Scenario } from '../types';
+import { LanguageSelector } from './LanguageSelector';
 
 interface ScenarioPreviewProps {
   scenarios: Scenario[];
@@ -7,6 +8,7 @@ interface ScenarioPreviewProps {
   onStart: () => void;
   onBack: () => void;
   onScenarioSelect?: (scenarioId: string) => void;
+  onLanguageChange: (language: Language['code']) => void;
 }
 
 const previewText = {
@@ -36,7 +38,7 @@ const previewText = {
   }
 };
 
-export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenarioSelect }: ScenarioPreviewProps) => {
+export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenarioSelect, onLanguageChange }: ScenarioPreviewProps) => {
   const content = previewText[language];
   
   // Get first 5 scenarios
@@ -51,6 +53,15 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenar
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-900 via-blue-700 to-teal-600 p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
+        {/* Language selector at the top */}
+        <div className="mb-8 flex justify-center">
+          <LanguageSelector 
+            currentLanguage={language}
+            onLanguageChange={onLanguageChange}
+            className="bg-white/20 backdrop-blur-sm rounded-2xl p-6"
+          />
+        </div>
+
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl lg:text-6xl font-bold text-white mb-4">

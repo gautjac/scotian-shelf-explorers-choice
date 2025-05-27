@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { WelcomeScreen } from '../components/WelcomeScreen';
 import { ScenarioPreview } from '../components/ScenarioPreview';
@@ -141,6 +142,7 @@ const Index = () => {
         onStart={handleStart}
         onBack={handleBackToWelcome}
         onScenarioSelect={handleScenarioSelect}
+        onLanguageChange={handleLanguageChange}
       />
     );
   }
