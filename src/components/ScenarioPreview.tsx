@@ -51,14 +51,14 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenar
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-900 via-blue-700 to-teal-600 p-6 lg:p-8">
+    <div className="min-h-screen bg-gradient-to-b from-[#0B424E] via-[#0C556B] to-[#0072A0] p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Language selector at the top */}
         <div className="mb-8 flex justify-center">
           <LanguageSelector 
             currentLanguage={language}
             onLanguageChange={onLanguageChange}
-            className="bg-white/20 backdrop-blur-sm rounded-2xl p-6"
+            className="bg-[#0B424E]/30 backdrop-blur-sm rounded-2xl p-6"
           />
         </div>
 
@@ -67,14 +67,14 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenar
           <h1 className="text-4xl lg:text-6xl font-bold text-white mb-4">
             {content.title}
           </h1>
-          <p className="text-xl lg:text-2xl text-blue-100 mb-6">
+          <p className="text-xl lg:text-2xl text-[#CDE2ED] mb-6">
             {content.subtitle}
           </p>
-          <p className="text-lg lg:text-xl text-blue-200 mb-4">
+          <p className="text-lg lg:text-xl text-[#CDE2ED]/90 mb-4">
             {content.instruction}
           </p>
           {onScenarioSelect && (
-            <p className="text-base lg:text-lg text-blue-300">
+            <p className="text-base lg:text-lg text-[#CDE2ED]/80">
               {content.selectScenario}
             </p>
           )}
@@ -86,10 +86,10 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenar
             <div
               key={scenario.id}
               onClick={() => handleScenarioClick(scenario.id)}
-              className={`bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl transition-all duration-300 ${
+              className={`bg-[#0B424E]/20 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl transition-all duration-300 ${
                 onScenarioSelect 
-                  ? 'hover:bg-white/20 cursor-pointer transform hover:scale-105 active:scale-95' 
-                  : 'hover:bg-white/15'
+                  ? 'hover:bg-[#0B424E]/30 cursor-pointer transform hover:scale-105 active:scale-95' 
+                  : 'hover:bg-[#0B424E]/25'
               }`}
             >
               {/* Scenario Image */}
@@ -97,12 +97,12 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenar
                 className="h-48 bg-cover bg-center relative"
                 style={{ backgroundImage: `url(${scenario.imageUrl})` }}
               >
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                <div className="absolute top-4 left-4 bg-blue-600 text-white px-4 py-2 rounded-full font-semibold text-lg">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B424E]/80 to-transparent" />
+                <div className="absolute top-4 left-4 bg-[#0072A0] text-white px-4 py-2 rounded-full font-semibold text-lg">
                   {index + 1}
                 </div>
                 {onScenarioSelect && (
-                  <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium">
+                  <div className="absolute top-4 right-4 bg-[#CDE2ED]/30 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium">
                     Click to start
                   </div>
                 )}
@@ -113,7 +113,7 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenar
                 <h3 className="text-xl lg:text-2xl font-bold text-white mb-3">
                   {scenario.title}
                 </h3>
-                <p className="text-blue-100 text-base lg:text-lg leading-relaxed">
+                <p className="text-[#CDE2ED] text-base lg:text-lg leading-relaxed">
                   {scenario.description.length > 120 
                     ? `${scenario.description.substring(0, 120)}...`
                     : scenario.description
@@ -128,13 +128,13 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenar
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
           <button
             onClick={onBack}
-            className="bg-white/20 backdrop-blur-sm text-white px-12 py-6 lg:px-16 lg:py-8 rounded-full text-xl lg:text-2xl font-medium shadow-xl hover:bg-white/30 active:bg-white/40 transition-all duration-300 min-h-[80px] lg:min-h-[100px]"
+            className="bg-[#0B424E]/30 backdrop-blur-sm text-white px-12 py-6 lg:px-16 lg:py-8 rounded-full text-xl lg:text-2xl font-medium shadow-xl hover:bg-[#0B424E]/40 active:bg-[#0B424E]/50 transition-all duration-300 min-h-[80px] lg:min-h-[100px]"
           >
             {content.backButton}
           </button>
           <button
             onClick={onStart}
-            className="bg-white text-blue-900 px-16 py-6 lg:px-20 lg:py-8 rounded-full text-xl lg:text-2xl font-bold shadow-2xl hover:shadow-3xl transform hover:scale-105 active:scale-95 transition-all duration-300 hover:bg-blue-50 min-h-[80px] lg:min-h-[100px]"
+            className="bg-white text-[#0B424E] px-16 py-6 lg:px-20 lg:py-8 rounded-full text-xl lg:text-2xl font-bold shadow-2xl hover:shadow-3xl transform hover:scale-105 active:scale-95 transition-all duration-300 hover:bg-[#CDE2ED] min-h-[80px] lg:min-h-[100px]"
           >
             {content.startButton}
           </button>

@@ -160,7 +160,7 @@ const Index = () => {
 
   if (gamePhase === 'playing' && currentScenario) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-blue-600 via-blue-700 to-blue-900 p-6 lg:p-8">
+      <div className="min-h-screen bg-gradient-to-b from-[#0072A0] via-[#0C556B] to-[#0B424E] p-6 lg:p-8">
         {/* Header with language selector and species health - optimized spacing */}
         <div className="max-w-7xl mx-auto mb-10 lg:mb-12">
           <div className="flex flex-col xl:flex-row gap-8 items-start">
@@ -173,7 +173,7 @@ const Index = () => {
             <LanguageSelector 
               currentLanguage={gameState.language}
               onLanguageChange={handleLanguageChange}
-              className="bg-white/20 backdrop-blur-sm rounded-2xl p-6"
+              className="bg-[#0B424E]/30 backdrop-blur-sm rounded-2xl p-6"
             />
           </div>
         </div>
@@ -191,7 +191,7 @@ const Index = () => {
         <div className="fixed bottom-8 right-8 flex flex-col gap-4">
           <button
             onClick={handleBackToPreview}
-            className="bg-white/20 backdrop-blur-sm text-white px-6 py-4 lg:px-8 lg:py-6 rounded-2xl font-medium text-base lg:text-lg hover:bg-white/30 active:bg-white/40 transition-colors duration-200 min-h-[60px] lg:min-h-[70px] shadow-lg"
+            className="bg-[#0B424E]/30 backdrop-blur-sm text-white px-6 py-4 lg:px-8 lg:py-6 rounded-2xl font-medium text-base lg:text-lg hover:bg-[#0B424E]/40 active:bg-[#0B424E]/50 transition-colors duration-200 min-h-[60px] lg:min-h-[70px] shadow-lg"
           >
             {gameState.language === 'en' && 'Return to Scenarios'}
             {gameState.language === 'fr' && 'Retour aux scénarios'}
@@ -199,7 +199,7 @@ const Index = () => {
           </button>
           <button
             onClick={handleRestart}
-            className="bg-white/20 backdrop-blur-sm text-white px-6 py-4 lg:px-8 lg:py-6 rounded-2xl font-medium text-base lg:text-lg hover:bg-white/30 active:bg-white/40 transition-colors duration-200 min-h-[60px] lg:min-h-[70px] shadow-lg"
+            className="bg-[#0B424E]/30 backdrop-blur-sm text-white px-6 py-4 lg:px-8 lg:py-6 rounded-2xl font-medium text-base lg:text-lg hover:bg-[#0B424E]/40 active:bg-[#0B424E]/50 transition-colors duration-200 min-h-[60px] lg:min-h-[70px] shadow-lg"
           >
             {gameState.language === 'en' && 'Start Over'}
             {gameState.language === 'fr' && 'Recommencer'}
