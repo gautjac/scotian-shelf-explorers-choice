@@ -8,9 +8,9 @@ interface ScenarioCardProps {
 }
 
 const impactColors = {
-  positive: 'bg-green-500 hover:bg-green-600',
-  negative: 'bg-red-500 hover:bg-red-600',
-  neutral: 'bg-blue-500 hover:bg-blue-600'
+  positive: 'bg-[#008BBF] hover:bg-[#008BBF]/90 text-white', // Ocean blue for positive
+  negative: 'bg-[#B22222] hover:bg-[#B22222]/90 text-white', // Maroon for negative  
+  neutral: 'bg-[#0C556B] hover:bg-[#0C556B]/90 text-white'   // Teal for neutral
 };
 
 export const ScenarioCard = ({ scenario, language, onChoiceSelect }: ScenarioCardProps) => {
@@ -42,7 +42,7 @@ export const ScenarioCard = ({ scenario, language, onChoiceSelect }: ScenarioCar
             <button
               key={choice.id}
               onClick={() => onChoiceSelect(choice.id)}
-              className={`w-full p-8 lg:p-10 rounded-2xl text-white font-semibold text-left transition-all duration-300 transform hover:scale-102 shadow-xl active:scale-98 ${impactColors[choice.impact]} min-h-[120px] lg:min-h-[140px]`}
+              className={`w-full p-8 lg:p-10 rounded-2xl font-semibold text-left transition-all duration-300 transform hover:scale-102 shadow-xl active:scale-98 ${impactColors[choice.impact]} min-h-[120px] lg:min-h-[140px]`}
             >
               <div className="flex items-center justify-between">
                 <span className="text-xl lg:text-2xl leading-relaxed pr-4">{choice.text}</span>
