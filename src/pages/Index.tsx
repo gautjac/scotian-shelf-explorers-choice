@@ -117,10 +117,10 @@ const Index = () => {
 
   if (gamePhase === 'playing' && currentScenario) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-blue-600 via-blue-700 to-blue-900 p-4">
-        {/* Header with language selector and species health */}
-        <div className="max-w-6xl mx-auto mb-8">
-          <div className="flex flex-col lg:flex-row gap-6 items-start">
+      <div className="min-h-screen bg-gradient-to-b from-blue-600 via-blue-700 to-blue-900 p-6 lg:p-8">
+        {/* Header with language selector and species health - optimized spacing */}
+        <div className="max-w-7xl mx-auto mb-10 lg:mb-12">
+          <div className="flex flex-col xl:flex-row gap-8 items-start">
             <div className="flex-1">
               <SpeciesHealthBar 
                 species={getCurrentSpecies()} 
@@ -130,13 +130,13 @@ const Index = () => {
             <LanguageSelector 
               currentLanguage={gameState.language}
               onLanguageChange={handleLanguageChange}
-              className="bg-white/20 backdrop-blur-sm rounded-xl p-4"
+              className="bg-white/20 backdrop-blur-sm rounded-2xl p-6"
             />
           </div>
         </div>
 
         {/* Main scenario */}
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <ScenarioCard
             scenario={currentScenario}
             language={gameState.language}
@@ -144,11 +144,11 @@ const Index = () => {
           />
         </div>
 
-        {/* Reset button */}
-        <div className="fixed bottom-6 right-6">
+        {/* Reset button - larger for touch */}
+        <div className="fixed bottom-8 right-8">
           <button
             onClick={handleRestart}
-            className="bg-white/20 backdrop-blur-sm text-white px-6 py-3 rounded-xl font-medium hover:bg-white/30 transition-colors duration-200"
+            className="bg-white/20 backdrop-blur-sm text-white px-8 py-6 lg:px-10 lg:py-8 rounded-2xl font-medium text-lg lg:text-xl hover:bg-white/30 active:bg-white/40 transition-colors duration-200 min-h-[70px] lg:min-h-[80px] shadow-lg"
           >
             {gameState.language === 'en' && 'Start Over'}
             {gameState.language === 'fr' && 'Recommencer'}
