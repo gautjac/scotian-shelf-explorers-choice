@@ -6,6 +6,7 @@ interface ScenarioPreviewProps {
   language: Language['code'];
   onStart: () => void;
   onBack: () => void;
+  onScenarioSelect?: (scenarioId: string) => void;
 }
 
 const previewText = {
@@ -14,29 +15,38 @@ const previewText = {
     subtitle: 'Preview the scenarios you\'ll encounter',
     startButton: 'Start Your Adventure',
     backButton: 'Back to Welcome',
-    instruction: 'You\'ll make important decisions in each scenario'
+    instruction: 'You\'ll make important decisions in each scenario',
+    selectScenario: 'Click on any scenario to start there'
   },
   fr: {
     title: 'Votre voyage océanique vous attend',
     subtitle: 'Aperçu des scénarios que vous rencontrerez',
     startButton: 'Commencer votre aventure',
     backButton: 'Retour à l\'accueil',
-    instruction: 'Vous prendrez des décisions importantes dans chaque scénario'
+    instruction: 'Vous prendrez des décisions importantes dans chaque scénario',
+    selectScenario: 'Cliquez sur un scénario pour commencer là'
   },
   mi: {
     title: 'Samqwan alasutmaqan petkik',
     subtitle: 'Nemi\'j koqoey ketu nemitultine\'k',
     startButton: 'Mawita\'n kiskukewey',
     backButton: 'Apijiw piluei',
-    instruction: 'Msit koqoey ketu elkewek'
+    instruction: 'Msit koqoey ketu elkewek',
+    selectScenario: 'Pekowsin koqoey mawita\'si\'k'
   }
 };
 
-export const ScenarioPreview = ({ scenarios, language, onStart, onBack }: ScenarioPreviewProps) => {
+export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenarioSelect }: ScenarioPreviewProps) => {
   const content = previewText[language];
   
   // Get first 5 scenarios
   const previewScenarios = scenarios.slice(0, 5);
+
+  const handleScenarioClick = (scenarioId: string) => {
+    if (onScenarioSelect) {
+      onScenarioSelect(scenarioId);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-900 via-blue-700 to-teal-600 p-6 lg:p-8">
@@ -49,9 +59,14 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack }: Scenar
           <p className="text-xl lg:text-2xl text-blue-100 mb-6">
             {content.subtitle}
           </p>
-          <p className="text-lg lg:text-xl text-blue-200">
+          <p className="text-lg lg:text-xl text-blue-200 mb-4">
             {content.instruction}
           </p>
+          {onScenarioSelect && (
+            <p className="text-base lg:text-lg text-blue-300">
+              {content.selectScenario}
+            </p>
+          )}
         </div>
 
         {/* Scenario Grid */}
@@ -59,7 +74,12 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack }: Scenar
           {previewScenarios.map((scenario, index) => (
             <div
               key={scenario.id}
-              className="bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl hover:bg-white/15 transition-all duration-300"
+              onClick={() => handleScenarioClick(scenario.id)}
+              className={`bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl transition-all duration-300 ${
+                onScenarioSelect 
+                  ? 'hover:bg-white/20 cursor-pointer transform hover:scale-105 active:scale-95' 
+                  : 'hover:bg-white/15'
+              }`}
             >
               {/* Scenario Image */}
               <div 
@@ -70,6 +90,11 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack }: Scenar
                 <div className="absolute top-4 left-4 bg-blue-600 text-white px-4 py-2 rounded-full font-semibold text-lg">
                   {index + 1}
                 </div>
+                {onScenarioSelect && (
+                  <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium">
+                    Click to start
+                  </div>
+                )}
               </div>
 
               {/* Scenario Content */}

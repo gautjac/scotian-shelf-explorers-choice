@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { WelcomeScreen } from '../components/WelcomeScreen';
 import { ScenarioPreview } from '../components/ScenarioPreview';
@@ -73,6 +72,17 @@ const Index = () => {
     trackActivity();
   };
 
+  const handleBackToPreview = () => {
+    setGamePhase('preview');
+    trackActivity();
+  };
+
+  const handleScenarioSelect = (scenarioId: string) => {
+    advanceScenario(scenarioId);
+    setGamePhase('playing');
+    trackActivity();
+  };
+
   const handleChoiceSelect = (choiceId: string) => {
     const choice = currentScenario?.choices.find(c => c.id === choiceId);
     if (choice) {
@@ -130,6 +140,7 @@ const Index = () => {
         language={gameState.language}
         onStart={handleStart}
         onBack={handleBackToWelcome}
+        onScenarioSelect={handleScenarioSelect}
       />
     );
   }
@@ -174,11 +185,19 @@ const Index = () => {
           />
         </div>
 
-        {/* Reset button - larger for touch */}
-        <div className="fixed bottom-8 right-8">
+        {/* Action buttons - larger for touch */}
+        <div className="fixed bottom-8 right-8 flex flex-col gap-4">
+          <button
+            onClick={handleBackToPreview}
+            className="bg-white/20 backdrop-blur-sm text-white px-6 py-4 lg:px-8 lg:py-6 rounded-2xl font-medium text-base lg:text-lg hover:bg-white/30 active:bg-white/40 transition-colors duration-200 min-h-[60px] lg:min-h-[70px] shadow-lg"
+          >
+            {gameState.language === 'en' && 'Return to Scenarios'}
+            {gameState.language === 'fr' && 'Retour aux scénarios'}
+            {gameState.language === 'mi' && 'Kluskap koqoey'}
+          </button>
           <button
             onClick={handleRestart}
-            className="bg-white/20 backdrop-blur-sm text-white px-8 py-6 lg:px-10 lg:py-8 rounded-2xl font-medium text-lg lg:text-xl hover:bg-white/30 active:bg-white/40 transition-colors duration-200 min-h-[70px] lg:min-h-[80px] shadow-lg"
+            className="bg-white/20 backdrop-blur-sm text-white px-6 py-4 lg:px-8 lg:py-6 rounded-2xl font-medium text-base lg:text-lg hover:bg-white/30 active:bg-white/40 transition-colors duration-200 min-h-[60px] lg:min-h-[70px] shadow-lg"
           >
             {gameState.language === 'en' && 'Start Over'}
             {gameState.language === 'fr' && 'Recommencer'}
