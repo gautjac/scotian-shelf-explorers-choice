@@ -1,6 +1,7 @@
 
 import { Languages } from 'lucide-react';
-import { languages, Language } from '../data/content';
+import { languages } from '../data/content';
+import { Language } from '../types';
 
 interface LanguageSelectorProps {
   currentLanguage: Language['code'];
