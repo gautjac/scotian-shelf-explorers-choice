@@ -9,7 +9,7 @@ interface ScenarioCardProps {
 
 const impactColors = {
   positive: 'bg-[#008BBF] hover:bg-[#008BBF]/90 text-white', // Ocean blue for positive
-  negative: 'bg-[#B22222] hover:bg-[#B22222]/90 text-white', // Maroon for negative  
+  negative: 'bg-[#0C556B] hover:bg-[#0C556B]/90 text-white', // Dark teal instead of red
   neutral: 'bg-[#0C556B] hover:bg-[#0C556B]/90 text-white'   // Teal for neutral
 };
 
