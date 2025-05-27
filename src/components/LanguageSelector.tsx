@@ -11,8 +11,8 @@ interface LanguageSelectorProps {
 
 const languageColors = {
   mi: 'bg-[#FBD026] text-black hover:bg-[#FBD026]/90 active:bg-[#FBD026]/80', // Mi'kmaw - Yellow
-  en: 'bg-[#0072A0] text-white hover:bg-[#0072A0]/90 active:bg-[#0072A0]/80', // English - Deep blue from palette
-  fr: 'bg-[#0B424E] text-white hover:bg-[#0B424E]/90 active:bg-[#0B424E]/80'  // French - Dark teal from palette
+  en: 'bg-[#00AE9F] text-white hover:bg-[#00AE9F]/90 active:bg-[#00AE9F]/80', // English - Teal from image
+  fr: 'bg-[#AD4557] text-white hover:bg-[#AD4557]/90 active:bg-[#AD4557]/80'  // French - Maroon from image
 };
 
 export const LanguageSelector = ({ currentLanguage, onLanguageChange, className = '' }: LanguageSelectorProps) => {
