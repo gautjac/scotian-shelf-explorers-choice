@@ -1,4 +1,3 @@
-
 import { LanguageSelector } from './LanguageSelector';
 import { Language } from '../types';
 
@@ -11,17 +10,17 @@ interface WelcomeScreenProps {
 const welcomeText = {
   en: {
     title: 'Guardians of the Scotian Shelf',
-    subtitle: 'Discover how human actions impact marine life on the Scotian Shelf',
-    description: 'Explore interactive scenarios and see how your decisions affect the ocean ecosystem off Nova Scotia\'s coast. Make choices, learn from consequences, and replay to discover different outcomes.',
-    startButton: 'Begin Your Journey',
-    instruction: 'Touch to start exploring'
+    subtitle: 'See how people affect sea life near Nova Scotia',
+    description: 'Play games and see how your choices change ocean animals off Nova Scotia\'s coast. Make choices, learn what happens, and play again to try different things.',
+    startButton: 'Start Playing',
+    instruction: 'Touch to start'
   },
   fr: {
     title: 'Gardiens du plateau continental scotian',
-    subtitle: 'Découvrez comment les actions humaines impactent la vie marine du plateau continental scotian',
-    description: 'Explorez des scénarios interactifs et voyez comment vos décisions affectent l\'écosystème océanique au large des côtes de la Nouvelle-Écosse. Faites des choix, apprenez des conséquences et rejouez pour découvrir différents résultats.',
-    startButton: 'Commencer votre voyage',
-    instruction: 'Touchez pour commencer l\'exploration'
+    subtitle: 'Découvrez comment les gens affectent la vie marine près de la Nouvelle-Écosse',
+    description: 'Jouez à des jeux et voyez comment vos choix changent les animaux océaniques au large des côtes de la Nouvelle-Écosse. Faites des choix, apprenez ce qui arrive et rejouez pour essayer différentes choses.',
+    startButton: 'Commencer à jouer',
+    instruction: 'Touchez pour commencer'
   },
   mi: {
     title: 'Ankamkewe\'k Kespukek',

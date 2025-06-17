@@ -25,26 +25,26 @@ export const ConsequenceModal = ({ choice, language, onConfirm, onReturn, isVisi
   if (!isVisible) return null;
 
   const confirmText = {
-    en: 'Confirm Choice',
-    fr: 'Confirmer le choix',
+    en: 'Yes I Choose This',
+    fr: 'Oui je choisis cela',
     mi: 'Ketu\'k koqoey'
   };
 
   const returnText = {
-    en: 'Back to Choices',
+    en: 'Go Back to Choices',
     fr: 'Retour aux choix',
     mi: 'Eykisk koqoey elkewey'
   };
 
   const prosText = {
-    en: 'Positive Impact',
-    fr: 'Impact positif',
+    en: 'Good Things',
+    fr: 'Bonnes choses',
     mi: 'Weli koqoey'
   };
 
   const consText = {
-    en: 'Negative Impact',
-    fr: 'Impact négatif',
+    en: 'Bad Things',
+    fr: 'Mauvaises choses',
     mi: 'Maw koqoey'
   };
 
@@ -55,8 +55,8 @@ export const ConsequenceModal = ({ choice, language, onConfirm, onReturn, isVisi
           <div className="text-8xl lg:text-9xl mb-8">{impactEmojis[choice.impact]}</div>
           
           <h3 className="text-3xl lg:text-4xl xl:text-5xl font-bold mb-10 lg:mb-12">
-            {language === 'en' && 'Consider the Consequences'}
-            {language === 'fr' && 'Considérez les conséquences'}
+            {language === 'en' && 'Think About What Happens'}
+            {language === 'fr' && 'Pensez à ce qui arrive'}
             {language === 'mi' && 'Ankweyul koqoey wejkukewek'}
           </h3>
 

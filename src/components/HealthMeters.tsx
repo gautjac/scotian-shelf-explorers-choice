@@ -19,16 +19,16 @@ const getHealthStatus = (value: number, language: 'en' | 'fr' | 'mi') => {
   
   const statusText = {
     en: {
-      thriving: 'Thriving',
-      stable: 'Stable',
-      declining: 'Declining',
-      critical: 'Critical'
+      thriving: 'Doing Great',
+      stable: 'Doing OK',
+      declining: 'Not Good',
+      critical: 'Very Bad'
     },
     fr: {
-      thriving: 'Prospère',
-      stable: 'Stable',
-      declining: 'En déclin',
-      critical: 'Critique'
+      thriving: 'Très bien',
+      stable: 'Ça va',
+      declining: 'Pas bon',
+      critical: 'Très mauvais'
     },
     mi: {
       thriving: 'Pilei',
@@ -57,14 +57,14 @@ const getIcon = (type: string) => {
 export const HealthMeters = ({ healthMetrics, language }: HealthMetersProps) => {
   const labels = {
     en: {
-      ecosystem: 'Ecosystem Health',
-      economic: 'Economic Health',
-      community: 'Community Health'
+      ecosystem: 'Animals & Plants Health',
+      economic: 'Money & Jobs Health',
+      community: 'People\'s Health'
     },
     fr: {
-      ecosystem: 'Santé écosystémique',
-      economic: 'Santé économique',
-      community: 'Santé communautaire'
+      ecosystem: 'Santé des animaux et plantes',
+      economic: 'Santé de l\'argent et des emplois',
+      community: 'Santé des gens'
     },
     mi: {
       ecosystem: 'Ukamkinu\'kuom samqwan',
@@ -76,8 +76,8 @@ export const HealthMeters = ({ healthMetrics, language }: HealthMetersProps) => 
   return (
     <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 lg:p-12 shadow-2xl">
       <h3 className="text-2xl lg:text-4xl xl:text-5xl font-bold text-slate-700 mb-8 lg:mb-12 text-center">
-        {language === 'en' && 'Marine Health Status'}
-        {language === 'fr' && 'État de santé marine'}
+        {language === 'en' && 'How Healthy is the Ocean'}
+        {language === 'fr' && 'Comment va l\'océan'}
         {language === 'mi' && 'Samqwanikatl ukamkinu\'kuom'}
       </h3>
       

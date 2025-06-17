@@ -1,4 +1,3 @@
-
 import { Language, Scenario } from '../types';
 import { LanguageSelector } from './LanguageSelector';
 
@@ -13,20 +12,20 @@ interface ScenarioPreviewProps {
 
 const previewText = {
   en: {
-    title: 'Your Ocean Journey Awaits',
-    subtitle: 'Preview the scenarios you\'ll encounter',
-    startButton: 'Start Your Adventure',
-    backButton: 'Back to Welcome',
-    instruction: 'You\'ll make important decisions in each scenario',
-    selectScenario: 'Click on any scenario to start there'
+    title: 'Your Ocean Adventure',
+    subtitle: 'Look at what you will do',
+    startButton: 'Start Adventure',
+    backButton: 'Go Back',
+    instruction: 'You will make important choices',
+    selectScenario: 'Click on any story to start there'
   },
   fr: {
-    title: 'Votre voyage océanique vous attend',
-    subtitle: 'Aperçu des scénarios que vous rencontrerez',
-    startButton: 'Commencer votre aventure',
-    backButton: 'Retour à l\'accueil',
-    instruction: 'Vous prendrez des décisions importantes dans chaque scénario',
-    selectScenario: 'Cliquez sur un scénario pour commencer là'
+    title: 'Votre aventure océanique',
+    subtitle: 'Regardez ce que vous ferez',
+    startButton: 'Commencer l\'aventure',
+    backButton: 'Retourner',
+    instruction: 'Vous ferez des choix importants',
+    selectScenario: 'Cliquez sur une histoire pour commencer'
   },
   mi: {
     title: 'Samqwan alasutmaqan petkik',

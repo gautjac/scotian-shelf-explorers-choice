@@ -19,16 +19,16 @@ const getHealthStatus = (value: number, language: 'en' | 'fr' | 'mi') => {
   
   const statusText = {
     en: {
-      thriving: 'Thriving',
-      stable: 'Stable',
-      declining: 'Declining',
-      critical: 'Critical'
+      thriving: 'Doing Great',
+      stable: 'Doing OK',
+      declining: 'Not Good',
+      critical: 'Very Bad'
     },
     fr: {
-      thriving: 'Prospère',
-      stable: 'Stable',
-      declining: 'En déclin',
-      critical: 'Critique'
+      thriving: 'Très bien',
+      stable: 'Ça va',
+      declining: 'Pas bon',
+      critical: 'Très mauvais'
     },
     mi: {
       thriving: 'Pilei',
@@ -57,14 +57,14 @@ const getIcon = (type: string) => {
 export const CompactHealthMeters = ({ healthMetrics, language }: CompactHealthMetersProps) => {
   const labels = {
     en: {
-      ecosystem: 'Ecosystem',
-      economic: 'Economic',
-      community: 'Community'
+      ecosystem: 'Animals & Plants',
+      economic: 'Money & Jobs',
+      community: 'People'
     },
     fr: {
-      ecosystem: 'Écosystème',
-      economic: 'Économique',
-      community: 'Communauté'
+      ecosystem: 'Animaux et plantes',
+      economic: 'Argent et emplois',
+      community: 'Gens'
     },
     mi: {
       ecosystem: 'Ukamkinu\'kuom',
@@ -76,8 +76,8 @@ export const CompactHealthMeters = ({ healthMetrics, language }: CompactHealthMe
   return (
     <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
       <h3 className="text-xl font-bold text-slate-700 mb-6 text-center">
-        {language === 'en' && 'Marine Health'}
-        {language === 'fr' && 'Santé marine'}
+        {language === 'en' && 'Ocean Health'}
+        {language === 'fr' && 'Santé océanique'}
         {language === 'mi' && 'Samqwan ukamkinu\'kuom'}
       </h3>
       

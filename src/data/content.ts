@@ -37,241 +37,241 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
   en: [
     {
       id: 'plastic-pollution',
-      title: 'Plastic in Our Waters',
-      description: 'You notice plastic waste washing up on the shores of Nova Scotia. Marine animals are getting tangled in debris and mistaking plastic for food. What action should be taken?',
+      title: 'Plastic in the Water',
+      description: 'You see plastic trash washing up on the beach. Sea animals are getting stuck in it and eating it by mistake. What should we do?',
       imageUrl: 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=600',
       choices: [
         {
           id: 'ban-plastics',
-          text: 'Support a ban on single-use plastics',
+          text: 'Stop using plastic bags and bottles',
           impact: 'positive',
-          consequence: 'Great choice! Reducing plastic waste helps protect marine life. Fish, whales, and seabirds are safer when there\'s less plastic in the ocean.',
-          pros: 'Eliminates major source of marine pollution, protects wildlife from entanglement and ingestion, reduces microplastics in food chain',
-          cons: 'May increase costs for businesses and consumers, requires adjustment period for alternative products',
+          consequence: 'Great choice! Less plastic trash means sea animals are safer. Fish, whales, and birds won\'t get hurt by plastic.',
+          pros: 'No more plastic hurting sea animals, cleaner water for everyone',
+          cons: 'People have to use different bags and bottles that might cost more',
           nextScenarioId: 'fishing-practices'
         },
         {
           id: 'ignore-problem',
-          text: 'Continue using plastics as usual',
+          text: 'Keep using plastic like before',
           impact: 'negative',
-          consequence: 'This choice harms marine life. More animals get injured by plastic debris, and the ocean ecosystem becomes polluted.',
-          pros: 'No immediate economic disruption, maintains current convenience levels',
-          cons: 'Continued harm to marine animals, worsening ocean pollution, long-term environmental and economic costs',
+          consequence: 'This hurts sea animals. More animals get hurt by plastic trash, and the ocean gets dirtier.',
+          pros: 'People don\'t have to change what they do',
+          cons: 'Sea animals keep getting hurt, ocean gets more polluted',
           nextScenarioId: 'fishing-practices'
         },
         {
           id: 'beach-cleanup',
-          text: 'Organize beach cleanup events',
+          text: 'Clean up the beach with friends',
           impact: 'positive',
-          consequence: 'Excellent! Community action makes a real difference. Every piece of plastic removed protects marine animals.',
-          pros: 'Immediate positive impact, builds community awareness, educates public about pollution',
-          cons: 'Only addresses existing waste, doesn\'t prevent new pollution, requires ongoing volunteer commitment',
+          consequence: 'Great idea! When we pick up trash, we help sea animals stay safe.',
+          pros: 'Helps sea animals right away, teaches people about keeping beaches clean',
+          cons: 'Only cleans up old trash, doesn\'t stop new trash from coming',
           nextScenarioId: 'fishing-practices'
         }
       ]
     },
     {
       id: 'fishing-practices',
-      title: 'Sustainable Fishing',
-      description: 'Fishing is important for Nova Scotia\'s economy, but overfishing threatens marine species like Atlantic cod. How should fishing be managed?',
+      title: 'Catching Fish',
+      description: 'Fishing gives people jobs and food. But catching too many fish means there won\'t be enough fish left. How should we fish?',
       imageUrl: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600',
       choices: [
         {
           id: 'sustainable-quotas',
-          text: 'Set sustainable fishing quotas',
+          text: 'Only catch a certain number of fish',
           impact: 'positive',
-          consequence: 'Wise decision! Sustainable fishing allows fish populations to recover while maintaining the fishing industry.',
-          pros: 'Ensures long-term fish population health, maintains fishing industry viability, supports ecosystem balance',
-          cons: 'May reduce short-term fishing profits, requires strict monitoring and enforcement',
+          consequence: 'Smart choice! This way there will always be fish in the ocean and people can keep fishing.',
+          pros: 'Fish families can grow, people can fish forever',
+          cons: 'Fishers might make less money at first',
           nextScenarioId: 'shipping-traffic'
         },
         {
           id: 'unlimited-fishing',
-          text: 'Allow unlimited fishing',
+          text: 'Catch as many fish as you want',
           impact: 'negative',
-          consequence: 'This depletes fish stocks. Species like cod struggle to reproduce, harming the entire food chain.',
-          pros: 'Maximum short-term economic benefit for fishing industry, no restrictions on fishing operations',
-          cons: 'Leads to overfishing and species collapse, destroys marine ecosystem, eliminates future fishing opportunities',
+          consequence: 'This means all the fish will be gone. Baby fish can\'t grow up, and soon there won\'t be any fish left.',
+          pros: 'Fishers make more money right now',
+          cons: 'All the fish disappear, no more fishing jobs later',
           nextScenarioId: 'shipping-traffic'
         },
         {
           id: 'marine-reserves',
-          text: 'Create marine protected areas',
+          text: 'Make safe places where fish can\'t be caught',
           impact: 'positive',
-          consequence: 'Perfect! Protected areas serve as nurseries where marine life can thrive and populations can recover.',
-          pros: 'Creates safe breeding grounds, allows ecosystem recovery, supports biodiversity conservation',
-          cons: 'Restricts fishing access to certain areas, may require compensation for affected fishers',
+          consequence: 'Perfect! These safe spots are like fish nurseries where baby fish can grow up safely.',
+          pros: 'Safe places for fish to have babies, more fish everywhere',
+          cons: 'Some fishers can\'t fish in those spots',
           nextScenarioId: 'shipping-traffic'
         }
       ]
     },
     {
       id: 'shipping-traffic',
-      title: 'Busy Shipping Lanes',
-      description: 'Heavy ship traffic through Halifax Harbor and the Scotian Shelf poses risks to marine mammals, especially endangered North Atlantic Right Whales. What measures should be taken?',
+      title: 'Big Ships and Whales',
+      description: 'Many big ships sail near Nova Scotia. Sometimes they hit whales by accident. The whales are in danger. What can we do?',
       imageUrl: 'https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=600',
       choices: [
         {
           id: 'speed-restrictions',
-          text: 'Implement ship speed limits in whale areas',
+          text: 'Make ships go slower near whales',
           impact: 'positive',
-          consequence: 'Excellent choice! Slower ships give whales time to avoid collisions and reduce fatal strikes.',
-          pros: 'Significantly reduces whale deaths from ship strikes, allows whales time to detect and avoid ships',
-          cons: 'Increases shipping time and costs, may affect delivery schedules and port efficiency',
+          consequence: 'Great idea! Slow ships give whales time to get out of the way.',
+          pros: 'Saves whale lives, whales have time to swim away',
+          cons: 'Ships take longer to deliver things, costs more money',
           nextScenarioId: 'ocean-acidification'
         },
         {
           id: 'ignore-whales',
-          text: 'Maintain current shipping speeds',
+          text: 'Let ships go as fast as they want',
           impact: 'negative',
-          consequence: 'This increases whale deaths from ship strikes. The endangered Right Whale population continues to decline.',
-          pros: 'Maintains efficient shipping operations and economic benefits, no additional costs or delays',
-          cons: 'Continues threat to endangered whale species, may lead to species extinction, damages marine ecosystem',
+          consequence: 'This hurts whales. More whales get hit by ships and die.',
+          pros: 'Ships can deliver things quickly and cheaply',
+          cons: 'Whales keep dying, they might all disappear',
           nextScenarioId: 'ocean-acidification'
         },
         {
           id: 'detection-systems',
-          text: 'Install whale detection technology on ships',
+          text: 'Put whale detectors on ships',
           impact: 'positive',
-          consequence: 'Smart solution! Early warning systems help ships avoid whales and reduce harmful noise pollution.',
-          pros: 'Advanced technology provides real-time whale detection, reduces both strikes and noise pollution',
-          cons: 'High initial technology costs, requires training for ship crews, technology may not be 100% reliable',
+          consequence: 'Smart thinking! Special computers can warn ships when whales are near.',
+          pros: 'Ships know where whales are, less noise hurts whales',
+          cons: 'Costs money to buy the computers, crews need to learn how to use them',
           nextScenarioId: 'ocean-acidification'
         }
       ]
     },
     {
       id: 'ocean-acidification',
-      title: 'Ocean Chemistry Changes',
-      description: 'The ocean is absorbing more carbon dioxide from the atmosphere, making it more acidic. This affects shellfish like lobsters and scallops that build shells. How can we address this?',
+      title: 'Sour Ocean Water',
+      description: 'The ocean is getting more sour because of pollution in the air. This makes it hard for lobsters and other shelled animals to grow. What can we do?',
       imageUrl: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600',
       choices: [
         {
           id: 'reduce-emissions',
-          text: 'Support carbon emission reductions',
+          text: 'Make less air pollution',
           impact: 'positive',
-          consequence: 'Great choice! Less CO2 in the atmosphere means less ocean acidification, protecting shellfish and coral.',
-          pros: 'Addresses root cause of acidification, benefits entire ocean ecosystem, supports climate goals',
-          cons: 'Requires significant economic and lifestyle changes, takes time to see results',
+          consequence: 'Excellent! Less dirty air means the ocean stays healthy for lobsters and other sea animals.',
+          pros: 'Helps the whole ocean, good for all sea animals',
+          cons: 'People have to change how they do things, takes time to work',
           nextScenarioId: 'renewable-energy'
         },
         {
           id: 'ignore-acidity',
-          text: 'Continue current emission levels',
+          text: 'Keep making the same amount of pollution',
           impact: 'negative',
-          consequence: 'Ocean acidification worsens. Lobsters and other shellfish struggle to build strong shells, affecting the food chain.',
-          pros: 'No immediate economic disruption, maintains current industrial practices',
-          cons: 'Continued damage to shell-building marine life, threatens fishing industry, worsens climate change',
+          consequence: 'The ocean gets more sour. Lobsters can\'t make strong shells, and they get sick.',
+          pros: 'People don\'t have to change anything',
+          cons: 'Sea animals with shells get sick, fishing gets harder',
           nextScenarioId: 'renewable-energy'
         },
         {
           id: 'buffer-zones',
-          text: 'Create alkaline buffer zones',
+          text: 'Add special chemicals to help the water',
           impact: 'neutral',
-          consequence: 'This experimental approach shows promise but needs more research. Local improvements are possible but limited.',
-          pros: 'May provide local protection for sensitive areas, innovative approach to the problem',
-          cons: 'Unproven technology, high costs, limited scope, doesn\'t address underlying cause',
+          consequence: 'This might work but we need to test it more. It could help some small areas.',
+          pros: 'Might help some places, trying new ideas',
+          cons: 'We don\'t know if it really works, costs a lot, only helps small areas',
           nextScenarioId: 'renewable-energy'
         }
       ]
     },
     {
       id: 'renewable-energy',
-      title: 'Offshore Wind Power',
-      description: 'Nova Scotia is developing offshore wind farms to generate clean energy. However, construction and operation might affect marine life. What\'s the best approach?',
+      title: 'Wind Power in the Ocean',
+      description: 'Nova Scotia wants to build big wind machines in the ocean to make clean electricity. But building them might bother sea animals. What\'s the best way?',
       imageUrl: 'https://images.unsplash.com/photo-1441057206919-63d19fac2369?w=600',
       choices: [
         {
           id: 'careful-planning',
-          text: 'Plan wind farms to avoid sensitive habitats',
+          text: 'Plan carefully to avoid hurting sea animals',
           impact: 'positive',
-          consequence: 'Excellent planning! Clean energy development that protects whale migration routes and fish spawning areas.',
-          pros: 'Balances clean energy needs with marine protection, minimizes environmental impact',
-          cons: 'May limit optimal placement locations, increases planning time and costs',
+          consequence: 'Great planning! We can make clean energy and keep whale roads and fish homes safe.',
+          pros: 'Clean energy that doesn\'t hurt sea animals',
+          cons: 'Takes more time to plan, might cost more money',
           nextScenarioId: 'coastal-development'
         },
         {
           id: 'no-renewables',
-          text: 'Reject offshore wind development',
+          text: 'Don\'t build wind machines in the ocean',
           impact: 'negative',
-          consequence: 'Without clean energy, fossil fuel use continues, worsening climate change and ocean warming.',
-          pros: 'No disruption to marine habitats from wind farm construction',
-          cons: 'Continued reliance on fossil fuels, missed opportunity for clean energy, worsens climate change',
+          consequence: 'Without clean energy, we keep burning dirty fuel that makes the ocean warmer.',
+          pros: 'No building bothers sea animals',
+          cons: 'Keep using dirty energy, ocean gets warmer and sicker',
           nextScenarioId: 'coastal-development'
         },
         {
           id: 'adaptive-technology',
-          text: 'Use fish-friendly turbine designs',
+          text: 'Build special wind machines that help fish',
           impact: 'positive',
-          consequence: 'Smart innovation! New turbine designs reduce noise and provide artificial reef habitat for marine life.',
-          pros: 'Innovative technology minimizes marine impact, may actually benefit some marine species',
-          cons: 'Higher development costs, newer technology may have unknown long-term effects',
+          consequence: 'Cool idea! New designs are quieter and can become homes for fish.',
+          pros: 'Helps some sea animals, makes less noise',
+          cons: 'Costs more money, we don\'t know all the effects yet',
           nextScenarioId: 'coastal-development'
         }
       ]
     },
     {
       id: 'coastal-development',
-      title: 'Coastal Community Growth',
-      description: 'Coastal communities in Nova Scotia are growing, bringing more development near the shore. This can affect water quality and marine habitats. How should development proceed?',
+      title: 'Building Near the Beach',
+      description: 'More people want to live near the beach in Nova Scotia. Building houses and stores can make the water dirty. How should we build?',
       imageUrl: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=600',
       choices: [
         {
           id: 'green-development',
-          text: 'Require sustainable coastal development',
+          text: 'Build in ways that keep water clean',
           impact: 'positive',
-          consequence: 'Wonderful! Green building practices protect water quality and preserve coastal ecosystems for future generations.',
-          pros: 'Protects water quality and marine habitats, ensures sustainable growth, sets positive precedent',
-          cons: 'Higher development costs, may slow growth pace, requires stricter regulations and oversight'
+          consequence: 'Wonderful! Building green keeps the water clean and saves homes for sea animals.',
+          pros: 'Clean water, safe homes for sea animals, good for the future',
+          cons: 'Costs more money to build, takes longer'
         },
         {
           id: 'unrestricted-development',
-          text: 'Allow unrestricted coastal building',
+          text: 'Build anywhere people want',
           impact: 'negative',
-          consequence: 'Runoff and pollution from development degrades water quality, harming fish nurseries and coastal habitats.',
-          pros: 'Faster economic growth, lower development costs, fewer regulatory barriers',
-          cons: 'Degrades water quality, destroys marine habitats, creates long-term environmental problems'
+          consequence: 'Dirty water runs into the ocean and hurts fish homes and baby fish areas.',
+          pros: 'Builds faster and cheaper, more jobs right away',
+          cons: 'Dirty water, sea animals lose their homes'
         },
         {
           id: 'buffer-zones-coastal',
-          text: 'Create protective buffer zones',
+          text: 'Leave empty space between buildings and water',
           impact: 'positive',
-          consequence: 'Great strategy! Buffer zones filter runoff and provide habitat corridors connecting land and sea ecosystems.',
-          pros: 'Natural filtration system, preserves wildlife corridors, provides flood protection',
-          cons: 'Reduces available development land, may increase property values and development costs'
+          consequence: 'Great idea! These empty spaces clean dirty water and give animals paths to move.',
+          pros: 'Natural water cleaner, animals can move safely',
+          cons: 'Less space to build, might make houses cost more'
         }
       ],
       isEnding: true
     },
     {
       id: 'climate-change',
-      title: 'Ocean Temperature Rising',
-      description: 'Climate change is warming the Atlantic Ocean, affecting where fish live and coral growth. What can help address this challenge?',
+      title: 'Ocean Getting Warmer',
+      description: 'The ocean is getting warmer because of air pollution. This makes fish move to different places. What can help fix this?',
       imageUrl: 'https://images.unsplash.com/photo-1441057206919-63d19fac2369?w=600',
       choices: [
         {
           id: 'renewable-energy',
-          text: 'Invest in renewable energy',
+          text: 'Use wind and sun power instead of dirty fuel',
           impact: 'positive',
-          consequence: 'Excellent choice! Wind and solar power reduce carbon emissions, helping slow ocean warming.',
-          pros: 'Reduces greenhouse gas emissions, creates clean energy jobs, helps stabilize ocean temperatures',
-          cons: 'High initial investment costs, requires infrastructure changes, intermittent energy source'
+          consequence: 'Excellent! Clean energy makes less dirty air, so the ocean stays cooler.',
+          pros: 'Less dirty air, new clean energy jobs, cooler ocean',
+          cons: 'Costs a lot of money to start, weather affects power'
         },
         {
           id: 'ignore-climate',
-          text: 'Continue burning fossil fuels',
+          text: 'Keep using dirty fuel like coal and oil',
           impact: 'negative',
-          consequence: 'This accelerates ocean warming. Marine species must migrate to survive, disrupting the ecosystem.',
-          pros: 'No immediate change to current energy systems, maintains existing economic structures',
-          cons: 'Accelerates climate change, forces marine species migration, disrupts entire ocean ecosystem'
+          consequence: 'This makes the ocean warmer. Fish have to swim far away to find cool water.',
+          pros: 'Don\'t have to change how we make energy',
+          cons: 'Ocean gets too warm, fish move away, sea animals get sick'
         },
         {
           id: 'carbon-capture',
-          text: 'Support ocean carbon capture',
+          text: 'Plant sea grass and protect wetlands',
           impact: 'positive',
-          consequence: 'Great thinking! Protecting coastal wetlands and kelp forests helps absorb carbon from the atmosphere.',
-          pros: 'Natural carbon storage, protects coastal ecosystems, multiple environmental benefits',
-          cons: 'Limited capacity compared to emission scale, requires large protected areas, slow process'
+          consequence: 'Smart thinking! Sea plants and wetlands suck up dirty air from the sky.',
+          pros: 'Nature cleans the air, protects sea animal homes',
+          cons: 'Can only clean a little bit, takes a long time, needs big areas'
         }
       ],
       isEnding: true

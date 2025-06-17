@@ -1,4 +1,3 @@
-
 import { LanguageSelector } from './LanguageSelector';
 import { Language } from '../types';
 
@@ -11,20 +10,20 @@ interface CompletionScreenProps {
 
 const completionText = {
   en: {
-    title: 'Journey Complete!',
-    subtitle: 'You\'ve experienced how human choices impact the Scotian Shelf marine ecosystem',
-    message: 'Every decision we make affects the delicate balance of ocean life. From plastic pollution to sustainable fishing, your choices today shape the future of marine conservation.',
-    encouragement: 'Want to explore different outcomes? Try making different choices and see how they change the ecosystem.',
-    restartButton: 'Start New Journey',
-    choicesTitle: 'Your Impact'
+    title: 'You Did It!',
+    subtitle: 'You learned how people\'s choices affect sea animals near Nova Scotia',
+    message: 'Every choice we make changes ocean life. Things like plastic trash and fishing affect sea animals. Your choices today help decide what happens to the ocean tomorrow.',
+    encouragement: 'Want to see what happens with different choices? Try again and pick different things to see how they change the ocean.',
+    restartButton: 'Play Again',
+    choicesTitle: 'How You Did'
   },
   fr: {
-    title: 'Voyage terminé!',
-    subtitle: 'Vous avez découvert comment les choix humains impactent l\'écosystème marin du plateau continental scotian',
-    message: 'Chaque décision que nous prenons affecte l\'équilibre délicat de la vie océanique. De la pollution plastique à la pêche durable, vos choix d\'aujourd\'hui façonnent l\'avenir de la conservation marine.',
-    encouragement: 'Voulez-vous explorer différents résultats? Essayez de faire des choix différents et voyez comment ils changent l\'écosystème.',
-    restartButton: 'Nouveau voyage',
-    choicesTitle: 'Votre impact'
+    title: 'Vous avez réussi!',
+    subtitle: 'Vous avez appris comment les choix des gens affectent les animaux marins près de la Nouvelle-Écosse',
+    message: 'Chaque choix que nous faisons change la vie océanique. Des choses comme les déchets plastiques et la pêche affectent les animaux marins. Vos choix d\'aujourd\'hui aident à décider ce qui arrive à l\'océan demain.',
+    encouragement: 'Voulez-vous voir ce qui arrive avec différents choix? Essayez encore et choisissez différentes choses pour voir comment elles changent l\'océan.',
+    restartButton: 'Jouer encore',
+    choicesTitle: 'Comment vous avez fait'
   },
   mi: {
     title: 'Ankamkewey kespek!',
@@ -70,9 +69,9 @@ export const CompletionScreen = ({ language, onLanguageChange, onRestart, choice
             {positiveChoices.length >= 2 ? '🌊💚' : positiveChoices.length === 1 ? '🌊💛' : '🌊💔'}
           </div>
           <p className="text-blue-100 text-lg">
-            {positiveChoices.length >= 2 && (language === 'en' ? 'Excellent work! Your choices promote healthy marine ecosystems.' : language === 'fr' ? 'Excellent travail! Vos choix favorisent des écosystèmes marins sains.' : 'Kelu wetulti\'k! Kil koqoey elkewek pilei samqwanikatl ukepmikatl.')}
-            {positiveChoices.length === 1 && (language === 'en' ? 'Good effort! Some of your choices help marine conservation.' : language === 'fr' ? 'Bon effort! Certains de vos choix aident la conservation marine.' : 'Pilei wetulti\'k! Apjiw kil koqoey elkewek kepmikatl samqwanikatl.')}
-            {positiveChoices.length === 0 && (language === 'en' ? 'Try again with different choices to see positive outcomes for marine life.' : language === 'fr' ? 'Essayez à nouveau avec des choix différents pour voir des résultats positifs pour la vie marine.' : 'Aqq nikma koqoey elkewek pilei samqwanikatl ukepmikatil.')}
+            {positiveChoices.length >= 2 && (language === 'en' ? 'Great job! Your choices help keep the ocean healthy.' : language === 'fr' ? 'Excellent travail! Vos choix aident à garder l\'océan en bonne santé.' : 'Kelu wetulti\'k! Kil koqoey elkewek pilei samqwanikatl ukepmikatl.')}
+            {positiveChoices.length === 1 && (language === 'en' ? 'Good work! Some of your choices help sea animals.' : language === 'fr' ? 'Bon travail! Certains de vos choix aident les animaux marins.' : 'Pilei wetulti\'k! Apjiw kil koqoey elkewek kepmikatl samqwanikatl.')}
+            {positiveChoices.length === 0 && (language === 'en' ? 'Try again with different choices to help sea animals more.' : language === 'fr' ? 'Essayez encore avec différents choix pour aider davantage les animaux marins.' : 'Aqq nikma koqoey elkewek pilei samqwanikatl ukepmikatil.')}
           </p>
         </div>
 
