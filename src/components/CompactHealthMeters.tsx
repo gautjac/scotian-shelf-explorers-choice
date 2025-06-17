@@ -85,7 +85,7 @@ export const CompactHealthMeters = ({ healthMetrics, language }: CompactHealthMe
         {Object.entries(healthMetrics).map(([key, value]) => (
           <div key={key} className="flex items-center gap-4">
             {/* Icon */}
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-slate-600 to-slate-800 border-2 border-white shadow-lg flex items-center justify-center flex-shrink-0">
+            <div className="w-12 h-12 rounded-full bg-slate-600 border-2 border-white shadow-lg flex items-center justify-center flex-shrink-0">
               {getIcon(key)}
             </div>
 
