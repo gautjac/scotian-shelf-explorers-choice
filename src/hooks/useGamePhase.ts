@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useCallback } from 'react';
 import { Choice } from '../types';
 
@@ -42,23 +43,21 @@ export const useGamePhase = (lastActivity: number, resetGame: () => void) => {
     setGamePhase('playing');
   }, []);
 
-  const handleChoiceSelect = useCallback((choiceId: string, currentScenario: any, category?: 'environmental' | 'economic' | 'community') => {
+  const handleChoiceSelect = useCallback((choiceId: string, currentScenario: any) => {
     const choice = currentScenario?.choices.find((c: Choice) => c.id === choiceId);
     if (choice) {
-      // Add category to the choice if it wasn't already there
-      const choiceWithCategory = { ...choice, category: choice.category || category };
-      setSelectedChoice(choiceWithCategory);
+      setSelectedChoice(choice);
       setGamePhase('consequence');
     }
   }, []);
 
   const handleConfirmChoice = useCallback((
-    makeChoice: (scenarioId: string, choiceId: string, impact: 'positive' | 'negative' | 'neutral', category?: 'environmental' | 'economic' | 'community') => void,
+    makeChoice: (scenarioId: string, choiceId: string, impact: 'positive' | 'negative' | 'neutral') => void,
     advanceScenario: (scenarioId?: string) => void,
     currentScenarioId: string
   ) => {
     if (selectedChoice) {
-      makeChoice(currentScenarioId, selectedChoice.id, selectedChoice.impact, selectedChoice.category);
+      makeChoice(currentScenarioId, selectedChoice.id, selectedChoice.impact);
       if (selectedChoice.nextScenarioId) {
         advanceScenario(selectedChoice.nextScenarioId);
         setGamePhase('playing');

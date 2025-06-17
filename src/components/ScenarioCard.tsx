@@ -13,17 +13,7 @@ const impactColors = {
   neutral: 'bg-[#0C556B] hover:bg-[#0C556B]/90 text-white'
 };
 
-const categoryIcons = {
-  environmental: '🌱',
-  economic: '💰',
-  community: '🤝'
-};
-
 export const ScenarioCard = ({ scenario, language, onChoiceSelect }: ScenarioCardProps) => {
-  console.log(`🎮 Rendering scenario: ${scenario.title}`);
-  console.log(`🎯 Number of choices: ${scenario.choices.length}`);
-  console.log(`🆕 Advanced choices:`, scenario.choices.filter(c => c.isAdvanced).length);
-
   return (
     <div className="h-full bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col">
       {/* Scenario image - optimized for sidebar layout */}
@@ -40,12 +30,6 @@ export const ScenarioCard = ({ scenario, language, onChoiceSelect }: ScenarioCar
           {scenario.description}
         </p>
 
-        {/* Debug info - remove this after testing */}
-        <div className="bg-gray-100 p-4 rounded-lg mb-6 text-sm">
-          <div>Choices available: {scenario.choices.length}</div>
-          <div>Advanced choices: {scenario.choices.filter(c => c.isAdvanced).length}</div>
-        </div>
-
         {/* Choices - optimized for touch interaction */}
         <div className="flex-1 flex flex-col">
           <h3 className="text-2xl lg:text-3xl font-semibold text-slate-800 mb-6 lg:mb-8">
@@ -59,27 +43,11 @@ export const ScenarioCard = ({ scenario, language, onChoiceSelect }: ScenarioCar
               <button
                 key={choice.id}
                 onClick={() => onChoiceSelect(choice.id)}
-                className={`w-full p-6 lg:p-8 rounded-2xl font-semibold text-left transition-all duration-300 transform hover:scale-102 shadow-xl active:scale-98 ${impactColors[choice.impact]} min-h-[100px] lg:min-h-[120px] relative`}
+                className={`w-full p-6 lg:p-8 rounded-2xl font-semibold text-left transition-all duration-300 transform hover:scale-102 shadow-xl active:scale-98 ${impactColors[choice.impact]} min-h-[100px] lg:min-h-[120px]`}
               >
                 <div className="flex items-center justify-between">
-                  <div className="flex items-start gap-3 pr-4">
-                    {choice.category && (
-                      <span className="text-2xl lg:text-3xl flex-shrink-0">
-                        {categoryIcons[choice.category]}
-                      </span>
-                    )}
-                    <span className="text-lg lg:text-xl xl:text-2xl leading-relaxed">
-                      {choice.text}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2 flex-shrink-0">
-                    {choice.isAdvanced && (
-                      <span className="bg-yellow-400 text-black px-3 py-1 rounded-full text-sm font-bold animate-pulse">
-                        NEW!
-                      </span>
-                    )}
-                    <span className="text-2xl lg:text-3xl">→</span>
-                  </div>
+                  <span className="text-lg lg:text-xl xl:text-2xl leading-relaxed pr-4">{choice.text}</span>
+                  <span className="text-2xl lg:text-3xl flex-shrink-0">→</span>
                 </div>
               </button>
             ))}

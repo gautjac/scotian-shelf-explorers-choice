@@ -13,15 +13,6 @@ export interface Choice {
   pros: string;
   cons: string;
   nextScenarioId?: string;
-  category?: 'environmental' | 'economic' | 'community';
-  requiredChoicePattern?: {
-    environmental?: number;
-    economic?: number;
-    community?: number;
-    totalChoices?: number; // Add this to allow requirements based on total choices made
-    minHealthMetrics?: Partial<HealthMetrics>;
-  };
-  isAdvanced?: boolean;
 }
 
 export interface Scenario {
@@ -31,7 +22,6 @@ export interface Scenario {
   imageUrl: string;
   choices: Choice[];
   isEnding?: boolean;
-  dynamicDescription?: (choicePattern: ChoicePattern) => string;
 }
 
 export interface MarineSpecies {
@@ -47,13 +37,6 @@ export interface HealthMetrics {
   community: number; // 0-100
 }
 
-export interface ChoicePattern {
-  environmental: number;
-  economic: number;
-  community: number;
-  totalChoices: number;
-}
-
 export interface GameState {
   currentScenarioId: string;
   language: Language['code'];
@@ -65,8 +48,5 @@ export interface GameState {
     scenarioId: string;
     choiceId: string;
     timestamp: number;
-    impact: 'positive' | 'negative' | 'neutral';
-    category?: 'environmental' | 'economic' | 'community';
   }>;
-  choicePattern: ChoicePattern;
 }
