@@ -9,7 +9,7 @@ interface GameSidebarProps {
 
 export const GameSidebar = ({ healthMetrics, language }: GameSidebarProps) => {
   return (
-    <div className="w-80 lg:w-96 xl:w-[420px] h-full bg-gradient-to-b from-[#0072A0] to-[#0B424E] p-6 lg:p-8 overflow-y-auto">
+    <div className="w-80 lg:w-96 xl:w-[420px] h-full bg-[#0072A0] p-6 lg:p-8 overflow-y-auto">
       {/* Health Meters - compact version for sidebar */}
       <div className="mb-8">
         <CompactHealthMeters 
