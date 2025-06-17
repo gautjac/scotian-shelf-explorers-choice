@@ -23,7 +23,7 @@ export const GamePlayingScreen = ({
   onRestart
 }: GamePlayingScreenProps) => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0072A0] via-[#0C556B] to-[#0B424E] flex relative">
+    <div className="min-h-screen bg-[#0072A0] flex relative">
       {/* Left Sidebar */}
       <GameSidebar
         healthMetrics={gameState.healthMetrics}
