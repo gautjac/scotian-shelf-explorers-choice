@@ -18,6 +18,7 @@ export interface Choice {
     environmental?: number;
     economic?: number;
     community?: number;
+    totalChoices?: number; // Add this to allow requirements based on total choices made
     minHealthMetrics?: Partial<HealthMetrics>;
   };
   isAdvanced?: boolean;

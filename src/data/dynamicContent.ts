@@ -44,6 +44,18 @@ const getDominantPattern = (choicePattern: ChoicePattern): 'environmental' | 'ec
 export const getAdvancedChoices = (scenarioId: string): Choice[] => {
   const advancedChoicesByScenario: Record<string, Choice[]> = {
     'plastic-pollution': [
+      // Low requirement choices to test the system
+      {
+        id: 'test-simple-advanced',
+        text: '🔬 Test an innovative bio-plastic solution (appears after 1 choice)',
+        impact: 'positive',
+        consequence: 'Launches a pilot program for biodegradable alternatives',
+        pros: 'Shows immediate environmental benefits with community support',
+        cons: 'Still in experimental phase with uncertain long-term viability',
+        category: 'environmental',
+        requiredChoicePattern: { totalChoices: 1 }, // Just need 1 choice total
+        isAdvanced: true
+      },
       {
         id: 'advanced-circular-economy',
         text: 'Implement a full circular economy system for ocean plastics',
