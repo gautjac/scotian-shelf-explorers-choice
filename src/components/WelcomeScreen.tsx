@@ -55,11 +55,6 @@ export const WelcomeScreen = ({ currentLanguage, onLanguageChange, onStart }: We
           {content.subtitle}
         </h2>
 
-        {/* Description - larger text for readability */}
-        <p className="text-xl lg:text-2xl xl:text-3xl text-[#CDE2ED]/90 mb-16 leading-relaxed max-w-4xl mx-auto animate-fade-in" style={{ animationDelay: '1s' }}>
-          {content.description}
-        </p>
-
         {/* Start button - much larger for touch */}
         <button
           onClick={onStart}
