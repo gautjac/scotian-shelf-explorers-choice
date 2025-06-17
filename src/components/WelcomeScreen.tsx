@@ -45,15 +45,6 @@ export const WelcomeScreen = ({ currentLanguage, onLanguageChange, onStart }: We
       </div>
 
       <div className="relative z-10 text-center max-w-6xl mx-auto">
-        {/* Language selector - larger for touch */}
-        <div className="mb-12 flex justify-center">
-          <LanguageSelector 
-            currentLanguage={currentLanguage}
-            onLanguageChange={onLanguageChange}
-            className="bg-[#0B424E]/30 backdrop-blur-sm rounded-2xl p-6"
-          />
-        </div>
-
         {/* Main title - larger for 32" display */}
         <h1 className="text-6xl lg:text-8xl xl:text-9xl font-bold text-white mb-8 animate-fade-in">
           {content.title}
@@ -82,6 +73,15 @@ export const WelcomeScreen = ({ currentLanguage, onLanguageChange, onStart }: We
         <p className="text-[#CDE2ED]/80 mt-8 text-lg lg:text-xl animate-fade-in" style={{ animationDelay: '2s' }}>
           {content.instruction}
         </p>
+      </div>
+
+      {/* Language selector - bottom right corner */}
+      <div className="absolute bottom-8 right-8 z-20">
+        <LanguageSelector 
+          currentLanguage={currentLanguage}
+          onLanguageChange={onLanguageChange}
+          className="bg-[#0B424E]/30 backdrop-blur-sm rounded-2xl p-4"
+        />
       </div>
 
       {/* Marine life silhouettes - larger for visibility */}

@@ -50,15 +50,6 @@ export const CompletionScreen = ({ language, onLanguageChange, onRestart, choice
       </div>
 
       <div className="relative z-10 text-center max-w-4xl mx-auto">
-        {/* Language selector */}
-        <div className="mb-8 flex justify-center">
-          <LanguageSelector 
-            currentLanguage={language}
-            onLanguageChange={onLanguageChange}
-            className="bg-white/20 backdrop-blur-sm rounded-xl p-4"
-          />
-        </div>
-
         {/* Celebration emoji */}
         <div className="text-8xl mb-6 animate-bounce">🌊🐋🎉</div>
 
@@ -103,6 +94,15 @@ export const CompletionScreen = ({ language, onLanguageChange, onRestart, choice
         >
           {content.restartButton}
         </button>
+      </div>
+
+      {/* Language selector - bottom right corner */}
+      <div className="absolute bottom-8 right-8 z-20">
+        <LanguageSelector 
+          currentLanguage={language}
+          onLanguageChange={onLanguageChange}
+          className="bg-white/20 backdrop-blur-sm rounded-xl p-4"
+        />
       </div>
 
       {/* Celebrating marine life */}

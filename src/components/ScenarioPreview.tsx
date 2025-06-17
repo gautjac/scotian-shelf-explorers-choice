@@ -51,17 +51,8 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenar
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0B424E] via-[#0C556B] to-[#0072A0] p-6 lg:p-8">
+    <div className="min-h-screen bg-gradient-to-b from-[#0B424E] via-[#0C556B] to-[#0072A0] p-6 lg:p-8 relative">
       <div className="max-w-7xl mx-auto">
-        {/* Language selector at the top */}
-        <div className="mb-8 flex justify-center">
-          <LanguageSelector 
-            currentLanguage={language}
-            onLanguageChange={onLanguageChange}
-            className="bg-[#0B424E]/30 backdrop-blur-sm rounded-2xl p-6"
-          />
-        </div>
-
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl lg:text-6xl font-bold text-white mb-4">
@@ -139,6 +130,15 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenar
             {content.startButton}
           </button>
         </div>
+      </div>
+
+      {/* Language selector - bottom right corner */}
+      <div className="absolute bottom-8 right-8 z-20">
+        <LanguageSelector 
+          currentLanguage={language}
+          onLanguageChange={onLanguageChange}
+          className="bg-[#0B424E]/30 backdrop-blur-sm rounded-2xl p-4"
+        />
       </div>
     </div>
   );

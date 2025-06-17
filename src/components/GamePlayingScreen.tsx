@@ -2,6 +2,7 @@
 import { GameSidebar } from './GameSidebar';
 import { ScenarioCard } from './ScenarioCard';
 import { GameActions } from './GameActions';
+import { LanguageSelector } from './LanguageSelector';
 import { Scenario, GameState, Language } from '../types';
 
 interface GamePlayingScreenProps {
@@ -22,12 +23,11 @@ export const GamePlayingScreen = ({
   onRestart
 }: GamePlayingScreenProps) => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0072A0] via-[#0C556B] to-[#0B424E] flex">
+    <div className="min-h-screen bg-gradient-to-b from-[#0072A0] via-[#0C556B] to-[#0B424E] flex relative">
       {/* Left Sidebar */}
       <GameSidebar
         healthMetrics={gameState.healthMetrics}
         language={gameState.language}
-        onLanguageChange={onLanguageChange}
       />
 
       {/* Main Content Area */}
@@ -46,6 +46,15 @@ export const GamePlayingScreen = ({
           language={gameState.language}
           onBackToPreview={onBackToPreview}
           onRestart={onRestart}
+        />
+      </div>
+
+      {/* Language selector - bottom right corner */}
+      <div className="absolute bottom-8 right-8 z-20">
+        <LanguageSelector 
+          currentLanguage={gameState.language}
+          onLanguageChange={onLanguageChange}
+          className="bg-[#0B424E]/30 backdrop-blur-sm rounded-2xl p-4"
         />
       </div>
     </div>
