@@ -1,0 +1,51 @@
+
+Screen,Element,English,French,Mi'kmaw,Notes
+WelcomeScreen,Title,Guardians of the Scotian Shelf,Gardiens du plateau continental scotian,Ankamkewe'k Kespukek,Main title
+WelcomeScreen,Subtitle,Discover how human actions impact marine life on the Scotian Shelf,Découvrez comment les actions humaines impactent la vie marine du plateau continental scotian,Wejkukuom talimkewe'k samqwanikatl Kespukek,Subtitle description
+WelcomeScreen,Start Button,Begin Your Journey,Commencer votre voyage,Mawita'n,Main CTA button
+WelcomeScreen,Touch Instruction,Touch to start exploring,Touchez pour commencer l'exploration,Pekowsin mawita'si'k,Bottom instruction text
+
+ScenarioPreview,Title,Your Ocean Journey Awaits,Votre voyage océanique vous attend,Samqwan alasutmaqan petkik,Main heading
+ScenarioPreview,Subtitle,Preview the scenarios you'll encounter,Aperçu des scénarios que vous rencontrerez,Nemi'j koqoey ketu nemitultine'k,Description
+ScenarioPreview,Start Button,Start Your Adventure,Commencer votre aventure,Mawita'n kiskukewey,Main CTA
+ScenarioPreview,Back Button,Back to Welcome,Retour à l'accueil,Apijiw piluei,Navigation button
+ScenarioPreview,Instruction,You'll make important decisions in each scenario,Vous prendrez des décisions importantes dans chaque scénario,Msit koqoey ketu elkewek,Info text
+ScenarioPreview,Select Scenario,Click on any scenario to start there,Cliquez sur un scénario pour commencer là,Pekowsin koqoey mawita'si'k,Action instruction
+
+ScenarioCard,Question Prompt,What would you do?,Que feriez-vous?,Koqoey ketu elkewek?,Choice selection prompt
+
+ConsequenceModal,Title,Consider the Consequences,Considérez les conséquences,Ankweyul koqoey wejkukewek,Modal heading
+ConsequenceModal,Your Choice Label,Your Choice:,Votre choix:,Kil koqoey:,Section label
+ConsequenceModal,Positive Impact,Positive Impact,Impact positif,Weli koqoey,Pros section header
+ConsequenceModal,Negative Impact,Negative Impact,Impact négatif,Maw koqoey,Cons section header
+ConsequenceModal,Confirm Button,Confirm Choice,Confirmer le choix,Ketu'k koqoey,Confirmation button
+ConsequenceModal,Return Button,Back to Choices,Retour aux choix,Eykisk koqoey elkewey,Cancel button
+
+GameActions,Back to Scenarios,Return to Scenarios,Retour aux scénarios,Kluskap koqoey,Navigation button
+GameActions,Restart,Start Over,Recommencer,Pilei mawita'sin,Reset button
+
+CompletionScreen,Title,Journey Complete!,Voyage terminé!,Ankamkewey kespek!,Completion title
+CompletionScreen,Subtitle,You've experienced how human choices impact the Scotian Shelf marine ecosystem,Vous avez découvert comment les choix humains impactent l'écosystème marin du plateau continental scotian,Wejkukuom talitakuom ketu samqwanikatl Kespukek,Achievement description
+CompletionScreen,Message,Every decision we make affects the delicate balance of ocean life. From plastic pollution to sustainable fishing your choices today shape the future of marine conservation.,Chaque décision que nous prenons affecte l'équilibre délicat de la vie océanique. De la pollution plastique à la pêche durable vos choix d'aujourd'hui façonnent l'avenir de la conservation marine.,Msit koqoey elkewekl menaqanej samqwan ukamskusuwakon. Pekisk aq pilei pu'tu'n kil koqoey elkewek nukta samqwanikatl kepmikatl.,Educational message
+CompletionScreen,Encouragement,Want to explore different outcomes? Try making different choices and see how they change the ecosystem.,Voulez-vous explorer différents résultats? Essayez de faire des choix différents et voyez comment ils changent l'écosystème.,Ketu aqq koqoey nemituom? Ula koqoey elkewek aq nemi'j samqwan ankamtimul.,Replay encouragement
+CompletionScreen,Restart Button,Start New Journey,Nouveau voyage,Siawey ankamkewey,Restart CTA
+CompletionScreen,Your Impact,Your Impact,Votre impact,Kil wenjo'taqn,Impact section title
+
+CompletionScreen,Excellent Work,Excellent work! Your choices promote healthy marine ecosystems.,Excellent travail! Vos choix favorisent des écosystèmes marins sains.,Kelu wetulti'k! Kil koqoey elkewek pilei samqwanikatl ukepmikatl.,High positive score message
+CompletionScreen,Good Effort,Good effort! Some of your choices help marine conservation.,Bon effort! Certains de vos choix aident la conservation marine.,Pilei wetulti'k! Apjiw kil koqoey elkewek kepmikatl samqwanikatl.,Medium score message
+CompletionScreen,Try Again,Try again with different choices to see positive outcomes for marine life.,Essayez à nouveau avec des choix différents pour voir des résultats positifs pour la vie marine.,Aqq nikma koqoey elkewek pilei samqwanikatl ukepmikatil.,Low score message
+
+CompactHealthMeters,Marine Health,Marine Health,Santé marine,Samqwan ukamkinu'kuom,Health section title
+CompactHealthMeters,Ecosystem,Ecosystem,Écosystème,Ukamkinu'kuom,Ecosystem health label
+CompactHealthMeters,Economic,Economic,Économique,Toqwa'tu'k,Economic health label
+CompactHealthMeters,Community,Community,Communauté,L'nui,Community health label
+
+HealthMeters,Marine Health Status,Marine Health Status,État de santé marine,Samqwanikatl ukamkinu'kuom,Full health display title
+HealthMeters,Ecosystem Health,Ecosystem Health,Santé écosystémique,Ukamkinu'kuom samqwan,Full ecosystem label
+HealthMeters,Economic Health,Economic Health,Santé économique,Toqwa'tu'k samqwan,Full economic label
+HealthMeters,Community Health,Community Health,Santé communautaire,L'nui samqwan,Full community label
+
+Health Status,Thriving,Thriving,Prospère,Pilei,80%+ health status
+Health Status,Stable,Stable,Stable,Nukek,60-79% health status
+Health Status,Declining,Declining,En déclin,Tepisq,40-59% health status
+Health Status,Critical,Critical,Critique,Mekij,Below 40% health status
