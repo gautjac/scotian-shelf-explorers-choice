@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import { WelcomeScreen } from '../components/WelcomeScreen';
 import { ScenarioPreview } from '../components/ScenarioPreview';
@@ -8,6 +7,7 @@ import { GamePlayingScreen } from '../components/GamePlayingScreen';
 import { useGameState } from '../hooks/useGameState';
 import { useGamePhase } from '../hooks/useGamePhase';
 import { scenarios } from '../data/content';
+import { useDynamicScenarios } from '../hooks/useDynamicScenarios';
 
 const Index = () => {
   const {
@@ -48,7 +48,8 @@ const Index = () => {
   }, [trackActivity]);
 
   const currentScenarios = scenarios[gameState.language];
-  const currentScenario = currentScenarios?.find(s => s.id === gameState.currentScenarioId);
+  const dynamicScenarios = useDynamicScenarios(currentScenarios || [], gameState);
+  const currentScenario = dynamicScenarios?.find(s => s.id === gameState.currentScenarioId);
 
   const handleLanguageChange = (language: 'en' | 'fr' | 'mi') => {
     updateLanguage(language);
@@ -61,7 +62,9 @@ const Index = () => {
   };
 
   const handleChoiceSelectWithTracking = (choiceId: string) => {
-    handleChoiceSelect(choiceId, currentScenario);
+    // Find the choice to get its category
+    const choice = currentScenario?.choices.find(c => c.id === choiceId);
+    handleChoiceSelect(choiceId, currentScenario, choice?.category);
     trackActivity();
   };
 
