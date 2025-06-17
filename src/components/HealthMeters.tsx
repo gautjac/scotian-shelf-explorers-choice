@@ -1,4 +1,3 @@
-
 import { HealthMetrics } from '../types';
 import { Waves, Coins, Heart } from 'lucide-react';
 
@@ -81,51 +80,47 @@ export const HealthMeters = ({ healthMetrics, language }: HealthMetersProps) => 
         {language === 'mi' && 'Samqwanikatl ukamkinu\'kuom'}
       </h3>
       
-      <div className="space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {Object.entries(healthMetrics).map(([key, value]) => (
-          <div key={key} className="flex items-center gap-4">
+          <div key={key} className="flex flex-col items-center text-center">
             {/* Circular Icon */}
-            <div className="relative">
+            <div className="relative mb-4">
               <div className="w-16 h-16 rounded-full bg-gradient-to-br from-slate-600 to-slate-800 border-4 border-white shadow-lg flex items-center justify-center">
                 {getIcon(key)}
               </div>
             </div>
 
-            {/* Progress Bar Container */}
-            <div className="flex-1">
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-sm font-medium text-slate-700">
-                  {labels[language][key as keyof typeof labels[typeof language]]}
-                </span>
-                <span className="text-sm font-medium text-slate-600">
-                  {value}%
-                </span>
+            {/* Label and Percentage */}
+            <div className="mb-3 w-full">
+              <div className="text-sm font-medium text-slate-700 mb-1">
+                {labels[language][key as keyof typeof labels[typeof language]]}
               </div>
-              
-              {/* Progress Bar */}
-              <div className="relative h-6 bg-slate-300 rounded-full border-2 border-white shadow-inner overflow-hidden">
-                <div 
-                  className={`h-full bg-gradient-to-r ${getHealthColor(value)} transition-all duration-500 rounded-full relative`}
-                  style={{ width: `${value}%` }}
-                >
-                  {/* Shine effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-full"></div>
-                  {/* Dots pattern */}
-                  <div className="absolute left-2 top-1/2 transform -translate-y-1/2 flex gap-1">
-                    <div className="w-1 h-1 bg-white/60 rounded-full"></div>
-                    <div className="w-1 h-1 bg-white/60 rounded-full"></div>
-                    <div className="w-1 h-1 bg-white/60 rounded-full"></div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Status Badge */}
-              <div className="mt-2 text-right">
-                <span className={`inline-block px-2 py-1 rounded-full text-xs text-white font-medium bg-gradient-to-r ${getHealthColor(value)}`}>
-                  {getHealthStatus(value, language)}
-                </span>
+              <div className="text-lg font-bold text-slate-600">
+                {value}%
               </div>
             </div>
+            
+            {/* Progress Bar */}
+            <div className="relative h-4 bg-slate-300 rounded-full border-2 border-white shadow-inner overflow-hidden w-full mb-3">
+              <div 
+                className={`h-full bg-gradient-to-r ${getHealthColor(value)} transition-all duration-500 rounded-full relative`}
+                style={{ width: `${value}%` }}
+              >
+                {/* Shine effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-full"></div>
+                {/* Dots pattern */}
+                <div className="absolute left-1 top-1/2 transform -translate-y-1/2 flex gap-0.5">
+                  <div className="w-0.5 h-0.5 bg-white/60 rounded-full"></div>
+                  <div className="w-0.5 h-0.5 bg-white/60 rounded-full"></div>
+                  <div className="w-0.5 h-0.5 bg-white/60 rounded-full"></div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Status Badge */}
+            <span className={`inline-block px-3 py-1 rounded-full text-xs text-white font-medium bg-gradient-to-r ${getHealthColor(value)}`}>
+              {getHealthStatus(value, language)}
+            </span>
           </div>
         ))}
       </div>
