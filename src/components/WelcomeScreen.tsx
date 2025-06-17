@@ -1,3 +1,4 @@
+
 import { LanguageSelector } from './LanguageSelector';
 import { Language } from '../types';
 
@@ -9,7 +10,7 @@ interface WelcomeScreenProps {
 
 const welcomeText = {
   en: {
-    title: 'Guardians of the Scotian Shelf',
+    title: 'Be a guardian of the Scotian Shelf',
     subtitle: 'See how people affect sea life near Nova Scotia',
     description: 'Play games and see how your choices change ocean animals off Nova Scotia\'s coast. Make choices, learn what happens, and play again to try different things.',
     startButton: 'Start Playing',
