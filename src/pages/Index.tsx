@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react';
 import { WelcomeScreen } from '../components/WelcomeScreen';
 import { ScenarioPreview } from '../components/ScenarioPreview';
@@ -6,7 +7,7 @@ import { CompletionScreen } from '../components/CompletionScreen';
 import { GamePlayingScreen } from '../components/GamePlayingScreen';
 import { useGameState } from '../hooks/useGameState';
 import { useGamePhase } from '../hooks/useGamePhase';
-import { useDynamicScenarios } from '../hooks/useDynamicScenarios';
+import { scenarios } from '../data/content';
 
 const Index = () => {
   const {
@@ -33,10 +34,6 @@ const Index = () => {
     handleRestart
   } = useGamePhase(lastActivity, resetGame);
 
-  // Get dynamic scenarios based on current game state
-  const currentScenarios = useDynamicScenarios(gameState);
-  const currentScenario = currentScenarios?.find(s => s.id === gameState.currentScenarioId);
-
   // Track user activity
   useEffect(() => {
     const handleActivity = () => trackActivity();
@@ -49,6 +46,9 @@ const Index = () => {
       window.removeEventListener('touchstart', handleActivity);
     };
   }, [trackActivity]);
+
+  const currentScenarios = scenarios[gameState.language];
+  const currentScenario = currentScenarios?.find(s => s.id === gameState.currentScenarioId);
 
   const handleLanguageChange = (language: 'en' | 'fr' | 'mi') => {
     updateLanguage(language);
@@ -66,13 +66,7 @@ const Index = () => {
   };
 
   const handleConfirmChoiceWithTracking = () => {
-    // Pass the choice category to makeChoice
-    const choiceCategory = selectedChoice?.category || 'environmental';
-    const makeChoiceWithCategory = (scenarioId: string, choiceId: string, impact: 'positive' | 'negative' | 'neutral') => {
-      makeChoice(scenarioId, choiceId, impact, choiceCategory);
-    };
-    
-    handleConfirmChoice(makeChoiceWithCategory, advanceScenario, gameState.currentScenarioId);
+    handleConfirmChoice(makeChoice, advanceScenario, gameState.currentScenarioId);
     trackActivity();
   };
 

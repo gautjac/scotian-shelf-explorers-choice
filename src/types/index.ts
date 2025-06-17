@@ -13,14 +13,6 @@ export interface Choice {
   pros: string;
   cons: string;
   nextScenarioId?: string;
-  category: 'environmental' | 'economic' | 'community';
-  availableIf?: {
-    minChoices?: number;
-    requiredCategory?: 'environmental' | 'economic' | 'community';
-    minCategoryCount?: number;
-    healthMetricMin?: { metric: 'ecosystem' | 'economic' | 'community'; value: number };
-    healthMetricMax?: { metric: 'ecosystem' | 'economic' | 'community'; value: number };
-  };
 }
 
 export interface Scenario {
@@ -30,11 +22,6 @@ export interface Scenario {
   imageUrl: string;
   choices: Choice[];
   isEnding?: boolean;
-  variants?: {
-    environmental?: { title: string; description: string };
-    economic?: { title: string; description: string };
-    community?: { title: string; description: string };
-  };
 }
 
 export interface MarineSpecies {
@@ -50,21 +37,6 @@ export interface HealthMetrics {
   community: number; // 0-100
 }
 
-export interface ChoiceRecord {
-  scenarioId: string;
-  choiceId: string;
-  timestamp: number;
-  impact: 'positive' | 'negative' | 'neutral';
-  category: 'environmental' | 'economic' | 'community';
-}
-
-export interface ChoicePattern {
-  environmental: number;
-  economic: number;
-  community: number;
-  totalChoices: number;
-}
-
 export interface GameState {
   currentScenarioId: string;
   language: Language['code'];
@@ -72,6 +44,9 @@ export interface GameState {
   speciesHealth: Record<string, MarineSpecies['healthStatus']>;
   healthMetrics: HealthMetrics;
   sessionStartTime: number;
-  choicesMade: ChoiceRecord[];
-  choicePattern: ChoicePattern;
+  choicesMade: Array<{
+    scenarioId: string;
+    choiceId: string;
+    timestamp: number;
+  }>;
 }

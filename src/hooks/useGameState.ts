@@ -1,8 +1,7 @@
 
 import { useState, useCallback } from 'react';
-import { GameState, Language, MarineSpecies, HealthMetrics, ChoiceRecord, ChoicePattern } from '../types';
+import { GameState, Language, MarineSpecies, HealthMetrics } from '../types';
 import { marineSpecies } from '../data/content';
-import { calculateChoicePattern } from '../utils/choiceEvaluator';
 
 const initialGameState: GameState = {
   currentScenarioId: 'plastic-pollution',
@@ -14,27 +13,21 @@ const initialGameState: GameState = {
   }), {}),
   healthMetrics: {
     ecosystem: 70,
-    economic: 70,  
+    economic: 70,
     community: 70
   },
   sessionStartTime: Date.now(),
-  choicesMade: [],
-  choicePattern: {
-    environmental: 0,
-    economic: 0,
-    community: 0,
-    totalChoices: 0
-  }
+  choicesMade: []
 };
 
 export const useGameState = () => {
   const [gameState, setGameState] = useState<GameState>(initialGameState);
 
-  const updateLanguage = useCallback((language: Language['code']) => {    
+  const updateLanguage = useCallback((language: Language['code']) => {
     setGameState(prev => ({ ...prev, language }));
   }, []);
 
-  const makeChoice = useCallback((scenarioId: string, choiceId: string, impact: 'positive' | 'negative' | 'neutral', category: 'environmental' | 'economic' | 'community') => {
+  const makeChoice = useCallback((scenarioId: string, choiceId: string, impact: 'positive' | 'negative' | 'neutral') => {
     setGameState(prev => {
       const newSpeciesHealth = { ...prev.speciesHealth };
       const newHealthMetrics = { ...prev.healthMetrics };
@@ -52,41 +45,21 @@ export const useGameState = () => {
         }
       });
 
-      // Update health metrics based on choice impact and category
-      const impactValue = impact === 'positive' ? 15 : impact === 'negative' ? -15 : 0;
-      const categoryBonus = 5; // Extra impact for the choice's category
-      
-      if (category === 'environmental') {
-        newHealthMetrics.ecosystem = Math.max(0, Math.min(100, newHealthMetrics.ecosystem + impactValue + categoryBonus));
-        newHealthMetrics.economic = Math.max(0, Math.min(100, newHealthMetrics.economic + impactValue));
-        newHealthMetrics.community = Math.max(0, Math.min(100, newHealthMetrics.community + impactValue));
-      } else if (category === 'economic') {
-        newHealthMetrics.economic = Math.max(0, Math.min(100, newHealthMetrics.economic + impactValue + categoryBonus));
-        newHealthMetrics.ecosystem = Math.max(0, Math.min(100, newHealthMetrics.ecosystem + impactValue));
-        newHealthMetrics.community = Math.max(0, Math.min(100, newHealthMetrics.community + impactValue));
-      } else if (category === 'community') {
-        newHealthMetrics.community = Math.max(0, Math.min(100, newHealthMetrics.community + impactValue + categoryBonus));
-        newHealthMetrics.ecosystem = Math.max(0, Math.min(100, newHealthMetrics.ecosystem + impactValue));
-        newHealthMetrics.economic = Math.max(0, Math.min(100, newHealthMetrics.economic + impactValue));
-      }
-
-      const newChoiceRecord: ChoiceRecord = {
-        scenarioId,
-        choiceId,
-        timestamp: Date.now(),
-        impact,
-        category
-      };
-
-      const newChoicesMade = [...prev.choicesMade, newChoiceRecord];
-      const newChoicePattern = calculateChoicePattern(newChoicesMade);
+      // Update health metrics based on choice impact
+      const impactValue = impact === 'positive' ? 10 : impact === 'negative' ? -10 : 0;
+      newHealthMetrics.ecosystem = Math.max(0, Math.min(100, newHealthMetrics.ecosystem + impactValue));
+      newHealthMetrics.economic = Math.max(0, Math.min(100, newHealthMetrics.economic + impactValue));
+      newHealthMetrics.community = Math.max(0, Math.min(100, newHealthMetrics.community + impactValue));
 
       return {
         ...prev,
         speciesHealth: newSpeciesHealth,
         healthMetrics: newHealthMetrics,
-        choicesMade: newChoicesMade,
-        choicePattern: newChoicePattern,
+        choicesMade: [...prev.choicesMade, {
+          scenarioId,
+          choiceId,
+          timestamp: Date.now()
+        }],
         completedScenarios: [...prev.completedScenarios, scenarioId]
       };
     });
