@@ -1,5 +1,5 @@
 
-import { GameHeader } from './GameHeader';
+import { GameSidebar } from './GameSidebar';
 import { ScenarioCard } from './ScenarioCard';
 import { GameActions } from './GameActions';
 import { Scenario, GameState, Language } from '../types';
@@ -22,29 +22,32 @@ export const GamePlayingScreen = ({
   onRestart
 }: GamePlayingScreenProps) => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0072A0] via-[#0C556B] to-[#0B424E] p-6 lg:p-8">
-      {/* Header with language selector and health meters */}
-      <GameHeader
+    <div className="min-h-screen bg-gradient-to-b from-[#0072A0] via-[#0C556B] to-[#0B424E] flex">
+      {/* Left Sidebar */}
+      <GameSidebar
         healthMetrics={gameState.healthMetrics}
         language={gameState.language}
         onLanguageChange={onLanguageChange}
       />
 
-      {/* Main scenario */}
-      <div className="max-w-7xl mx-auto mb-12">
-        <ScenarioCard
-          scenario={currentScenario}
+      {/* Main Content Area */}
+      <div className="flex-1 p-6 lg:p-8 flex flex-col">
+        {/* Main scenario */}
+        <div className="flex-1 mb-8">
+          <ScenarioCard
+            scenario={currentScenario}
+            language={gameState.language}
+            onChoiceSelect={onChoiceSelect}
+          />
+        </div>
+
+        {/* Action buttons */}
+        <GameActions
           language={gameState.language}
-          onChoiceSelect={onChoiceSelect}
+          onBackToPreview={onBackToPreview}
+          onRestart={onRestart}
         />
       </div>
-
-      {/* Action buttons */}
-      <GameActions
-        language={gameState.language}
-        onBackToPreview={onBackToPreview}
-        onRestart={onRestart}
-      />
     </div>
   );
 };
