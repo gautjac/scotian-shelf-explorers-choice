@@ -17,14 +17,14 @@ const languageColors = {
 
 export const LanguageSelector = ({ currentLanguage, onLanguageChange, className = '' }: LanguageSelectorProps) => {
   return (
-    <div className={`flex items-center gap-4 ${className}`}>
+    <div className={`flex flex-col items-center gap-4 ${className}`}>
       <Languages className="w-8 h-8 lg:w-10 lg:h-10 text-white" />
-      <div className="flex gap-3">
+      <div className="flex flex-col gap-3 w-full">
         {languages.map((lang) => (
           <button
             key={lang.code}
             onClick={() => onLanguageChange(lang.code)}
-            className={`w-[120px] h-[120px] lg:w-[140px] lg:h-[140px] rounded-lg text-lg lg:text-xl font-bold transition-all duration-200 shadow-lg ${
+            className={`w-full h-[80px] lg:h-[100px] rounded-lg text-lg lg:text-xl font-bold transition-all duration-200 shadow-lg ${
               languageColors[lang.code]
             } ${
               currentLanguage === lang.code
