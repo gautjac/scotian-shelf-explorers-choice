@@ -6,6 +6,11 @@ import { createDynamicScenarioDescription, getAdvancedChoices } from '../data/dy
 
 export const useDynamicScenarios = (scenarios: Scenario[], gameState: GameState) => {
   return useMemo(() => {
+    console.log('🔄 Processing dynamic scenarios...');
+    console.log('Choice pattern:', gameState.choicePattern);
+    console.log('Health metrics:', gameState.healthMetrics);
+    console.log('Choices made:', gameState.choicesMade.length);
+
     return scenarios.map(scenario => {
       // Create dynamic description based on choice pattern
       const dynamicDescription = createDynamicScenarioDescription(
@@ -16,6 +21,7 @@ export const useDynamicScenarios = (scenarios: Scenario[], gameState: GameState)
 
       // Get advanced choices that might be available
       const advancedChoices = getAdvancedChoices(scenario.id);
+      console.log(`📋 Advanced choices for ${scenario.id}:`, advancedChoices.length);
 
       // Combine original choices with advanced choices
       const allChoices = [...scenario.choices, ...advancedChoices];
@@ -27,11 +33,20 @@ export const useDynamicScenarios = (scenarios: Scenario[], gameState: GameState)
         gameState.healthMetrics
       );
 
-      return {
+      console.log(`✅ Available choices for ${scenario.id}: ${availableChoices.length}/${allChoices.length}`);
+      
+      const dynamicScenario = {
         ...scenario,
         description: dynamicDescription,
         choices: availableChoices
       };
+
+      // Log if description changed
+      if (dynamicDescription !== scenario.description) {
+        console.log(`📝 Dynamic description for ${scenario.id}: "${dynamicDescription.substring(0, 50)}..."`);
+      }
+
+      return dynamicScenario;
     });
   }, [scenarios, gameState.choicePattern, gameState.healthMetrics]);
 };

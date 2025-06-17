@@ -20,6 +20,10 @@ const categoryIcons = {
 };
 
 export const ScenarioCard = ({ scenario, language, onChoiceSelect }: ScenarioCardProps) => {
+  console.log(`🎮 Rendering scenario: ${scenario.title}`);
+  console.log(`🎯 Number of choices: ${scenario.choices.length}`);
+  console.log(`🆕 Advanced choices:`, scenario.choices.filter(c => c.isAdvanced).length);
+
   return (
     <div className="h-full bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col">
       {/* Scenario image - optimized for sidebar layout */}
@@ -35,6 +39,12 @@ export const ScenarioCard = ({ scenario, language, onChoiceSelect }: ScenarioCar
         <p className="text-xl lg:text-2xl text-slate-700 leading-relaxed mb-8 lg:mb-10">
           {scenario.description}
         </p>
+
+        {/* Debug info - remove this after testing */}
+        <div className="bg-gray-100 p-4 rounded-lg mb-6 text-sm">
+          <div>Choices available: {scenario.choices.length}</div>
+          <div>Advanced choices: {scenario.choices.filter(c => c.isAdvanced).length}</div>
+        </div>
 
         {/* Choices - optimized for touch interaction */}
         <div className="flex-1 flex flex-col">
@@ -64,7 +74,7 @@ export const ScenarioCard = ({ scenario, language, onChoiceSelect }: ScenarioCar
                   </div>
                   <div className="flex items-center gap-2 flex-shrink-0">
                     {choice.isAdvanced && (
-                      <span className="bg-yellow-400 text-black px-2 py-1 rounded-full text-sm font-bold">
+                      <span className="bg-yellow-400 text-black px-3 py-1 rounded-full text-sm font-bold animate-pulse">
                         NEW!
                       </span>
                     )}
