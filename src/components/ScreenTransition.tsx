@@ -5,13 +5,15 @@ interface ScreenTransitionProps {
   isVisible: boolean;
   direction?: 'forward' | 'backward' | 'fade';
   onTransitionComplete?: () => void;
+  onTransitionStart?: () => void;
 }
 
 export const ScreenTransition = ({ 
   children, 
   isVisible, 
   direction = 'forward',
-  onTransitionComplete 
+  onTransitionComplete,
+  onTransitionStart 
 }: ScreenTransitionProps) => {
   const [shouldRender, setShouldRender] = useState(isVisible);
   const [animationClass, setAnimationClass] = useState('');
@@ -19,6 +21,7 @@ export const ScreenTransition = ({
   useEffect(() => {
     if (isVisible) {
       setShouldRender(true);
+      onTransitionStart?.();
       // Slight delay to ensure element is rendered before animation
       setTimeout(() => {
         if (direction === 'forward') {
@@ -30,6 +33,7 @@ export const ScreenTransition = ({
         }
       }, 10);
     } else {
+      onTransitionStart?.();
       // Start exit animation
       if (direction === 'forward') {
         setAnimationClass('animate-slide-out-right');
@@ -45,7 +49,7 @@ export const ScreenTransition = ({
         onTransitionComplete?.();
       }, 500);
     }
-  }, [isVisible, direction, onTransitionComplete]);
+  }, [isVisible, direction, onTransitionComplete, onTransitionStart]);
 
   if (!shouldRender) return null;
 

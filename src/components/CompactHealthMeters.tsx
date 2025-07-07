@@ -6,6 +6,8 @@ import { useEffect, useState, useRef } from 'react';
 interface CompactHealthMetersProps {
   healthMetrics: HealthMetrics;
   language: 'en' | 'fr' | 'mi';
+  isTransitioning?: boolean;
+  pendingHealthAnimation?: boolean;
 }
 
 const getHealthColor = (value: number) => {
@@ -55,11 +57,19 @@ const getIcon = (type: string) => {
   }
 };
 
-export const CompactHealthMeters = ({ healthMetrics, language }: CompactHealthMetersProps) => {
+export const CompactHealthMeters = ({ 
+  healthMetrics, 
+  language,
+  isTransitioning = false,
+  pendingHealthAnimation = false
+}: CompactHealthMetersProps) => {
   const previousMetrics = useRef<HealthMetrics>(healthMetrics);
   const [changedMetrics, setChangedMetrics] = useState<Set<string>>(new Set());
 
   useEffect(() => {
+    // Don't start animations if we're transitioning
+    if (isTransitioning) return;
+    
     const newChangedMetrics = new Set<string>();
     Object.keys(healthMetrics).forEach(key => {
       if (previousMetrics.current[key as keyof HealthMetrics] !== healthMetrics[key as keyof HealthMetrics]) {
@@ -68,13 +78,19 @@ export const CompactHealthMeters = ({ healthMetrics, language }: CompactHealthMe
     });
     
     if (newChangedMetrics.size > 0) {
-      setChangedMetrics(newChangedMetrics);
+      // If we have pending health animation, start immediately
+      // Otherwise use normal timing
+      const delay = pendingHealthAnimation ? 0 : 0;
+      
       setTimeout(() => {
-        setChangedMetrics(new Set());
-        previousMetrics.current = { ...healthMetrics };
-      }, 1200);
+        setChangedMetrics(newChangedMetrics);
+        setTimeout(() => {
+          setChangedMetrics(new Set());
+          previousMetrics.current = { ...healthMetrics };
+        }, 1200);
+      }, delay);
     }
-  }, [healthMetrics]);
+  }, [healthMetrics, isTransitioning, pendingHealthAnimation]);
 
   const labels = {
     en: {

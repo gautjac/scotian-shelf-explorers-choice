@@ -10,6 +10,8 @@ interface GameSidebarProps {
   onLanguageChange: (language: Language['code']) => void;
   onBackToPreview: () => void;
   onRestart: () => void;
+  isTransitioning?: boolean;
+  pendingHealthAnimation?: boolean;
 }
 
 export const GameSidebar = ({ 
@@ -17,7 +19,9 @@ export const GameSidebar = ({
   language, 
   onLanguageChange, 
   onBackToPreview, 
-  onRestart 
+  onRestart,
+  isTransitioning = false,
+  pendingHealthAnimation = false
 }: GameSidebarProps) => {
   return (
     <div className="w-full h-full bg-[#0072A0] p-6 lg:p-8 overflow-y-auto flex flex-col">
@@ -26,6 +30,8 @@ export const GameSidebar = ({
         <CompactHealthMeters 
           healthMetrics={healthMetrics} 
           language={language}
+          isTransitioning={isTransitioning}
+          pendingHealthAnimation={pendingHealthAnimation}
         />
       </div>
 

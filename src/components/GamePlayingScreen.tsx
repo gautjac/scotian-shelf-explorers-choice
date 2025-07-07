@@ -12,6 +12,8 @@ interface GamePlayingScreenProps {
   onChoiceSelect: (choiceId: string) => void;
   onBackToPreview: () => void;
   onRestart: () => void;
+  isTransitioning?: boolean;
+  pendingHealthAnimation?: boolean;
 }
 
 export const GamePlayingScreen = ({
@@ -20,7 +22,9 @@ export const GamePlayingScreen = ({
   onLanguageChange,
   onChoiceSelect,
   onBackToPreview,
-  onRestart
+  onRestart,
+  isTransitioning = false,
+  pendingHealthAnimation = false
 }: GamePlayingScreenProps) => {
   return (
     <div className="min-h-screen bg-[#0072A0] flex relative">
@@ -44,6 +48,8 @@ export const GamePlayingScreen = ({
           onLanguageChange={onLanguageChange}
           onBackToPreview={onBackToPreview}
           onRestart={onRestart}
+          isTransitioning={isTransitioning}
+          pendingHealthAnimation={pendingHealthAnimation}
         />
       </div>
     </div>

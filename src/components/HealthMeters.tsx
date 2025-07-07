@@ -6,6 +6,8 @@ import { useEffect, useState, useRef } from 'react';
 interface HealthMetersProps {
   healthMetrics: HealthMetrics;
   language: 'en' | 'fr' | 'mi';
+  isTransitioning?: boolean;
+  pendingHealthAnimation?: boolean;
 }
 
 const getHealthColor = (value: number) => {
@@ -177,24 +179,38 @@ const AnimatedHealthMeter = ({ metricKey, value, previousValue, language, labels
   );
 };
 
-export const HealthMeters = ({ healthMetrics, language }: HealthMetersProps) => {
+export const HealthMeters = ({ 
+  healthMetrics, 
+  language,
+  isTransitioning = false,
+  pendingHealthAnimation = false
+}: HealthMetersProps) => {
   const previousMetrics = useRef<HealthMetrics>(healthMetrics);
   const [animationKey, setAnimationKey] = useState(0);
 
   useEffect(() => {
+    // Don't start animations if we're transitioning
+    if (isTransitioning) return;
+    
     // Check if any metric has changed
     const hasChanged = Object.keys(healthMetrics).some(
       key => previousMetrics.current[key as keyof HealthMetrics] !== healthMetrics[key as keyof HealthMetrics]
     );
     
     if (hasChanged) {
-      setAnimationKey(prev => prev + 1);
-      // Update previous metrics after a delay to allow animation to complete
+      // If we have pending health animation, start immediately
+      // Otherwise use normal timing
+      const delay = pendingHealthAnimation ? 0 : 100;
+      
       setTimeout(() => {
-        previousMetrics.current = { ...healthMetrics };
-      }, 100);
+        setAnimationKey(prev => prev + 1);
+        // Update previous metrics after a delay to allow animation to complete
+        setTimeout(() => {
+          previousMetrics.current = { ...healthMetrics };
+        }, 100);
+      }, delay);
     }
-  }, [healthMetrics]);
+  }, [healthMetrics, isTransitioning, pendingHealthAnimation]);
 
   const labels = {
     en: {

@@ -9,6 +9,7 @@ import { AdminPanel } from '../components/AdminPanel';
 import { ScreenTransition } from '../components/ScreenTransition';
 import { useGameState } from '../hooks/useGameState';
 import { useGamePhase } from '../hooks/useGamePhase';
+import { useTransitionState } from '../hooks/useTransitionState';
 import { scenarios } from '../data/content';
 
 const Index = () => {
@@ -39,6 +40,13 @@ const Index = () => {
     handleReturnToChoices,
     handleRestart
   } = useGamePhase(lastActivity, resetGame);
+
+  const {
+    isTransitioning,
+    pendingHealthAnimation,
+    startTransition,
+    completeTransition
+  } = useTransitionState();
 
   // Check for admin parameter in URL
   useEffect(() => {
@@ -122,6 +130,8 @@ const Index = () => {
       <ScreenTransition 
         isVisible={gamePhase === 'welcome'} 
         direction={getTransitionDirection()}
+        onTransitionStart={startTransition}
+        onTransitionComplete={completeTransition}
       >
         <WelcomeScreen
           currentLanguage={gameState.language}
@@ -133,6 +143,8 @@ const Index = () => {
       <ScreenTransition 
         isVisible={gamePhase === 'preview'} 
         direction={getTransitionDirection()}
+        onTransitionStart={startTransition}
+        onTransitionComplete={completeTransition}
       >
         <ScenarioPreview
           scenarios={currentScenarios}
@@ -147,6 +159,8 @@ const Index = () => {
       <ScreenTransition 
         isVisible={gamePhase === 'playing'} 
         direction={getTransitionDirection()}
+        onTransitionStart={startTransition}
+        onTransitionComplete={completeTransition}
       >
         {currentScenario && (
           <GamePlayingScreen
@@ -156,6 +170,8 @@ const Index = () => {
             onChoiceSelect={handleChoiceSelectWithTracking}
             onBackToPreview={handleBackToPreviewWithTracking}
             onRestart={handleRestartWithTracking}
+            isTransitioning={isTransitioning}
+            pendingHealthAnimation={pendingHealthAnimation}
           />
         )}
       </ScreenTransition>
@@ -163,6 +179,8 @@ const Index = () => {
       <ScreenTransition 
         isVisible={gamePhase === 'completed'} 
         direction="fade"
+        onTransitionStart={startTransition}
+        onTransitionComplete={completeTransition}
       >
         <CompletionScreen
           language={gameState.language}
