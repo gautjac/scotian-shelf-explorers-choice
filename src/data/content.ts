@@ -145,7 +145,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
       id: 'ocean-acidification',
       title: 'The Sour Ocean Problem',
       description: 'The ocean is becoming more acidic (sour) because it\'s absorbing pollution from the air. This makes it super hard for lobsters and crabs to build strong shells. It\'s like trying to build with weak blocks!',
-      imageUrl: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600',
+      imageUrl: 'https://im.runware.ai/image/ws/2/ii/edd2022c-ef34-47d3-a4f8-7c588d71f007.webp',
       choices: [
         {
           id: 'reduce-emissions',
