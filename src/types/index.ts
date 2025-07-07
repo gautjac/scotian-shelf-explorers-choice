@@ -13,6 +13,10 @@ export interface Choice {
   pros: string;
   cons: string;
   nextScenarioId?: string;
+  // Granular impact values (-50 to +50)
+  ecosystemImpact?: number;
+  economicImpact?: number;
+  communityImpact?: number;
 }
 
 export interface Scenario {

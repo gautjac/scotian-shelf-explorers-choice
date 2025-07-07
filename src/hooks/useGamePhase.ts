@@ -1,6 +1,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { Choice } from '../types';
+import { getChoiceImpact } from '../utils/impactConfiguration';
 
 type GamePhase = 'welcome' | 'preview' | 'playing' | 'consequence' | 'completed';
 
@@ -52,12 +53,13 @@ export const useGamePhase = (lastActivity: number, resetGame: () => void) => {
   }, []);
 
   const handleConfirmChoice = useCallback((
-    makeChoice: (scenarioId: string, choiceId: string, impact: 'positive' | 'negative' | 'neutral') => void,
+    makeChoice: (scenarioId: string, choiceId: string, impact: 'positive' | 'negative' | 'neutral', granularImpacts?: { ecosystem: number; economic: number; community: number }) => void,
     advanceScenario: (scenarioId?: string) => void,
     currentScenarioId: string
   ) => {
     if (selectedChoice) {
-      makeChoice(currentScenarioId, selectedChoice.id, selectedChoice.impact);
+      const granularImpacts = getChoiceImpact(currentScenarioId, selectedChoice);
+      makeChoice(currentScenarioId, selectedChoice.id, selectedChoice.impact, granularImpacts);
       if (selectedChoice.nextScenarioId) {
         advanceScenario(selectedChoice.nextScenarioId);
         setGamePhase('playing');

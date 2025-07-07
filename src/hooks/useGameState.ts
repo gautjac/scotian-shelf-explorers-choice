@@ -27,29 +27,38 @@ export const useGameState = () => {
     setGameState(prev => ({ ...prev, language }));
   }, []);
 
-  const makeChoice = useCallback((scenarioId: string, choiceId: string, impact: 'positive' | 'negative' | 'neutral') => {
+  const makeChoice = useCallback((scenarioId: string, choiceId: string, impact: 'positive' | 'negative' | 'neutral', granularImpacts?: { ecosystem: number; economic: number; community: number }) => {
     setGameState(prev => {
       const newSpeciesHealth = { ...prev.speciesHealth };
       const newHealthMetrics = { ...prev.healthMetrics };
       
-      // Update species health based on choice impact
+      // Update species health based on choice impact (using ecosystem impact for species health)
+      const ecosystemImpact = granularImpacts?.ecosystem ?? (impact === 'positive' ? 10 : impact === 'negative' ? -10 : 0);
+      
       Object.keys(newSpeciesHealth).forEach(speciesId => {
-        if (impact === 'positive') {
+        if (ecosystemImpact > 0) {
           if (newSpeciesHealth[speciesId] === 'critical') newSpeciesHealth[speciesId] = 'declining';
           else if (newSpeciesHealth[speciesId] === 'declining') newSpeciesHealth[speciesId] = 'stable';
           else if (newSpeciesHealth[speciesId] === 'stable') newSpeciesHealth[speciesId] = 'thriving';
-        } else if (impact === 'negative') {
+        } else if (ecosystemImpact < 0) {
           if (newSpeciesHealth[speciesId] === 'thriving') newSpeciesHealth[speciesId] = 'stable';
           else if (newSpeciesHealth[speciesId] === 'stable') newSpeciesHealth[speciesId] = 'declining';
           else if (newSpeciesHealth[speciesId] === 'declining') newSpeciesHealth[speciesId] = 'critical';
         }
       });
 
-      // Update health metrics based on choice impact
-      const impactValue = impact === 'positive' ? 10 : impact === 'negative' ? -10 : 0;
-      newHealthMetrics.ecosystem = Math.max(0, Math.min(100, newHealthMetrics.ecosystem + impactValue));
-      newHealthMetrics.economic = Math.max(0, Math.min(100, newHealthMetrics.economic + impactValue));
-      newHealthMetrics.community = Math.max(0, Math.min(100, newHealthMetrics.community + impactValue));
+      // Update health metrics using granular impacts if available, otherwise fallback to legacy system
+      if (granularImpacts) {
+        newHealthMetrics.ecosystem = Math.max(0, Math.min(100, newHealthMetrics.ecosystem + granularImpacts.ecosystem));
+        newHealthMetrics.economic = Math.max(0, Math.min(100, newHealthMetrics.economic + granularImpacts.economic));
+        newHealthMetrics.community = Math.max(0, Math.min(100, newHealthMetrics.community + granularImpacts.community));
+      } else {
+        // Legacy system fallback
+        const impactValue = impact === 'positive' ? 10 : impact === 'negative' ? -10 : 0;
+        newHealthMetrics.ecosystem = Math.max(0, Math.min(100, newHealthMetrics.ecosystem + impactValue));
+        newHealthMetrics.economic = Math.max(0, Math.min(100, newHealthMetrics.economic + impactValue));
+        newHealthMetrics.community = Math.max(0, Math.min(100, newHealthMetrics.community + impactValue));
+      }
 
       return {
         ...prev,
