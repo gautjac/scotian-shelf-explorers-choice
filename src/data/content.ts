@@ -215,7 +215,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
       id: 'coastal-development',
       title: 'Building by the Beach',
       description: 'More families want to live near Nova Scotia\'s beautiful coastline. New houses, stores, and hotels are being built. But construction can make dirty water run into the ocean. How should we build responsibly?',
-      imageUrl: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=600',
+      imageUrl: 'https://im.runware.ai/image/ws/2/ii/d79daed4-6759-4505-b393-7c4b8845856f.webp',
       choices: [
         {
           id: 'green-development',
