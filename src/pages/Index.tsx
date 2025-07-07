@@ -6,6 +6,7 @@ import { ConsequenceModal } from '../components/ConsequenceModal';
 import { CompletionScreen } from '../components/CompletionScreen';
 import { GamePlayingScreen } from '../components/GamePlayingScreen';
 import { AdminPanel } from '../components/AdminPanel';
+import { ScreenTransition } from '../components/ScreenTransition';
 import { useGameState } from '../hooks/useGameState';
 import { useGamePhase } from '../hooks/useGamePhase';
 import { scenarios } from '../data/content';
@@ -25,6 +26,8 @@ const Index = () => {
 
   const {
     gamePhase,
+    previousPhase,
+    transitionDirection,
     selectedChoice,
     handleShowPreview,
     handleStart,
@@ -109,63 +112,78 @@ const Index = () => {
     trackActivity();
   };
 
-  let mainContent;
-
-  if (gamePhase === 'welcome') {
-    mainContent = (
-      <WelcomeScreen
-        currentLanguage={gameState.language}
-        onLanguageChange={handleLanguageChange}
-        onStart={handleShowPreviewWithTracking}
-      />
-    );
-  } else if (gamePhase === 'preview') {
-    mainContent = (
-      <ScenarioPreview
-        scenarios={currentScenarios}
-        language={gameState.language}
-        onStart={handleStartWithTracking}
-        onBack={handleBackToWelcomeWithTracking}
-        onScenarioSelect={handleScenarioSelectWithTracking}
-        onLanguageChange={handleLanguageChange}
-      />
-    );
-  } else if (gamePhase === 'completed') {
-    mainContent = (
-      <CompletionScreen
-        language={gameState.language}
-        onLanguageChange={handleLanguageChange}
-        onRestart={handleRestartWithTracking}
-        choicesMade={gameState.choicesMade}
-      />
-    );
-  } else if (gamePhase === 'playing' && currentScenario) {
-    mainContent = (
-      <GamePlayingScreen
-        gameState={gameState}
-        currentScenario={currentScenario}
-        onLanguageChange={handleLanguageChange}
-        onChoiceSelect={handleChoiceSelectWithTracking}
-        onBackToPreview={handleBackToPreviewWithTracking}
-        onRestart={handleRestartWithTracking}
-      />
-    );
-  } else {
-    mainContent = null;
-  }
+  const getTransitionDirection = () => {
+    if (transitionDirection === 'modal') return 'forward';
+    return transitionDirection;
+  };
 
   return (
     <>
-      {mainContent}
-      {gamePhase === 'consequence' && selectedChoice && (
-        <ConsequenceModal
-          choice={selectedChoice}
-          language={gameState.language}
-          onConfirm={handleConfirmChoiceWithTracking}
-          onReturn={handleReturnToChoicesWithTracking}
-          isVisible={true}
+      <ScreenTransition 
+        isVisible={gamePhase === 'welcome'} 
+        direction={getTransitionDirection()}
+      >
+        <WelcomeScreen
+          currentLanguage={gameState.language}
+          onLanguageChange={handleLanguageChange}
+          onStart={handleShowPreviewWithTracking}
         />
+      </ScreenTransition>
+
+      <ScreenTransition 
+        isVisible={gamePhase === 'preview'} 
+        direction={getTransitionDirection()}
+      >
+        <ScenarioPreview
+          scenarios={currentScenarios}
+          language={gameState.language}
+          onStart={handleStartWithTracking}
+          onBack={handleBackToWelcomeWithTracking}
+          onScenarioSelect={handleScenarioSelectWithTracking}
+          onLanguageChange={handleLanguageChange}
+        />
+      </ScreenTransition>
+
+      <ScreenTransition 
+        isVisible={gamePhase === 'playing'} 
+        direction={getTransitionDirection()}
+      >
+        {currentScenario && (
+          <GamePlayingScreen
+            gameState={gameState}
+            currentScenario={currentScenario}
+            onLanguageChange={handleLanguageChange}
+            onChoiceSelect={handleChoiceSelectWithTracking}
+            onBackToPreview={handleBackToPreviewWithTracking}
+            onRestart={handleRestartWithTracking}
+          />
+        )}
+      </ScreenTransition>
+
+      <ScreenTransition 
+        isVisible={gamePhase === 'completed'} 
+        direction="fade"
+      >
+        <CompletionScreen
+          language={gameState.language}
+          onLanguageChange={handleLanguageChange}
+          onRestart={handleRestartWithTracking}
+          choicesMade={gameState.choicesMade}
+        />
+      </ScreenTransition>
+
+      {gamePhase === 'consequence' && selectedChoice && (
+        <div className="fixed inset-0 z-50 animate-scale-modal-in">
+          <ConsequenceModal
+            choice={selectedChoice}
+            language={gameState.language}
+            onConfirm={handleConfirmChoiceWithTracking}
+            onReturn={handleReturnToChoicesWithTracking}
+            isVisible={true}
+          />
+        </div>
       )}
+      
       {showAdmin && (
         <AdminPanel onClose={() => setShowAdmin(false)} />
       )}
