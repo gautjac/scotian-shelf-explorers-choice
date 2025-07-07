@@ -64,10 +64,6 @@ export const WelcomeScreen = ({ currentLanguage, onLanguageChange, onStart }: We
           {content.startButton}
         </button>
 
-        {/* Touch instruction - larger text */}
-        <p className="text-[#CDE2ED]/80 mt-8 text-lg lg:text-xl animate-fade-in" style={{ animationDelay: '2s' }}>
-          {content.instruction}
-        </p>
       </div>
 
       {/* Language selector - bottom right corner */}
