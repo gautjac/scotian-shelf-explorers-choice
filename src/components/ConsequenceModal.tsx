@@ -37,14 +37,14 @@ export const ConsequenceModal = ({ choice, language, onConfirm, onReturn, isVisi
   };
 
   const prosText = {
-    en: 'Good Things',
-    fr: 'Bonnes choses',
+    en: 'The pros',
+    fr: 'Les avantages',
     mi: 'Weli koqoey'
   };
 
   const consText = {
-    en: 'Bad Things',
-    fr: 'Mauvaises choses',
+    en: 'The cons',
+    fr: 'Les inconvénients',
     mi: 'Maw koqoey'
   };
 
