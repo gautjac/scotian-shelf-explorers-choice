@@ -112,7 +112,7 @@ const AnimatedHealthMeter = ({ metricKey, value, previousValue, language, labels
   };
 
   const getAnimatedIcon = (type: string) => {
-    const iconClasses = `w-24 h-24 lg:w-32 lg:h-32 text-white transition-all duration-300 ${animationClass}`;
+    const iconClasses = `w-6 h-6 lg:w-8 lg:h-8 text-white transition-all duration-300 ${animationClass}`;
     switch (type) {
       case 'ecosystem':
         return <Waves className={iconClasses} />;
@@ -129,7 +129,7 @@ const AnimatedHealthMeter = ({ metricKey, value, previousValue, language, labels
     <div className="flex flex-col items-center text-center">
       {/* Circular Icon with animation */}
       <div className="relative mb-12 lg:mb-16">
-        <div className={`w-48 h-48 lg:w-64 lg:h-64 xl:w-80 xl:h-80 rounded-full bg-gradient-to-br from-slate-600 to-slate-800 border-12 lg:border-16 border-white shadow-2xl flex items-center justify-center transition-all duration-500 ${isAnimating ? 'scale-105 shadow-3xl' : ''}`}>
+        <div className={`w-12 h-12 lg:w-16 lg:h-16 xl:w-20 xl:h-20 rounded-full bg-gradient-to-br from-slate-600 to-slate-800 border-3 lg:border-4 border-white shadow-2xl flex items-center justify-center transition-all duration-500 ${isAnimating ? 'scale-105 shadow-3xl' : ''}`}>
           {getAnimatedIcon(metricKey)}
           {/* Ripple effect on change */}
           {isAnimating && (
