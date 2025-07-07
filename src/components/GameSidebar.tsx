@@ -14,26 +14,29 @@ interface GameSidebarProps {
 
 export const GameSidebar = ({ healthMetrics, language, onBackToPreview, onRestart, onLanguageChange }: GameSidebarProps) => {
   return (
-    <div className="w-full h-full bg-[#0072A0] p-6 lg:p-8 overflow-y-auto">
-      {/* Health Meters - compact version for sidebar */}
-      <div className="mb-8">
-        <CompactHealthMeters 
-          healthMetrics={healthMetrics} 
-          language={language}
-        />
+    <div className="w-full h-full bg-[#0072A0] p-6 lg:p-8 overflow-y-auto flex flex-col">
+      {/* Top content */}
+      <div className="flex-1">
+        {/* Health Meters - compact version for sidebar */}
+        <div className="mb-8">
+          <CompactHealthMeters 
+            healthMetrics={healthMetrics} 
+            language={language}
+          />
+        </div>
+
+        {/* Game Actions */}
+        <div className="mb-8">
+          <GameActions
+            language={language}
+            onBackToPreview={onBackToPreview}
+            onRestart={onRestart}
+          />
+        </div>
       </div>
 
-      {/* Game Actions */}
-      <div className="mb-8">
-        <GameActions
-          language={language}
-          onBackToPreview={onBackToPreview}
-          onRestart={onRestart}
-        />
-      </div>
-
-      {/* Language Selector */}
-      <div className="mb-8">
+      {/* Language Selector - aligned to bottom */}
+      <div className="mt-auto">
         <LanguageSelector 
           currentLanguage={language}
           onLanguageChange={onLanguageChange}
