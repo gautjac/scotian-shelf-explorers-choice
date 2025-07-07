@@ -44,9 +44,18 @@ export const WelcomeScreen = ({ currentLanguage, onLanguageChange, onStart }: We
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#CDE2ED]/10 rounded-full animate-pulse" style={{ animationDelay: '2s' }} />
       </div>
 
+      {/* Semi-transparent whale background */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center opacity-15 pointer-events-none"
+        style={{ 
+          backgroundImage: `url(https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=1920&h=1080&fit=crop)`,
+          backgroundPosition: 'center 40%'
+        }}
+      />
+
       <div className="relative z-10 text-center max-w-6xl mx-auto">
         {/* Main title - larger for 32" display */}
-        <h1 className="text-6xl lg:text-8xl xl:text-9xl font-bold text-white mb-8 animate-fade-in">
+        <h1 className="text-6xl lg:text-8xl xl:text-9xl font-bold text-white mb-8 animate-fade-in drop-shadow-2xl">
           {content.title}
         </h1>
 
