@@ -109,18 +109,18 @@ const Index = () => {
     trackActivity();
   };
 
+  let mainContent;
+
   if (gamePhase === 'welcome') {
-    return (
+    mainContent = (
       <WelcomeScreen
         currentLanguage={gameState.language}
         onLanguageChange={handleLanguageChange}
         onStart={handleShowPreviewWithTracking}
       />
     );
-  }
-
-  if (gamePhase === 'preview') {
-    return (
+  } else if (gamePhase === 'preview') {
+    mainContent = (
       <ScenarioPreview
         scenarios={currentScenarios}
         language={gameState.language}
@@ -130,10 +130,8 @@ const Index = () => {
         onLanguageChange={handleLanguageChange}
       />
     );
-  }
-
-  if (gamePhase === 'completed') {
-    return (
+  } else if (gamePhase === 'completed') {
+    mainContent = (
       <CompletionScreen
         language={gameState.language}
         onLanguageChange={handleLanguageChange}
@@ -141,10 +139,8 @@ const Index = () => {
         choicesMade={gameState.choicesMade}
       />
     );
-  }
-
-  if (gamePhase === 'playing' && currentScenario) {
-    return (
+  } else if (gamePhase === 'playing' && currentScenario) {
+    mainContent = (
       <GamePlayingScreen
         gameState={gameState}
         currentScenario={currentScenario}
@@ -154,10 +150,13 @@ const Index = () => {
         onRestart={handleRestartWithTracking}
       />
     );
+  } else {
+    mainContent = null;
   }
 
   return (
     <>
+      {mainContent}
       {gamePhase === 'consequence' && selectedChoice && (
         <ConsequenceModal
           choice={selectedChoice}
