@@ -6,10 +6,8 @@ import { ConsequenceModal } from '../components/ConsequenceModal';
 import { CompletionScreen } from '../components/CompletionScreen';
 import { GamePlayingScreen } from '../components/GamePlayingScreen';
 import { AdminPanel } from '../components/AdminPanel';
-import { ScreenTransition } from '../components/ScreenTransition';
 import { useGameState } from '../hooks/useGameState';
 import { useGamePhase } from '../hooks/useGamePhase';
-import { useTransitionState } from '../hooks/useTransitionState';
 import { scenarios } from '../data/content';
 
 const Index = () => {
@@ -27,8 +25,6 @@ const Index = () => {
 
   const {
     gamePhase,
-    previousPhase,
-    transitionDirection,
     selectedChoice,
     handleShowPreview,
     handleStart,
@@ -41,12 +37,6 @@ const Index = () => {
     handleRestart
   } = useGamePhase(lastActivity, resetGame);
 
-  const {
-    isTransitioning,
-    pendingHealthAnimation,
-    startTransition,
-    completeTransition
-  } = useTransitionState();
 
   // Check for admin parameter in URL
   useEffect(() => {
@@ -120,32 +110,17 @@ const Index = () => {
     trackActivity();
   };
 
-  const getTransitionDirection = () => {
-    if (transitionDirection === 'modal') return 'forward';
-    return transitionDirection;
-  };
-
   return (
     <>
-      <ScreenTransition 
-        isVisible={gamePhase === 'welcome'} 
-        direction={getTransitionDirection()}
-        onTransitionStart={startTransition}
-        onTransitionComplete={completeTransition}
-      >
+      {gamePhase === 'welcome' && (
         <WelcomeScreen
           currentLanguage={gameState.language}
           onLanguageChange={handleLanguageChange}
           onStart={handleShowPreviewWithTracking}
         />
-      </ScreenTransition>
+      )}
 
-      <ScreenTransition 
-        isVisible={gamePhase === 'preview'} 
-        direction={getTransitionDirection()}
-        onTransitionStart={startTransition}
-        onTransitionComplete={completeTransition}
-      >
+      {gamePhase === 'preview' && (
         <ScenarioPreview
           scenarios={currentScenarios}
           language={gameState.language}
@@ -154,41 +129,27 @@ const Index = () => {
           onScenarioSelect={handleScenarioSelectWithTracking}
           onLanguageChange={handleLanguageChange}
         />
-      </ScreenTransition>
+      )}
 
-      <ScreenTransition 
-        isVisible={gamePhase === 'playing'} 
-        direction={getTransitionDirection()}
-        onTransitionStart={startTransition}
-        onTransitionComplete={completeTransition}
-      >
-        {currentScenario && (
-          <GamePlayingScreen
-            gameState={gameState}
-            currentScenario={currentScenario}
-            onLanguageChange={handleLanguageChange}
-            onChoiceSelect={handleChoiceSelectWithTracking}
-            onBackToPreview={handleBackToPreviewWithTracking}
-            onRestart={handleRestartWithTracking}
-            isTransitioning={isTransitioning}
-            pendingHealthAnimation={pendingHealthAnimation}
-          />
-        )}
-      </ScreenTransition>
+      {gamePhase === 'playing' && currentScenario && (
+        <GamePlayingScreen
+          gameState={gameState}
+          currentScenario={currentScenario}
+          onLanguageChange={handleLanguageChange}
+          onChoiceSelect={handleChoiceSelectWithTracking}
+          onBackToPreview={handleBackToPreviewWithTracking}
+          onRestart={handleRestartWithTracking}
+        />
+      )}
 
-      <ScreenTransition 
-        isVisible={gamePhase === 'completed'} 
-        direction="fade"
-        onTransitionStart={startTransition}
-        onTransitionComplete={completeTransition}
-      >
+      {gamePhase === 'completed' && (
         <CompletionScreen
           language={gameState.language}
           onLanguageChange={handleLanguageChange}
           onRestart={handleRestartWithTracking}
           choicesMade={gameState.choicesMade}
         />
-      </ScreenTransition>
+      )}
 
       {gamePhase === 'consequence' && selectedChoice && (
         <div className="fixed inset-0 z-50 animate-scale-modal-in">

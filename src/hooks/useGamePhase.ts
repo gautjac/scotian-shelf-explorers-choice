@@ -4,13 +4,10 @@ import { Choice } from '../types';
 import { getChoiceImpact } from '../utils/impactConfiguration';
 
 type GamePhase = 'welcome' | 'preview' | 'playing' | 'consequence' | 'completed';
-type TransitionDirection = 'forward' | 'backward' | 'fade' | 'modal';
 
 export const useGamePhase = (lastActivity: number, resetGame: () => void) => {
   const [gamePhase, setGamePhase] = useState<GamePhase>('welcome');
-  const [previousPhase, setPreviousPhase] = useState<GamePhase>('welcome');
   const [selectedChoice, setSelectedChoice] = useState<Choice | null>(null);
-  const [transitionDirection, setTransitionDirection] = useState<TransitionDirection>('forward');
 
   // Auto-reset after 3 minutes of inactivity (kiosk mode)
   useEffect(() => {
@@ -26,38 +23,31 @@ export const useGamePhase = (lastActivity: number, resetGame: () => void) => {
     return () => clearInterval(checkInactivity);
   }, [lastActivity, gamePhase, resetGame]);
 
-  const setPhaseWithTransition = useCallback((newPhase: GamePhase, direction: TransitionDirection) => {
-    setPreviousPhase(gamePhase);
-    setTransitionDirection(direction);
-    setGamePhase(newPhase);
-  }, [gamePhase]);
-
   const handleShowPreview = useCallback(() => {
-    setPhaseWithTransition('preview', 'forward');
-  }, [setPhaseWithTransition]);
+    setGamePhase('preview');
+  }, []);
 
   const handleStart = useCallback(() => {
-    setPhaseWithTransition('playing', 'forward');
-  }, [setPhaseWithTransition]);
+    setGamePhase('playing');
+  }, []);
 
   const handleBackToWelcome = useCallback(() => {
-    setPhaseWithTransition('welcome', 'backward');
-  }, [setPhaseWithTransition]);
+    setGamePhase('welcome');
+  }, []);
 
   const handleBackToPreview = useCallback(() => {
-    setPhaseWithTransition('preview', 'backward');
-  }, [setPhaseWithTransition]);
+    setGamePhase('preview');
+  }, []);
 
   const handleScenarioSelect = useCallback((scenarioId: string, advanceScenario: (scenarioId: string) => void) => {
     advanceScenario(scenarioId);
-    setPhaseWithTransition('playing', 'forward');
-  }, [setPhaseWithTransition]);
+    setGamePhase('playing');
+  }, []);
 
   const handleChoiceSelect = useCallback((choiceId: string, currentScenario: any) => {
     const choice = currentScenario?.choices.find((c: Choice) => c.id === choiceId);
     if (choice) {
       setSelectedChoice(choice);
-      setTransitionDirection('modal');
       setGamePhase('consequence');
     }
   }, []);
@@ -72,13 +62,13 @@ export const useGamePhase = (lastActivity: number, resetGame: () => void) => {
       makeChoice(currentScenarioId, selectedChoice.id, selectedChoice.impact, granularImpacts);
       if (selectedChoice.nextScenarioId) {
         advanceScenario(selectedChoice.nextScenarioId);
-        setPhaseWithTransition('playing', 'forward');
+        setGamePhase('playing');
       } else {
-        setPhaseWithTransition('completed', 'fade');
+        setGamePhase('completed');
       }
       setSelectedChoice(null);
     }
-  }, [selectedChoice, setPhaseWithTransition]);
+  }, [selectedChoice]);
 
   const handleReturnToChoices = useCallback(() => {
     setSelectedChoice(null);
@@ -86,14 +76,12 @@ export const useGamePhase = (lastActivity: number, resetGame: () => void) => {
   }, []);
 
   const handleRestart = useCallback(() => {
-    setPhaseWithTransition('welcome', 'backward');
+    setGamePhase('welcome');
     resetGame();
-  }, [setPhaseWithTransition, resetGame]);
+  }, [resetGame]);
 
   return {
     gamePhase,
-    previousPhase,
-    transitionDirection,
     selectedChoice,
     handleShowPreview,
     handleStart,
