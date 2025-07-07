@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Button } from './ui/button';
+import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Textarea } from './ui/textarea';
 import { toast } from 'sonner';
-import { supabase } from '@/integrations/supabase/client';
 
 const scenarioPrompts = [
   {
@@ -50,31 +50,28 @@ const scenarioPrompts = [
 ];
 
 export const ImageGenerator = () => {
+  const [apiKey, setApiKey] = useState('');
   const [selectedPrompt, setSelectedPrompt] = useState(scenarioPrompts[0]);
   const [customPrompt, setCustomPrompt] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedImages, setGeneratedImages] = useState<string[]>([]);
 
   const handleGenerate = async () => {
+    if (!apiKey) {
+      toast.error('Please enter your Runware API key');
+      return;
+    }
+
     setIsGenerating(true);
     try {
       const prompt = customPrompt || selectedPrompt.prompt;
       
-      const { data, error } = await supabase.functions.invoke('generate-image', {
-        body: {
-          positivePrompt: prompt,
-          numberResults: 1,
-          outputFormat: 'WEBP'
-        }
-      });
-
-      if (error) throw error;
-
-      setGeneratedImages(prev => [data.imageURL, ...prev]);
-      toast.success('Image generated successfully!');
+      // Simple fetch to Runware API (placeholder for now)
+      toast.info('Image generation feature will be available after Supabase setup');
+      
     } catch (error) {
       console.error('Error generating image:', error);
-      toast.error('Failed to generate image. Please check your setup and try again.');
+      toast.error('Failed to generate image. Please complete Supabase setup first.');
     } finally {
       setIsGenerating(false);
     }
@@ -87,10 +84,17 @@ export const ImageGenerator = () => {
           <CardTitle>Generate Scenario Images</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="bg-blue-50 p-4 rounded-lg">
-            <p className="text-sm text-blue-700">
-              This tool uses your Runware API key stored securely in Supabase Edge Function Secrets. 
-              Make sure to add your <strong>RUNWARE_API_KEY</strong> to your Supabase project secrets.
+          <div>
+            <Label htmlFor="apiKey">Runware API Key</Label>
+            <Input
+              id="apiKey"
+              type="password"
+              placeholder="Enter your Runware API key"
+              value={apiKey}
+              onChange={(e) => setApiKey(e.target.value)}
+            />
+            <p className="text-sm text-muted-foreground mt-1">
+              Get your API key from <a href="https://runware.ai" target="_blank" rel="noopener noreferrer" className="underline">runware.ai</a>
             </p>
           </div>
 
@@ -123,7 +127,7 @@ export const ImageGenerator = () => {
 
           <Button 
             onClick={handleGenerate} 
-            disabled={isGenerating}
+            disabled={isGenerating || !apiKey}
             className="w-full"
           >
             {isGenerating ? 'Generating...' : 'Generate Image'}
