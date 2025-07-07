@@ -73,6 +73,24 @@ export const CompactHealthMeters = ({ healthMetrics, language }: CompactHealthMe
     }
   };
 
+  const descriptions = {
+    en: {
+      ecosystem: 'Fish, whales, plants and other sea life',
+      economic: 'Fishing jobs and coastal businesses',
+      community: 'Health and wellbeing of communities'
+    },
+    fr: {
+      ecosystem: 'Poissons, baleines, plantes et autres vies marines',
+      economic: 'Emplois de pêche et entreprises côtières',
+      community: 'Santé et bien-être des communautés'
+    },
+    mi: {
+      ecosystem: 'Namu, puktew, maskiku aq aqq samqwan mimaji\'kuom',
+      economic: 'Ami\'kuew koqoey aq kespukwitk lukwaqnej',
+      community: 'Wela\'lin aq welameq l\'nuiwoq'
+    }
+  };
+
   return (
     <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
       <h3 className="text-2xl font-bold text-slate-700 mb-12 text-center">
@@ -91,8 +109,11 @@ export const CompactHealthMeters = ({ healthMetrics, language }: CompactHealthMe
 
             {/* Content */}
             <div className="flex-1 min-w-0">
-              <div className="text-lg font-semibold text-slate-700 mb-2 truncate">
+              <div className="text-lg font-semibold text-slate-700 mb-1 truncate">
                 {labels[language][key as keyof typeof labels[typeof language]]}
+              </div>
+              <div className="text-sm text-slate-500 mb-2">
+                {descriptions[language][key as keyof typeof descriptions[typeof language]]}
               </div>
               
               {/* Progress Bar */}
