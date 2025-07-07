@@ -75,7 +75,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
       id: 'fishing-practices',
       title: 'Fish for the Future',
       description: 'Fishing boats catch tons of fish every day near Nova Scotia. Fishing gives people jobs and yummy food. But if we catch too many fish, baby fish won\'t have parents. How should we fish smartly?',
-      imageUrl: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600',
+      imageUrl: 'https://im.runware.ai/image/ws/2/ii/79fa002d-2a21-4a4b-9d6d-69f42bcf9e85.webp',
       choices: [
         {
           id: 'sustainable-quotas',
