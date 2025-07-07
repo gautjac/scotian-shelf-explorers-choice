@@ -92,7 +92,7 @@ export const CompactHealthMeters = ({ healthMetrics, language }: CompactHealthMe
   };
 
   return (
-    <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
+    <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl min-h-[130%]">
       <h3 className="text-2xl font-bold text-slate-700 mb-12 text-center">
         {language === 'en' && 'Ocean Health'}
         {language === 'fr' && 'Santé océanique'}
