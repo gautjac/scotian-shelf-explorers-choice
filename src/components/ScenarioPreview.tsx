@@ -40,8 +40,8 @@ const previewText = {
 export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenarioSelect, onLanguageChange }: ScenarioPreviewProps) => {
   const content = previewText[language];
   
-  // Get first 5 scenarios
-  const previewScenarios = scenarios.slice(0, 5);
+  // Get first 6 scenarios
+  const previewScenarios = scenarios.slice(0, 6);
 
   const handleScenarioClick = (scenarioId: string) => {
     if (onScenarioSelect) {
