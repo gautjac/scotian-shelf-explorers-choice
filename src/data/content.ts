@@ -40,7 +40,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
       id: 'plastic-pollution',
       title: 'Trash Attack!',
       description: 'Oh no! Plastic bags and bottles are washing up on Nova Scotia beaches. Sea turtles think plastic bags are jellyfish and try to eat them. Fish get tangled up in bottle rings. What should we do to help?',
-      imageUrl: 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=600',
+      imageUrl: 'https://im.runware.ai/image/ws/2/ii/4d544ff8-8851-497d-894a-3c5408b27c20.webp',
       choices: [
         {
           id: 'ban-plastics',
