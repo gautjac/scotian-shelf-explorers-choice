@@ -4,7 +4,7 @@ import { Label } from './ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Textarea } from './ui/textarea';
 import { toast } from 'sonner';
-import { supabase } from '../integrations/supabase/client';
+// import { supabase } from '../integrations/supabase/client';
 
 const scenarioPrompts = [
   {
@@ -56,11 +56,10 @@ export const ImageGenerator = () => {
   const [generatedImages, setGeneratedImages] = useState<string[]>([]);
 
   const handleGenerate = async () => {
-    if (!supabase) {
-      toast.error('Supabase not configured. Please connect your project to Supabase first.');
-      return;
-    }
+    toast.info('Connect to Supabase first to enable image generation');
+    return;
 
+    /*
     setIsGenerating(true);
     try {
       const prompt = customPrompt || selectedPrompt.prompt;
@@ -83,6 +82,7 @@ export const ImageGenerator = () => {
     } finally {
       setIsGenerating(false);
     }
+    */
   };
 
   return (
@@ -128,7 +128,7 @@ export const ImageGenerator = () => {
 
           <Button 
             onClick={handleGenerate} 
-            disabled={isGenerating || !supabase}
+            disabled={isGenerating}
             className="w-full"
           >
             {isGenerating ? 'Generating...' : 'Generate Image'}
