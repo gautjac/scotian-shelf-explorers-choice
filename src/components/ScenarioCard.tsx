@@ -17,7 +17,7 @@ export const ScenarioCard = ({ scenario, language, onChoiceSelect }: ScenarioCar
   return (
     <div className="h-full bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col">
       {/* Scenario image - optimized for sidebar layout */}
-      <div className="h-104 lg:h-128 bg-cover bg-center relative flex-shrink-0" style={{ backgroundImage: `url(${scenario.imageUrl})` }}>
+      <div className="h-96 lg:h-[26rem] bg-cover bg-center relative flex-shrink-0" style={{ backgroundImage: `url(${scenario.imageUrl})` }}>
       </div>
 
       {/* Scenario content - scrollable if needed */}
