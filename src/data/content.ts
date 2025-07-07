@@ -75,7 +75,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
       id: 'fishing-practices',
       title: 'Fish for the Future',
       description: 'Fishing boats catch tons of fish every day near Nova Scotia. Fishing gives people jobs and yummy food. But if we catch too many fish, baby fish won\'t have parents. How should we fish smartly?',
-      imageUrl: 'https://im.runware.ai/image/ws/2/ii/b2c6f736-842c-4407-a3b8-aa20c0160835.webp',
+      imageUrl: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600',
       choices: [
         {
           id: 'sustainable-quotas',
@@ -110,7 +110,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
       id: 'shipping-traffic',
       title: 'Whale Highway Danger',
       description: 'Giant cargo ships sail past Nova Scotia every day. Sometimes they accidentally hit whales because they\'re going super fast. Right whales are almost extinct - there are only about 340 left! How can we help?',
-      imageUrl: 'https://im.runware.ai/image/ws/2/ii/70fd6bee-7082-4a02-9372-3b373f29ea2d.webp',
+      imageUrl: 'https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=600',
       choices: [
         {
           id: 'speed-restrictions',
@@ -145,7 +145,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
       id: 'ocean-acidification',
       title: 'The Sour Ocean Problem',
       description: 'The ocean is becoming more acidic (sour) because it\'s absorbing pollution from the air. This makes it super hard for lobsters and crabs to build strong shells. It\'s like trying to build with weak blocks!',
-      imageUrl: 'https://im.runware.ai/image/ws/2/ii/b1e6030e-9eff-47f7-b1f4-ea32f5a507a2.webphttps://im.runware.ai/image/ws/2/ii/34336803-4dca-4199-b9d2-f6732dae278f.webp',
+      imageUrl: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600',
       choices: [
         {
           id: 'reduce-emissions',
