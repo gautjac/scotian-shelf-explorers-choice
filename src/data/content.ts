@@ -110,7 +110,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
       id: 'shipping-traffic',
       title: 'Whale Highway Danger',
       description: 'Giant cargo ships sail past Nova Scotia every day. Sometimes they accidentally hit whales because they\'re going super fast. Right whales are almost extinct - there are only about 340 left! How can we help?',
-      imageUrl: 'https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=600',
+      imageUrl: 'https://im.runware.ai/image/ws/2/ii/66e8aeee-de3e-42e8-8e28-a6055ab72778.webp',
       choices: [
         {
           id: 'speed-restrictions',
