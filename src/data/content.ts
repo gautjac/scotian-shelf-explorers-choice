@@ -243,40 +243,75 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
         }
       ],
       isEnding: true
-    },
-    {
-      id: 'climate-change',
-      title: 'The Warming Waters',
-      description: 'Ocean temperatures are rising because of climate change. Fish are swimming to colder waters up north, and coral reefs are getting stressed. It\'s like the ocean has a fever! What can help cool things down?',
-      imageUrl: 'https://images.unsplash.com/photo-1441057206919-63d19fac2369?w=600',
-      choices: [
-        {
-          id: 'renewable-energy',
-          text: 'Switch to wind and solar power',
-          impact: 'positive',
-          consequence: 'Awesome! Clean energy produces way less pollution. It\'s like giving the ocean medicine to bring down its fever.',
-          pros: 'Stops heating up the ocean. Creates new green jobs.',
-          cons: 'Expensive to build at first. Weather affects how much power we get.'
-        },
-        {
-          id: 'ignore-climate',
-          text: 'Keep using coal and oil for energy',
-          impact: 'negative',
-          consequence: 'Oh no! The ocean gets even hotter. Fish have to swim far away to find cool water. Some might not survive the journey.',
-          pros: 'Don\'t have to change our energy systems.',
-          cons: 'Ocean fever gets worse. Fish communities break apart.'
-        },
-        {
-          id: 'carbon-capture',
-          text: 'Protect kelp forests and salt marshes',
-          impact: 'positive',
-          consequence: 'Smart nature solution! These underwater plants are like giant vacuum cleaners that suck carbon out of the air.',
-          pros: 'Nature does the work for us. Protects important sea habitats too.',
-          cons: 'Takes a long time to work. Needs huge areas to make a big difference.'
-        }
-      ],
-      isEnding: true
-    }
+      },
+      {
+        id: 'invasive-species',
+        title: 'Underwater Invaders',
+        description: 'Strange new sea creatures are moving into Nova Scotia waters! Green crabs from Europe and other invasive species are eating local fish food and taking over their homes. It\'s like bullies moving into your neighborhood! How can we protect our local sea friends?',
+        imageUrl: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600',
+        choices: [
+          {
+            id: 'removal-programs',
+            text: 'Set up special traps to catch the invaders',
+            impact: 'positive',
+            consequence: 'Great idea! By catching these underwater bullies, local fish can get their homes back. It\'s like a superhero rescue mission!',
+            pros: 'Local sea animals get their space back. Fishing gets better for everyone.',
+            cons: 'Costs money to set up traps. Takes lots of work to catch them all.',
+            nextScenarioId: 'climate-change'
+          },
+          {
+            id: 'ignore-invaders',
+            text: 'Let the new species stay and see what happens',
+            impact: 'negative',
+            consequence: 'Uh oh! The invaders multiply like crazy and take over completely. Local fish lose their homes and food forever.',
+            pros: 'No extra work or money needed right now.',
+            cons: 'Local sea life disappears. Ocean ecosystem gets totally mixed up.',
+            nextScenarioId: 'climate-change'
+          },
+          {
+            id: 'education-prevention',
+            text: 'Teach people how to stop new invaders from arriving',
+            impact: 'positive',
+            consequence: 'Smart prevention! When people clean their boats and don\'t dump aquarium fish, fewer invaders arrive. It\'s like border security for the ocean!',
+            pros: 'Stops the problem before it starts. People learn to be ocean protectors.',
+            cons: 'Takes time for everyone to learn. Some invaders are already here.',
+            nextScenarioId: 'climate-change'
+          }
+        ]
+      },
+      {
+        id: 'climate-change',
+        title: 'The Warming Waters',
+        description: 'Ocean temperatures are rising because of climate change. Fish are swimming to colder waters up north, and coral reefs are getting stressed. It\'s like the ocean has a fever! What can help cool things down?',
+        imageUrl: 'https://images.unsplash.com/photo-1441057206919-63d19fac2369?w=600',
+        choices: [
+          {
+            id: 'renewable-energy',
+            text: 'Switch to wind and solar power',
+            impact: 'positive',
+            consequence: 'Awesome! Clean energy produces way less pollution. It\'s like giving the ocean medicine to bring down its fever.',
+            pros: 'Stops heating up the ocean. Creates new green jobs.',
+            cons: 'Expensive to build at first. Weather affects how much power we get.'
+          },
+          {
+            id: 'ignore-climate',
+            text: 'Keep using coal and oil for energy',
+            impact: 'negative',
+            consequence: 'Oh no! The ocean gets even hotter. Fish have to swim far away to find cool water. Some might not survive the journey.',
+            pros: 'Don\'t have to change our energy systems.',
+            cons: 'Ocean fever gets worse. Fish communities break apart.'
+          },
+          {
+            id: 'carbon-capture',
+            text: 'Protect kelp forests and salt marshes',
+            impact: 'positive',
+            consequence: 'Smart nature solution! These underwater plants are like giant vacuum cleaners that suck carbon out of the air.',
+            pros: 'Nature does the work for us. Protects important sea habitats too.',
+            cons: 'Takes a long time to work. Needs huge areas to make a big difference.'
+          }
+        ],
+        isEnding: true
+      }
   ],
   fr: [
     {
@@ -486,6 +521,41 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
         }
       ],
       isEnding: true
+    },
+    {
+      id: 'invasive-species',
+      title: 'Envahisseurs sous-marins',
+      description: 'D\'étranges nouvelles créatures marines arrivent dans les eaux de Nouvelle-Écosse! Des crabes verts d\'Europe et d\'autres espèces envahissantes mangent la nourriture des poissons locaux et prennent leurs maisons. C\'est comme des intimidateurs qui s\'installent dans ton quartier! Comment protéger nos amis marins locaux?',
+      imageUrl: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600',
+      choices: [
+        {
+          id: 'removal-programs',
+          text: 'Installer des pièges spéciaux pour attraper les envahisseurs',
+          impact: 'positive',
+          consequence: 'Super idée! En attrapant ces intimidateurs sous-marins, les poissons locaux peuvent retrouver leurs maisons. C\'est comme une mission de sauvetage de superhéros!',
+          pros: 'Les animaux marins locaux récupèrent leur espace. La pêche s\'améliore pour tout le monde.',
+          cons: 'Coûte de l\'argent pour installer des pièges. Beaucoup de travail pour tous les attraper.',
+          nextScenarioId: 'climate-change'
+        },
+        {
+          id: 'ignore-invaders',
+          text: 'Laisser les nouvelles espèces rester et voir ce qui arrive',
+          impact: 'negative',
+          consequence: 'Oh là là! Les envahisseurs se multiplient comme des fous et prennent tout contrôle. Les poissons locaux perdent leurs maisons et nourriture pour toujours.',
+          pros: 'Pas de travail ou d\'argent supplémentaire nécessaire maintenant.',
+          cons: 'La vie marine locale disparaît. L\'écosystème océanique devient complètement mélangé.',
+          nextScenarioId: 'climate-change'
+        },
+        {
+          id: 'education-prevention',
+          text: 'Enseigner aux gens comment empêcher de nouveaux envahisseurs d\'arriver',
+          impact: 'positive',
+          consequence: 'Prévention intelligente! Quand les gens nettoient leurs bateaux et ne jettent pas de poissons d\'aquarium, moins d\'envahisseurs arrivent. C\'est comme la sécurité frontalière pour l\'océan!',
+          pros: 'Arrête le problème avant qu\'il commence. Les gens apprennent à être des protecteurs de l\'océan.',
+          cons: 'Prend du temps pour que tout le monde apprenne. Certains envahisseurs sont déjà ici.',
+          nextScenarioId: 'climate-change'
+        }
+      ]
     },
     {
       id: 'climate-change',
@@ -727,6 +797,41 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
         }
       ],
       isEnding: true
+    },
+    {
+      id: 'invasive-species',
+      title: 'Siawa\'jijik samqwanikatl',
+      description: 'Kjikuwanji siawa\'jijik samqwanikatl wejkiskultijik Kespuk usamqy! Pasit klusuwakon apoqsuol Europe\'ktook aq aq ktanji ankamoltijik samqwanikatl mijultijik tepo\'tin nkmaq umijuwakonol aq otijkultijik uwkuomol. Elitasik mekiteliji\'jik ukwkuomktinikitipa\'kek wejultijik! Koqoey ketu kepmin tepo\'tin nkmaq nijgalk?',
+      imageUrl: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600',
+      choices: [
+        {
+          id: 'removal-programs',
+          text: 'Puksit elsitaqann klkukinomkon ankamoltijik kesnuekl',
+          impact: 'positive',
+          consequence: 'Kelu koqoey! Kesnuekl na samqwankitijk mekiteliji\'jik, tepo\'tin nkmaq ketu apisultijik uwkuomol. Elitasik superhero ukepmikatimkewey!',
+          pros: 'Tepo\'tin samqwanikatl apisultijik utepo\'tin. Pu\'tu\'newey weskitpin msita\'n.',
+          cons: 'Telo\'q klkukinomkonol puksitlulnek. Pukwelk nto\'ltimkewey msit kesnuekl.',
+          nextScenarioId: 'climate-change'
+        },
+        {
+          id: 'ignore-invaders',
+          text: 'Teliulkitijik siawa\'jijik ankamoltijik aq nemi\'j koqoey ketu kiskul',
+          impact: 'negative',
+          consequence: 'Mu kelu! Ankamoltijik alsultijik alokteliji\'k aq msit koqoey owokatultijik. Tepo\'tin nkmaq wanjukultijik uwkuomol aq umijuwakonol kiskaja\'q.',
+          pros: 'Mu esku\'sk nto\'ltimkewey kije telo\'q nutakoq.',
+          cons: 'Tepo\'tin samqwanikatl qospemkultijik. Samqwan ukamkinu\'kuom keknuo\'tm.',
+          nextScenarioId: 'climate-change'
+        },
+        {
+          id: 'education-prevention',
+          text: 'Kenu\'matimk l\'nuk tan ketu kistamulnekw siawa\'jijik ankamoltijik wejkiskultijik',
+          impact: 'positive',
+          consequence: 'Pilei aweskewey! L\'nuk malkeknumatultijik uwkitnol aq mu kjikuwatajik mijuaokik nkmaq, apjiw ankamoltijik wejkiskultijik. Elitasik samqwan utepkunikatimkewey!',
+          pros: 'Kistamulnul na\'kumin mu tu welaku. L\'nuk nukmatuinewaql samqwan ukepmikatl.',
+          cons: 'Na\'kwek msit koqwa l\'nu nukmatqamkimekl. Ketanji ankamoltijik kije atu.',
+          nextScenarioId: 'climate-change'
+        }
+      ]
     },
     {
       id: 'climate-change',
