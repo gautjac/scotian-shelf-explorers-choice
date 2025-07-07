@@ -25,7 +25,9 @@ export const ScenarioCard = ({ scenario, language, onChoiceSelect }: ScenarioCar
         }}
       >
         <div className="absolute bottom-6 left-8 right-8">
-          <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-3">{scenario.title}</h2>
+          <div className="bg-gradient-to-r from-blue-300/80 to-cyan-300/80 backdrop-blur-sm rounded-lg p-4">
+            <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-3">{scenario.title}</h2>
+          </div>
         </div>
       </div>
 
