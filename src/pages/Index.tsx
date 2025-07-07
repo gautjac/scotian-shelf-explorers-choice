@@ -148,6 +148,7 @@ const Index = () => {
           onLanguageChange={handleLanguageChange}
           onRestart={handleRestartWithTracking}
           choicesMade={gameState.choicesMade}
+          healthMetrics={gameState.healthMetrics}
         />
       )}
 

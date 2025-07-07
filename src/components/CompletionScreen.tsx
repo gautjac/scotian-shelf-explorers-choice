@@ -1,11 +1,13 @@
 import { LanguageSelector } from './LanguageSelector';
-import { Language } from '../types';
+import { HealthMeters } from './HealthMeters';
+import { Language, HealthMetrics } from '../types';
 
 interface CompletionScreenProps {
   language: Language['code'];
   onLanguageChange: (language: Language['code']) => void;
   onRestart: () => void;
   choicesMade: Array<{ scenarioId: string; choiceId: string; timestamp: number }>;
+  healthMetrics: HealthMetrics;
 }
 
 const completionText = {
@@ -35,64 +37,110 @@ const completionText = {
   }
 };
 
-export const CompletionScreen = ({ language, onLanguageChange, onRestart, choicesMade }: CompletionScreenProps) => {
+export const CompletionScreen = ({ language, onLanguageChange, onRestart, choicesMade, healthMetrics }: CompletionScreenProps) => {
   const content = completionText[language];
   const positiveChoices = choicesMade.filter(choice => choice.choiceId.includes('ban-plastics') || choice.choiceId.includes('sustainable') || choice.choiceId.includes('renewable') || choice.choiceId.includes('marine-reserves') || choice.choiceId.includes('cleanup') || choice.choiceId.includes('carbon-capture'));
 
+  // Calculate overall ocean health average
+  const overallHealth = Math.round((healthMetrics.ecosystem + healthMetrics.economic + healthMetrics.community) / 3);
+  
+  const getOverallHealthMessage = () => {
+    if (overallHealth >= 80) {
+      return {
+        en: "Excellent! The ocean is thriving thanks to your wise choices!",
+        fr: "Excellent! L'océan prospère grâce à vos choix judicieux!",
+        mi: "Pilei! Samqwan ukamkinu'kuom pilei welta'q kil koqoey!"
+      };
+    } else if (overallHealth >= 60) {
+      return {
+        en: "Good work! The ocean is in decent health with room to improve.",
+        fr: "Bon travail! L'océan est en bonne santé avec de la place pour s'améliorer.",
+        mi: "Pilei wetulti'k! Samqwan nukek welta'q, ketu nugu' pilei kesalul."
+      };
+    } else if (overallHealth >= 40) {
+      return {
+        en: "The ocean is struggling. Different choices could help it recover.",
+        fr: "L'océan est en difficulté. Des choix différents pourraient l'aider à récupérer.",
+        mi: "Samqwan tepisq. Ula koqoey elkewek wulkwatmul nukta."
+      };
+    } else {
+      return {
+        en: "The ocean is in critical condition. We must make better choices.",
+        fr: "L'océan est dans un état critique. Nous devons faire de meilleurs choix.",
+        mi: "Samqwan mekij welta'q. Pilei koqoey elkewekl."
+      };
+    }
+  };
+
+  const healthMessage = getOverallHealthMessage();
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-teal-600 via-blue-700 to-blue-900 flex flex-col items-center justify-center p-8 relative overflow-hidden">
-      {/* Animated success elements */}
+    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-blue-900 to-teal-900 flex flex-col p-8 relative overflow-hidden">
+      {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-green-400/20 rounded-full animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-400/20 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-1/2 right-1/4 w-48 h-48 bg-teal-400/20 rounded-full animate-pulse" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-400/10 rounded-full animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-teal-400/10 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 right-1/4 w-48 h-48 bg-green-400/10 rounded-full animate-pulse" style={{ animationDelay: '2s' }} />
       </div>
 
-      <div className="relative z-10 text-center max-w-4xl mx-auto">
-        {/* Celebration emoji */}
-        <div className="text-8xl mb-6 animate-bounce">🌊🐋🎉</div>
-
-        {/* Title */}
-        <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 animate-fade-in">
+      {/* Header */}
+      <div className="relative z-10 text-center mb-8">
+        <div className="text-6xl mb-4 animate-bounce">🌊🏆</div>
+        <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 animate-fade-in">
           {content.title}
         </h1>
-
-        {/* Subtitle */}
-        <h2 className="text-xl md:text-2xl text-blue-100 mb-8 animate-fade-in" style={{ animationDelay: '0.5s' }}>
+        <h2 className="text-lg md:text-xl text-blue-100 animate-fade-in" style={{ animationDelay: '0.5s' }}>
           {content.subtitle}
         </h2>
+      </div>
 
-        {/* Impact summary */}
-        <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-8 mb-8 animate-fade-in" style={{ animationDelay: '1s' }}>
-          <h3 className="text-2xl font-bold text-white mb-4">{content.choicesTitle}</h3>
-          <div className="text-6xl mb-4">
-            {positiveChoices.length >= 2 ? '🌊💚' : positiveChoices.length === 1 ? '🌊💛' : '🌊💔'}
+      {/* Main Content - Health Meters */}
+      <div className="relative z-10 flex-1 flex flex-col items-center justify-center max-w-7xl mx-auto w-full">
+        <div className="mb-8 text-center">
+          <h3 className="text-2xl md:text-4xl font-bold text-white mb-4 animate-fade-in" style={{ animationDelay: '1s' }}>
+            {language === 'en' && 'Final Ocean Health Results'}
+            {language === 'fr' && 'Résultats finaux de la santé océanique'}
+            {language === 'mi' && 'Qeq samqwan ukamkinu\'kuom kesaltuoq'}
+          </h3>
+          <div className="text-4xl md:text-6xl font-bold text-white mb-2 animate-fade-in" style={{ animationDelay: '1.2s' }}>
+            {overallHealth}%
           </div>
-          <p className="text-blue-100 text-lg">
-            {positiveChoices.length >= 2 && (language === 'en' ? 'Great job! Your choices help keep the ocean healthy.' : language === 'fr' ? 'Excellent travail! Vos choix aident à garder l\'océan en bonne santé.' : 'Kelu wetulti\'k! Kil koqoey elkewek pilei samqwanikatl ukepmikatl.')}
-            {positiveChoices.length === 1 && (language === 'en' ? 'Good work! Some of your choices help sea animals.' : language === 'fr' ? 'Bon travail! Certains de vos choix aident les animaux marins.' : 'Pilei wetulti\'k! Apjiw kil koqoey elkewek kepmikatl samqwanikatl.')}
-            {positiveChoices.length === 0 && (language === 'en' ? 'Try again with different choices to help sea animals more.' : language === 'fr' ? 'Essayez encore avec différents choix pour aider davantage les animaux marins.' : 'Aqq nikma koqoey elkewek pilei samqwanikatl ukepmikatil.')}
+          <p className="text-lg md:text-xl text-blue-100 animate-fade-in" style={{ animationDelay: '1.4s' }}>
+            {healthMessage[language]}
           </p>
         </div>
 
-        {/* Message */}
-        <p className="text-lg text-blue-50 mb-8 leading-relaxed animate-fade-in" style={{ animationDelay: '1.5s' }}>
-          {content.message}
-        </p>
+        {/* Health Meters - Featured prominently */}
+        <div className="w-full animate-fade-in" style={{ animationDelay: '1.5s' }}>
+          <HealthMeters 
+            healthMetrics={healthMetrics}
+            language={language}
+          />
+        </div>
+      </div>
 
-        {/* Encouragement */}
-        <p className="text-blue-200 mb-8 animate-fade-in" style={{ animationDelay: '2s' }}>
-          {content.encouragement}
-        </p>
+      {/* Bottom Section */}
+      <div className="relative z-10 text-center mt-8">
+        {/* Educational Message */}
+        <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-8 max-w-4xl mx-auto animate-fade-in" style={{ animationDelay: '2s' }}>
+          <p className="text-blue-50 text-lg leading-relaxed mb-4">
+            {content.message}
+          </p>
+          <p className="text-blue-200">
+            {content.encouragement}
+          </p>
+        </div>
 
-        {/* Restart button */}
-        <button
-          onClick={onRestart}
-          className="bg-white text-blue-900 px-12 py-6 rounded-full text-2xl font-bold shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 animate-fade-in hover:bg-blue-50"
-          style={{ animationDelay: '2.5s' }}
-        >
-          {content.restartButton}
-        </button>
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <button
+            onClick={onRestart}
+            className="bg-gradient-to-r from-blue-500 to-teal-500 text-white px-8 py-4 rounded-full text-xl font-bold shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 animate-fade-in"
+            style={{ animationDelay: '2.5s' }}
+          >
+            {content.restartButton}
+          </button>
+        </div>
       </div>
 
       {/* Language selector - bottom right corner */}
@@ -104,12 +152,12 @@ export const CompletionScreen = ({ language, onLanguageChange, onRestart, choice
         />
       </div>
 
-      {/* Celebrating marine life */}
-      <div className="absolute bottom-0 left-0 right-0 h-32">
-        <div className="absolute bottom-4 left-8 text-6xl animate-bounce">🐋</div>
-        <div className="absolute bottom-8 right-16 text-4xl animate-bounce" style={{ animationDelay: '0.5s' }}>🦞</div>
-        <div className="absolute bottom-6 left-1/3 text-3xl animate-bounce" style={{ animationDelay: '1s' }}>🐟</div>
-        <div className="absolute bottom-4 right-1/3 text-5xl animate-bounce" style={{ animationDelay: '1.5s' }}>🌿</div>
+      {/* Floating marine life decorations */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none">
+        <div className="absolute bottom-4 left-8 text-4xl animate-bounce opacity-70">🐋</div>
+        <div className="absolute bottom-8 right-16 text-3xl animate-bounce opacity-70" style={{ animationDelay: '0.5s' }}>🦞</div>
+        <div className="absolute bottom-6 left-1/3 text-2xl animate-bounce opacity-70" style={{ animationDelay: '1s' }}>🐟</div>
+        <div className="absolute bottom-4 right-1/3 text-3xl animate-bounce opacity-70" style={{ animationDelay: '1.5s' }}>🌿</div>
       </div>
     </div>
   );
