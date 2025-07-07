@@ -110,7 +110,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
       id: 'shipping-traffic',
       title: 'Whale Highway Danger',
       description: 'Giant cargo ships sail past Nova Scotia every day. Sometimes they accidentally hit whales because they\'re going super fast. Right whales are almost extinct - there are only about 340 left! How can we help?',
-      imageUrl: 'https://images.unsplash.com/photo-1518877593221-1f28583780b4?w=600',
+      imageUrl: 'https://im.runware.ai/image/ws/2/ii/70fd6bee-7082-4a02-9372-3b373f29ea2d.webp',
       choices: [
         {
           id: 'speed-restrictions',
@@ -145,7 +145,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
       id: 'ocean-acidification',
       title: 'The Sour Ocean Problem',
       description: 'The ocean is becoming more acidic (sour) because it\'s absorbing pollution from the air. This makes it super hard for lobsters and crabs to build strong shells. It\'s like trying to build with weak blocks!',
-      imageUrl: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600',
+      imageUrl: 'https://im.runware.ai/image/ws/2/ii/b1e6030e-9eff-47f7-b1f4-ea32f5a507a2.webp',
       choices: [
         {
           id: 'reduce-emissions',
@@ -215,7 +215,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
       id: 'coastal-development',
       title: 'Building by the Beach',
       description: 'More families want to live near Nova Scotia\'s beautiful coastline. New houses, stores, and hotels are being built. But construction can make dirty water run into the ocean. How should we build responsibly?',
-      imageUrl: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=600',
+      imageUrl: 'https://im.runware.ai/image/ws/2/ii/c16bc7d2-df84-42e1-b8ef-c844a9d9e7e4.webp',
       choices: [
         {
           id: 'green-development',
