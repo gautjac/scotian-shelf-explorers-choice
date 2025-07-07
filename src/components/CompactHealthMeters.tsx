@@ -1,6 +1,7 @@
 
 import { HealthMetrics } from '../types';
 import { Waves, Coins, Heart } from 'lucide-react';
+import { useEffect, useState, useRef } from 'react';
 
 interface CompactHealthMetersProps {
   healthMetrics: HealthMetrics;
@@ -55,6 +56,26 @@ const getIcon = (type: string) => {
 };
 
 export const CompactHealthMeters = ({ healthMetrics, language }: CompactHealthMetersProps) => {
+  const previousMetrics = useRef<HealthMetrics>(healthMetrics);
+  const [changedMetrics, setChangedMetrics] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    const newChangedMetrics = new Set<string>();
+    Object.keys(healthMetrics).forEach(key => {
+      if (previousMetrics.current[key as keyof HealthMetrics] !== healthMetrics[key as keyof HealthMetrics]) {
+        newChangedMetrics.add(key);
+      }
+    });
+    
+    if (newChangedMetrics.size > 0) {
+      setChangedMetrics(newChangedMetrics);
+      setTimeout(() => {
+        setChangedMetrics(new Set());
+        previousMetrics.current = { ...healthMetrics };
+      }, 1200);
+    }
+  }, [healthMetrics]);
+
   const labels = {
     en: {
       ecosystem: 'Animals & Plants',
@@ -100,40 +121,58 @@ export const CompactHealthMeters = ({ healthMetrics, language }: CompactHealthMe
       </h3>
       
       <div className="space-y-8">
-        {Object.entries(healthMetrics).map(([key, value]) => (
-          <div key={key} className="flex items-center gap-8">
-            {/* Icon */}
-            <div className="w-24 h-24 rounded-full bg-slate-600 border-4 border-white shadow-lg flex items-center justify-center flex-shrink-0">
-              {getIcon(key)}
-            </div>
+        {Object.entries(healthMetrics).map(([key, value]) => {
+          const isChanged = changedMetrics.has(key);
+          return (
+            <div key={key} className={`flex items-center gap-8 transition-all duration-300 ${isChanged ? 'scale-105' : ''}`}>
+              {/* Icon with animation */}
+              <div className={`w-24 h-24 rounded-full bg-slate-600 border-4 border-white shadow-lg flex items-center justify-center flex-shrink-0 transition-all duration-500 ${isChanged ? 'animate-pulse shadow-xl scale-110' : ''}`}>
+                <div className={`transition-all duration-300 ${isChanged ? 'animate-bounce' : ''}`}>
+                  {getIcon(key)}
+                </div>
+                {/* Ripple effect on change */}
+                {isChanged && (
+                  <div className="absolute w-24 h-24 rounded-full border-2 border-blue-400/50 animate-ping"></div>
+                )}
+              </div>
 
-            {/* Content */}
-            <div className="flex-1 min-w-0">
-              <div className="text-lg font-semibold text-slate-700 mb-1 truncate">
-                {labels[language][key as keyof typeof labels[typeof language]]}
-              </div>
-              <div className="text-sm text-slate-500 mb-2">
-                {descriptions[language][key as keyof typeof descriptions[typeof language]]}
-              </div>
-              
-              {/* Progress Bar */}
-              <div className="relative h-6 bg-slate-300 rounded-full border-2 border-white shadow-inner overflow-hidden mb-2">
-                <div 
-                  className={`h-full ${getHealthColor(value)} transition-all duration-500 rounded-full`}
-                  style={{ width: `${value}%` }}
-                />
-              </div>
-              
-              {/* Value and Status */}
-              <div className="flex justify-between items-center">
-                <span className="text-2xl font-bold text-slate-600">{value}%</span>
-                <span className={`text-sm px-4 py-2 rounded-full text-white font-medium ${getHealthColor(value)}`}>
-                  {getHealthStatus(value, language)}
-                </span>
+              {/* Content */}
+              <div className="flex-1 min-w-0">
+                <div className="text-lg font-semibold text-slate-700 mb-1 truncate">
+                  {labels[language][key as keyof typeof labels[typeof language]]}
+                </div>
+                <div className="text-sm text-slate-500 mb-2">
+                  {descriptions[language][key as keyof typeof descriptions[typeof language]]}
+                </div>
+                
+                {/* Animated Progress Bar */}
+                <div className="relative h-6 bg-slate-300 rounded-full border-2 border-white shadow-inner overflow-hidden mb-2">
+                  <div 
+                    className={`h-full ${getHealthColor(value)} transition-all duration-1000 ease-out rounded-full relative ${isChanged ? 'animate-pulse' : ''}`}
+                    style={{ width: `${value}%` }}
+                  >
+                    {/* Enhanced shine effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent rounded-full"></div>
+                    {/* Flash effect on change */}
+                    {isChanged && (
+                      <div className="absolute inset-0 bg-white/60 rounded-full animate-pulse"></div>
+                    )}
+                  </div>
+                </div>
+                
+                {/* Value and Status with animation */}
+                <div className="flex justify-between items-center">
+                  <span className={`text-2xl font-bold text-slate-600 transition-all duration-300 ${isChanged ? 'scale-110' : ''}`}>
+                    {value}%
+                  </span>
+                  <span className={`text-sm px-4 py-2 rounded-full text-white font-medium ${getHealthColor(value)} transition-all duration-500 ${isChanged ? 'scale-105 shadow-lg' : ''}`}>
+                    {getHealthStatus(value, language)}
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
