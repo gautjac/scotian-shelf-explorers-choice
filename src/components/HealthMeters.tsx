@@ -44,13 +44,13 @@ const getHealthStatus = (value: number, language: 'en' | 'fr' | 'mi') => {
 const getIcon = (type: string) => {
   switch (type) {
     case 'ecosystem':
-      return <Waves className="w-12 h-12 lg:w-16 lg:h-16 text-white" />;
+      return <Waves className="w-24 h-24 lg:w-32 lg:h-32 text-white" />;
     case 'economic':
-      return <Coins className="w-12 h-12 lg:w-16 lg:h-16 text-white" />;
+      return <Coins className="w-24 h-24 lg:w-32 lg:h-32 text-white" />;
     case 'community':
-      return <Heart className="w-12 h-12 lg:w-16 lg:h-16 text-white" />;
+      return <Heart className="w-24 h-24 lg:w-32 lg:h-32 text-white" />;
     default:
-      return <Waves className="w-12 h-12 lg:w-16 lg:h-16 text-white" />;
+      return <Waves className="w-24 h-24 lg:w-32 lg:h-32 text-white" />;
   }
 };
 
@@ -75,7 +75,7 @@ export const HealthMeters = ({ healthMetrics, language }: HealthMetersProps) => 
 
   return (
     <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 lg:p-12 shadow-2xl">
-      <h3 className="text-2xl lg:text-4xl xl:text-5xl font-bold text-slate-700 mb-8 lg:mb-12 text-center">
+      <h3 className="text-4xl lg:text-8xl xl:text-10xl font-bold text-slate-700 mb-16 lg:mb-24 text-center">
         {language === 'en' && 'How Healthy is the Ocean'}
         {language === 'fr' && 'Comment va l\'océan'}
         {language === 'mi' && 'Samqwanikatl ukamkinu\'kuom'}
@@ -85,24 +85,24 @@ export const HealthMeters = ({ healthMetrics, language }: HealthMetersProps) => 
         {Object.entries(healthMetrics).map(([key, value]) => (
           <div key={key} className="flex flex-col items-center text-center">
             {/* Circular Icon - much larger for 32" screen */}
-            <div className="relative mb-6 lg:mb-8">
-              <div className="w-24 h-24 lg:w-32 lg:h-32 xl:w-40 xl:h-40 rounded-full bg-gradient-to-br from-slate-600 to-slate-800 border-6 lg:border-8 border-white shadow-2xl flex items-center justify-center">
+            <div className="relative mb-12 lg:mb-16">
+              <div className="w-48 h-48 lg:w-64 lg:h-64 xl:w-80 xl:h-80 rounded-full bg-gradient-to-br from-slate-600 to-slate-800 border-12 lg:border-16 border-white shadow-2xl flex items-center justify-center">
                 {getIcon(key)}
               </div>
             </div>
 
             {/* Label and Percentage - larger text */}
-            <div className="mb-6 lg:mb-8 w-full">
-              <div className="text-lg lg:text-2xl xl:text-3xl font-bold text-slate-700 mb-3 lg:mb-4 leading-tight">
+            <div className="mb-12 lg:mb-16 w-full">
+              <div className="text-2xl lg:text-4xl xl:text-6xl font-bold text-slate-700 mb-6 lg:mb-8 leading-tight">
                 {labels[language][key as keyof typeof labels[typeof language]]}
               </div>
-              <div className="text-3xl lg:text-5xl xl:text-6xl font-bold text-slate-600">
+              <div className="text-6xl lg:text-10xl xl:text-12xl font-bold text-slate-600">
                 {value}%
               </div>
             </div>
             
             {/* Progress Bar - much larger for touch screen */}
-            <div className="relative h-6 lg:h-8 xl:h-10 bg-slate-300 rounded-full border-4 lg:border-6 border-white shadow-inner overflow-hidden w-full mb-6 lg:mb-8">
+            <div className="relative h-12 lg:h-16 xl:h-20 bg-slate-300 rounded-full border-8 lg:border-12 border-white shadow-inner overflow-hidden w-full mb-12 lg:mb-16">
               <div 
                 className={`h-full bg-gradient-to-r ${getHealthColor(value)} transition-all duration-500 rounded-full relative`}
                 style={{ width: `${value}%` }}
@@ -110,16 +110,16 @@ export const HealthMeters = ({ healthMetrics, language }: HealthMetersProps) => 
                 {/* Shine effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-full"></div>
                 {/* Dots pattern - larger for visibility */}
-                <div className="absolute left-2 lg:left-3 top-1/2 transform -translate-y-1/2 flex gap-1 lg:gap-1.5">
-                  <div className="w-1 h-1 lg:w-1.5 lg:h-1.5 bg-white/60 rounded-full"></div>
-                  <div className="w-1 h-1 lg:w-1.5 lg:h-1.5 bg-white/60 rounded-full"></div>
-                  <div className="w-1 h-1 lg:w-1.5 lg:h-1.5 bg-white/60 rounded-full"></div>
+                <div className="absolute left-4 lg:left-6 top-1/2 transform -translate-y-1/2 flex gap-2 lg:gap-3">
+                  <div className="w-2 h-2 lg:w-3 lg:h-3 bg-white/60 rounded-full"></div>
+                  <div className="w-2 h-2 lg:w-3 lg:h-3 bg-white/60 rounded-full"></div>
+                  <div className="w-2 h-2 lg:w-3 lg:h-3 bg-white/60 rounded-full"></div>
                 </div>
               </div>
             </div>
             
             {/* Status Badge - larger text */}
-            <span className={`inline-block px-6 py-3 lg:px-8 lg:py-4 rounded-full text-lg lg:text-xl xl:text-2xl text-white font-bold bg-gradient-to-r ${getHealthColor(value)} shadow-lg`}>
+            <span className={`inline-block px-12 py-6 lg:px-16 lg:py-8 rounded-full text-2xl lg:text-4xl xl:text-4xl text-white font-bold bg-gradient-to-r ${getHealthColor(value)} shadow-lg`}>
               {getHealthStatus(value, language)}
             </span>
           </div>

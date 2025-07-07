@@ -44,11 +44,11 @@ const getHealthStatus = (value: number, language: 'en' | 'fr' | 'mi') => {
 const getIcon = (type: string) => {
   switch (type) {
     case 'ecosystem':
-      return <Waves className="w-8 h-8 text-white" />;
+      return <Waves className="w-16 h-16 text-white" />;
     case 'economic':
-      return <Coins className="w-8 h-8 text-white" />;
+      return <Coins className="w-16 h-16 text-white" />;
     case 'community':
-      return <Heart className="w-8 h-8 text-white" />;
+      return <Heart className="w-16 h-16 text-white" />;
     default:
       return <Waves className="w-8 h-8 text-white" />;
   }
@@ -75,28 +75,28 @@ export const CompactHealthMeters = ({ healthMetrics, language }: CompactHealthMe
 
   return (
     <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
-      <h3 className="text-xl font-bold text-slate-700 mb-6 text-center">
+      <h3 className="text-2xl font-bold text-slate-700 mb-12 text-center">
         {language === 'en' && 'Ocean Health'}
         {language === 'fr' && 'Santé océanique'}
         {language === 'mi' && 'Samqwan ukamkinu\'kuom'}
       </h3>
       
-      <div className="space-y-4">
+      <div className="space-y-8">
         {Object.entries(healthMetrics).map(([key, value]) => (
-          <div key={key} className="flex items-center gap-4">
+          <div key={key} className="flex items-center gap-8">
             {/* Icon */}
-            <div className="w-12 h-12 rounded-full bg-slate-600 border-2 border-white shadow-lg flex items-center justify-center flex-shrink-0">
+            <div className="w-24 h-24 rounded-full bg-slate-600 border-4 border-white shadow-lg flex items-center justify-center flex-shrink-0">
               {getIcon(key)}
             </div>
 
             {/* Content */}
             <div className="flex-1 min-w-0">
-              <div className="text-sm font-semibold text-slate-700 mb-1 truncate">
+              <div className="text-lg font-semibold text-slate-700 mb-2 truncate">
                 {labels[language][key as keyof typeof labels[typeof language]]}
               </div>
               
               {/* Progress Bar */}
-              <div className="relative h-3 bg-slate-300 rounded-full border border-white shadow-inner overflow-hidden mb-1">
+              <div className="relative h-6 bg-slate-300 rounded-full border-2 border-white shadow-inner overflow-hidden mb-2">
                 <div 
                   className={`h-full ${getHealthColor(value)} transition-all duration-500 rounded-full`}
                   style={{ width: `${value}%` }}
@@ -105,8 +105,8 @@ export const CompactHealthMeters = ({ healthMetrics, language }: CompactHealthMe
               
               {/* Value and Status */}
               <div className="flex justify-between items-center">
-                <span className="text-lg font-bold text-slate-600">{value}%</span>
-                <span className={`text-xs px-2 py-1 rounded-full text-white font-medium ${getHealthColor(value)}`}>
+                <span className="text-2xl font-bold text-slate-600">{value}%</span>
+                <span className={`text-sm px-4 py-2 rounded-full text-white font-medium ${getHealthColor(value)}`}>
                   {getHealthStatus(value, language)}
                 </span>
               </div>
