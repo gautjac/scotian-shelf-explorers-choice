@@ -111,7 +111,7 @@ export const CompletionScreen = ({ language, onLanguageChange, onRestart, choice
         </div>
 
         {/* Health Meters - Featured prominently */}
-        <div className="w-full animate-fade-in" style={{ animationDelay: '1.5s' }}>
+        <div className="w-1/2 mx-auto animate-fade-in" style={{ animationDelay: '1.5s' }}>
           <HealthMeters 
             healthMetrics={healthMetrics}
             language={language}
