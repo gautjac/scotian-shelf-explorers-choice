@@ -11,21 +11,21 @@ interface WelcomeScreenProps {
 const welcomeText = {
   en: {
     title: 'Be a guardian of the Scotian Shelf',
-    subtitle: 'See how people affect sea life near Nova Scotia',
+    subtitle: 'Discover how people can affect sea life',
     description: 'Play games and see how your choices change ocean animals off Nova Scotia\'s coast. Make choices, learn what happens, and play again to try different things.',
     startButton: 'Start Playing',
     instruction: 'Touch to start'
   },
   fr: {
     title: 'Gardiens du plateau continental scotian',
-    subtitle: 'Découvrez comment les gens affectent la vie marine près de la Nouvelle-Écosse',
+    subtitle: 'Découvrez comment les gens peuvent affecter la vie marine',
     description: 'Jouez à des jeux et voyez comment vos choix changent les animaux océaniques au large des côtes de la Nouvelle-Écosse. Faites des choix, apprenez ce qui arrive et rejouez pour essayer différentes choses.',
     startButton: 'Commencer à jouer',
     instruction: 'Touchez pour commencer'
   },
   mi: {
     title: 'Ankamkewe\'k Kespukek',
-    subtitle: 'Wejkukuom talimkewe\'k samqwanikatl Kespukek',
+    subtitle: 'Wejkukuom talimkewe\'k ketu samqwanikatl',
     description: 'Kjinuatukewey koqoey elkewek aq nemi\'j samqwan Kespukek. Koqoey kisi elkewek, kenuk wejkukewek, aq aqq nikma koqoey nemiwultimk.',
     startButton: 'Mawita\'n',
     instruction: 'Pekowsin mawita\'si\'k'
