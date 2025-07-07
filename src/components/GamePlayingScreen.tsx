@@ -24,14 +24,16 @@ export const GamePlayingScreen = ({
 }: GamePlayingScreenProps) => {
   return (
     <div className="min-h-screen bg-[#0072A0] flex relative">
-      {/* Left Sidebar */}
-      <GameSidebar
-        healthMetrics={gameState.healthMetrics}
-        language={gameState.language}
-      />
+      {/* Left Sidebar - Ocean Health - 1/3 of screen */}
+      <div className="w-1/3 h-screen">
+        <GameSidebar
+          healthMetrics={gameState.healthMetrics}
+          language={gameState.language}
+        />
+      </div>
 
-      {/* Main Content Area */}
-      <div className="flex-1 p-6 lg:p-8 flex flex-col">
+      {/* Main Content Area - Question Section - 2/3 of screen */}
+      <div className="w-2/3 h-screen p-6 lg:p-8 flex flex-col">
         {/* Main scenario */}
         <div className="flex-1 mb-8">
           <ScenarioCard
