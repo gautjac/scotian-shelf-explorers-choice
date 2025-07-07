@@ -1,5 +1,6 @@
 
 import { Scenario, Language } from '../types';
+import fishingBoatOverlay from '../assets/fishing-boat-overlay.jpg';
 
 interface ScenarioCardProps {
   scenario: Scenario;
@@ -18,7 +19,7 @@ export const ScenarioCard = ({ scenario, language, onChoiceSelect }: ScenarioCar
     <div className="h-full bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col">
       {/* Scenario image - optimized for sidebar layout */}
       <div className="h-64 lg:h-80 bg-cover bg-center relative flex-shrink-0" style={{ backgroundImage: `url(${scenario.imageUrl})` }}>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+        <div className="absolute inset-0 bg-cover bg-center opacity-60" style={{ backgroundImage: `url(${fishingBoatOverlay})` }} />
         <div className="absolute bottom-6 left-8 right-8">
           <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-3">{scenario.title}</h2>
         </div>
