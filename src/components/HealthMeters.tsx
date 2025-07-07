@@ -218,7 +218,7 @@ export const HealthMeters = ({
   };
 
   return (
-    <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 lg:p-12 shadow-2xl">
+    <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-4 lg:p-6 shadow-xl">
       <h3 className="text-4xl lg:text-8xl xl:text-10xl font-bold text-slate-700 mb-16 lg:mb-24 text-center">
         {language === 'en' && 'How Healthy is the Ocean'}
         {language === 'fr' && 'Comment va l\'océan'}
