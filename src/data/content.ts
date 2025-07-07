@@ -75,7 +75,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
       id: 'fishing-practices',
       title: 'Fish for the Future',
       description: 'Fishing boats catch tons of fish every day near Nova Scotia. Fishing gives people jobs and yummy food. But if we catch too many fish, baby fish won\'t have parents. How should we fish smartly?',
-      imageUrl: 'https://im.runware.ai/image/ws/2/ii/b2c6f736-842c-4407-a3b8-aa20c0160835.webp',
+      imageUrl: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600',
       choices: [
         {
           id: 'sustainable-quotas',
@@ -180,7 +180,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
       id: 'renewable-energy',
       title: 'Ocean Wind Power',
       description: 'Nova Scotia wants to build huge wind turbines in the ocean to make clean electricity. These giant spinning towers could power thousands of homes! But building them might disturb whales and fish. What\'s the best plan?',
-      imageUrl: 'https://images.unsplash.com/photo-1441057206919-63d19fac2369?w=600',
+      imageUrl: 'https://im.runware.ai/image/ws/2/ii/34336803-4dca-4199-b9d2-f6732dae278f.webp',
       choices: [
         {
           id: 'careful-planning',
