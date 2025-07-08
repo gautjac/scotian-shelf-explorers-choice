@@ -67,12 +67,15 @@ export const CompactHealthMeters = ({
     Object.keys(healthMetrics).forEach(key => {
       if (previousMetrics.current[key as keyof HealthMetrics] !== healthMetrics[key as keyof HealthMetrics]) {
         newChangedMetrics.add(key);
+        console.log(`Health metric changed: ${key} from ${previousMetrics.current[key as keyof HealthMetrics]} to ${healthMetrics[key as keyof HealthMetrics]}`);
       }
     });
     
     if (newChangedMetrics.size > 0) {
+      console.log('Setting changed metrics:', Array.from(newChangedMetrics));
       setChangedMetrics(newChangedMetrics);
       setTimeout(() => {
+        console.log('Clearing changed metrics');
         setChangedMetrics(new Set());
         previousMetrics.current = { ...healthMetrics };
       }, 1200);
