@@ -14,7 +14,7 @@ interface CompletionScreenProps {
 }
 const completionText = {
   en: {
-    title: 'You Did It!',
+    title: 'MISSION ACCOMPLISHED GUARDIAN!',
     subtitle: 'Your choices have an impact!',
     message: 'Every choice we make changes ocean life. Things like plastic trash and fishing affect sea animals. Your choices today help decide what happens to the ocean tomorrow.',
     encouragement: 'Want to see what happens with different choices? Try again and pick different things to see how they change the ocean.',
