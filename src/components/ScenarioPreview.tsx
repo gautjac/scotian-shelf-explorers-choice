@@ -13,7 +13,7 @@ interface ScenarioPreviewProps {
 const previewText = {
   en: {
     title: 'Choices matter!',
-    subtitle: 'Look at what you will do',
+    subtitle: 'Each scenario require a decision, make your choices and see their impact!',
     startButton: 'Start Adventure',
     backButton: 'Go Back',
     instruction: 'You will make important choices',
