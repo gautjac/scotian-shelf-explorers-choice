@@ -126,7 +126,7 @@ const AnimatedHealthMeter = ({ metricKey, value, previousValue, language, labels
   };
 
   return (
-    <div className="flex flex-col items-center text-center">
+    <div className="flex flex-col items-center text-center transform scale-50">
       {/* Circular Icon with animation */}
       <div className="relative mb-12 lg:mb-16">
         <div className={`w-12 h-12 lg:w-16 lg:h-16 xl:w-20 xl:h-20 rounded-full bg-gradient-to-br from-slate-600 to-slate-800 border-3 lg:border-4 border-white shadow-2xl flex items-center justify-center transition-all duration-500 ${isAnimating ? 'scale-105 shadow-3xl' : ''}`}>
