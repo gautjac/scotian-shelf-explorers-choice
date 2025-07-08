@@ -60,10 +60,11 @@ export const CompactHealthMeters = ({
   language
 }: CompactHealthMetersProps) => {
   console.log('CompactHealthMeters received props:', healthMetrics);
-  const previousMetrics = useRef<HealthMetrics>(healthMetrics);
+  const previousMetrics = useRef<HealthMetrics>({ ecosystem: 70, economic: 70, community: 70 });
   const [changedMetrics, setChangedMetrics] = useState<Set<string>>(new Set());
 
   useEffect(() => {
+    console.log('Comparing metrics:', { previous: previousMetrics.current, current: healthMetrics });
     const newChangedMetrics = new Set<string>();
     Object.keys(healthMetrics).forEach(key => {
       if (previousMetrics.current[key as keyof HealthMetrics] !== healthMetrics[key as keyof HealthMetrics]) {
