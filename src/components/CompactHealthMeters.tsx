@@ -132,9 +132,9 @@ export const CompactHealthMeters = ({
         {Object.entries(healthMetrics).map(([key, value]) => {
           const isChanged = changedMetrics.has(key);
           return (
-            <div key={key} className={`flex items-center gap-8 transition-all duration-300 ${isChanged ? 'scale-105' : ''}`}>
+            <div key={key} className={`flex items-center gap-8 transition-all duration-300`}>
               {/* Icon with animation */}
-              <div className={`w-24 h-24 rounded-full bg-slate-600 border-4 border-white shadow-lg flex items-center justify-center flex-shrink-0 transition-all duration-500 ${isChanged ? 'animate-pulse shadow-xl scale-110' : ''}`}>
+              <div className={`w-24 h-24 rounded-full bg-slate-600 border-4 border-white shadow-lg flex items-center justify-center flex-shrink-0 transition-all duration-500 ${isChanged ? 'animate-pulse shadow-xl' : ''}`}>
                 <div className={`transition-all duration-300 ${isChanged ? 'animate-pulse' : ''}`}>
                   {getIcon(key)}
                 </div>
@@ -170,10 +170,10 @@ export const CompactHealthMeters = ({
                 
                 {/* Value and Status with animation */}
                 <div className="flex justify-between items-center">
-                  <span className={`text-2xl font-bold text-slate-600 transition-all duration-300 ${isChanged ? 'scale-110' : ''}`}>
+                  <span className={`text-2xl font-bold text-slate-600 transition-all duration-300`}>
                     {value}%
                   </span>
-                  <span className={`text-sm px-4 py-2 rounded-full text-white font-medium ${getHealthColor(value)} transition-all duration-500 ${isChanged ? 'scale-105 shadow-lg' : ''}`}>
+                  <span className={`text-sm px-4 py-2 rounded-full text-white font-medium ${getHealthColor(value)} transition-all duration-500 ${isChanged ? 'shadow-lg' : ''}`}>
                     {getHealthStatus(value, language)}
                   </span>
                 </div>
