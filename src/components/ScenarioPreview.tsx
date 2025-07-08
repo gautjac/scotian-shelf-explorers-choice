@@ -60,9 +60,6 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenar
           <p className="text-xl lg:text-2xl text-[#CDE2ED] mb-6">
             {content.subtitle}
           </p>
-          <p className="text-lg lg:text-xl text-[#CDE2ED]/90 mb-4">
-            {content.instruction}
-          </p>
           {onScenarioSelect && (
             <p className="text-base lg:text-lg text-[#CDE2ED]/80">
               {content.selectScenario}
