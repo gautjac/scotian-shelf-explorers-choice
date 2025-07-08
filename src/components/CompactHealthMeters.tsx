@@ -135,7 +135,7 @@ export const CompactHealthMeters = ({
             <div key={key} className={`flex items-center gap-8 transition-all duration-300 ${isChanged ? 'scale-105' : ''}`}>
               {/* Icon with animation */}
               <div className={`w-24 h-24 rounded-full bg-slate-600 border-4 border-white shadow-lg flex items-center justify-center flex-shrink-0 transition-all duration-500 ${isChanged ? 'animate-pulse shadow-xl scale-110' : ''}`}>
-                <div className={`transition-all duration-300 ${isChanged ? 'animate-bounce' : ''}`}>
+                <div className={`transition-all duration-300 ${isChanged ? 'animate-pulse' : ''}`}>
                   {getIcon(key)}
                 </div>
                 {/* Ripple effect on change */}
