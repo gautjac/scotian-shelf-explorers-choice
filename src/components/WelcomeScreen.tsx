@@ -10,7 +10,7 @@ interface WelcomeScreenProps {
 
 const welcomeText = {
   en: {
-    title: 'Be a guardian of the Scotian Shelf',
+    title: 'Become a guardian of the Scotian Shelf',
     subtitle: 'Discover how people can affect sea life',
     description: 'Play games and see how your choices change ocean animals off Nova Scotia\'s coast. Make choices, learn what happens, and play again to try different things.',
     startButton: 'Start Playing',
