@@ -59,6 +59,7 @@ export const CompactHealthMeters = ({
   healthMetrics, 
   language
 }: CompactHealthMetersProps) => {
+  console.log('CompactHealthMeters received props:', healthMetrics);
   const previousMetrics = useRef<HealthMetrics>(healthMetrics);
   const [changedMetrics, setChangedMetrics] = useState<Set<string>>(new Set());
 
