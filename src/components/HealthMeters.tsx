@@ -6,6 +6,7 @@ import { useEffect, useState, useRef } from 'react';
 interface HealthMetersProps {
   healthMetrics: HealthMetrics;
   language: 'en' | 'fr' | 'mi';
+  showInitialAnimation?: boolean;
 }
 
 const getHealthColor = (value: number) => {
@@ -175,12 +176,24 @@ const AnimatedHealthMeter = ({ metricKey, value, previousValue, language, labels
 
 export const HealthMeters = ({ 
   healthMetrics, 
-  language
+  language,
+  showInitialAnimation = false
 }: HealthMetersProps) => {
-  const previousMetrics = useRef<HealthMetrics>(healthMetrics);
+  const previousMetrics = useRef<HealthMetrics>(
+    showInitialAnimation ? { ecosystem: 0, economic: 0, community: 0 } : healthMetrics
+  );
   const [animationKey, setAnimationKey] = useState(0);
 
   useEffect(() => {
+    if (showInitialAnimation) {
+      // Trigger initial animation on mount
+      setTimeout(() => {
+        setAnimationKey(prev => prev + 1);
+        previousMetrics.current = { ...healthMetrics };
+      }, 500);
+      return;
+    }
+
     // Check if any metric has changed
     const hasChanged = Object.keys(healthMetrics).some(
       key => previousMetrics.current[key as keyof HealthMetrics] !== healthMetrics[key as keyof HealthMetrics]
@@ -193,7 +206,7 @@ export const HealthMeters = ({
         previousMetrics.current = { ...healthMetrics };
       }, 100);
     }
-  }, [healthMetrics]);
+  }, [healthMetrics, showInitialAnimation]);
 
   const labels = {
     en: {

@@ -129,7 +129,11 @@ export const CompletionScreen = ({
         <div className="w-full animate-fade-in" style={{
         animationDelay: '1.5s'
       }}>
-          <HealthMeters healthMetrics={healthMetrics} language={language} />
+          <HealthMeters 
+            healthMetrics={healthMetrics} 
+            language={language} 
+            showInitialAnimation={true}
+          />
         </div>
       </div>
 
