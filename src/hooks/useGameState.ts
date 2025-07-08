@@ -28,6 +28,7 @@ export const useGameState = () => {
   }, []);
 
   const makeChoice = useCallback((scenarioId: string, choiceId: string, impact: 'positive' | 'negative' | 'neutral', granularImpacts?: { ecosystem: number; economic: number; community: number }) => {
+    console.log('makeChoice called:', { scenarioId, choiceId, impact, granularImpacts });
     setGameState(prev => {
       const newSpeciesHealth = { ...prev.speciesHealth };
       const newHealthMetrics = { ...prev.healthMetrics };
@@ -59,6 +60,11 @@ export const useGameState = () => {
         newHealthMetrics.economic = Math.max(0, Math.min(100, newHealthMetrics.economic + impactValue));
         newHealthMetrics.community = Math.max(0, Math.min(100, newHealthMetrics.community + impactValue));
       }
+
+      console.log('Health metrics updated:', { 
+        old: prev.healthMetrics, 
+        new: newHealthMetrics 
+      });
 
       return {
         ...prev,
