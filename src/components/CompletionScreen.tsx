@@ -96,9 +96,9 @@ export const CompletionScreen = ({
         <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 animate-fade-in">
           {content.title}
         </h1>
-        <h2 className="text-lg md:text-xl text-blue-100 animate-fade-in" style={{
+        <h2 style={{
         animationDelay: '0.5s'
-      }}>
+      }} className="text-lg text-blue-100 animate-fade-in md:text-4xl">
           {content.subtitle}
         </h2>
       </div>
@@ -134,7 +134,7 @@ export const CompletionScreen = ({
       </div>
 
       {/* Bottom Section */}
-      <div className="relative z-10 text-center mt-8">
+      <div className="relative z-10 text-center mt-8 my-0">
         {/* Educational Message */}
         <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-8 max-w-4xl mx-auto animate-fade-in" style={{
         animationDelay: '2s'
