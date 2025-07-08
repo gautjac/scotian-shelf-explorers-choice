@@ -57,7 +57,7 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenar
           <h1 className="text-4xl lg:text-6xl font-bold text-white mb-4">
             {content.title}
           </h1>
-          <p className="text-xl lg:text-2xl text-[#CDE2ED] mb-6">
+          <p className="text-2xl lg:text-3xl text-[#CDE2ED] mb-6">
             {content.subtitle}
           </p>
           {onScenarioSelect && (
