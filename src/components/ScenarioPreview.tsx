@@ -12,7 +12,7 @@ interface ScenarioPreviewProps {
 
 const previewText = {
   en: {
-    title: 'Your Ocean Adventure',
+    title: 'Choices matter!',
     subtitle: 'Look at what you will do',
     startButton: 'Start Adventure',
     backButton: 'Go Back',
