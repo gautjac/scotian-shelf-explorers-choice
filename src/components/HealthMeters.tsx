@@ -112,7 +112,7 @@ const AnimatedHealthMeter = ({ metricKey, value, previousValue, language, labels
   };
 
   const getAnimatedIcon = (type: string) => {
-    const iconClasses = `w-6 h-6 lg:w-8 lg:h-8 text-white transition-all duration-300 ${animationClass}`;
+    const iconClasses = `w-10 h-10 text-white transition-all duration-300 ${animationClass}`;
     switch (type) {
       case 'ecosystem':
         return <Waves className={iconClasses} />;
@@ -126,53 +126,49 @@ const AnimatedHealthMeter = ({ metricKey, value, previousValue, language, labels
   };
 
   return (
-    <div className="flex flex-col items-center text-center transform scale-50">
-      {/* Circular Icon with animation */}
-      <div className="relative mb-12 lg:mb-16">
-        <div className={`w-12 h-12 lg:w-16 lg:h-16 xl:w-20 xl:h-20 rounded-full bg-gradient-to-br from-slate-600 to-slate-800 border-3 lg:border-4 border-white shadow-2xl flex items-center justify-center transition-all duration-500 ${isAnimating ? 'scale-105 shadow-3xl' : ''}`}>
+    <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/20 hover:shadow-3xl transition-all duration-500 group">
+      {/* Elegant Icon Circle */}
+      <div className="relative mb-6 flex justify-center">
+        <div className={`relative w-20 h-20 rounded-full bg-gradient-to-br ${getAnimatedHealthColor(value)} shadow-xl flex items-center justify-center transition-all duration-500 group-hover:scale-110 ${isAnimating ? 'animate-pulse' : ''}`}>
           {getAnimatedIcon(metricKey)}
-          {/* Ripple effect on change */}
+          {/* Subtle glow effect */}
+          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-white/20 to-transparent"></div>
+          {/* Animated ring on change */}
           {isAnimating && (
-            <div className="absolute inset-0 rounded-full border-4 border-white/50 animate-ping"></div>
+            <div className="absolute -inset-2 rounded-full border-2 border-current opacity-30 animate-ping"></div>
           )}
         </div>
       </div>
 
-      {/* Label and Percentage */}
-      <div className="mb-12 lg:mb-16 w-full">
-        <div className="text-2xl lg:text-4xl xl:text-6xl font-bold text-slate-700 mb-6 lg:mb-8 leading-tight">
+      {/* Clean Typography */}
+      <div className="text-center mb-6">
+        <h4 className="text-lg font-semibold text-slate-700 mb-2 leading-tight">
           {labels[language][metricKey as keyof typeof labels[typeof language]]}
-        </div>
-        <div className={`text-6xl lg:text-10xl xl:text-12xl font-bold text-slate-600 transition-all duration-300 ${isAnimating ? 'scale-110' : ''}`}>
+        </h4>
+        <div className={`text-4xl font-bold text-slate-800 transition-all duration-300 ${isAnimating ? 'scale-110' : ''}`}>
           {displayValue}%
         </div>
       </div>
       
-      {/* Animated Progress Bar */}
-      <div className="relative h-12 lg:h-16 xl:h-20 bg-slate-300 rounded-full border-8 lg:border-12 border-white shadow-inner overflow-hidden w-full mb-12 lg:mb-16">
-        <div 
-          className={`h-full bg-gradient-to-r ${getAnimatedHealthColor(value)} transition-all duration-1000 ease-out rounded-full relative ${isAnimating ? 'animate-pulse' : ''}`}
-          style={{ width: `${value}%` }}
-        >
-          {/* Enhanced shine effect */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent rounded-full"></div>
-          {/* Wave animation on change */}
-          {isAnimating && (
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent rounded-full animate-pulse"></div>
-          )}
-          {/* Floating dots */}
-          <div className="absolute left-4 lg:left-6 top-1/2 transform -translate-y-1/2 flex gap-2 lg:gap-3">
-            <div className={`w-2 h-2 lg:w-3 lg:h-3 bg-white/60 rounded-full transition-all duration-300 ${isAnimating ? 'animate-bounce' : ''}`}></div>
-            <div className={`w-2 h-2 lg:w-3 lg:h-3 bg-white/60 rounded-full transition-all duration-300 ${isAnimating ? 'animate-bounce' : ''}`} style={{animationDelay: '0.1s'}}></div>
-            <div className={`w-2 h-2 lg:w-3 lg:h-3 bg-white/60 rounded-full transition-all duration-300 ${isAnimating ? 'animate-bounce' : ''}`} style={{animationDelay: '0.2s'}}></div>
+      {/* Sleek Progress Bar */}
+      <div className="relative mb-6">
+        <div className="h-3 bg-slate-200 rounded-full overflow-hidden shadow-inner">
+          <div 
+            className={`h-full bg-gradient-to-r ${getAnimatedHealthColor(value)} transition-all duration-1000 ease-out rounded-full relative ${isAnimating ? 'animate-pulse' : ''}`}
+            style={{ width: `${value}%` }}
+          >
+            {/* Shine effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-full"></div>
           </div>
         </div>
       </div>
       
-      {/* Animated Status Badge */}
-      <span className={`inline-block px-12 py-6 lg:px-16 lg:py-8 rounded-full text-2xl lg:text-4xl xl:text-4xl text-white font-bold bg-gradient-to-r ${getAnimatedHealthColor(value)} shadow-lg transition-all duration-500 ${isAnimating ? 'scale-105 shadow-2xl' : ''}`}>
-        {getHealthStatus(value, language)}
-      </span>
+      {/* Status Badge */}
+      <div className="text-center">
+        <span className={`inline-block px-4 py-2 rounded-full text-sm font-medium text-white bg-gradient-to-r ${getAnimatedHealthColor(value)} shadow-md transition-all duration-500 ${isAnimating ? 'scale-105' : ''}`}>
+          {getHealthStatus(value, language)}
+        </span>
+      </div>
     </div>
   );
 };
@@ -218,16 +214,20 @@ export const HealthMeters = ({
   };
 
   return (
-    <div className="bg-white/90 backdrop-blur-sm rounded-xl p-2 lg:p-3 shadow-lg transform scale-75">
-      <h3 className="text-4xl lg:text-8xl xl:text-10xl font-bold text-slate-700 mb-16 lg:mb-24 text-center">
+    <div className="bg-gradient-to-br from-white/95 to-blue-50/95 backdrop-blur-lg rounded-3xl p-8 shadow-2xl border border-white/30">
+      <h3 className="text-3xl lg:text-4xl font-bold text-slate-800 mb-8 text-center">
         {language === 'en' && 'How Healthy is the Ocean?'}
         {language === 'fr' && 'Comment va l\'océan?'}
         {language === 'mi' && 'Samqwanikatl ukamkinu\'kuom?'}
       </h3>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
         {Object.entries(healthMetrics).map(([key, value], index) => (
-          <div key={`${key}-${animationKey}`} style={{ animationDelay: `${index * 0.1}s` }}>
+          <div 
+            key={`${key}-${animationKey}`} 
+            className="animate-fade-in"
+            style={{ animationDelay: `${index * 0.15}s` }}
+          >
             <AnimatedHealthMeter
               metricKey={key}
               value={value}
