@@ -18,7 +18,6 @@ const languageColors = {
 export const LanguageSelector = ({ currentLanguage, onLanguageChange, className = '' }: LanguageSelectorProps) => {
   return (
     <div className={`flex items-center gap-4 ${className}`}>
-      <Languages className="w-6 h-6 lg:w-8 lg:h-8 text-white" />
       <div className="flex gap-3">
         {languages.map((lang) => (
           <button
