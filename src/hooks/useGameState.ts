@@ -2,6 +2,8 @@
 import { useState, useCallback } from 'react';
 import { GameState, Language, MarineSpecies, HealthMetrics } from '../types';
 import { marineSpecies } from '../data/content';
+import { useComprehensiveConfig } from './useComprehensiveConfig';
+import { getChoiceImpact } from '../utils/impactConfiguration';
 
 const initialGameState: GameState = {
   currentScenarioId: 'plastic-pollution',
@@ -22,6 +24,7 @@ const initialGameState: GameState = {
 
 export const useGameState = () => {
   const [gameState, setGameState] = useState<GameState>(initialGameState);
+  const { getChoiceImpact: getComprehensiveChoiceImpact } = useComprehensiveConfig();
 
   const updateLanguage = useCallback((language: Language['code']) => {
     setGameState(prev => ({ ...prev, language }));
@@ -33,8 +36,28 @@ export const useGameState = () => {
       const newSpeciesHealth = { ...prev.speciesHealth };
       const newHealthMetrics = { ...prev.healthMetrics };
       
+      // Get impact values: check comprehensive config first, then granular, then fallback to legacy
+      let finalImpacts = granularImpacts;
+      
+      if (!finalImpacts) {
+        const comprehensiveImpacts = getComprehensiveChoiceImpact(scenarioId, choiceId, prev.language);
+        if (comprehensiveImpacts) {
+          finalImpacts = comprehensiveImpacts;
+        }
+      }
+      
+      if (!finalImpacts) {
+        // Find the choice object and get its impact values
+        const scenarios = require('../data/content').scenarios;
+        const scenario = scenarios[prev.language]?.find((s: any) => s.id === scenarioId);
+        const choice = scenario?.choices.find((c: any) => c.id === choiceId);
+        if (choice) {
+          finalImpacts = getChoiceImpact(scenarioId, choice);
+        }
+      }
+      
       // Update species health based on choice impact (using ecosystem impact for species health)
-      const ecosystemImpact = granularImpacts?.ecosystem ?? (impact === 'positive' ? 10 : impact === 'negative' ? -10 : 0);
+      const ecosystemImpact = finalImpacts?.ecosystem ?? (impact === 'positive' ? 10 : impact === 'negative' ? -10 : 0);
       
       Object.keys(newSpeciesHealth).forEach(speciesId => {
         if (ecosystemImpact > 0) {
@@ -48,13 +71,13 @@ export const useGameState = () => {
         }
       });
 
-      // Update health metrics using granular impacts if available, otherwise fallback to legacy system
-      if (granularImpacts) {
-        newHealthMetrics.ecosystem = Math.max(0, Math.min(100, newHealthMetrics.ecosystem + granularImpacts.ecosystem));
-        newHealthMetrics.economic = Math.max(0, Math.min(100, newHealthMetrics.economic + granularImpacts.economic));
-        newHealthMetrics.community = Math.max(0, Math.min(100, newHealthMetrics.community + granularImpacts.community));
+      // Update health metrics using final impacts
+      if (finalImpacts) {
+        newHealthMetrics.ecosystem = Math.max(0, Math.min(100, newHealthMetrics.ecosystem + finalImpacts.ecosystem));
+        newHealthMetrics.economic = Math.max(0, Math.min(100, newHealthMetrics.economic + finalImpacts.economic));
+        newHealthMetrics.community = Math.max(0, Math.min(100, newHealthMetrics.community + finalImpacts.community));
       } else {
-        // Legacy system fallback
+        // Ultimate fallback to legacy system
         const impactValue = impact === 'positive' ? 10 : impact === 'negative' ? -10 : 0;
         newHealthMetrics.ecosystem = Math.max(0, Math.min(100, newHealthMetrics.ecosystem + impactValue));
         newHealthMetrics.economic = Math.max(0, Math.min(100, newHealthMetrics.economic + impactValue));
@@ -78,7 +101,7 @@ export const useGameState = () => {
         completedScenarios: [...prev.completedScenarios, scenarioId]
       };
     });
-  }, []);
+  }, [getComprehensiveChoiceImpact]);
 
   const advanceScenario = useCallback((nextScenarioId?: string) => {
     if (nextScenarioId) {
