@@ -126,7 +126,7 @@ const AnimatedHealthMeter = ({ metricKey, value, previousValue, language, labels
   };
 
   return (
-    <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/20 hover:shadow-3xl transition-all duration-500 group">
+    <div className="bg-card/95 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-border hover:shadow-3xl transition-all duration-500 group">
       {/* Elegant Icon Circle */}
       <div className="relative mb-6 flex justify-center">
         <div className={`relative w-20 h-20 rounded-full bg-gradient-to-br ${getAnimatedHealthColor(value)} shadow-xl flex items-center justify-center transition-all duration-500 group-hover:scale-110 ${isAnimating ? 'animate-pulse' : ''}`}>
@@ -142,17 +142,17 @@ const AnimatedHealthMeter = ({ metricKey, value, previousValue, language, labels
 
       {/* Clean Typography */}
       <div className="text-center mb-6">
-        <h4 className="text-lg font-semibold text-slate-700 mb-2 leading-tight">
+        <h4 className="text-lg font-semibold text-foreground mb-2 leading-tight">
           {labels[language][metricKey as keyof typeof labels[typeof language]]}
         </h4>
-        <div className={`text-4xl font-bold text-slate-800 transition-all duration-300 ${isAnimating ? 'scale-110' : ''}`}>
+        <div className={`text-4xl font-bold text-foreground transition-all duration-300 ${isAnimating ? 'scale-110' : ''}`}>
           {displayValue}%
         </div>
       </div>
       
       {/* Sleek Progress Bar */}
       <div className="relative mb-6">
-        <div className="h-3 bg-slate-200 rounded-full overflow-hidden shadow-inner">
+        <div className="h-3 bg-muted rounded-full overflow-hidden shadow-inner">
           <div 
             className={`h-full bg-gradient-to-r ${getAnimatedHealthColor(value)} transition-all duration-1000 ease-out rounded-full relative ${isAnimating ? 'animate-pulse' : ''}`}
             style={{ width: `${value}%` }}
@@ -214,8 +214,8 @@ export const HealthMeters = ({
   };
 
   return (
-    <div className="bg-gradient-to-br from-white/95 to-blue-50/95 backdrop-blur-lg rounded-3xl p-8 shadow-2xl border border-white/30">
-      <h3 className="text-3xl lg:text-4xl font-bold text-slate-800 mb-8 text-center">
+    <div className="bg-card/95 backdrop-blur-lg rounded-3xl p-8 shadow-2xl border border-border">
+      <h3 className="text-3xl lg:text-4xl font-bold text-foreground mb-8 text-center">
         {language === 'en' && 'How Healthy is the Ocean?'}
         {language === 'fr' && 'Comment va l\'océan?'}
         {language === 'mi' && 'Samqwanikatl ukamkinu\'kuom?'}
