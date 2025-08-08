@@ -30,7 +30,7 @@ export const LanguageSelectionScreen = ({ onLanguageSelect }: LanguageSelectionS
             <button
               key={lang.code}
               onClick={() => onLanguageSelect(lang.code)}
-              className={`flex-1 h-32 lg:h-40 rounded-2xl text-xl lg:text-2xl font-bold transition-all duration-200 shadow-2xl hover:scale-105 active:scale-95 ${
+              className={`flex-1 aspect-square rounded-2xl text-2xl lg:text-4xl xl:text-5xl font-bold transition-all duration-200 shadow-2xl hover:scale-105 active:scale-95 ${
                 languageColors[lang.code]
               }`}
             >
