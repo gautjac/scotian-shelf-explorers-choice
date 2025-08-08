@@ -1,5 +1,6 @@
 import { Language, Scenario } from '../types';
 import { LanguageSelector } from './LanguageSelector';
+import { useComprehensiveConfig } from '../hooks/useComprehensiveConfig';
 
 interface ScenarioPreviewProps {
   scenarios: Scenario[];
@@ -39,7 +40,7 @@ const previewText = {
 
 export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenarioSelect, onLanguageChange }: ScenarioPreviewProps) => {
   const content = previewText[language];
-  
+  const { getScenarioText } = useComprehensiveConfig();
   // Get first 6 scenarios
   const previewScenarios = scenarios.slice(0, 6);
 
@@ -98,13 +99,13 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenar
               {/* Scenario Content */}
               <div className="p-6">
                 <h3 className="text-xl lg:text-2xl font-bold text-white mb-3">
-                  {scenario.title}
+                  {getScenarioText(scenario.id, 'title', language) ?? scenario.title}
                 </h3>
                 <p className="text-[#CDE2ED] text-base lg:text-lg leading-relaxed">
-                  {scenario.description.length > 120 
-                    ? `${scenario.description.substring(0, 120)}...`
-                    : scenario.description
-                  }
+                  {(() => {
+                    const d = getScenarioText(scenario.id, 'description', language) ?? scenario.description;
+                    return d.length > 120 ? `${d.substring(0, 120)}...` : d;
+                  })()}
                 </p>
               </div>
             </div>

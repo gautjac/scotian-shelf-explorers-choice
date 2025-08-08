@@ -100,19 +100,23 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
         }
         
         localStorage.setItem('comprehensiveConfiguration', JSON.stringify(comprehensiveConfig));
+        // Notify app to reload config live
+        window.dispatchEvent(new Event('comprehensive-config-updated'));
         
         toast({
           title: "Comprehensive CSV Uploaded",
-          description: "Successfully imported all content and impact values. Refresh to apply changes.",
+          description: "Applied immediately. Your content and impacts are now live.",
         });
       } else {
         // Parse legacy impact CSV
         const impactConfig = parseImpactCSV(text);
         localStorage.setItem('impactConfiguration', JSON.stringify(impactConfig));
+        // Notify app to apply new impacts
+        window.dispatchEvent(new Event('impact-config-updated'));
         
         toast({
           title: "Impact CSV Uploaded",
-          description: `Successfully imported ${Object.keys(impactConfig).length} scenarios. Refresh to apply changes.`,
+          description: `Applied immediately. Imported ${Object.keys(impactConfig).length} scenarios.`,
         });
       }
     } catch (error) {

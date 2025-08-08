@@ -6,6 +6,21 @@ export const useComprehensiveConfig = () => {
   const [config, setConfig] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Reload configuration from localStorage
+  const reloadConfig = () => {
+    try {
+      const savedConfig = localStorage.getItem('comprehensiveConfiguration');
+      if (savedConfig) {
+        const parsedConfig = JSON.parse(savedConfig);
+        setConfig(parsedConfig);
+      } else {
+        setConfig(null);
+      }
+    } catch (error) {
+      console.error('Failed to reload comprehensive configuration:', error);
+    }
+  };
+
   useEffect(() => {
     try {
       const savedConfig = localStorage.getItem('comprehensiveConfiguration');
@@ -19,6 +34,22 @@ export const useComprehensiveConfig = () => {
       setIsLoading(false);
     }
   }, []);
+
+  // Hot-reload configuration when uploads happen (same-tab) or in other tabs
+  useEffect(() => {
+    const handleConfigUpdated = () => reloadConfig();
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === 'comprehensiveConfiguration') reloadConfig();
+    };
+
+    window.addEventListener('comprehensive-config-updated', handleConfigUpdated as EventListener);
+    window.addEventListener('storage', handleStorage);
+
+    return () => {
+      window.removeEventListener('comprehensive-config-updated', handleConfigUpdated as EventListener);
+      window.removeEventListener('storage', handleStorage);
+    };
+  }, [reloadConfig]);
 
   // Get scenario text with override support
   const getScenarioText = (scenarioId: string, field: string, language: string = 'en') => {

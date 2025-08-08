@@ -1,9 +1,11 @@
 
 import { Choice, Language } from '../types';
+import { useComprehensiveConfig } from '../hooks/useComprehensiveConfig';
 
 interface ConsequenceModalProps {
   choice: Choice;
   language: Language['code'];
+  scenarioId: string;
   onConfirm: () => void;
   onReturn: () => void;
   isVisible: boolean;
@@ -21,8 +23,13 @@ const impactColors = {
   neutral: 'from-blue-500 to-indigo-600'
 };
 
-export const ConsequenceModal = ({ choice, language, onConfirm, onReturn, isVisible }: ConsequenceModalProps) => {
+export const ConsequenceModal = ({ choice, language, scenarioId, onConfirm, onReturn, isVisible }: ConsequenceModalProps) => {
   if (!isVisible) return null;
+
+  const { getChoiceText } = useComprehensiveConfig();
+  const choiceText = getChoiceText(scenarioId, choice.id, 'text', language) ?? choice.text;
+  const prosOverride = getChoiceText(scenarioId, choice.id, 'pros', language);
+  const consOverride = getChoiceText(scenarioId, choice.id, 'cons', language);
 
   const confirmText = {
     en: 'Yes I Choose This',
@@ -67,7 +74,7 @@ export const ConsequenceModal = ({ choice, language, onConfirm, onReturn, isVisi
               {language === 'fr' && 'Votre choix:'}
               {language === 'mi' && 'Kil koqoey:'}
             </h4>
-            <p className="text-xl lg:text-2xl leading-relaxed">{choice.text}</p>
+            <p className="text-xl lg:text-2xl leading-relaxed">{choiceText}</p>
           </div>
 
           {/* Pros and Cons */}
@@ -78,7 +85,7 @@ export const ConsequenceModal = ({ choice, language, onConfirm, onReturn, isVisi
                 <span className="text-4xl">✅</span>
                 {prosText[language]}
               </h4>
-              <p className="text-lg lg:text-xl leading-relaxed">{choice.pros}</p>
+              <p className="text-lg lg:text-xl leading-relaxed">{prosOverride ?? choice.pros}</p>
             </div>
 
             {/* Cons */}
@@ -87,7 +94,7 @@ export const ConsequenceModal = ({ choice, language, onConfirm, onReturn, isVisi
                 <span className="text-4xl">❌</span>
                 {consText[language]}
               </h4>
-              <p className="text-lg lg:text-xl leading-relaxed">{choice.cons}</p>
+              <p className="text-lg lg:text-xl leading-relaxed">{consOverride ?? choice.cons}</p>
             </div>
           </div>
 

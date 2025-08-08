@@ -157,6 +157,7 @@ const Index = () => {
           <ConsequenceModal
             choice={selectedChoice}
             language={gameState.language}
+            scenarioId={gameState.currentScenarioId}
             onConfirm={handleConfirmChoiceWithTracking}
             onReturn={handleReturnToChoicesWithTracking}
             isVisible={true}

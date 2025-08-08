@@ -36,14 +36,32 @@ export const useGameState = () => {
       const newSpeciesHealth = { ...prev.speciesHealth };
       const newHealthMetrics = { ...prev.healthMetrics };
       
-      // Get impact values: check comprehensive config first, then granular, then fallback to legacy
-      let finalImpacts = granularImpacts;
+      // Get impact values: prefer comprehensive CSV, then uploaded impact CSV, then passed granular, then content/legacy
+      let finalImpacts = getComprehensiveChoiceImpact(scenarioId, choiceId, prev.language) || null;
       
       if (!finalImpacts) {
-        const comprehensiveImpacts = getComprehensiveChoiceImpact(scenarioId, choiceId, prev.language);
-        if (comprehensiveImpacts) {
-          finalImpacts = comprehensiveImpacts;
+        // Try impact-only CSV from localStorage
+        try {
+          const raw = localStorage.getItem('impactConfiguration');
+          if (raw) {
+            const impactConfig = JSON.parse(raw);
+            const byScenario = impactConfig[scenarioId];
+            const byChoice = byScenario?.[choiceId];
+            if (byChoice && typeof byChoice.ecosystem === 'number' && typeof byChoice.economic === 'number' && typeof byChoice.community === 'number') {
+              finalImpacts = {
+                ecosystem: byChoice.ecosystem,
+                economic: byChoice.economic,
+                community: byChoice.community
+              };
+            }
+          }
+        } catch (e) {
+          console.warn('Failed to read impactConfiguration from localStorage:', e);
         }
+      }
+      
+      if (!finalImpacts && granularImpacts) {
+        finalImpacts = granularImpacts;
       }
       
       if (!finalImpacts) {
