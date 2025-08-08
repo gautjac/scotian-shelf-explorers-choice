@@ -1,6 +1,7 @@
 
 import { LanguageSelector } from './LanguageSelector';
 import { Language } from '../types';
+import geometricBackground from '../assets/geometric-background.png';
 
 interface WelcomeScreenProps {
   currentLanguage: Language['code'];
@@ -36,7 +37,9 @@ export const WelcomeScreen = ({ currentLanguage, onLanguageChange, onStart }: We
   const content = welcomeText[currentLanguage];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0B424E] via-[#0C556B] to-[#0072A0] flex flex-col items-center justify-center p-8 lg:p-12 relative overflow-hidden">
+    <div className="min-h-screen flex flex-col items-center justify-center p-8 lg:p-12 relative overflow-hidden" style={{ backgroundImage: `url(${geometricBackground})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      {/* Dark overlay for better text readability */}
+      <div className="absolute inset-0 bg-[#0072A0]/60" />
       {/* Animated background elements - using palette colors */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#008BBF]/20 rounded-full animate-pulse" />

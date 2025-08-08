@@ -1,6 +1,7 @@
 import { Language, Scenario } from '../types';
 import { LanguageSelector } from './LanguageSelector';
 import { useComprehensiveConfig } from '../hooks/useComprehensiveConfig';
+import geometricBackground from '../assets/geometric-background.png';
 
 interface ScenarioPreviewProps {
   scenarios: Scenario[];
@@ -51,7 +52,9 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenar
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0B424E] via-[#0C556B] to-[#0072A0] p-6 lg:p-8 relative">
+    <div className="min-h-screen p-6 lg:p-8 relative" style={{ backgroundImage: `url(${geometricBackground})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      {/* Dark overlay for better text readability */}
+      <div className="absolute inset-0 bg-[#0072A0]/60" />
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">

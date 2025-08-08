@@ -1,6 +1,7 @@
 import { LanguageSelector } from './LanguageSelector';
 import { HealthMeters } from './HealthMeters';
 import { Language, HealthMetrics } from '../types';
+import geometricBackground from '../assets/geometric-background.png';
 interface CompletionScreenProps {
   language: Language['code'];
   onLanguageChange: (language: Language['code']) => void;
@@ -78,7 +79,9 @@ export const CompletionScreen = ({
     }
   };
   const healthMessage = getOverallHealthMessage();
-  return <div className="min-h-screen bg-gradient-to-b from-slate-900 via-blue-900 to-teal-900 flex flex-col p-8 relative overflow-hidden">
+  return <div className="min-h-screen flex flex-col p-8 relative overflow-hidden" style={{ backgroundImage: `url(${geometricBackground})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      {/* Dark overlay for better text readability */}
+      <div className="absolute inset-0 bg-[#0072A0]/60" />
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-400/10 rounded-full animate-pulse" />
