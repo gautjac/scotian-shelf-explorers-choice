@@ -37,8 +37,8 @@ export const LanguageSelectionScreen = ({ onLanguageSelect }: LanguageSelectionS
             >
               <Leaf size={32} className="lg:w-10 lg:h-10" />
               <div className="text-center">
-                <div className="text-2xl lg:text-4xl xl:text-5xl font-semibold">{languageTexts[lang.code].line1}</div>
-                <div className="text-2xl lg:text-4xl xl:text-5xl font-bold">{languageTexts[lang.code].line2}</div>
+                <div className="text-4xl lg:text-6xl xl:text-7xl font-helvetica font-medium">{languageTexts[lang.code].line1}</div>
+                <div className="text-4xl lg:text-6xl xl:text-7xl font-helvetica font-medium">{languageTexts[lang.code].line2}</div>
               </div>
             </button>
           ))}
