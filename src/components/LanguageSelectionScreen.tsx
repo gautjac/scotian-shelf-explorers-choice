@@ -1,21 +1,22 @@
 import { Language } from '../types';
 import { languages } from '../data/content';
 import rockyShoreBackground from '../assets/rocky-shore-background.jpg';
+import { Leaf } from 'lucide-react';
 
 interface LanguageSelectionScreenProps {
   onLanguageSelect: (language: Language['code']) => void;
 }
 
 const languageTexts = {
-  mi: 'Papultmimk L\'nuiktuk',
-  en: 'Play in English', 
-  fr: 'Joue en Français'
+  mi: { line1: 'Papultmimk', line2: 'L\'nuiktuk' },
+  en: { line1: 'Play in', line2: 'English' }, 
+  fr: { line1: 'Joue en', line2: 'Français' }
 };
 
 const languageColors = {
-  mi: 'bg-[#FBD026] text-black hover:bg-[#FBD026]/90 active:bg-[#FBD026]/80', // Mi'kmaw - Yellow
+  mi: 'bg-[#FFD700] text-black hover:bg-[#FFD700]/90 active:bg-[#FFD700]/80', // Mi'kmaw - Bright Yellow
   en: 'bg-[#00AE9F] text-white hover:bg-[#00AE9F]/90 active:bg-[#00AE9F]/80', // English - Teal
-  fr: 'bg-[#AD4557] text-white hover:bg-[#AD4557]/90 active:bg-[#AD4557]/80'  // French - Maroon
+  fr: 'bg-[#E53E3E] text-white hover:bg-[#E53E3E]/90 active:bg-[#E53E3E]/80'  // French - Red
 };
 
 export const LanguageSelectionScreen = ({ onLanguageSelect }: LanguageSelectionScreenProps) => {
@@ -30,11 +31,15 @@ export const LanguageSelectionScreen = ({ onLanguageSelect }: LanguageSelectionS
             <button
               key={lang.code}
               onClick={() => onLanguageSelect(lang.code)}
-              className={`flex-1 aspect-square rounded-2xl text-2xl lg:text-4xl xl:text-5xl font-bold transition-all duration-200 shadow-2xl hover:scale-105 active:scale-95 ${
+              className={`flex-1 h-48 lg:h-56 rounded-2xl font-bold transition-all duration-200 shadow-2xl hover:scale-105 active:scale-95 flex flex-col items-center justify-center gap-2 ${
                 languageColors[lang.code]
               }`}
             >
-              {languageTexts[lang.code]}
+              <Leaf size={32} className="lg:w-10 lg:h-10" />
+              <div className="text-center">
+                <div className="text-lg lg:text-xl font-semibold">{languageTexts[lang.code].line1}</div>
+                <div className="text-xl lg:text-2xl font-bold">{languageTexts[lang.code].line2}</div>
+              </div>
             </button>
           ))}
         </div>
