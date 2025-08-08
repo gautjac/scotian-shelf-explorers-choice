@@ -38,8 +38,6 @@ export const WelcomeScreen = ({ currentLanguage, onLanguageChange, onStart }: We
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-8 lg:p-12 relative overflow-hidden" style={{ backgroundImage: `url(${geometricBackground})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-      {/* Dark overlay for better text readability */}
-      <div className="absolute inset-0 bg-[#0072A0]/60" />
       {/* Animated background elements - using palette colors */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#008BBF]/20 rounded-full animate-pulse" />

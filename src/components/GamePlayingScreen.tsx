@@ -25,8 +25,6 @@ export const GamePlayingScreen = ({
 }: GamePlayingScreenProps) => {
   return (
     <div className="min-h-screen flex relative" style={{ backgroundImage: `url(${geometricBackground})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-      {/* Dark overlay for better text readability */}
-      <div className="absolute inset-0 bg-[#0072A0]/60" />
       {/* Main Content Area - Question Section - 2/3 of screen */}
       <div className="w-2/3 h-screen p-6 lg:p-8 flex flex-col">
         {/* Main scenario */}
