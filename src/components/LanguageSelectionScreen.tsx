@@ -24,13 +24,13 @@ export const LanguageSelectionScreen = ({ onLanguageSelect }: LanguageSelectionS
       className="min-h-screen w-full flex items-center justify-center bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url(${rockyShoreBackground})` }}
     >
-      <div className="flex flex-col items-center gap-8 p-8">
-        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+      <div className="flex flex-col items-center gap-8 p-8 w-full">
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 w-full max-w-[75vw]">
           {languages.map((lang) => (
             <button
               key={lang.code}
               onClick={() => onLanguageSelect(lang.code)}
-              className={`w-48 h-48 lg:w-56 lg:h-56 rounded-2xl text-xl lg:text-2xl font-bold transition-all duration-200 shadow-2xl hover:scale-105 active:scale-95 ${
+              className={`flex-1 h-32 lg:h-40 rounded-2xl text-xl lg:text-2xl font-bold transition-all duration-200 shadow-2xl hover:scale-105 active:scale-95 ${
                 languageColors[lang.code]
               }`}
             >
