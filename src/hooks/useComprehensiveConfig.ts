@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { scenarios } from '../data/content';
 
@@ -119,21 +120,6 @@ export const useComprehensiveConfig = () => {
     
     // Fallback to hardcoded text or original copydeck
     return null;
-  };
-
-  // Reload configuration from localStorage
-  const reloadConfig = () => {
-    try {
-      const savedConfig = localStorage.getItem('comprehensiveConfiguration');
-      if (savedConfig) {
-        const parsedConfig = JSON.parse(savedConfig);
-        setConfig(parsedConfig);
-      } else {
-        setConfig(null);
-      }
-    } catch (error) {
-      console.error('Failed to reload comprehensive configuration:', error);
-    }
   };
 
   return {
