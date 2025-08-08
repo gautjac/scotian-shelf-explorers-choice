@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import { ImageGenerator } from "./components/ImageGenerator";
+import { OfflineStatus } from "./components/OfflineStatus";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
+      <OfflineStatus />
     </TooltipProvider>
   </QueryClientProvider>
 );
