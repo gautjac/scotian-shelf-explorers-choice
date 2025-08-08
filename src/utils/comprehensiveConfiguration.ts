@@ -5,7 +5,7 @@ import { getChoiceImpact } from './impactConfiguration';
 // CSV row interface for comprehensive export
 interface ComprehensiveConfigRow {
   section: 'SCENARIOS' | 'UI_ELEMENTS' | 'IMPACT_VALUES';
-  type: 'title' | 'description' | 'choice' | 'consequence' | 'pros' | 'cons' | 'ui_text' | 'impact';
+  type: 'title' | 'description' | 'imageUrl' | 'choice' | 'consequence' | 'pros' | 'cons' | 'ui_text' | 'impact';
   id: string;
   language: string;
   field: string;

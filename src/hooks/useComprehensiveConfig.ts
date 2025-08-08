@@ -64,6 +64,7 @@ export const useComprehensiveConfig = () => {
     
     if (field === 'title') return scenario?.title;
     if (field === 'description') return scenario?.description;
+    if (field === 'imageUrl') return scenario?.imageUrl;
     
     return null;
   };
