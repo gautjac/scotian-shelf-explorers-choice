@@ -1,7 +1,6 @@
 
 import { Scenario, Language } from '../types';
 import { useComprehensiveConfig } from '../hooks/useComprehensiveConfig';
-import ImageWithFallback from './ImageWithFallback';
 
 interface ScenarioCardProps {
   scenario: Scenario;
@@ -22,12 +21,7 @@ export const ScenarioCard = ({ scenario, language, onChoiceSelect }: ScenarioCar
   return (
     <div className="h-full bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col">
       {/* Scenario image - optimized for sidebar layout */}
-      <div className="h-96 lg:h-[26rem] relative flex-shrink-0">
-        <ImageWithFallback
-          src={(getScenarioText(scenario.id, 'imageUrl', language) as string) ?? scenario.imageUrl}
-          alt={`${title} image`}
-          className="absolute inset-0 w-full h-full object-cover"
-        />
+      <div className="h-96 lg:h-[26rem] bg-cover bg-center relative flex-shrink-0" style={{ backgroundImage: `url(${scenario.imageUrl})` }}>
       </div>
 
       {/* Scenario content - scrollable if needed */}

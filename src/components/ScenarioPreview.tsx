@@ -1,7 +1,6 @@
 import { Language, Scenario } from '../types';
 import { LanguageSelector } from './LanguageSelector';
 import { useComprehensiveConfig } from '../hooks/useComprehensiveConfig';
-import ImageWithFallback from './ImageWithFallback';
 
 interface ScenarioPreviewProps {
   scenarios: Scenario[];
@@ -82,12 +81,10 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenar
               }`}
             >
               {/* Scenario Image */}
-              <div className="h-48 relative">
-                <ImageWithFallback
-                  src={(getScenarioText(scenario.id, 'imageUrl', language) as string) ?? scenario.imageUrl}
-                  alt={`${getScenarioText(scenario.id, 'title', language) ?? scenario.title} image`}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
+              <div 
+                className="h-48 bg-cover bg-center relative"
+                style={{ backgroundImage: `url(${scenario.imageUrl})` }}
+              >
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0B424E]/80 to-transparent" />
                 <div className="absolute top-4 left-4 bg-[#0072A0] text-white px-4 py-2 rounded-full font-semibold text-lg">
                   {index + 1}
