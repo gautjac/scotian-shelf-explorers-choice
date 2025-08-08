@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from 'react';
+import { LanguageSelectionScreen } from '../components/LanguageSelectionScreen';
 import { WelcomeScreen } from '../components/WelcomeScreen';
 import { ScenarioPreview } from '../components/ScenarioPreview';
 import { ConsequenceModal } from '../components/ConsequenceModal';
@@ -26,9 +27,11 @@ const Index = () => {
   const {
     gamePhase,
     selectedChoice,
+    handleLanguageSelect,
     handleShowPreview,
     handleStart,
     handleBackToWelcome,
+    handleBackToLanguageSelection,
     handleBackToPreview,
     handleScenarioSelect,
     handleChoiceSelect,
@@ -59,6 +62,12 @@ const Index = () => {
 
   const currentScenarios = scenarios[gameState.language];
   const currentScenario = currentScenarios?.find(s => s.id === gameState.currentScenarioId);
+
+  const handleLanguageSelectWithTracking = (language: 'en' | 'fr' | 'mi') => {
+    updateLanguage(language);
+    handleLanguageSelect();
+    trackActivity();
+  };
 
   const handleLanguageChange = (language: 'en' | 'fr' | 'mi') => {
     updateLanguage(language);
@@ -112,6 +121,12 @@ const Index = () => {
 
   return (
     <>
+      {gamePhase === 'languageSelection' && (
+        <LanguageSelectionScreen
+          onLanguageSelect={handleLanguageSelectWithTracking}
+        />
+      )}
+
       {gamePhase === 'welcome' && (
         <WelcomeScreen
           currentLanguage={gameState.language}
