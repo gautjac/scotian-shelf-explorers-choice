@@ -31,14 +31,14 @@ export const LanguageSelectionScreen = ({ onLanguageSelect }: LanguageSelectionS
             <button
               key={lang.code}
               onClick={() => onLanguageSelect(lang.code)}
-              className={`flex-1 h-48 lg:h-56 rounded-2xl font-bold transition-all duration-200 shadow-2xl hover:scale-105 active:scale-95 flex flex-col items-center justify-center gap-2 ${
+              className={`flex-1 aspect-square rounded-2xl font-bold transition-all duration-200 shadow-2xl hover:scale-105 active:scale-95 flex flex-col items-center justify-center gap-2 ${
                 languageColors[lang.code]
               }`}
             >
               <Leaf size={32} className="lg:w-10 lg:h-10" />
               <div className="text-center">
-                <div className="text-lg lg:text-xl font-semibold">{languageTexts[lang.code].line1}</div>
-                <div className="text-xl lg:text-2xl font-bold">{languageTexts[lang.code].line2}</div>
+                <div className="text-2xl lg:text-4xl xl:text-5xl font-semibold">{languageTexts[lang.code].line1}</div>
+                <div className="text-2xl lg:text-4xl xl:text-5xl font-bold">{languageTexts[lang.code].line2}</div>
               </div>
             </button>
           ))}
