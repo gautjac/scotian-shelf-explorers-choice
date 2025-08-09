@@ -122,7 +122,7 @@ export const CompactHealthMeters = ({
 
   return (
     <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl min-h-[130%]">
-      <h3 className="text-2xl font-bold text-slate-700 mb-12 text-center">
+      <h3 className="text-3xl font-bold text-slate-700 mb-12 text-center">
         {language === 'en' && 'Ocean Health'}
         {language === 'fr' && 'Santé océanique'}
         {language === 'mi' && 'Samqwan ukamkinu\'kuom'}
@@ -146,10 +146,10 @@ export const CompactHealthMeters = ({
 
               {/* Content */}
               <div className="flex-1 min-w-0">
-                <div className="text-lg font-semibold text-slate-700 mb-1 truncate">
+                <div className="text-xl font-semibold text-slate-700 mb-1 truncate">
                   {labels[language][key as keyof typeof labels[typeof language]]}
                 </div>
-                <div className="text-sm text-slate-500 mb-2">
+                <div className="text-base text-slate-500 mb-2">
                   {descriptions[language][key as keyof typeof descriptions[typeof language]]}
                 </div>
                 
@@ -170,10 +170,10 @@ export const CompactHealthMeters = ({
                 
                 {/* Value and Status with animation */}
                 <div className="flex justify-between items-center">
-                  <span className={`text-2xl font-bold text-slate-600 transition-all duration-300`}>
+                  <span className={`text-3xl font-bold text-slate-600 transition-all duration-300`}>
                     {value}%
                   </span>
-                  <span className={`text-sm px-4 py-2 rounded-full text-white font-medium ${getHealthColor(value)} transition-all duration-500 ${isChanged ? 'shadow-lg' : ''}`}>
+                  <span className={`text-base px-4 py-2 rounded-full text-white font-medium ${getHealthColor(value)} transition-all duration-500 ${isChanged ? 'shadow-lg' : ''}`}>
                     {getHealthStatus(value, language)}
                   </span>
                 </div>
