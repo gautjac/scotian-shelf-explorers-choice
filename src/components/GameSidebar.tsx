@@ -20,7 +20,7 @@ export const GameSidebar = ({
   onRestart
 }: GameSidebarProps) => {
   return (
-    <div className="w-full h-full bg-[#0072A0] p-6 lg:p-8 overflow-y-auto flex flex-col">
+    <div className="w-full h-full p-6 lg:p-8 overflow-y-auto flex flex-col">
       {/* Health Meters - compact version for sidebar */}
       <div className="mb-8">
         <CompactHealthMeters 
