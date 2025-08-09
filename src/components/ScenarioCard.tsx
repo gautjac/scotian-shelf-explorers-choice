@@ -25,7 +25,7 @@ export const ScenarioCard = ({ scenario, language, onChoiceSelect }: ScenarioCar
       </div>
 
       {/* Scenario content - scrollable if needed */}
-      <div className="flex-1 p-8 lg:p-10 pb-24 flex flex-col overflow-y-auto">
+      <div className="flex-1 p-8 lg:p-10 pb-32 lg:pb-40 flex flex-col overflow-y-auto">
         <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-900 mb-6">{title}</h2>
         <p className="text-xl lg:text-2xl text-slate-700 leading-relaxed mb-8 lg:mb-10">
           {description}
