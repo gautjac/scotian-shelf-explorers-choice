@@ -40,7 +40,7 @@ export const GamePlayingScreen = ({
       {/* Main Content Area - 2/3 of screen with Grid Layout */}
       <div className="w-2/3 h-screen flex flex-col">
         {/* Main Content Grid with bottom padding for floating header */}
-        <div className="min-h-full p-6 lg:p-8 pb-24 lg:pb-32 grid grid-rows-[auto_auto_auto] gap-4 overflow-hidden">
+        <div className="min-h-full p-6 lg:p-8 pb-24 lg:pb-32 grid grid-rows-[auto_auto_auto] gap-8 overflow-hidden">
           {/* Scenario Image */}
           <div 
             className="h-96 lg:h-128 bg-cover bg-center rounded-2xl shadow-lg" 
@@ -48,7 +48,7 @@ export const GamePlayingScreen = ({
           />
 
           {/* Content Section */}
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-6 py-2 lg:px-8 lg:py-3 shadow-lg -mt-8">
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-6 py-4 lg:px-8 lg:py-6 shadow-lg">
             <h2 className="text-2xl lg:text-3xl xl:text-4xl font-bold text-blue-900 mb-4">{title}</h2>
             <p className="text-lg lg:text-xl text-slate-700 leading-relaxed">
               {description}
@@ -56,7 +56,7 @@ export const GamePlayingScreen = ({
           </div>
 
           {/* Choices Section with Header */}
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 lg:p-8 shadow-lg overflow-y-auto -mt-4">
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 lg:p-8 shadow-lg overflow-y-auto">
             <h3 className="text-xl lg:text-2xl font-semibold text-slate-800 text-center mb-6">
               {gameState.language === 'en' && 'What would you do?'}
               {gameState.language === 'fr' && 'Que feriez-vous?'}
