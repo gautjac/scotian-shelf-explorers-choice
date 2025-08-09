@@ -14,6 +14,12 @@ const languageColors = {
   fr: 'bg-[#E53E3E] text-white active:bg-[#E53E3E]/80'  // French - Red
 };
 
+const languageButtonText = {
+  mi: 'Papultmimk L\'nuiktuk',
+  en: 'Play in English',
+  fr: 'Joue en Français'
+};
+
 export const LanguageSelectionScreen = ({ onLanguageSelect }: LanguageSelectionScreenProps) => {
   const { getUIText } = useComprehensiveConfig();
   return (
@@ -24,9 +30,7 @@ export const LanguageSelectionScreen = ({ onLanguageSelect }: LanguageSelectionS
       <div className="flex flex-col items-center gap-8 p-8 w-full">
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 w-full max-w-[75vw]">
           {languages.map((lang) => {
-            const buttonTextKey = lang.code === 'en' ? 'English Button' : 
-                                  lang.code === 'fr' ? 'French Button' : 'Mikmaw Button';
-            const buttonText = getUIText('LanguageSelector', buttonTextKey, lang.code);
+            const buttonText = languageButtonText[lang.code];
             return (
               <button
                 key={lang.code}
