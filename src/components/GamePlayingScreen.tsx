@@ -43,7 +43,7 @@ export const GamePlayingScreen = ({
         <div className="flex-1 p-6 lg:p-8 pb-24 lg:pb-32 grid grid-rows-[minmax(200px,1fr)_auto_1fr] gap-6 overflow-hidden">
           {/* Scenario Image */}
           <div 
-            className="h-72 lg:h-96 bg-cover bg-center rounded-2xl shadow-lg" 
+            className="h-96 lg:h-128 bg-cover bg-center rounded-2xl shadow-lg" 
             style={{ backgroundImage: `url(${currentScenario.imageUrl})` }}
           />
 
