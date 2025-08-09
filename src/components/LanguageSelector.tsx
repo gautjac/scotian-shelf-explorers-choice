@@ -18,5 +18,23 @@ export const LanguageSelector = ({
   onLanguageChange,
   className = ''
 }: LanguageSelectorProps) => {
-  return;
+  return (
+    <div className={`flex gap-3 ${className}`}>
+      {languages.map((lang) => (
+        <button
+          key={lang.code}
+          onClick={() => onLanguageChange(lang.code)}
+          className={`px-4 py-2 rounded-lg text-sm lg:text-base font-bold transition-all duration-200 ${
+            languageColors[lang.code]
+          } ${
+            currentLanguage === lang.code
+              ? 'ring-4 ring-white/50 scale-105'
+              : ''
+          }`}
+        >
+          {lang.nativeName}
+        </button>
+      ))}
+    </div>
+  );
 };
