@@ -48,7 +48,7 @@ export const GamePlayingScreen = ({
           />
 
           {/* Content Section */}
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-6 py-4 lg:px-8 lg:py-6 shadow-lg">
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-6 py-6 lg:px-8 lg:py-8 shadow-lg">
             <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-900 mb-4">{title}</h2>
             <p className="text-xl lg:text-2xl text-slate-700 leading-relaxed">
               {description}
