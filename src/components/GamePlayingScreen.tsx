@@ -44,7 +44,6 @@ export const GamePlayingScreen = ({
         <GameSidebar
           healthMetrics={gameState.healthMetrics}
           language={gameState.language}
-          onLanguageChange={onLanguageChange}
           onBackToPreview={onBackToPreview}
           onRestart={onRestart}
         />

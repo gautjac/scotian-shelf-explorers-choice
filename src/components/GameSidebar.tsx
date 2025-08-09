@@ -1,18 +1,14 @@
 import { CompactHealthMeters } from './CompactHealthMeters';
-import { GameActions } from './GameActions';
-import { LanguageSelector } from './LanguageSelector';
 import { HealthMetrics, Language } from '../types';
 interface GameSidebarProps {
   healthMetrics: HealthMetrics;
   language: Language['code'];
-  onLanguageChange: (language: Language['code']) => void;
   onBackToPreview: () => void;
   onRestart: () => void;
 }
 export const GameSidebar = ({
   healthMetrics,
   language,
-  onLanguageChange,
   onBackToPreview,
   onRestart
 }: GameSidebarProps) => {
@@ -34,10 +30,6 @@ export const GameSidebar = ({
           
         </div>
 
-        {/* Language Selector */}
-        <div className="flex justify-center">
-          <LanguageSelector currentLanguage={language} onLanguageChange={onLanguageChange} className="bg-[#0B424E]/30 backdrop-blur-sm rounded-2xl p-4" />
-        </div>
       </div>
     </div>;
 };
