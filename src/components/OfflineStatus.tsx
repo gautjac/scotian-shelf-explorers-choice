@@ -1,10 +1,17 @@
 import { useState, useEffect } from 'react';
 import { Alert, AlertDescription } from './ui/alert';
 import { Wifi, WifiOff } from 'lucide-react';
+import { useComprehensiveConfig } from '../hooks/useComprehensiveConfig';
+import { Language } from '../types';
 
-export const OfflineStatus = () => {
+interface OfflineStatusProps {
+  language?: Language['code'];
+}
+
+export const OfflineStatus = ({ language = 'en' }: OfflineStatusProps) => {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [showOfflineMessage, setShowOfflineMessage] = useState(false);
+  const { getUIText } = useComprehensiveConfig();
 
   useEffect(() => {
     const handleOnline = () => {
@@ -43,15 +50,20 @@ export const OfflineStatus = () => {
         <AlertDescription className="text-orange-800 dark:text-orange-200">
           <strong>Offline Mode</strong>
           <br />
-          You're currently offline. The app will continue to work with saved data.
+          {getUIText('OfflineStatus', 'Offline Message', language)}
         </AlertDescription>
       </Alert>
     </div>
   );
 };
 
-export const OnlineIndicator = () => {
+interface OnlineIndicatorProps {
+  language?: Language['code'];
+}
+
+export const OnlineIndicator = ({ language = 'en' }: OnlineIndicatorProps) => {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const { getUIText } = useComprehensiveConfig();
 
   useEffect(() => {
     const handleOnline = () => setIsOnline(true);
@@ -73,7 +85,7 @@ export const OnlineIndicator = () => {
       ) : (
         <WifiOff className="h-4 w-4 text-orange-500" />
       )}
-      <span>{isOnline ? 'Online' : 'Offline'}</span>
+      <span>{isOnline ? getUIText('OfflineStatus', 'Online Text', language) : getUIText('OfflineStatus', 'Offline Text', language)}</span>
     </div>
   );
 };

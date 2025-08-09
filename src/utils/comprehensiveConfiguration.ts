@@ -83,7 +83,17 @@ HealthMeters,Community Health,People's Health,Santé des gens,L'nui samqwan,Full
 Health Status,Thriving,Doing Great,Très bien,Pilei,80%+ health status
 Health Status,Stable,Doing OK,Ça va,Nukek,60-79% health status
 Health Status,Declining,Not Good,Pas bon,Tepisq,40-59% health status
-Health Status,Critical,Very Bad,Très mauvais,Mekij,Below 40% health status`;
+Health Status,Critical,Very Bad,Très mauvais,Mekij,Below 40% health status
+InactivityModal,Title,You've been away for a while,Vous êtes absent depuis un moment,Telkisqewe'k kiju,Inactivity modal title
+InactivityModal,Still Here Button,I'm still here,Je suis toujours là,Aqq tett naka,Still here button
+InactivityModal,Start Over Button,Start over,Recommencer,Pilei mawita'sin,Start over button
+InactivityModal,Auto Redirect,Auto-redirect in {countdown} seconds,Redirection automatique dans {countdown} secondes,Apijiw-kijatukun {countdown} sekunt,Auto redirect countdown
+LanguageSelector,English Button,English,English,English,English language button
+LanguageSelector,French Button,Français,Français,Français,French language button
+LanguageSelector,Mikmaw Button,Mi'kmaw,Mi'kmaw,Mi'kmaw,Mi'kmaw language button
+OfflineStatus,Offline Message,You're currently offline,Vous êtes actuellement hors ligne,Maw kelulti'k,Offline status message
+OfflineStatus,Online Text,Online,En ligne,Kelulti'k,Online status text
+OfflineStatus,Offline Text,Offline,Hors ligne,Maw kelulti'k,Offline status text`;
 
 // Export comprehensive configuration to CSV
 export const exportComprehensiveCSV = (): string => {
