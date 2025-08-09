@@ -42,12 +42,10 @@ export const GamePlayingScreen = ({
         {/* Main Content Grid with bottom padding for floating header */}
         <div className="min-h-full p-6 lg:p-8 pb-24 lg:pb-32 grid grid-rows-[auto_auto_auto] gap-8 overflow-hidden">
           {/* Scenario Image */}
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 lg:p-8 shadow-lg">
-            <div 
-              className="h-80 lg:h-112 bg-cover bg-center rounded-xl" 
-              style={{ backgroundImage: `url(${currentScenario.imageUrl})` }}
-            />
-          </div>
+          <div 
+            className="h-80 lg:h-112 bg-cover bg-center rounded-2xl shadow-lg" 
+            style={{ backgroundImage: `url(${currentScenario.imageUrl})` }}
+          />
 
           {/* Content Section */}
           <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-6 py-4 lg:px-8 lg:py-6 shadow-lg">
