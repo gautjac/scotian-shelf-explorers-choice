@@ -48,7 +48,7 @@ export const GamePlayingScreen = ({
           />
 
           {/* Content Section */}
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 lg:p-8 shadow-lg -mt-4">
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 lg:p-8 shadow-lg -mt-8">
             <h2 className="text-2xl lg:text-3xl xl:text-4xl font-bold text-blue-900 mb-4">{title}</h2>
             <p className="text-lg lg:text-xl text-slate-700 leading-relaxed">
               {description}
@@ -56,7 +56,7 @@ export const GamePlayingScreen = ({
           </div>
 
           {/* Choices Section with Header */}
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 lg:p-8 shadow-lg overflow-y-auto">
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 lg:p-8 shadow-lg overflow-y-auto -mt-4">
             <h3 className="text-xl lg:text-2xl font-semibold text-slate-800 text-center mb-6">
               {gameState.language === 'en' && 'What would you do?'}
               {gameState.language === 'fr' && 'Que feriez-vous?'}
