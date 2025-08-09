@@ -49,15 +49,15 @@ export const GamePlayingScreen = ({
 
           {/* Content Section */}
           <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-6 py-4 lg:px-8 lg:py-6 shadow-lg">
-            <h2 className="text-2xl lg:text-3xl xl:text-4xl font-bold text-blue-900 mb-4">{title}</h2>
-            <p className="text-lg lg:text-xl text-slate-700 leading-relaxed">
+            <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-900 mb-4">{title}</h2>
+            <p className="text-xl lg:text-2xl text-slate-700 leading-relaxed">
               {description}
             </p>
           </div>
 
           {/* Choices Section with Header */}
           <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 lg:p-8 shadow-lg overflow-y-auto">
-            <h3 className="text-xl lg:text-2xl font-semibold text-slate-800 text-center mb-6">
+            <h3 className="text-2xl lg:text-3xl font-semibold text-slate-800 text-center mb-6">
               {gameState.language === 'en' && 'What would you do?'}
               {gameState.language === 'fr' && 'Que feriez-vous?'}
               {gameState.language === 'mi' && 'Koqoey ketu elkewek?'}
@@ -70,10 +70,10 @@ export const GamePlayingScreen = ({
                   className={`w-full p-4 lg:p-6 rounded-xl font-semibold text-left transition-all duration-300 transform hover:scale-102 shadow-md active:scale-98 ${impactColors[choice.impact]} min-h-[80px] lg:min-h-[100px]`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-base lg:text-lg xl:text-xl leading-relaxed pr-4">
+                    <span className="text-lg lg:text-xl xl:text-2xl leading-relaxed pr-4">
                       {getChoiceText(currentScenario.id, choice.id, 'text', gameState.language) ?? choice.text}
                     </span>
-                    <span className="text-xl lg:text-2xl flex-shrink-0">→</span>
+                    <span className="text-2xl lg:text-3xl flex-shrink-0">→</span>
                   </div>
                 </button>
               ))}
