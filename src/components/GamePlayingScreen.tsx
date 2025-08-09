@@ -28,7 +28,7 @@ export const GamePlayingScreen = ({
   return (
     <div className="min-h-screen flex relative" style={{ backgroundImage: `url(${geometricBackground})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
       {/* Main Content Area - Question Section - 2/3 of screen */}
-      <div className="w-2/3 h-screen p-6 lg:p-8 flex flex-col">
+      <div className="w-2/3 h-screen p-6 lg:p-8 pb-20 flex flex-col">
         {/* Main scenario */}
         <div className="flex-1 mb-8">
           <ScenarioCard
