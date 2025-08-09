@@ -71,8 +71,9 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenar
         </div>
 
         {/* Scenario Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mb-12">
-          {previewScenarios.map((scenario, index) => (
+        <div className="grid gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+            {previewScenarios.slice(0, 3).map((scenario, index) => (
             <div
               key={scenario.id}
               onClick={() => handleScenarioClick(scenario.id)}
@@ -111,7 +112,56 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenar
                 </p>
               </div>
             </div>
-          ))}
+            ))}
+          </div>
+          
+          {/* Second row with 2 scenarios centered */}
+          {previewScenarios.length > 3 && (
+            <div className="flex justify-center">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
+                {previewScenarios.slice(3, 5).map((scenario, index) => (
+                  <div
+                    key={scenario.id}
+                    onClick={() => handleScenarioClick(scenario.id)}
+                    className={`bg-[#0B424E]/20 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl transition-all duration-300 ${
+                      onScenarioSelect 
+                        ? 'cursor-pointer transform active:scale-95' 
+                        : ''
+                    }`}
+                  >
+                    {/* Scenario Image */}
+                    <div 
+                      className="h-48 bg-cover bg-center relative"
+                      style={{ backgroundImage: `url(${scenario.imageUrl})` }}
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0B424E]/80 to-transparent" />
+                      <div className="absolute top-4 left-4 bg-[#0072A0] text-white px-4 py-2 rounded-full font-semibold text-lg">
+                        {index + 4}
+                      </div>
+                      {onScenarioSelect && (
+                        <div className="absolute top-4 right-4 bg-[#CDE2ED]/30 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium">
+                          Click to start
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Scenario Content */}
+                    <div className="p-6">
+                      <h3 className="text-xl lg:text-2xl font-bold text-white mb-3">
+                        {getScenarioText(scenario.id, 'title', language) ?? scenario.title}
+                      </h3>
+                      <p className="text-[#CDE2ED] text-base lg:text-lg leading-relaxed">
+                        {(() => {
+                          const d = getScenarioText(scenario.id, 'description', language) ?? scenario.description;
+                          return d.length > 120 ? `${d.substring(0, 120)}...` : d;
+                        })()}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Action Buttons */}

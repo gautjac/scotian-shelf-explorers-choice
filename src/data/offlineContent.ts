@@ -4,7 +4,7 @@ import { Language, Scenario, MarineSpecies } from '../types';
 import plasticPollutionImg from '../assets/images/plastic-pollution.jpg';
 import fishingPracticesImg from '../assets/images/fishing-practices.jpg';
 import shippingTrafficImg from '../assets/images/shipping-traffic.jpg';
-import oceanAcidificationImg from '../assets/images/ocean-acidification.jpg';
+
 import renewableEnergyImg from '../assets/images/renewable-energy.jpg';
 import coastalDevelopmentImg from '../assets/images/coastal-development.jpg';
 import lobsterImg from '../assets/images/lobster.jpg';
@@ -130,7 +130,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
           consequence: "Brilliant! When ships go slower, whales have time to swim out of the way. It's like a speed limit to save lives!",
           pros: 'Saves whale lives. Gives whales time to escape danger.',
           cons: 'Ships take longer to deliver stuff. Shipping costs more money.',
-          nextScenarioId: 'ocean-acidification'
+          nextScenarioId: 'renewable-energy'
         },
         {
           id: 'ignore-whales',
@@ -139,7 +139,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
           consequence: 'Terrible news! More whales get hit and die. These amazing giants might disappear forever.',
           pros: 'Ships deliver things quickly and cheaply.',
           cons: 'Whales become extinct. We lose these incredible ocean animals.',
-          nextScenarioId: 'ocean-acidification'
+          nextScenarioId: 'renewable-energy'
         },
         {
           id: 'detection-systems',
@@ -148,41 +148,6 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
           consequence: "Cool tech solution! Special computers warn ship captains when whales are nearby. It's like whale radar!",
           pros: 'Ships know exactly where whales are swimming.',
           cons: 'Costs money to buy the technology. Ship crews need training.',
-          nextScenarioId: 'ocean-acidification'
-        }
-      ]
-    },
-    {
-      id: 'ocean-acidification',
-      title: 'The Sour Ocean Problem',
-      description: "The ocean is becoming more acidic (sour) because it's absorbing pollution from the air. This makes it super hard for lobsters and crabs to build strong shells. It's like trying to build with weak blocks!",
-      imageUrl: oceanAcidificationImg,
-      choices: [
-        {
-          id: 'reduce-emissions',
-          text: 'Cut down on air pollution from cars and factories',
-          impact: 'positive',
-          consequence: 'Fantastic! Less pollution in the air means the ocean stays healthy. Lobsters can build super strong shells again!',
-          pros: 'Helps the whole ocean ecosystem. Good for all sea creatures.',
-          cons: 'People need to change how they travel and make things.',
-          nextScenarioId: 'renewable-energy'
-        },
-        {
-          id: 'ignore-acidity',
-          text: 'Keep polluting the air like before',
-          impact: 'negative',
-          consequence: "Bad news! The ocean gets more and more sour. Lobsters' shells become weak and crumbly. They can't protect themselves.",
-          pros: 'No one has to change their lifestyle.',
-          cons: 'Shell animals get sick and die. Lobster fishing becomes impossible.',
-          nextScenarioId: 'renewable-energy'
-        },
-        {
-          id: 'buffer-zones',
-          text: 'Add special chemicals to neutralize the acid',
-          impact: 'neutral',
-          consequence: "Interesting idea! This might work in small areas, but we need to test it more. It's like adding baking soda to sour water.",
-          pros: "Could help protect important areas. Shows we're trying new solutions.",
-          cons: "We don't know if it really works. Very expensive. Only helps tiny areas.",
           nextScenarioId: 'renewable-energy'
         }
       ]
@@ -341,7 +306,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
           consequence: "Brillant! Quand les navires vont plus lentement, les baleines ont le temps de s'écarter. C'est comme une limite de vitesse pour sauver des vies!",
           pros: "Sauve des vies de baleines. Donne du temps aux baleines pour éviter le danger.",
           cons: "Les navires mettent plus de temps à livrer. Le transport coûte plus cher.",
-          nextScenarioId: 'ocean-acidification'
+          nextScenarioId: 'renewable-energy'
         },
         {
           id: 'ignore-whales',
@@ -350,7 +315,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
           consequence: "Terrible! Plus de baleines sont heurtées et meurent. Ces géants incroyables pourraient disparaître pour toujours.",
           pros: "Les navires livrent rapidement et à bas prix.",
           cons: "Les baleines deviennent éteintes. Nous perdons ces animaux incroyables.",
-          nextScenarioId: 'ocean-acidification'
+          nextScenarioId: 'renewable-energy'
         },
         {
           id: 'detection-systems',
@@ -359,41 +324,6 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
           consequence: "Solution technologique cool! Des ordinateurs spéciaux avertissent les capitaines quand des baleines sont proches. C'est comme un radar à baleines!",
           pros: "Les navires savent exactement où nagent les baleines.",
           cons: "Coûte cher d'acheter la technologie. Les équipages doivent être formés.",
-          nextScenarioId: 'ocean-acidification'
-        }
-      ]
-    },
-    {
-      id: 'ocean-acidification',
-      title: "Le problème de l'océan acide",
-      description: "L'océan devient plus acide car il absorbe la pollution de l'air. Cela rend difficile pour les homards et crabes de construire des carapaces solides. C'est comme construire avec des blocs faibles!",
-      imageUrl: oceanAcidificationImg,
-      choices: [
-        {
-          id: 'reduce-emissions',
-          text: 'Réduire la pollution de l\'air des voitures et usines',
-          impact: 'positive',
-          consequence: "Fantastique! Moins de pollution dans l'air signifie un océan sain. Les homards peuvent construire des carapaces solides à nouveau!",
-          pros: "Aide tout l'écosystème océanique. Bon pour toutes les créatures marines.",
-          cons: "Les gens doivent changer leur façon de voyager et fabriquer des choses.",
-          nextScenarioId: 'renewable-energy'
-        },
-        {
-          id: 'ignore-acidity',
-          text: "Continuer à polluer l'air comme avant",
-          impact: 'negative',
-          consequence: "Mauvaise nouvelle! L'océan devient de plus en plus acide. Les carapaces des homards deviennent faibles et friables. Ils ne peuvent pas se protéger.",
-          pros: "Personne n'a à changer son mode de vie.",
-          cons: "Les animaux à carapace tombent malades et meurent. La pêche au homard devient impossible.",
-          nextScenarioId: 'renewable-energy'
-        },
-        {
-          id: 'buffer-zones',
-          text: 'Ajouter des produits chimiques pour neutraliser l\'acidité',
-          impact: 'neutral',
-          consequence: "Idée intéressante! Cela pourrait fonctionner dans de petites zones, mais il faut tester davantage. C'est comme ajouter du bicarbonate à de l'eau acide.",
-          pros: "Pourrait protéger des zones importantes. Montre qu'on essaie de nouvelles solutions.",
-          cons: "On ne sait pas si ça marche vraiment. Très cher. Aide seulement de petites zones.",
           nextScenarioId: 'renewable-energy'
         }
       ]
@@ -552,7 +482,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
           consequence: "Kesalultijik wjit puktuk",
           pros: "Kesalultijik wjit puktuk",
           cons: "Kesalultijik wjit puktuk",
-          nextScenarioId: 'ocean-acidification'
+          nextScenarioId: 'renewable-energy'
         },
         {
           id: 'ignore-whales',
@@ -561,47 +491,12 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
           consequence: "Kesalultijik wjit puktuk",
           pros: "Kesalultijik wjit puktuk",
           cons: "Kesalultijik wjit puktuk",
-          nextScenarioId: 'ocean-acidification'
+          nextScenarioId: 'renewable-energy'
         },
         {
           id: 'detection-systems',
           text: "Kesalultijik wjit puktuk",
           impact: 'positive',
-          consequence: "Kesalultijik wjit puktuk",
-          pros: "Kesalultijik wjit puktuk",
-          cons: "Kesalultijik wjit puktuk",
-          nextScenarioId: 'ocean-acidification'
-        }
-      ]
-    },
-    {
-      id: 'ocean-acidification',
-      title: "Kesalultijik aqq Kiskukewey",
-      description: "Kesalultijik wjit Nova Scotia aqq kesalultijik wjit puktuk.",
-      imageUrl: oceanAcidificationImg,
-      choices: [
-        {
-          id: 'reduce-emissions',
-          text: "Kesalultijik wjit puktuk",
-          impact: 'positive',
-          consequence: "Kesalultijik wjit puktuk",
-          pros: "Kesalultijik wjit puktuk",
-          cons: "Kesalultijik wjit puktuk",
-          nextScenarioId: 'renewable-energy'
-        },
-        {
-          id: 'ignore-acidity',
-          text: "Kesalultijik wjit puktuk",
-          impact: 'negative',
-          consequence: "Kesalultijik wjit puktuk",
-          pros: "Kesalultijik wjit puktuk",
-          cons: "Kesalultijik wjit puktuk",
-          nextScenarioId: 'renewable-energy'
-        },
-        {
-          id: 'buffer-zones',
-          text: "Kesalultijik wjit puktuk",
-          impact: 'neutral',
           consequence: "Kesalultijik wjit puktuk",
           pros: "Kesalultijik wjit puktuk",
           cons: "Kesalultijik wjit puktuk",
