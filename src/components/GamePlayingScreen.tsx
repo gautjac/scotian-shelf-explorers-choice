@@ -2,7 +2,7 @@
 import { GameSidebar } from './GameSidebar';
 import { ScenarioCard } from './ScenarioCard';
 import { GameActions } from './GameActions';
-import { LanguageSelector } from './LanguageSelector';
+import { FloatingLanguageHeader } from './FloatingLanguageHeader';
 import { Scenario, GameState, Language } from '../types';
 import geometricBackground from '../assets/geometric-background.png';
 
@@ -13,6 +13,7 @@ interface GamePlayingScreenProps {
   onChoiceSelect: (choiceId: string) => void;
   onBackToPreview: () => void;
   onRestart: () => void;
+  onBackToLanguageSelection: () => void;
 }
 
 export const GamePlayingScreen = ({
@@ -21,7 +22,8 @@ export const GamePlayingScreen = ({
   onLanguageChange,
   onChoiceSelect,
   onBackToPreview,
-  onRestart
+  onRestart,
+  onBackToLanguageSelection
 }: GamePlayingScreenProps) => {
   return (
     <div className="min-h-screen flex relative" style={{ backgroundImage: `url(${geometricBackground})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
@@ -47,6 +49,13 @@ export const GamePlayingScreen = ({
           onRestart={onRestart}
         />
       </div>
+
+      {/* Floating Language Header */}
+      <FloatingLanguageHeader
+        currentLanguage={gameState.language}
+        onLanguageChange={onLanguageChange}
+        onBackToLanguageSelection={onBackToLanguageSelection}
+      />
     </div>
   );
 };

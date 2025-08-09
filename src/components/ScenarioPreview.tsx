@@ -1,5 +1,5 @@
 import { Language, Scenario } from '../types';
-import { LanguageSelector } from './LanguageSelector';
+import { FloatingLanguageHeader } from './FloatingLanguageHeader';
 import { useComprehensiveConfig } from '../hooks/useComprehensiveConfig';
 import geometricBackground from '../assets/geometric-background.png';
 
@@ -10,6 +10,7 @@ interface ScenarioPreviewProps {
   onBack: () => void;
   onScenarioSelect?: (scenarioId: string) => void;
   onLanguageChange: (language: Language['code']) => void;
+  onBackToLanguageSelection: () => void;
 }
 
 const previewText = {
@@ -39,7 +40,7 @@ const previewText = {
   }
 };
 
-export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenarioSelect, onLanguageChange }: ScenarioPreviewProps) => {
+export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenarioSelect, onLanguageChange, onBackToLanguageSelection }: ScenarioPreviewProps) => {
   const content = previewText[language];
   const { getScenarioText } = useComprehensiveConfig();
   // Get first 6 scenarios
@@ -130,14 +131,12 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenar
         </div>
       </div>
 
-      {/* Language selector - bottom right corner */}
-      <div className="absolute bottom-8 right-8 z-20">
-        <LanguageSelector 
-          currentLanguage={language}
-          onLanguageChange={onLanguageChange}
-          className="bg-[#0B424E]/30 backdrop-blur-sm rounded-2xl p-4"
-        />
-      </div>
+      {/* Floating Language Header */}
+      <FloatingLanguageHeader
+        currentLanguage={language}
+        onLanguageChange={onLanguageChange}
+        onBackToLanguageSelection={onBackToLanguageSelection}
+      />
     </div>
   );
 };

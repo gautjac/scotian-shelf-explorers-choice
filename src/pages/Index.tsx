@@ -114,6 +114,11 @@ const Index = () => {
     trackActivity();
   };
 
+  const handleBackToLanguageSelectionWithTracking = () => {
+    handleBackToLanguageSelection();
+    trackActivity();
+  };
+
   const handleShowPreviewWithTracking = () => {
     handleShowPreview();
     trackActivity();
@@ -132,6 +137,7 @@ const Index = () => {
           currentLanguage={gameState.language}
           onLanguageChange={handleLanguageChange}
           onStart={handleShowPreviewWithTracking}
+          onBackToLanguageSelection={handleBackToLanguageSelectionWithTracking}
         />
       )}
 
@@ -143,6 +149,7 @@ const Index = () => {
           onBack={handleBackToWelcomeWithTracking}
           onScenarioSelect={handleScenarioSelectWithTracking}
           onLanguageChange={handleLanguageChange}
+          onBackToLanguageSelection={handleBackToLanguageSelectionWithTracking}
         />
       )}
 
@@ -154,6 +161,7 @@ const Index = () => {
           onChoiceSelect={handleChoiceSelectWithTracking}
           onBackToPreview={handleBackToPreviewWithTracking}
           onRestart={handleRestartWithTracking}
+          onBackToLanguageSelection={handleBackToLanguageSelectionWithTracking}
         />
       )}
 
@@ -164,6 +172,7 @@ const Index = () => {
           onRestart={handleRestartWithTracking}
           choicesMade={gameState.choicesMade}
           healthMetrics={gameState.healthMetrics}
+          onBackToLanguageSelection={handleBackToLanguageSelectionWithTracking}
         />
       )}
 

@@ -1,7 +1,8 @@
-import { LanguageSelector } from './LanguageSelector';
+import { FloatingLanguageHeader } from './FloatingLanguageHeader';
 import { HealthMeters } from './HealthMeters';
 import { Language, HealthMetrics } from '../types';
 import geometricBackground from '../assets/geometric-background.png';
+
 interface CompletionScreenProps {
   language: Language['code'];
   onLanguageChange: (language: Language['code']) => void;
@@ -12,6 +13,7 @@ interface CompletionScreenProps {
     timestamp: number;
   }>;
   healthMetrics: HealthMetrics;
+  onBackToLanguageSelection: () => void;
 }
 const completionText = {
   en: {
@@ -39,12 +41,13 @@ const completionText = {
     choicesTitle: 'Kil wenjo\'taqn'
   }
 };
-export const CompletionScreen = ({
-  language,
-  onLanguageChange,
-  onRestart,
-  choicesMade,
-  healthMetrics
+export const CompletionScreen = ({ 
+  language, 
+  onLanguageChange, 
+  onRestart, 
+  choicesMade, 
+  healthMetrics,
+  onBackToLanguageSelection
 }: CompletionScreenProps) => {
   const content = completionText[language];
   const positiveChoices = choicesMade.filter(choice => choice.choiceId.includes('ban-plastics') || choice.choiceId.includes('sustainable') || choice.choiceId.includes('renewable') || choice.choiceId.includes('marine-reserves') || choice.choiceId.includes('cleanup') || choice.choiceId.includes('carbon-capture'));
@@ -162,10 +165,12 @@ export const CompletionScreen = ({
         </div>
       </div>
 
-      {/* Language selector - bottom right corner */}
-      <div className="absolute bottom-8 right-8 z-20">
-        <LanguageSelector currentLanguage={language} onLanguageChange={onLanguageChange} className="bg-white/20 backdrop-blur-sm rounded-xl p-4" />
-      </div>
+      {/* Floating Language Header */}
+      <FloatingLanguageHeader
+        currentLanguage={language}
+        onLanguageChange={onLanguageChange}
+        onBackToLanguageSelection={onBackToLanguageSelection}
+      />
 
       {/* Floating marine life decorations */}
       <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none">

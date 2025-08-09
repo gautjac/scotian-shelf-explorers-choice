@@ -1,5 +1,5 @@
 
-import { LanguageSelector } from './LanguageSelector';
+import { FloatingLanguageHeader } from './FloatingLanguageHeader';
 import { Language } from '../types';
 import geometricBackground from '../assets/geometric-background.png';
 
@@ -7,6 +7,7 @@ interface WelcomeScreenProps {
   currentLanguage: Language['code'];
   onLanguageChange: (language: Language['code']) => void;
   onStart: () => void;
+  onBackToLanguageSelection: () => void;
 }
 
 const welcomeText = {
@@ -33,7 +34,7 @@ const welcomeText = {
   }
 };
 
-export const WelcomeScreen = ({ currentLanguage, onLanguageChange, onStart }: WelcomeScreenProps) => {
+export const WelcomeScreen = ({ currentLanguage, onLanguageChange, onStart, onBackToLanguageSelection }: WelcomeScreenProps) => {
   const content = welcomeText[currentLanguage];
 
   return (
@@ -76,14 +77,12 @@ export const WelcomeScreen = ({ currentLanguage, onLanguageChange, onStart }: We
 
       </div>
 
-      {/* Language selector - bottom right corner */}
-      <div className="absolute bottom-8 right-8 z-20">
-        <LanguageSelector 
-          currentLanguage={currentLanguage}
-          onLanguageChange={onLanguageChange}
-          className="bg-[#0B424E]/30 backdrop-blur-sm rounded-2xl p-4"
-        />
-      </div>
+      {/* Floating Language Header */}
+      <FloatingLanguageHeader
+        currentLanguage={currentLanguage}
+        onLanguageChange={onLanguageChange}
+        onBackToLanguageSelection={onBackToLanguageSelection}
+      />
 
       {/* Marine life silhouettes - larger for visibility */}
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#0B424E]/50 to-transparent">
