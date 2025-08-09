@@ -40,7 +40,7 @@ export const GamePlayingScreen = ({
       {/* Main Content Area - 2/3 of screen with Grid Layout */}
       <div className="w-2/3 h-screen flex flex-col">
         {/* Main Content Grid with bottom padding for floating header */}
-        <div className="flex-1 p-6 lg:p-8 pb-24 lg:pb-32 grid grid-rows-[auto_auto_1fr] gap-4 overflow-hidden">
+        <div className="min-h-full p-6 lg:p-8 pb-24 lg:pb-32 grid grid-rows-[auto_auto_auto] gap-4 overflow-hidden">
           {/* Scenario Image */}
           <div 
             className="h-96 lg:h-128 bg-cover bg-center rounded-2xl shadow-lg" 
