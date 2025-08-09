@@ -6,13 +6,12 @@ import { ScenarioPreview } from '../components/ScenarioPreview';
 import { ConsequenceModal } from '../components/ConsequenceModal';
 import { CompletionScreen } from '../components/CompletionScreen';
 import { GamePlayingScreen } from '../components/GamePlayingScreen';
-import { AdminPanel } from '../components/AdminPanel';
+import { ContentManagerButton } from '../components/ContentManagerButton';
 import { useGameState } from '../hooks/useGameState';
 import { useGamePhase } from '../hooks/useGamePhase';
 import { scenarios } from '../data/content';
 
 const Index = () => {
-  const [showAdmin, setShowAdmin] = useState(false);
   
   const {
     gameState,
@@ -44,11 +43,6 @@ const Index = () => {
   } = useGamePhase(lastActivity, resetGame);
 
 
-  // Check for admin parameter in URL
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    setShowAdmin(urlParams.get('admin') === 'true');
-  }, []);
 
   // Track user activity
   useEffect(() => {
@@ -180,9 +174,7 @@ const Index = () => {
         </div>
       )}
       
-      {showAdmin && (
-        <AdminPanel onClose={() => setShowAdmin(false)} />
-      )}
+      <ContentManagerButton />
 
       <InactivityModal
         isVisible={showInactivityModal}
