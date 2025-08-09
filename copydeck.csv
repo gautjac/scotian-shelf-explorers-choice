@@ -55,9 +55,9 @@ InactivityModal,Still Here Button,I'm still here,Je suis toujours là,Aqq tett n
 InactivityModal,Start Over Button,Start over,Recommencer,Pilei mawita'sin,Start over button
 InactivityModal,Auto Redirect,Auto-redirect in {countdown} seconds,Redirection automatique dans {countdown} secondes,Apijiw-kijatukun {countdown} sekunt,Auto redirect countdown
 
-LanguageSelector,English Button,English,English,English,English language button
-LanguageSelector,French Button,Français,Français,Français,French language button
-LanguageSelector,Mikmaw Button,Mi'kmaw,Mi'kmaw,Mi'kmaw,Mi'kmaw language button
+LanguageSelector,English Button,Play in English,Joue en Français,Papultmimk L'nuiktuk,English language button
+LanguageSelector,French Button,Play in English,Joue en Français,Papultmimk L'nuiktuk,French language button
+LanguageSelector,Mikmaw Button,Play in English,Joue en Français,Papultmimk L'nuiktuk,Mi'kmaw language button
 
 OfflineStatus,Offline Message,You're currently offline,Vous êtes actuellement hors ligne,Maw kelulti'k,Offline status message
 OfflineStatus,Online Text,Online,En ligne,Kelulti'k,Online status text
