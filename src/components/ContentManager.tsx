@@ -7,8 +7,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 import { exportChoicesToCSV, parseImpactCSV } from '../utils/impactConfiguration';
 import { exportComprehensiveCSV, parseComprehensiveCSV, validateComprehensiveConfig } from '../utils/comprehensiveConfiguration';
+import { createBackup } from '../utils/backupManager';
 import { Download, Upload, X } from 'lucide-react';
 import { EditorGuide } from './EditorGuide';
+import { BackupManager } from './BackupManager';
 
 interface ContentManagerProps {
   onClose: () => void;
@@ -87,6 +89,26 @@ export const ContentManager = ({ onClose }: ContentManagerProps) => {
       const firstLine = text.split('\n')[0];
       const isComprehensive = firstLine.includes('Section,Type,ID,Language,Field,Content');
       
+      // Create automatic backup before import
+      try {
+        const backupType = isComprehensive ? 'comprehensive' : 'impact';
+        createBackup(backupType, 'auto-import');
+        
+        toast({
+          title: "Backup Created",
+          description: "Automatic backup created before import.",
+        });
+      } catch (backupError) {
+        // Continue with import even if backup fails
+        console.warn('Failed to create auto-backup:', backupError);
+        
+        toast({
+          title: "Backup Warning",
+          description: "Could not create backup, but continuing with import.",
+          variant: "destructive",
+        });
+      }
+      
       if (isComprehensive) {
         // Parse comprehensive CSV
         const comprehensiveConfig = parseComprehensiveCSV(text);
@@ -150,8 +172,9 @@ export const ContentManager = ({ onClose }: ContentManagerProps) => {
         </CardHeader>
         <CardContent className="p-0">
           <Tabs defaultValue="import-export" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 mx-6 mt-2">
+            <TabsList className="grid w-full grid-cols-3 mx-6 mt-2">
               <TabsTrigger value="import-export">Import/Export</TabsTrigger>
+              <TabsTrigger value="backup-history">Backup History</TabsTrigger>
               <TabsTrigger value="editor-guide">Editor's Guide</TabsTrigger>
             </TabsList>
             
@@ -200,12 +223,16 @@ export const ContentManager = ({ onClose }: ContentManagerProps) => {
                 <p><strong>Comprehensive CSV:</strong> All app text, scenario content, UI labels, and impact values in one file</p>
                 <p><strong>Impact Only CSV:</strong> Just scenario impact values (legacy format)</p>
                 <p>• Edit downloaded CSV in Excel/Google Sheets</p>
-                <p>• Upload modified CSV to apply changes</p>
-                <p>• Changes require page refresh to take effect</p>
-                <p>• The comprehensive CSV has sections: SCENARIOS, UI_ELEMENTS</p>
+                <p>• Upload modified CSV to apply changes immediately</p>
+                <p>• Automatic backup created before each import</p>
+                <p>• Use Backup History tab to restore previous versions</p>
               </div>
             </TabsContent>
             
+            <TabsContent value="backup-history" className="px-6 pb-6">
+              <BackupManager />
+            </TabsContent>
+
             <TabsContent value="editor-guide" className="px-6 pb-6">
               <EditorGuide />
             </TabsContent>
