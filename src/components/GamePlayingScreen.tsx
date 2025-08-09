@@ -1,6 +1,6 @@
 
 import { GameSidebar } from './GameSidebar';
-import { GameHeader } from './GameHeader';
+import { FloatingLanguageHeader } from './FloatingLanguageHeader';
 import { Scenario, GameState, Language } from '../types';
 import geometricBackground from '../assets/geometric-background.png';
 import { useComprehensiveConfig } from '../hooks/useComprehensiveConfig';
@@ -39,15 +39,8 @@ export const GamePlayingScreen = ({
     <div className="min-h-screen flex relative" style={{ backgroundImage: `url(${geometricBackground})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
       {/* Main Content Area - 2/3 of screen with Grid Layout */}
       <div className="w-2/3 h-screen flex flex-col">
-        {/* Header */}
-        <GameHeader
-          currentLanguage={gameState.language}
-          onLanguageChange={onLanguageChange}
-          onBackToLanguageSelection={onBackToLanguageSelection}
-        />
-
-        {/* Main Content Grid */}
-        <div className="flex-1 p-6 lg:p-8 grid grid-rows-[auto_minmax(200px,1fr)_auto_1fr] gap-6 overflow-hidden">
+        {/* Main Content Grid with bottom padding for floating header */}
+        <div className="flex-1 p-6 lg:p-8 pb-24 lg:pb-32 grid grid-rows-[minmax(200px,1fr)_auto_1fr] gap-6 overflow-hidden">
           {/* Scenario Image */}
           <div 
             className="h-48 lg:h-64 bg-cover bg-center rounded-2xl shadow-lg" 
@@ -102,6 +95,13 @@ export const GamePlayingScreen = ({
           onRestart={onRestart}
         />
       </div>
+
+      {/* Floating Language Header at Bottom */}
+      <FloatingLanguageHeader
+        currentLanguage={gameState.language}
+        onLanguageChange={onLanguageChange}
+        onBackToLanguageSelection={onBackToLanguageSelection}
+      />
     </div>
   );
 };
