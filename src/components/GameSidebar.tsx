@@ -22,7 +22,7 @@ export const GameSidebar = ({
       <div className="mb-8">
         {/* Game Actions */}
         <div className="flex flex-col gap-4 items-center">
-          <button onClick={onBackToPreview} className="bg-[#0B424E]/30 backdrop-blur-sm text-white px-3 py-2 rounded-xl font-medium text-sm hover:bg-[#0B424E]/40 active:bg-[#0B424E]/50 transition-colors duration-200 shadow-lg">
+          <button onClick={onBackToPreview} className="bg-[#0C556B]/30 backdrop-blur-sm text-white px-4 py-3 rounded-xl font-medium text-base hover:bg-[#0C556B]/40 active:bg-[#0C556B]/50 transition-colors duration-200 shadow-lg">
             {language === 'en' && 'Back to Stories'}
             {language === 'fr' && 'Retour aux histoires'}
             {language === 'mi' && 'Kluskap koqoey'}
