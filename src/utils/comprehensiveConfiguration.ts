@@ -307,18 +307,26 @@ export const parseCopydeckCSVForFallback = () => {
   const headers = lines[0].split(',');
   const data: any = {};
   
+  // Map CSV headers to language codes
+  const languageMapping: { [key: string]: string } = {
+    'English': 'en',
+    'French': 'fr',
+    'Mi\'kmaw': 'mi'
+  };
+  
   for (let i = 1; i < lines.length; i++) {
     const values = lines[i].split(',');
     const screen = values[0];
     const element = values[1];
     
     for (let j = 2; j < headers.length; j++) {
-      const language = headers[j];
+      const csvLanguage = headers[j];
+      const languageCode = languageMapping[csvLanguage] || csvLanguage;
       const content = values[j];
       
-      if (!data[language]) data[language] = {};
-      if (!data[language][screen]) data[language][screen] = {};
-      data[language][screen][element] = content;
+      if (!data[languageCode]) data[languageCode] = {};
+      if (!data[languageCode][screen]) data[languageCode][screen] = {};
+      data[languageCode][screen][element] = content;
     }
   }
   
