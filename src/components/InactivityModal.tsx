@@ -46,17 +46,17 @@ export const InactivityModal = ({
     }
 
     const timer = setInterval(() => {
-      setCountdown((prev) => {
-        if (prev <= 1) {
-          onTimeout();
-          return 10;
-        }
-        return prev - 1;
-      });
+      setCountdown((prev) => prev - 1);
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [isVisible, onTimeout]);
+  }, [isVisible]);
+
+  useEffect(() => {
+    if (countdown <= 0 && isVisible) {
+      onTimeout();
+    }
+  }, [countdown, isVisible, onTimeout]);
 
   if (!isVisible) return null;
 
