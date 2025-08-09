@@ -22,6 +22,8 @@ export default {
 				'helvetica': ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
 			},
 			height: {
+				'88': '22rem',
+				'120': '30rem',
 				'176': '44rem',
 				'240': '60rem'
 			},
