@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { Choice } from '../types';
 import { getChoiceImpact } from '../utils/impactConfiguration';
 
-type GamePhase = 'languageSelection' | 'welcome' | 'preview' | 'playing' | 'consequence' | 'completed';
+type GamePhase = 'languageSelection' | 'preview' | 'playing' | 'consequence' | 'completed';
 
 export const useGamePhase = (lastActivity: number, resetGame: () => void) => {
   const [gamePhase, setGamePhase] = useState<GamePhase>('languageSelection');
@@ -24,7 +24,7 @@ export const useGamePhase = (lastActivity: number, resetGame: () => void) => {
   }, [lastActivity, gamePhase, resetGame]);
 
   const handleLanguageSelect = useCallback(() => {
-    setGamePhase('welcome');
+    setGamePhase('preview');
   }, []);
 
   const handleShowPreview = useCallback(() => {
@@ -35,9 +35,6 @@ export const useGamePhase = (lastActivity: number, resetGame: () => void) => {
     setGamePhase('playing');
   }, []);
 
-  const handleBackToWelcome = useCallback(() => {
-    setGamePhase('welcome');
-  }, []);
 
   const handleBackToLanguageSelection = useCallback(() => {
     setGamePhase('languageSelection');
@@ -94,7 +91,6 @@ export const useGamePhase = (lastActivity: number, resetGame: () => void) => {
     handleLanguageSelect,
     handleShowPreview,
     handleStart,
-    handleBackToWelcome,
     handleBackToLanguageSelection,
     handleBackToPreview,
     handleScenarioSelect,

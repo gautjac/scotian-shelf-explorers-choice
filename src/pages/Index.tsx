@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import { LanguageSelectionScreen } from '../components/LanguageSelectionScreen';
-import { WelcomeScreen } from '../components/WelcomeScreen';
+
 import { ScenarioPreview } from '../components/ScenarioPreview';
 import { ConsequenceModal } from '../components/ConsequenceModal';
 import { CompletionScreen } from '../components/CompletionScreen';
@@ -30,7 +30,7 @@ const Index = () => {
     handleLanguageSelect,
     handleShowPreview,
     handleStart,
-    handleBackToWelcome,
+    
     handleBackToLanguageSelection,
     handleBackToPreview,
     handleScenarioSelect,
@@ -109,10 +109,6 @@ const Index = () => {
     trackActivity();
   };
 
-  const handleBackToWelcomeWithTracking = () => {
-    handleBackToWelcome();
-    trackActivity();
-  };
 
   const handleBackToLanguageSelectionWithTracking = () => {
     handleBackToLanguageSelection();
@@ -132,21 +128,13 @@ const Index = () => {
         />
       )}
 
-      {gamePhase === 'welcome' && (
-        <WelcomeScreen
-          currentLanguage={gameState.language}
-          onLanguageChange={handleLanguageChange}
-          onStart={handleShowPreviewWithTracking}
-          onBackToLanguageSelection={handleBackToLanguageSelectionWithTracking}
-        />
-      )}
 
       {gamePhase === 'preview' && (
         <ScenarioPreview
           scenarios={currentScenarios}
           language={gameState.language}
           onStart={handleStartWithTracking}
-          onBack={handleBackToWelcomeWithTracking}
+          onBack={handleBackToLanguageSelectionWithTracking}
           onScenarioSelect={handleScenarioSelectWithTracking}
           onLanguageChange={handleLanguageChange}
           onBackToLanguageSelection={handleBackToLanguageSelectionWithTracking}
