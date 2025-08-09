@@ -30,9 +30,9 @@ export const GamePlayingScreen = ({
   const description = getScenarioText(currentScenario.id, 'description', gameState.language) ?? currentScenario.description;
 
   const impactColors = {
-    positive: 'bg-[#008BBF] hover:bg-[#008BBF]/90 text-white',
-    negative: 'bg-[#0C556B] hover:bg-[#0C556B]/90 text-white',
-    neutral: 'bg-[#0C556B] hover:bg-[#0C556B]/90 text-white'
+    positive: 'bg-[#008BBF] active:bg-[#008BBF]/90 text-white',
+    negative: 'bg-[#0C556B] active:bg-[#0C556B]/90 text-white',
+    neutral: 'bg-[#0C556B] active:bg-[#0C556B]/90 text-white'
   };
 
   return (
@@ -67,7 +67,7 @@ export const GamePlayingScreen = ({
                 <button
                   key={choice.id}
                   onClick={() => onChoiceSelect(choice.id)}
-                  className={`w-full p-4 lg:p-6 rounded-xl font-semibold text-left transition-all duration-300 transform hover:scale-102 shadow-md active:scale-98 ${impactColors[choice.impact]} min-h-[80px] lg:min-h-[100px]`}
+                  className={`w-full p-4 lg:p-6 rounded-xl font-semibold text-left transition-all duration-300 transform shadow-md active:scale-98 ${impactColors[choice.impact]} min-h-[80px] lg:min-h-[100px]`}
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-lg lg:text-xl xl:text-2xl leading-relaxed pr-4">

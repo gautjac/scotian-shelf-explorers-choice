@@ -9,9 +9,9 @@ interface FloatingLanguageHeaderProps {
 }
 
 const languageColors = {
-  mi: 'bg-[#FBD026] text-black hover:bg-[#FBD026]/90 active:bg-[#FBD026]/80', // Mi'kmaw - Yellow
-  en: 'bg-[#00AE9F] text-white hover:bg-[#00AE9F]/90 active:bg-[#00AE9F]/80', // English - Teal
-  fr: 'bg-[#AD4557] text-white hover:bg-[#AD4557]/90 active:bg-[#AD4557]/80'  // French - Maroon
+  mi: 'bg-[#FBD026] text-black active:bg-[#FBD026]/80', // Mi'kmaw - Yellow
+  en: 'bg-[#00AE9F] text-white active:bg-[#00AE9F]/80', // English - Teal
+  fr: 'bg-[#AD4557] text-white active:bg-[#AD4557]/80'  // French - Maroon
 };
 
 export const FloatingLanguageHeader = ({ 
@@ -44,7 +44,7 @@ export const FloatingLanguageHeader = ({
         {/* Back button */}
         <button
           onClick={onBackToLanguageSelection}
-          className="w-12 h-12 lg:w-16 lg:h-16 rounded-lg hover:bg-white/20 transition-all duration-200 flex items-center justify-center"
+          className="w-12 h-12 lg:w-16 lg:h-16 rounded-lg active:bg-white/20 transition-all duration-200 flex items-center justify-center"
         >
           <ArrowLeft className="w-6 h-6 lg:w-8 lg:h-8 text-white" />
         </button>

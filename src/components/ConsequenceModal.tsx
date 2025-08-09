@@ -110,14 +110,14 @@ export const ConsequenceModal = ({ choice, language, scenarioId, onConfirm, onRe
           <div className="flex flex-col sm:flex-row gap-6 lg:gap-8 justify-center">
             <button
               onClick={onReturn}
-              className="bg-white/20 text-white px-12 py-6 lg:px-16 lg:py-8 rounded-2xl font-semibold text-2xl lg:text-3xl hover:bg-white/30 active:bg-white/40 transition-colors duration-200 shadow-lg min-h-[80px] lg:min-h-[100px] transform hover:scale-105 active:scale-95 border-2 border-white/40"
+              className="bg-white/20 text-white px-12 py-6 lg:px-16 lg:py-8 rounded-2xl font-semibold text-2xl lg:text-3xl active:bg-white/40 transition-colors duration-200 shadow-lg min-h-[80px] lg:min-h-[100px] transform active:scale-95 border-2 border-white/40"
             >
               {returnText[language]}
             </button>
             
             <button
               onClick={onConfirm}
-              className="bg-white text-gray-800 px-12 py-6 lg:px-16 lg:py-8 rounded-2xl font-semibold text-2xl lg:text-3xl hover:bg-gray-100 active:bg-gray-200 transition-colors duration-200 shadow-lg min-h-[80px] lg:min-h-[100px] transform hover:scale-105 active:scale-95"
+              className="bg-white text-gray-800 px-12 py-6 lg:px-16 lg:py-8 rounded-2xl font-semibold text-2xl lg:text-3xl active:bg-gray-200 transition-colors duration-200 shadow-lg min-h-[80px] lg:min-h-[100px] transform active:scale-95"
             >
               {confirmText[language]}
             </button>

@@ -127,10 +127,10 @@ const AnimatedHealthMeter = ({ metricKey, value, previousValue, language, labels
   };
 
   return (
-    <div className="bg-card/95 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-border hover:shadow-3xl transition-all duration-500 group">
+    <div className="bg-card/95 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-border transition-all duration-500 group">
       {/* Elegant Icon Circle */}
       <div className="relative mb-6 flex justify-center">
-        <div className={`relative w-20 h-20 rounded-full bg-gradient-to-br ${getAnimatedHealthColor(value)} shadow-xl flex items-center justify-center transition-all duration-500 group-hover:scale-110 ${isAnimating ? 'animate-pulse' : ''}`}>
+        <div className={`relative w-20 h-20 rounded-full bg-gradient-to-br ${getAnimatedHealthColor(value)} shadow-xl flex items-center justify-center transition-all duration-500 ${isAnimating ? 'animate-pulse' : ''}`}>
           {getAnimatedIcon(metricKey)}
           {/* Subtle glow effect */}
           <div className="absolute inset-0 rounded-full bg-gradient-to-r from-white/20 to-transparent"></div>

@@ -14,9 +14,9 @@ const languageTexts = {
 };
 
 const languageColors = {
-  mi: 'bg-[#FFD700] text-black hover:bg-[#FFD700]/90 active:bg-[#FFD700]/80', // Mi'kmaw - Bright Yellow
-  en: 'bg-[#00AE9F] text-white hover:bg-[#00AE9F]/90 active:bg-[#00AE9F]/80', // English - Teal
-  fr: 'bg-[#E53E3E] text-white hover:bg-[#E53E3E]/90 active:bg-[#E53E3E]/80'  // French - Red
+  mi: 'bg-[#FFD700] text-black active:bg-[#FFD700]/80', // Mi'kmaw - Bright Yellow
+  en: 'bg-[#00AE9F] text-white active:bg-[#00AE9F]/80', // English - Teal
+  fr: 'bg-[#E53E3E] text-white active:bg-[#E53E3E]/80'  // French - Red
 };
 
 export const LanguageSelectionScreen = ({ onLanguageSelect }: LanguageSelectionScreenProps) => {
@@ -31,7 +31,7 @@ export const LanguageSelectionScreen = ({ onLanguageSelect }: LanguageSelectionS
             <button
               key={lang.code}
               onClick={() => onLanguageSelect(lang.code)}
-              className={`flex-1 aspect-square rounded-2xl font-bold transition-all duration-200 shadow-2xl hover:scale-105 active:scale-95 flex flex-col items-center justify-center gap-2 ${
+              className={`flex-1 aspect-square rounded-2xl font-bold transition-all duration-200 shadow-2xl active:scale-95 flex flex-col items-center justify-center gap-2 ${
                 languageColors[lang.code]
               }`}
             >

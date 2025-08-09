@@ -9,9 +9,9 @@ interface ScenarioCardProps {
 }
 
 const impactColors = {
-  positive: 'bg-[#008BBF] hover:bg-[#008BBF]/90 text-white',
-  negative: 'bg-[#0C556B] hover:bg-[#0C556B]/90 text-white',
-  neutral: 'bg-[#0C556B] hover:bg-[#0C556B]/90 text-white'
+  positive: 'bg-[#008BBF] active:bg-[#008BBF]/90 text-white',
+  negative: 'bg-[#0C556B] active:bg-[#0C556B]/90 text-white',
+  neutral: 'bg-[#0C556B] active:bg-[#0C556B]/90 text-white'
 };
 
 export const ScenarioCard = ({ scenario, language, onChoiceSelect }: ScenarioCardProps) => {
@@ -44,7 +44,7 @@ export const ScenarioCard = ({ scenario, language, onChoiceSelect }: ScenarioCar
               <button
                 key={choice.id}
                 onClick={() => onChoiceSelect(choice.id)}
-                className={`w-full p-6 lg:p-8 rounded-2xl font-semibold text-left transition-all duration-300 transform hover:scale-102 shadow-xl active:scale-98 ${impactColors[choice.impact]} min-h-[100px] lg:min-h-[120px]`}
+                className={`w-full p-6 lg:p-8 rounded-2xl font-semibold text-left transition-all duration-300 transform shadow-xl active:scale-98 ${impactColors[choice.impact]} min-h-[100px] lg:min-h-[120px]`}
               >
                 <div className="flex items-center justify-between">
                   <span className="text-lg lg:text-xl xl:text-2xl leading-relaxed pr-4">{getChoiceText(scenario.id, choice.id, 'text', language) ?? choice.text}</span>

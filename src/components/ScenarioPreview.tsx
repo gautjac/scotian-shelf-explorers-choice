@@ -78,8 +78,8 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenar
               onClick={() => handleScenarioClick(scenario.id)}
               className={`bg-[#0B424E]/20 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl transition-all duration-300 ${
                 onScenarioSelect 
-                  ? 'hover:bg-[#0B424E]/30 cursor-pointer transform hover:scale-105 active:scale-95' 
-                  : 'hover:bg-[#0B424E]/25'
+                  ? 'cursor-pointer transform active:scale-95' 
+                  : ''
               }`}
             >
               {/* Scenario Image */}
@@ -118,13 +118,13 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenar
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
           <button
             onClick={onBack}
-            className="bg-[#0B424E]/30 backdrop-blur-sm text-white px-12 py-6 lg:px-16 lg:py-8 rounded-full text-xl lg:text-2xl font-medium shadow-xl hover:bg-[#0B424E]/40 active:bg-[#0B424E]/50 transition-all duration-300 min-h-[80px] lg:min-h-[100px]"
+            className="bg-[#0B424E]/30 backdrop-blur-sm text-white px-12 py-6 lg:px-16 lg:py-8 rounded-full text-xl lg:text-2xl font-medium shadow-xl active:bg-[#0B424E]/50 transition-all duration-300 min-h-[80px] lg:min-h-[100px]"
           >
             {content.backButton}
           </button>
           <button
             onClick={onStart}
-            className="bg-white text-[#0B424E] px-16 py-6 lg:px-20 lg:py-8 rounded-full text-xl lg:text-2xl font-bold shadow-2xl hover:shadow-3xl transform hover:scale-105 active:scale-95 transition-all duration-300 hover:bg-[#CDE2ED] min-h-[80px] lg:min-h-[100px]"
+            className="bg-white text-[#0B424E] px-16 py-6 lg:px-20 lg:py-8 rounded-full text-xl lg:text-2xl font-bold shadow-2xl transform active:scale-95 transition-all duration-300 min-h-[80px] lg:min-h-[100px]"
           >
             {content.startButton}
           </button>

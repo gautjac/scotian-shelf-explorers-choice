@@ -157,7 +157,7 @@ export const CompletionScreen = ({
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button onClick={onRestart} className="bg-gradient-to-r from-blue-500 to-teal-500 text-white px-8 py-4 rounded-full text-xl font-bold shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 animate-fade-in" style={{
+          <button onClick={onRestart} className="bg-gradient-to-r from-blue-500 to-teal-500 text-white px-8 py-4 rounded-full text-xl font-bold shadow-2xl transform active:scale-95 transition-all duration-300 animate-fade-in" style={{
           animationDelay: '2.5s'
         }}>
             {content.restartButton}
