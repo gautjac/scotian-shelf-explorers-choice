@@ -17,7 +17,7 @@ interface ComprehensiveConfigRow {
 }
 
 // Parse copydeck CSV content
-const parseCopydeckCSV = (csvContent: string) => {
+const parseCopydeckCSVContent = (csvContent: string) => {
   const lines = csvContent.split('\n');
   const uiElements: any[] = [];
   
@@ -179,7 +179,7 @@ export const exportComprehensiveCSV = (): string => {
   });
   
   // Add UI elements
-  const uiElements = parseCopydeckCSV(uiTextContent);
+  const uiElements = parseCopydeckCSVContent(uiTextContent);
   uiElements.forEach(element => {
     if (element.english) {
       rows.push({
@@ -300,6 +300,32 @@ export const parseComprehensiveCSV = (csvContent: string) => {
   
   return config;
 };
+
+// Export utilities for fallback usage
+export const parseCopydeckCSVForFallback = () => {
+  const lines = uiTextContent.trim().split('\n');
+  const headers = lines[0].split(',');
+  const data: any = {};
+  
+  for (let i = 1; i < lines.length; i++) {
+    const values = lines[i].split(',');
+    const screen = values[0];
+    const element = values[1];
+    
+    for (let j = 2; j < headers.length; j++) {
+      const language = headers[j];
+      const content = values[j];
+      
+      if (!data[language]) data[language] = {};
+      if (!data[language][screen]) data[language][screen] = {};
+      data[language][screen][element] = content;
+    }
+  }
+  
+  return data;
+};
+
+export { uiTextContent };
 
 // Validate comprehensive configuration
 export const validateComprehensiveConfig = (config: any): string[] => {

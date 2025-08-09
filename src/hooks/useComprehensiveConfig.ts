@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { scenarios } from '../data/content';
+import { parseCopydeckCSVForFallback } from '../utils/comprehensiveConfiguration';
 
 // Hook to manage comprehensive configuration
 export const useComprehensiveConfig = () => {
   const [config, setConfig] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [fallbackUIText, setFallbackUIText] = useState<any>(null);
 
   // Reload configuration from localStorage
   const reloadConfig = () => {
@@ -23,6 +25,10 @@ export const useComprehensiveConfig = () => {
 
   useEffect(() => {
     try {
+      // Parse fallback UI text on component mount
+      const parsedFallback = parseCopydeckCSVForFallback();
+      setFallbackUIText(parsedFallback);
+      
       const savedConfig = localStorage.getItem('comprehensiveConfiguration');
       if (savedConfig) {
         const parsedConfig = JSON.parse(savedConfig);
@@ -117,7 +123,11 @@ export const useComprehensiveConfig = () => {
       return config.uiElements[language][compositeId][elementId];
     }
     
-    // Fallback to hardcoded text or original copydeck
+    // Fallback to parsed copydeck content
+    if (fallbackUIText?.[language]?.[screenId]?.[elementId]) {
+      return fallbackUIText[language][screenId][elementId];
+    }
+    
     return null;
   };
 
