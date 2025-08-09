@@ -55,17 +55,13 @@ export const GamePlayingScreen = ({
             </p>
           </div>
 
-          {/* Choices Header */}
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-4 lg:p-6 shadow-lg">
-            <h3 className="text-xl lg:text-2xl font-semibold text-slate-800 text-center">
+          {/* Choices Section with Header */}
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 lg:p-8 shadow-lg overflow-y-auto">
+            <h3 className="text-xl lg:text-2xl font-semibold text-slate-800 text-center mb-6">
               {gameState.language === 'en' && 'What would you do?'}
               {gameState.language === 'fr' && 'Que feriez-vous?'}
               {gameState.language === 'mi' && 'Koqoey ketu elkewek?'}
             </h3>
-          </div>
-
-          {/* Choices Section - Scrollable */}
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 lg:p-8 shadow-lg overflow-y-auto">
             <div className="space-y-4 lg:space-y-6">
               {currentScenario.choices.map((choice, index) => (
                 <button
