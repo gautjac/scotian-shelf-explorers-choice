@@ -15,9 +15,9 @@ const languageColors = {
 };
 
 const languageButtonText = {
-  mi: 'Papultmimk L\'nuiktuk',
-  en: 'Play in English',
-  fr: 'Joue en Français'
+  mi: ['Papultmimk', 'L\'nuiktuk'],
+  en: ['Play in', 'English'],
+  fr: ['Joue en', 'Français']
 };
 
 export const LanguageSelectionScreen = ({ onLanguageSelect }: LanguageSelectionScreenProps) => {
@@ -41,7 +41,11 @@ export const LanguageSelectionScreen = ({ onLanguageSelect }: LanguageSelectionS
               >
                 <Leaf size={32} className="lg:w-10 lg:h-10" />
                 <div className="text-center">
-                  <div className="text-4xl lg:text-6xl xl:text-7xl font-helvetica font-medium">{buttonText}</div>
+                  {buttonText.map((line, index) => (
+                    <div key={index} className="text-4xl lg:text-6xl xl:text-7xl font-helvetica font-medium">
+                      {line}
+                    </div>
+                  ))}
                 </div>
               </button>
             );
