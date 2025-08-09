@@ -20,7 +20,19 @@ export const LanguageSelector = ({
 }: LanguageSelectorProps) => {
   return <div className={`flex items-center gap-4 ${className}`}>
       <div className="flex gap-3">
-        {languages.map(lang => {})}
+        {languages.map(lang => (
+          <button
+            key={lang.code}
+            onClick={() => onLanguageChange(lang.code)}
+            className={`px-4 py-2 rounded-xl font-medium text-lg transition-all duration-200 ${
+              currentLanguage === lang.code 
+                ? languageColors[lang.code] 
+                : 'bg-white/20 text-white hover:bg-white/30'
+            }`}
+          >
+            {lang.name}
+          </button>
+        ))}
       </div>
     </div>;
 };
