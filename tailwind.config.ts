@@ -21,6 +21,10 @@ export default {
 			fontFamily: {
 				'helvetica': ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
 			},
+			height: {
+				'176': '44rem',
+				'240': '60rem'
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
