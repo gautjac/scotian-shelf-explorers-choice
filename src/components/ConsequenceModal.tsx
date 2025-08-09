@@ -65,8 +65,7 @@ export const ConsequenceModal = ({ choice, language, scenarioId, onConfirm, onRe
         backgroundPosition: 'center' 
       }}
     >
-      <div className="absolute inset-0 bg-black/50"></div>
-      <div className={`relative bg-gradient-to-br ${impactColors[choice.impact]} rounded-3xl p-10 lg:p-12 max-w-6xl lg:max-w-7xl mx-auto text-white animate-scale-in shadow-2xl`}>
+      <div className={`bg-gradient-to-br ${impactColors[choice.impact]} rounded-3xl p-10 lg:p-12 max-w-6xl lg:max-w-7xl mx-auto text-white animate-scale-in shadow-2xl`}>
         <div className="text-center">
           <div className="text-8xl lg:text-9xl mb-8">{impactEmojis[choice.impact]}</div>
           
