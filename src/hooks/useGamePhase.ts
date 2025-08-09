@@ -8,20 +8,27 @@ type GamePhase = 'languageSelection' | 'preview' | 'playing' | 'consequence' | '
 export const useGamePhase = (lastActivity: number, resetGame: () => void) => {
   const [gamePhase, setGamePhase] = useState<GamePhase>('languageSelection');
   const [selectedChoice, setSelectedChoice] = useState<Choice | null>(null);
+  const [showInactivityModal, setShowInactivityModal] = useState(false);
 
-  // Auto-reset after 3 minutes of inactivity (kiosk mode)
+  // Inactivity detection - show modal after 60 seconds, auto-redirect after 10 more seconds
   useEffect(() => {
     const checkInactivity = setInterval(() => {
       const timeSinceLastActivity = Date.now() - lastActivity;
-      if (timeSinceLastActivity > 180000 && gamePhase !== 'languageSelection') { // 3 minutes
-        console.log('Auto-reset due to inactivity');
-        setGamePhase('languageSelection');
-        resetGame();
+      
+      // Don't show modal on language selection screen
+      if (gamePhase === 'languageSelection') {
+        setShowInactivityModal(false);
+        return;
       }
-    }, 30000); // Check every 30 seconds
+      
+      // Show modal after 60 seconds of inactivity
+      if (timeSinceLastActivity > 60000 && !showInactivityModal) {
+        setShowInactivityModal(true);
+      }
+    }, 1000); // Check every second for responsiveness
 
     return () => clearInterval(checkInactivity);
-  }, [lastActivity, gamePhase, resetGame]);
+  }, [lastActivity, gamePhase, showInactivityModal]);
 
   const handleLanguageSelect = useCallback(() => {
     setGamePhase('preview');
@@ -82,12 +89,30 @@ export const useGamePhase = (lastActivity: number, resetGame: () => void) => {
 
   const handleRestart = useCallback(() => {
     setGamePhase('languageSelection');
+    setShowInactivityModal(false);
+    resetGame();
+  }, [resetGame]);
+
+  const handleInactivityStillHere = useCallback(() => {
+    setShowInactivityModal(false);
+  }, []);
+
+  const handleInactivityStartOver = useCallback(() => {
+    setShowInactivityModal(false);
+    setGamePhase('languageSelection');
+    resetGame();
+  }, [resetGame]);
+
+  const handleInactivityTimeout = useCallback(() => {
+    setShowInactivityModal(false);
+    setGamePhase('languageSelection');
     resetGame();
   }, [resetGame]);
 
   return {
     gamePhase,
     selectedChoice,
+    showInactivityModal,
     handleLanguageSelect,
     handleShowPreview,
     handleStart,
@@ -97,6 +122,9 @@ export const useGamePhase = (lastActivity: number, resetGame: () => void) => {
     handleChoiceSelect,
     handleConfirmChoice,
     handleReturnToChoices,
-    handleRestart
+    handleRestart,
+    handleInactivityStillHere,
+    handleInactivityStartOver,
+    handleInactivityTimeout
   };
 };

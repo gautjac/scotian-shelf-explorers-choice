@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import { LanguageSelectionScreen } from '../components/LanguageSelectionScreen';
-
+import { InactivityModal } from '../components/InactivityModal';
 import { ScenarioPreview } from '../components/ScenarioPreview';
 import { ConsequenceModal } from '../components/ConsequenceModal';
 import { CompletionScreen } from '../components/CompletionScreen';
@@ -27,17 +27,20 @@ const Index = () => {
   const {
     gamePhase,
     selectedChoice,
+    showInactivityModal,
     handleLanguageSelect,
     handleShowPreview,
     handleStart,
-    
     handleBackToLanguageSelection,
     handleBackToPreview,
     handleScenarioSelect,
     handleChoiceSelect,
     handleConfirmChoice,
     handleReturnToChoices,
-    handleRestart
+    handleRestart,
+    handleInactivityStillHere,
+    handleInactivityStartOver,
+    handleInactivityTimeout
   } = useGamePhase(lastActivity, resetGame);
 
 
@@ -180,6 +183,14 @@ const Index = () => {
       {showAdmin && (
         <AdminPanel onClose={() => setShowAdmin(false)} />
       )}
+
+      <InactivityModal
+        isVisible={showInactivityModal}
+        language={gameState.language}
+        onStillHere={() => { handleInactivityStillHere(); trackActivity(); }}
+        onStartOver={() => { handleInactivityStartOver(); trackActivity(); }}
+        onTimeout={handleInactivityTimeout}
+      />
     </>
   );
 };
