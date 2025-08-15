@@ -14,6 +14,7 @@ import { Download, Upload, X, Database, AlertCircle } from 'lucide-react';
 import { EditorGuide } from './EditorGuide';
 import { BackupManager } from './BackupManager';
 import { StorageHealthIndicator } from './StorageHealthIndicator';
+import { DebugPanel } from './DebugPanel';
 
 interface ContentManagerProps {
   onClose: () => void;
@@ -21,6 +22,7 @@ interface ContentManagerProps {
 
 export const ContentManager = ({ onClose }: ContentManagerProps) => {
   const [isUploading, setIsUploading] = useState(false);
+  const [showDebugPanel, setShowDebugPanel] = useState(false);
   const { toast } = useToast();
 
   const handleDownloadImpactCSV = () => {
@@ -114,10 +116,15 @@ export const ContentManager = ({ onClose }: ContentManagerProps) => {
       
       if (isComprehensive) {
         // Parse comprehensive CSV
+        console.log('📁 [DEBUG] Parsing comprehensive CSV...');
         const comprehensiveConfig = parseComprehensiveCSV(text);
+        console.log('📊 [DEBUG] Parsed config structure:', comprehensiveConfig);
+        console.log('📊 [DEBUG] Scenarios available:', Object.keys(comprehensiveConfig.scenarios || {}));
+        
         const validationErrors = validateComprehensiveConfig(comprehensiveConfig);
         
         if (validationErrors.length > 0) {
+          console.error('❌ [DEBUG] Validation errors:', validationErrors);
           toast({
             title: "Validation Failed",
             description: `Configuration errors: ${validationErrors.join(', ')}`,
@@ -127,8 +134,13 @@ export const ContentManager = ({ onClose }: ContentManagerProps) => {
         }
         
         // Store comprehensive configuration in persistent storage
+        console.log('💾 [DEBUG] Storing comprehensive config...');
         await storeConfiguration('comprehensive', comprehensiveConfig);
         localStorage.setItem('comprehensiveConfiguration', JSON.stringify(comprehensiveConfig));
+        
+        // Trigger immediate reload
+        window.dispatchEvent(new CustomEvent('comprehensive-config-updated'));
+        console.log('🔔 [DEBUG] Dispatched config update event');
         
         toast({
           title: "Comprehensive CSV Uploaded",
@@ -176,11 +188,12 @@ export const ContentManager = ({ onClose }: ContentManagerProps) => {
         </CardHeader>
         <CardContent className="p-0">
           <Tabs defaultValue="import-export" className="w-full">
-            <TabsList className="grid w-full grid-cols-4 mx-6 mt-2">
+            <TabsList className="grid w-full grid-cols-5 mx-6 mt-2">
               <TabsTrigger value="import-export">Import/Export</TabsTrigger>
               <TabsTrigger value="backup-history">Backup History</TabsTrigger>
               <TabsTrigger value="storage-health">Storage Health</TabsTrigger>
               <TabsTrigger value="editor-guide">Editor's Guide</TabsTrigger>
+              <TabsTrigger value="debug">Debug</TabsTrigger>
             </TabsList>
             
             <TabsContent value="import-export" className="px-6 pb-6 space-y-4">
@@ -269,9 +282,24 @@ export const ContentManager = ({ onClose }: ContentManagerProps) => {
             <TabsContent value="editor-guide" className="px-6 pb-6">
               <EditorGuide />
             </TabsContent>
+
+            <TabsContent value="debug" className="px-6 pb-6">
+              <div className="space-y-4">
+                <div className="text-center">
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Advanced debugging tools to inspect configuration data and troubleshoot issues.
+                  </p>
+                  <Button onClick={() => setShowDebugPanel(true)}>Open Debug Panel</Button>
+                </div>
+              </div>
+            </TabsContent>
           </Tabs>
         </CardContent>
       </Card>
+      
+      {showDebugPanel && (
+        <DebugPanel onClose={() => setShowDebugPanel(false)} />
+      )}
     </div>
   );
 };

@@ -12,21 +12,25 @@ export const useComprehensiveConfig = () => {
   // Load configuration from persistent storage with localStorage fallback
   const reloadConfig = async () => {
     setIsLoading(true);
+    console.log('🔄 [DEBUG] Reloading comprehensive config...');
     try {
       // Try persistent storage first
       let stored = await retrieveConfiguration('comprehensive');
+      console.log('📦 [DEBUG] Retrieved from persistent storage:', stored);
       
       // Fallback to localStorage
       if (!stored) {
         const localData = localStorage.getItem('comprehensiveConfiguration');
         if (localData) {
           stored = JSON.parse(localData);
+          console.log('💾 [DEBUG] Retrieved from localStorage:', stored);
         }
       }
       
+      console.log('✅ [DEBUG] Final config set:', stored);
       setConfig(stored || null);
     } catch (error) {
-      console.error('Failed to load comprehensive configuration:', error);
+      console.error('❌ [DEBUG] Failed to load comprehensive configuration:', error);
       setConfig(null);
     } finally {
       setIsLoading(false);
@@ -64,26 +68,37 @@ export const useComprehensiveConfig = () => {
 
   // Get scenario text with override support
   const getScenarioText = (scenarioId: string, field: string, language: string = 'en') => {
+    console.log(`🔍 [DEBUG] getScenarioText(${scenarioId}, ${field}, ${language})`);
+    console.log(`📊 [DEBUG] Config available:`, !!config);
+    console.log(`📊 [DEBUG] Config scenarios:`, config?.scenarios);
+    
     if (config?.scenarios?.[language]?.[scenarioId]?.[field]) {
-      return config.scenarios[language][scenarioId][field];
+      const override = config.scenarios[language][scenarioId][field];
+      console.log(`✅ [DEBUG] Found override for ${scenarioId}.${field}:`, override);
+      return override;
     }
     
     // Fallback to original content
     const originalScenarios = scenarios[language as keyof typeof scenarios];
     const scenario = originalScenarios?.find(s => s.id === scenarioId);
     
-    if (field === 'title') return scenario?.title;
-    if (field === 'description') return scenario?.description;
+    const fallback = field === 'title' ? scenario?.title : 
+                    field === 'description' ? scenario?.description : null;
     
-    return null;
+    console.log(`📋 [DEBUG] Using fallback for ${scenarioId}.${field}:`, fallback);
+    return fallback;
   };
 
   // Get choice text with override support
   const getChoiceText = (scenarioId: string, choiceId: string, field: string, language: string = 'en') => {
     const compositeId = `${scenarioId}_${choiceId}`;
+    console.log(`🔍 [DEBUG] getChoiceText(${scenarioId}, ${choiceId}, ${field}, ${language})`);
+    console.log(`🔗 [DEBUG] Looking for composite ID: ${compositeId}`);
     
     if (config?.scenarios?.[language]?.[compositeId]?.[field]) {
-      return config.scenarios[language][compositeId][field];
+      const override = config.scenarios[language][compositeId][field];
+      console.log(`✅ [DEBUG] Found choice override for ${compositeId}.${field}:`, override);
+      return override;
     }
     
     // Fallback to original content
@@ -91,12 +106,13 @@ export const useComprehensiveConfig = () => {
     const scenario = originalScenarios?.find(s => s.id === scenarioId);
     const choice = scenario?.choices.find(c => c.id === choiceId);
     
-    if (field === 'text') return choice?.text;
-    if (field === 'consequence') return choice?.consequence;
-    if (field === 'pros') return choice?.pros;
-    if (field === 'cons') return choice?.cons;
+    const fallback = field === 'text' ? choice?.text :
+                    field === 'consequence' ? choice?.consequence :
+                    field === 'pros' ? choice?.pros :
+                    field === 'cons' ? choice?.cons : null;
     
-    return null;
+    console.log(`📋 [DEBUG] Using choice fallback for ${compositeId}.${field}:`, fallback);
+    return fallback;
   };
 
   // Get choice impact values with override support
