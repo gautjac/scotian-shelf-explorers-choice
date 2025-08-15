@@ -43,17 +43,31 @@ export const DebugPanel = ({ onClose }: DebugPanelProps) => {
     console.log('🧪 [TEST] Current config in hook:', config);
     console.log('🧪 [TEST] Has config:', hasConfig);
     
-    // Test specific scenarios
-    const testScenario = 'overfishing';
-    const testChoice = 'regulations';
+    if (!config?.scenarios?.en) {
+      console.log('❌ [TEST] No scenarios available in config');
+      return;
+    }
     
-    console.log('🧪 [TEST] Testing scenario retrieval:');
-    console.log('Title (en):', config?.scenarios?.en?.[testScenario]?.title);
-    console.log('Title (fr):', config?.scenarios?.fr?.[testScenario]?.title);
+    // Get actual scenario IDs from the config
+    const availableScenarios = Object.keys(config.scenarios.en).filter(id => !id.includes('_'));
+    console.log('📋 [TEST] Available scenarios:', availableScenarios);
     
-    console.log('🧪 [TEST] Testing choice retrieval:');
-    const compositeId = `${testScenario}_${testChoice}`;
-    console.log(`Choice text (${compositeId}):`, config?.scenarios?.en?.[compositeId]?.text);
+    if (availableScenarios.length > 0) {
+      const testScenario = availableScenarios[0];
+      console.log(`🧪 [TEST] Testing scenario: ${testScenario}`);
+      console.log('Title (en):', config?.scenarios?.en?.[testScenario]?.title);
+      console.log('Title (fr):', config?.scenarios?.fr?.[testScenario]?.title);
+      console.log('Description (en):', config?.scenarios?.en?.[testScenario]?.description);
+      
+      // Test choice retrieval
+      const choiceKeys = Object.keys(config.scenarios.en).filter(id => id.startsWith(`${testScenario}_`));
+      console.log(`🔗 [TEST] Choice keys for ${testScenario}:`, choiceKeys);
+      
+      if (choiceKeys.length > 0) {
+        const testChoiceKey = choiceKeys[0];
+        console.log(`Choice text (${testChoiceKey}):`, config?.scenarios?.en?.[testChoiceKey]?.text);
+      }
+    }
   };
 
   return (
@@ -80,6 +94,16 @@ export const DebugPanel = ({ onClose }: DebugPanelProps) => {
                   <p>Config Object: {config ? '✅' : '❌'}</p>
                   <p>Scenarios Available: {config?.scenarios ? Object.keys(config.scenarios).length : 0} languages</p>
                   <p>UI Elements Available: {config?.uiElements ? Object.keys(config.uiElements).length : 0} languages</p>
+                  {config?.scenarios?.en && (
+                    <div className="mt-2">
+                      <p className="text-sm text-muted-foreground">
+                        English Scenarios: {Object.keys(config.scenarios.en).filter(id => !id.includes('_')).length}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        English Choices: {Object.keys(config.scenarios.en).filter(id => id.includes('_')).length}
+                      </p>
+                    </div>
+                  )}
                 </div>
                 <div className="space-y-2">
                   <Button onClick={reloadConfig} className="w-full">Reload Config</Button>
@@ -132,10 +156,48 @@ export const DebugPanel = ({ onClose }: DebugPanelProps) => {
             </TabsContent>
 
             <TabsContent value="test" className="space-y-4">
-              <div className="space-y-2">
-                <h3 className="font-semibold">Live Testing</h3>
-                <p>Open the browser console to see test results when you click the button below.</p>
-                <Button onClick={testConfigRetrieval}>Run Retrieval Test</Button>
+              <div className="space-y-4">
+                <div>
+                  <h3 className="font-semibold">Live Testing</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Open the browser console to see detailed test results.
+                  </p>
+                </div>
+                
+                {!hasConfig && (
+                  <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                    <p className="text-yellow-800">⚠️ No config loaded yet. Import a CSV file first.</p>
+                  </div>
+                )}
+                
+                {hasConfig && config?.scenarios?.en && (
+                  <div className="space-y-3">
+                    <div className="p-3 bg-green-50 border border-green-200 rounded-lg">
+                      <p className="text-green-800 font-medium">✅ Config successfully loaded!</p>
+                      <p className="text-sm text-green-600 mt-1">
+                        Found {Object.keys(config.scenarios.en).filter(id => !id.includes('_')).length} scenarios 
+                        and {Object.keys(config.scenarios.en).filter(id => id.includes('_')).length} choices
+                      </p>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 gap-2">
+                      <h4 className="font-medium">Available Scenarios:</h4>
+                      {Object.keys(config.scenarios.en)
+                        .filter(id => !id.includes('_'))
+                        .map(scenarioId => (
+                          <div key={scenarioId} className="p-2 bg-muted rounded text-sm">
+                            <span className="font-mono text-blue-600">{scenarioId}</span>
+                            <span className="ml-2">→</span>
+                            <span className="ml-2">{config.scenarios.en[scenarioId]?.title || 'No title'}</span>
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+                )}
+                
+                <Button onClick={testConfigRetrieval} disabled={!hasConfig}>
+                  Run Detailed Test
+                </Button>
               </div>
             </TabsContent>
           </Tabs>
