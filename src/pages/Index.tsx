@@ -7,7 +7,6 @@ import { ConsequenceModal } from '../components/ConsequenceModal';
 import { CompletionScreen } from '../components/CompletionScreen';
 import { GamePlayingScreen } from '../components/GamePlayingScreen';
 import { ContentManagerButton } from '../components/ContentManagerButton';
-import { OfflineConfigStatus } from '../components/OfflineConfigStatus';
 import { useGameState } from '../hooks/useGameState';
 import { useGamePhase } from '../hooks/useGamePhase';
 import { scenarios } from '../data/content';
@@ -176,10 +175,6 @@ const Index = () => {
       )}
       
       <ContentManagerButton />
-      
-      <div className="fixed bottom-4 right-4 z-40">
-        <OfflineConfigStatus />
-      </div>
 
       <InactivityModal
         isVisible={showInactivityModal}
