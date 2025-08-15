@@ -10,7 +10,8 @@ import { exportChoicesToCSV, parseImpactCSV } from '../utils/impactConfiguration
 import { exportComprehensiveCSV, parseComprehensiveCSV, validateComprehensiveConfig } from '../utils/comprehensiveConfiguration';
 import { createBackup } from '../utils/backupManager';
 import { storeConfiguration } from '../utils/persistentStorage';
-import { Download, Upload, X, Database, AlertCircle } from 'lucide-react';
+import { downloadSourceFiles } from '../utils/sourceFileGenerator';
+import { Download, Upload, X, Database, AlertCircle, FileCode } from 'lucide-react';
 import { EditorGuide } from './EditorGuide';
 import { BackupManager } from './BackupManager';
 import { StorageHealthIndicator } from './StorageHealthIndicator';
@@ -76,6 +77,44 @@ export const ContentManager = ({ onClose }: ContentManagerProps) => {
       toast({
         title: "Download Failed",
         description: "Failed to export comprehensive CSV file.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleGenerateSourceFiles = async () => {
+    try {
+      // Get current configuration
+      const configStr = localStorage.getItem('comprehensiveConfiguration');
+      if (!configStr) {
+        toast({
+          title: "No Configuration Found",
+          description: "Please import a CSV file first before generating source files.",
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      const config = JSON.parse(configStr);
+      
+      const success = downloadSourceFiles(config);
+      
+      if (success) {
+        toast({
+          title: "Source Files Generated",
+          description: "Downloaded offlineContent.ts and content.ts. Replace these files in your project to make changes permanent.",
+        });
+      } else {
+        toast({
+          title: "Generation Failed", 
+          description: "Failed to generate source files.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Generation Failed",
+        description: "Failed to access configuration data.",
         variant: "destructive",
       });
     }
@@ -218,6 +257,21 @@ export const ContentManager = ({ onClose }: ContentManagerProps) => {
                   </Button>
                 </div>
               </div>
+
+              <div className="space-y-2">
+                <Label>Make Changes Permanent</Label>
+                <Button 
+                  onClick={handleGenerateSourceFiles} 
+                  className="w-full"
+                  variant="secondary"
+                >
+                  <FileCode className="h-4 w-4 mr-2" />
+                  Generate Source Files for Publishing
+                </Button>
+                <div className="text-xs text-muted-foreground">
+                  Downloads .ts files to replace in your project, making CSV changes permanent in published apps
+                </div>
+              </div>
               
               <div className="space-y-2">
                 <Label htmlFor="csv-upload">Upload New Configuration</Label>
@@ -242,8 +296,9 @@ export const ContentManager = ({ onClose }: ContentManagerProps) => {
                 <p><strong>Impact Only CSV:</strong> Just scenario impact values (legacy format)</p>
                 <p>• Edit downloaded CSV in Excel/Google Sheets</p>
                 <p>• Upload modified CSV to apply changes immediately</p>
+                <p>• Generate source files after CSV import to make changes permanent in published apps</p>
+                <p>• Replace the downloaded .ts files in your project to publish your custom content</p>
                 <p>• Automatic backup created before each import</p>
-                <p>• Use Backup History tab to restore previous versions</p>
               </div>
             </TabsContent>
             
