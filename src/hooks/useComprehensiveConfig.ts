@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { scenarios } from '../data/content';
 import { parseCopydeckCSVForFallback } from '../utils/comprehensiveConfiguration';
+import { retrieveConfiguration } from '../utils/persistentStorage';
 
 // Hook to manage comprehensive configuration
 export const useComprehensiveConfig = () => {
@@ -8,37 +9,41 @@ export const useComprehensiveConfig = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [fallbackUIText, setFallbackUIText] = useState<any>(null);
 
-  // Reload configuration from localStorage
-  const reloadConfig = () => {
+  // Load configuration from persistent storage with localStorage fallback
+  const reloadConfig = async () => {
+    setIsLoading(true);
     try {
-      const savedConfig = localStorage.getItem('comprehensiveConfiguration');
-      if (savedConfig) {
-        const parsedConfig = JSON.parse(savedConfig);
-        setConfig(parsedConfig);
-      } else {
-        setConfig(null);
+      // Try persistent storage first
+      let stored = await retrieveConfiguration('comprehensive');
+      
+      // Fallback to localStorage
+      if (!stored) {
+        const localData = localStorage.getItem('comprehensiveConfiguration');
+        if (localData) {
+          stored = JSON.parse(localData);
+        }
       }
+      
+      setConfig(stored || null);
     } catch (error) {
-      console.error('Failed to reload comprehensive configuration:', error);
+      console.error('Failed to load comprehensive configuration:', error);
+      setConfig(null);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
+    // Parse fallback UI text on mount
     try {
-      // Parse fallback UI text on component mount
-      const parsedFallback = parseCopydeckCSVForFallback();
-      setFallbackUIText(parsedFallback);
-      
-      const savedConfig = localStorage.getItem('comprehensiveConfiguration');
-      if (savedConfig) {
-        const parsedConfig = JSON.parse(savedConfig);
-        setConfig(parsedConfig);
-      }
+      const parsedUI = parseCopydeckCSVForFallback();
+      setFallbackUIText(parsedUI);
     } catch (error) {
-      console.error('Failed to load comprehensive configuration:', error);
-    } finally {
-      setIsLoading(false);
+      console.error('Failed to parse fallback UI text:', error);
     }
+
+    // Load initial configuration
+    reloadConfig();
   }, []);
 
   // Hot-reload configuration when uploads happen (same-tab) or in other tabs

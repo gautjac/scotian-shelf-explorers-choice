@@ -1,3 +1,5 @@
+import { storeConfiguration, retrieveConfiguration, persistentStorage } from './persistentStorage';
+
 interface BackupMetadata {
   id: string;
   timestamp: string;
@@ -22,19 +24,26 @@ const generateBackupId = (type: string, trigger: string): string => {
   return `${BACKUP_PREFIX}${type}_${timestamp}_${trigger}`;
 };
 
-// Create backup of current configuration
-export const createBackup = (type: 'comprehensive' | 'impact', trigger: 'manual' | 'auto-import'): string => {
+// Create backup of current configuration with persistent storage
+export const createBackup = async (type: 'comprehensive' | 'impact', trigger: 'manual' | 'auto-import'): Promise<string> => {
   try {
-    const currentData = type === 'comprehensive' 
-      ? localStorage.getItem('comprehensiveConfiguration')
-      : localStorage.getItem('impactConfiguration');
+    // Try persistent storage first, fallback to localStorage
+    let currentData = await retrieveConfiguration(type);
+    
+    if (!currentData) {
+      // Fallback to localStorage
+      const localData = localStorage.getItem(`${type}Configuration`);
+      if (localData) {
+        currentData = JSON.parse(localData);
+      }
+    }
     
     if (!currentData) {
       throw new Error(`No ${type} configuration found to backup`);
     }
 
     const backupId = generateBackupId(type, trigger);
-    const parsedData = JSON.parse(currentData);
+    const parsedData = currentData;
     
     // Generate content summary
     let contentSummary = '';
@@ -52,7 +61,7 @@ export const createBackup = (type: 'comprehensive' | 'impact', trigger: 'manual'
       timestamp: new Date().toISOString(),
       type,
       trigger,
-      size: currentData.length,
+      size: JSON.stringify(currentData).length,
       contentSummary
     };
 
@@ -61,7 +70,8 @@ export const createBackup = (type: 'comprehensive' | 'impact', trigger: 'manual'
       data: parsedData
     };
 
-    // Store backup
+    // Store backup in persistent storage and localStorage
+    await persistentStorage.store(backupId, backup);
     localStorage.setItem(backupId, JSON.stringify(backup));
     
     // Update backup index
@@ -102,29 +112,34 @@ export const listBackups = (): BackupMetadata[] => {
   }
 };
 
-// Restore from backup
-export const restoreFromBackup = (backupId: string): void => {
+// Restore from backup with persistent storage
+export const restoreFromBackup = async (backupId: string): Promise<void> => {
   try {
-    const backupData = localStorage.getItem(backupId);
-    if (!backupData) {
-      throw new Error('Backup not found');
+    // Try persistent storage first, fallback to localStorage
+    let backup: BackupData | null = await persistentStorage.retrieve(backupId);
+    
+    if (!backup) {
+      const backupData = localStorage.getItem(backupId);
+      if (!backupData) {
+        throw new Error('Backup not found');
+      }
+      backup = JSON.parse(backupData);
     }
 
-    const backup: BackupData = JSON.parse(backupData);
     const { metadata, data } = backup;
     const type = metadata.type;
     
     // Create a backup of current state before restoring
     try {
-      createBackup(type, 'manual');
+      await createBackup(type, 'manual');
     } catch (e) {
       // Continue with restore even if backup creation fails
       console.warn('Failed to create backup before restore:', e);
     }
     
-    // Restore the data
-    const storageKey = type === 'comprehensive' ? 'comprehensiveConfiguration' : 'impactConfiguration';
-    localStorage.setItem(storageKey, JSON.stringify(data));
+    // Restore the data to persistent storage and localStorage
+    await storeConfiguration(type, data);
+    localStorage.setItem(`${type}Configuration`, JSON.stringify(data));
     
     // Dispatch events to notify app
     const eventName = type === 'comprehensive' ? 'comprehensive-config-updated' : 'impact-config-updated';

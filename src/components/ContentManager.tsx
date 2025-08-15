@@ -1,16 +1,19 @@
 import { useState } from 'react';
 import { Button } from './ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
+import { Alert, AlertDescription } from './ui/alert';
 import { useToast } from '@/hooks/use-toast';
 import { exportChoicesToCSV, parseImpactCSV } from '../utils/impactConfiguration';
 import { exportComprehensiveCSV, parseComprehensiveCSV, validateComprehensiveConfig } from '../utils/comprehensiveConfiguration';
 import { createBackup } from '../utils/backupManager';
-import { Download, Upload, X } from 'lucide-react';
+import { storeConfiguration } from '../utils/persistentStorage';
+import { Download, Upload, X, Database, AlertCircle } from 'lucide-react';
 import { EditorGuide } from './EditorGuide';
 import { BackupManager } from './BackupManager';
+import { StorageHealthIndicator } from './StorageHealthIndicator';
 
 interface ContentManagerProps {
   onClose: () => void;
@@ -92,7 +95,7 @@ export const ContentManager = ({ onClose }: ContentManagerProps) => {
       // Create automatic backup before import
       try {
         const backupType = isComprehensive ? 'comprehensive' : 'impact';
-        createBackup(backupType, 'auto-import');
+        await createBackup(backupType, 'auto-import');
         
         toast({
           title: "Backup Created",
@@ -123,9 +126,9 @@ export const ContentManager = ({ onClose }: ContentManagerProps) => {
           return;
         }
         
+        // Store comprehensive configuration in persistent storage
+        await storeConfiguration('comprehensive', comprehensiveConfig);
         localStorage.setItem('comprehensiveConfiguration', JSON.stringify(comprehensiveConfig));
-        // Notify app to reload config live
-        window.dispatchEvent(new Event('comprehensive-config-updated'));
         
         toast({
           title: "Comprehensive CSV Uploaded",
@@ -134,9 +137,10 @@ export const ContentManager = ({ onClose }: ContentManagerProps) => {
       } else {
         // Parse legacy impact CSV
         const impactConfig = parseImpactCSV(text);
+        
+        // Store impact configuration in persistent storage
+        await storeConfiguration('impact', impactConfig);
         localStorage.setItem('impactConfiguration', JSON.stringify(impactConfig));
-        // Notify app to apply new impacts
-        window.dispatchEvent(new Event('impact-config-updated'));
         
         toast({
           title: "Impact CSV Uploaded",
@@ -172,9 +176,10 @@ export const ContentManager = ({ onClose }: ContentManagerProps) => {
         </CardHeader>
         <CardContent className="p-0">
           <Tabs defaultValue="import-export" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mx-6 mt-2">
+            <TabsList className="grid w-full grid-cols-4 mx-6 mt-2">
               <TabsTrigger value="import-export">Import/Export</TabsTrigger>
               <TabsTrigger value="backup-history">Backup History</TabsTrigger>
+              <TabsTrigger value="storage-health">Storage Health</TabsTrigger>
               <TabsTrigger value="editor-guide">Editor's Guide</TabsTrigger>
             </TabsList>
             
@@ -231,6 +236,34 @@ export const ContentManager = ({ onClose }: ContentManagerProps) => {
             
             <TabsContent value="backup-history" className="px-6 pb-6">
               <BackupManager />
+            </TabsContent>
+
+            <TabsContent value="storage-health" className="px-6 pb-6 space-y-4">
+              <StorageHealthIndicator />
+              
+              <Card>
+                <CardHeader>
+                  <CardTitle>About Storage Health</CardTitle>
+                  <CardDescription>
+                    Your app uses multiple storage layers to ensure content survives browser clearing
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="text-sm space-y-2">
+                    <p><strong>IndexedDB:</strong> Most reliable, large storage capacity, survives browser clearing</p>
+                    <p><strong>Cache API:</strong> PWA cache storage, persists across sessions</p>
+                    <p><strong>localStorage:</strong> Basic browser storage, can be cleared by user</p>
+                  </div>
+                  
+                  <Alert>
+                    <AlertCircle className="h-4 w-4" />
+                    <AlertDescription>
+                      If any storage layer fails, click "Ensure Persistence" to re-save your content to all available layers.
+                      The "Download backup files" button creates downloadable JSON backups for maximum safety.
+                    </AlertDescription>
+                  </Alert>
+                </CardContent>
+              </Card>
             </TabsContent>
 
             <TabsContent value="editor-guide" className="px-6 pb-6">
