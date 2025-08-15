@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { scenarios } from '../data/content';
 import { parseCopydeckCSVForFallback } from '../utils/comprehensiveConfiguration';
-import { loadOfflineConfig } from '../utils/offlineConfigManager';
+import { retrieveConfiguration } from '../utils/persistentStorage';
 
 // Hook to manage comprehensive configuration
 export const useComprehensiveConfig = () => {
@@ -9,13 +9,23 @@ export const useComprehensiveConfig = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [fallbackUIText, setFallbackUIText] = useState<any>(null);
 
-  // Load configuration with enhanced offline manager
+  // Load configuration from persistent storage with localStorage fallback
   const reloadConfig = async () => {
     setIsLoading(true);
-    console.log('🔄 [DEBUG] Reloading comprehensive config with enhanced manager...');
+    console.log('🔄 [DEBUG] Reloading comprehensive config...');
     try {
-      const stored = await loadOfflineConfig('comprehensive');
-      console.log('📦 [DEBUG] Retrieved from offline manager:', stored);
+      // Try persistent storage first
+      let stored = await retrieveConfiguration('comprehensive');
+      console.log('📦 [DEBUG] Retrieved from persistent storage:', stored);
+      
+      // Fallback to localStorage
+      if (!stored) {
+        const localData = localStorage.getItem('comprehensiveConfiguration');
+        if (localData) {
+          stored = JSON.parse(localData);
+          console.log('💾 [DEBUG] Retrieved from localStorage:', stored);
+        }
+      }
       
       console.log('✅ [DEBUG] Final config set:', stored);
       setConfig(stored || null);

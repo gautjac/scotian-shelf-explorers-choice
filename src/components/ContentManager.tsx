@@ -9,13 +9,12 @@ import { useToast } from '@/hooks/use-toast';
 import { exportChoicesToCSV, parseImpactCSV } from '../utils/impactConfiguration';
 import { exportComprehensiveCSV, parseComprehensiveCSV, validateComprehensiveConfig } from '../utils/comprehensiveConfiguration';
 import { createBackup } from '../utils/backupManager';
-import { storeOfflineConfig } from '../utils/offlineConfigManager';
-import { Download, Upload, X, Database, AlertCircle, Package } from 'lucide-react';
+import { storeConfiguration } from '../utils/persistentStorage';
+import { Download, Upload, X, Database, AlertCircle } from 'lucide-react';
 import { EditorGuide } from './EditorGuide';
 import { BackupManager } from './BackupManager';
 import { StorageHealthIndicator } from './StorageHealthIndicator';
 import { DebugPanel } from './DebugPanel';
-import { createBuildPackage } from '../utils/buildTimeConfig';
 
 interface ContentManagerProps {
   onClose: () => void;
@@ -82,22 +81,6 @@ export const ContentManager = ({ onClose }: ContentManagerProps) => {
     }
   };
 
-  const handleDownloadBuildPackage = async () => {
-    try {
-      await createBuildPackage();
-      toast({
-        title: "Build Package Downloaded",
-        description: "Complete offline deployment package created with embedded configurations.",
-      });
-    } catch (error) {
-      toast({
-        title: "Package Failed",
-        description: "Failed to create build package.",
-        variant: "destructive",
-      });
-    }
-  };
-
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -150,9 +133,10 @@ export const ContentManager = ({ onClose }: ContentManagerProps) => {
           return;
         }
         
-        // Store comprehensive configuration using enhanced offline manager
-        console.log('💾 [DEBUG] Storing comprehensive config with enhanced manager...');
-        await storeOfflineConfig('comprehensive', comprehensiveConfig);
+        // Store comprehensive configuration in persistent storage
+        console.log('💾 [DEBUG] Storing comprehensive config...');
+        await storeConfiguration('comprehensive', comprehensiveConfig);
+        localStorage.setItem('comprehensiveConfiguration', JSON.stringify(comprehensiveConfig));
         
         // Trigger immediate reload
         window.dispatchEvent(new CustomEvent('comprehensive-config-updated'));
@@ -166,8 +150,9 @@ export const ContentManager = ({ onClose }: ContentManagerProps) => {
         // Parse legacy impact CSV
         const impactConfig = parseImpactCSV(text);
         
-        // Store impact configuration using enhanced offline manager
-        await storeOfflineConfig('impact', impactConfig);
+        // Store impact configuration in persistent storage
+        await storeConfiguration('impact', impactConfig);
+        localStorage.setItem('impactConfiguration', JSON.stringify(impactConfig));
         
         toast({
           title: "Impact CSV Uploaded",
@@ -231,14 +216,6 @@ export const ContentManager = ({ onClose }: ContentManagerProps) => {
                     <Download className="h-4 w-4 mr-2" />
                     Download Impact Values Only
                   </Button>
-                  <Button 
-                    onClick={handleDownloadBuildPackage} 
-                    className="w-full"
-                    variant="secondary"
-                  >
-                    <Package className="h-4 w-4 mr-2" />
-                    Download Build Package (Offline Deployment)
-                  </Button>
                 </div>
               </div>
               
@@ -263,10 +240,8 @@ export const ContentManager = ({ onClose }: ContentManagerProps) => {
               <div className="text-xs text-muted-foreground space-y-1">
                 <p><strong>Comprehensive CSV:</strong> All app text, scenario content, UI labels, and impact values in one file</p>
                 <p><strong>Impact Only CSV:</strong> Just scenario impact values (legacy format)</p>
-                <p><strong>Build Package:</strong> Complete offline deployment bundle with embedded configurations</p>
                 <p>• Edit downloaded CSV in Excel/Google Sheets</p>
                 <p>• Upload modified CSV to apply changes immediately</p>
-                <p>• Build package ensures configurations work across all environments</p>
                 <p>• Automatic backup created before each import</p>
                 <p>• Use Backup History tab to restore previous versions</p>
               </div>
