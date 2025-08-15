@@ -45,7 +45,23 @@ export default defineConfig(({ mode }) => ({
                 maxAgeSeconds: 60 * 60 * 24 * 365 // 365 days
               }
             }
+          },
+          {
+            urlPattern: /\/embedded-configs\/.*/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'config-cache',
+              expiration: {
+                maxEntries: 20,
+                maxAgeSeconds: 60 * 60 * 24 * 30 // 30 days
+              }
+            }
           }
+        ],
+        // Include configuration files in precache
+        additionalManifestEntries: [
+          { url: '/embedded-configs/comprehensive-config.json', revision: null },
+          { url: '/embedded-configs/impact-config.json', revision: null }
         ]
       }
     })
