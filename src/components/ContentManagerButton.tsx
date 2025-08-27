@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Settings, FileText } from 'lucide-react';
+import React, { useState } from 'react';
+import { FileText } from 'lucide-react';
 import { Button } from './ui/button';
 import { ContentManager } from './ContentManager';
 import { StorageClearButton } from './StorageClearButton';
