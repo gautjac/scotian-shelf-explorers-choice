@@ -5,6 +5,8 @@ import { AutoCacheValidator } from '../components/AutoCacheValidator';
 import { NuclearCacheClear } from '../components/NuclearCacheClear';
 import { VersionMismatchDetector } from '../components/VersionMismatchDetector';
 import { ContentVersionIndicator } from '../components/ContentVersionIndicator';
+import { DeploymentDiagnostics } from '../components/DeploymentDiagnostics';
+import { ForceRefreshButton } from '../components/ForceRefreshButton';
 import { LanguageSelectionScreen } from '../components/LanguageSelectionScreen';
 import { InactivityModal } from '../components/InactivityModal';
 import { ScenarioPreview } from '../components/ScenarioPreview';
@@ -133,6 +135,8 @@ const Index = () => {
       <NuclearCacheClear />
       <VersionMismatchDetector />
       <ContentVersionIndicator />
+      <DeploymentDiagnostics />
+      <ForceRefreshButton />
       
       {gamePhase === 'languageSelection' && (
         <LanguageSelectionScreen
