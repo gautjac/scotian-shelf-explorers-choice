@@ -90,9 +90,10 @@ export const GamePlayingScreen = ({
 
       {/* Right Sidebar - Ocean Health - 1/3 of screen */}
       <div className="w-1/3 h-screen">
-        <GameSidebar
+        <GameSidebar 
           healthMetrics={gameState.healthMetrics}
           language={gameState.language}
+          currentScenarioIndex={gameState.currentScenarioIndex}
           onBackToPreview={onBackToPreview}
           onRestart={onRestart}
         />
