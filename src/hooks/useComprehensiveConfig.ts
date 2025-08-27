@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { scenarios } from '../data/content';
 import { parseCopydeckCSVForFallback } from '../utils/comprehensiveConfiguration';
-import { retrieveConfiguration, persistentStorage } from '../utils/persistentStorage';
+import { retrieveConfiguration } from '../utils/persistentStorage';
 
 // Hook to manage comprehensive configuration
 export const useComprehensiveConfig = () => {
@@ -27,21 +27,7 @@ export const useComprehensiveConfig = () => {
         }
       }
       
-      // Validate scenario count (should be exactly 5)
-      if (stored && stored.scenarios) {
-        const scenarioCount = (Object.values(stored.scenarios)?.[0] as any[])?.length || 0;
-        console.log('🎯 [DEBUG] Stored config scenario count:', scenarioCount);
-        
-        if (scenarioCount !== 5) {
-          console.warn('⚠️ [DEBUG] Stored config has incorrect scenario count (' + scenarioCount + '), clearing and using embedded content');
-          // Clear the bad cached data
-          await persistentStorage.clearAll();
-          localStorage.removeItem('comprehensiveConfiguration');
-          stored = null;
-        }
-      }
-      
-      console.log('✅ [DEBUG] Final config set:', stored ? 'Custom config with ' + ((Object.values(stored.scenarios)?.[0] as any[])?.length || 0) + ' scenarios' : 'Embedded content (5 scenarios)');
+      console.log('✅ [DEBUG] Final config set:', stored);
       setConfig(stored || null);
     } catch (error) {
       console.error('❌ [DEBUG] Failed to load comprehensive configuration:', error);
