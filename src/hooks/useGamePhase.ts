@@ -71,7 +71,6 @@ export const useGamePhase = (lastActivity: number, resetGame: () => void) => {
       const granularImpacts = getChoiceImpact(currentScenarioId, selectedChoice);
       makeChoice(currentScenarioId, selectedChoice.id, selectedChoice.impact, granularImpacts);
       setGamePhase('healthTransition');
-      setSelectedChoice(null);
     }
   }, [selectedChoice]);
 
@@ -85,6 +84,7 @@ export const useGamePhase = (lastActivity: number, resetGame: () => void) => {
     } else {
       setGamePhase('completed');
     }
+    setSelectedChoice(null);
   }, []);
 
   const handleReturnToChoices = useCallback(() => {
