@@ -36,10 +36,9 @@ export const GameSidebar = ({
               {language === 'mi' && ' kespek'}
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2 mt-3">
-              <div 
-                className="bg-[#0C556B] h-2 rounded-full transition-all duration-300"
-                style={{ width: `${((currentScenarioIndex + 1) / 5) * 100}%` }}
-              />
+              <div className="bg-[#0C556B] h-2 rounded-full transition-all duration-300" style={{
+              width: `${(currentScenarioIndex + 1) / 5 * 100}%`
+            }} />
             </div>
           </div>
         </div>
@@ -49,11 +48,7 @@ export const GameSidebar = ({
       <div className="mb-8">
         {/* Game Actions */}
         <div className="flex flex-col gap-4 items-center">
-          <button onClick={onBackToPreview} className="bg-[#0C556B]/30 backdrop-blur-sm text-white px-4 py-3 rounded-xl font-medium text-base active:bg-[#0C556B]/50 transition-colors duration-200 shadow-lg">
-            {language === 'en' && 'Back to Stories'}
-            {language === 'fr' && 'Retour aux histoires'}
-            {language === 'mi' && 'Kluskap koqoey'}
-          </button>
+          
           
         </div>
 
