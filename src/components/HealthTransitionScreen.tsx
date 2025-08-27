@@ -19,7 +19,6 @@ export const HealthTransitionScreen = ({
   onTransitionComplete
 }: HealthTransitionScreenProps) => {
   const [showMeters, setShowMeters] = useState(false);
-  const [autoAdvanceTimer, setAutoAdvanceTimer] = useState(5);
 
   useEffect(() => {
     // Show meters after a brief delay
@@ -27,22 +26,10 @@ export const HealthTransitionScreen = ({
       setShowMeters(true);
     }, 500);
 
-    // Auto-advance countdown
-    const interval = setInterval(() => {
-      setAutoAdvanceTimer(prev => {
-        if (prev <= 1) {
-          onTransitionComplete();
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
     return () => {
       clearTimeout(showTimer);
-      clearInterval(interval);
     };
-  }, [onTransitionComplete]);
+  }, []);
 
   const titleText = {
     en: 'Ocean Impact',
@@ -57,9 +44,9 @@ export const HealthTransitionScreen = ({
   };
 
   const nextText = {
-    en: selectedChoice.nextScenarioId ? `Next scenario in ${autoAdvanceTimer}s` : `Final results in ${autoAdvanceTimer}s`,
-    fr: selectedChoice.nextScenarioId ? `Prochain scénario dans ${autoAdvanceTimer}s` : `Résultats finaux dans ${autoAdvanceTimer}s`,
-    mi: selectedChoice.nextScenarioId ? `Aq tett ${autoAdvanceTimer}s` : `Klu'su'n ${autoAdvanceTimer}s`
+    en: selectedChoice.nextScenarioId ? 'Next scenario' : 'Final results',
+    fr: selectedChoice.nextScenarioId ? 'Prochain scénario' : 'Résultats finaux',
+    mi: selectedChoice.nextScenarioId ? 'Aq tett' : 'Klu\'su\'n'
   };
 
   const skipText = {
