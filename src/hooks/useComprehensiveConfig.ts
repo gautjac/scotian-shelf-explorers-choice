@@ -90,15 +90,18 @@ export const useComprehensiveConfig = () => {
   // Hot-reload configuration when uploads happen (same-tab) or in other tabs
   useEffect(() => {
     const handleConfigUpdated = () => reloadConfig();
+    const handleCacheInvalidated = () => reloadConfig();
     const handleStorage = (e: StorageEvent) => {
       if (e.key === 'comprehensiveConfiguration') reloadConfig();
     };
 
     window.addEventListener('comprehensive-config-updated', handleConfigUpdated as EventListener);
+    window.addEventListener('cache-invalidated', handleCacheInvalidated as EventListener);
     window.addEventListener('storage', handleStorage);
 
     return () => {
       window.removeEventListener('comprehensive-config-updated', handleConfigUpdated as EventListener);
+      window.removeEventListener('cache-invalidated', handleCacheInvalidated as EventListener);
       window.removeEventListener('storage', handleStorage);
     };
   }, [reloadConfig]);

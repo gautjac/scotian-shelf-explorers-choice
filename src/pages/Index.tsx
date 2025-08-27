@@ -1,5 +1,7 @@
 
 import { useEffect, useState } from 'react';
+import { InvalidDataDetector } from '../components/InvalidDataDetector';
+import { AutoCacheValidator } from '../components/AutoCacheValidator';
 import { LanguageSelectionScreen } from '../components/LanguageSelectionScreen';
 import { InactivityModal } from '../components/InactivityModal';
 import { ScenarioPreview } from '../components/ScenarioPreview';
@@ -123,6 +125,9 @@ const Index = () => {
 
   return (
     <>
+      <AutoCacheValidator />
+      <InvalidDataDetector />
+      
       {gamePhase === 'languageSelection' && (
         <LanguageSelectionScreen
           onLanguageSelect={handleLanguageSelectWithTracking}
