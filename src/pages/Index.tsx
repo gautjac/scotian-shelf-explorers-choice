@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { InvalidDataDetector } from '../components/InvalidDataDetector';
 import { AutoCacheValidator } from '../components/AutoCacheValidator';
@@ -17,7 +16,6 @@ import { HealthTransitionScreen } from '../components/HealthTransitionScreen';
 import { ContentManagerButton } from '../components/ContentManagerButton';
 import { RuntimeConfigDebugger } from '../components/RuntimeConfigDebugger';
 import { ContentHashVerifier } from '../components/ContentHashVerifier';
-
 import { ContentDeploymentVerifier } from '../components/ContentDeploymentVerifier';
 import { useGameState } from '../hooks/useGameState';
 import { useGamePhase } from '../hooks/useGamePhase';
