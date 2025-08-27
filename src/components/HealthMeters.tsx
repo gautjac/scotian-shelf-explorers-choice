@@ -115,7 +115,7 @@ const AnimatedHealthMeter = ({ metricKey, value, previousValue, language, labels
   const isPulsingRed = value < 50;
 
   const getAnimatedIcon = (type: string) => {
-    const iconClasses = `w-10 h-10 transition-all duration-300 ${animationClass} ${isPulsingRed ? 'text-red-100' : 'text-white'}`;
+    const iconClasses = `w-10 h-10 transition-all duration-300 ${animationClass} ${isPulsingRed ? 'text-red-500' : 'text-white'}`;
     switch (type) {
       case 'ecosystem':
         return <Waves className={iconClasses} />;
@@ -168,7 +168,7 @@ const AnimatedHealthMeter = ({ metricKey, value, previousValue, language, labels
       
       {/* Status Badge */}
       <div className="text-center">
-        <span className={`inline-block px-4 py-2 rounded-full text-sm font-medium text-white bg-gradient-to-r ${getAnimatedHealthColor(value)} shadow-md transition-all duration-500 ${isAnimating ? 'scale-105' : ''} ${isPulsingRed ? 'animate-pulse-red' : ''}`}>
+        <span className={`inline-block px-4 py-2 rounded-full text-sm font-medium transition-all duration-500 ${isAnimating ? 'scale-105' : ''} ${isPulsingRed ? 'animate-pulse-red text-red-500 bg-red-500/20 border border-red-500/30' : `text-white bg-gradient-to-r ${getAnimatedHealthColor(value)}`} shadow-md`}>
           {getHealthStatus(value, language)}
         </span>
       </div>
