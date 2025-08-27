@@ -63,9 +63,9 @@ export const HealthTransitionScreen = ({
   };
 
   const skipText = {
-    en: 'Skip',
-    fr: 'Passer',
-    mi: 'Alkusis'
+    en: 'Next',
+    fr: 'Suivant',
+    mi: 'Aqq'
   };
 
   return (
