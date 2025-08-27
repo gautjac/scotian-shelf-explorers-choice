@@ -8,9 +8,6 @@ fishing-practices,"Fish for the Future",marine-reserves,"Create special ""no fis
 shipping-traffic,"Whale Highway Danger",speed-restrictions,"Make ships slow down in whale areas",en,positive,25,-8,5
 shipping-traffic,"Whale Highway Danger",ignore-whales,"Let ships go as fast as they want",en,negative,-40,0,-5
 shipping-traffic,"Whale Highway Danger",detection-systems,"Put whale-spotting technology on ships",en,positive,20,-15,10
-ocean-acidification,"The Sour Ocean Problem",reduce-emissions,"Cut down on air pollution from cars and factories",en,positive,30,-10,15
-ocean-acidification,"The Sour Ocean Problem",ignore-acidity,"Keep polluting the air like before",en,negative,-25,0,-8
-ocean-acidification,"The Sour Ocean Problem",buffer-zones,"Add special chemicals to neutralize the acid",en,neutral,5,-20,0
 renewable-energy,"Ocean Wind Power",careful-planning,"Plan carefully to avoid whale migration routes",en,positive,15,5,20
 renewable-energy,"Ocean Wind Power",no-renewables,"Don't build any ocean wind farms",en,negative,-20,0,-15
 renewable-energy,"Ocean Wind Power",adaptive-technology,"Design fish-friendly wind turbines",en,positive,25,-5,15
@@ -32,9 +29,6 @@ fishing-practices,"Pêche pour l'avenir",marine-reserves,"Créer des zones spéc
 shipping-traffic,"Danger sur l'autoroute des baleines",speed-restrictions,"Obliger les navires à ralentir dans les zones de baleines",fr,positive,25,-8,5
 shipping-traffic,"Danger sur l'autoroute des baleines",ignore-whales,"Laisser les navires aller aussi vite qu'ils veulent",fr,negative,-40,0,-5
 shipping-traffic,"Danger sur l'autoroute des baleines",detection-systems,"Mettre une technologie de détection des baleines sur les navires",fr,positive,20,-15,10
-ocean-acidification,"Le problème de l'océan acide",reduce-emissions,"Réduire la pollution de l'air des voitures et usines",fr,positive,30,-10,15
-ocean-acidification,"Le problème de l'océan acide",ignore-acidity,"Continuer à polluer l'air comme avant",fr,negative,-25,0,-8
-ocean-acidification,"Le problème de l'océan acide",buffer-zones,"Ajouter des produits chimiques spéciaux pour neutraliser l'acide",fr,neutral,5,-20,0
 renewable-energy,"Énergie éolienne océanique",careful-planning,"Planifier soigneusement pour éviter les routes de migration des baleines",fr,positive,15,5,20
 renewable-energy,"Énergie éolienne océanique",no-renewables,"Ne pas construire de parcs éoliens océaniques",fr,negative,-20,0,-15
 renewable-energy,"Énergie éolienne océanique",adaptive-technology,"Concevoir des éoliennes adaptées aux poissons",fr,positive,25,-5,15
@@ -56,9 +50,6 @@ fishing-practices,"Puktew kespek",marine-reserves,"Eltasittikewey mu puktisiyey"
 shipping-traffic,"Putupkey wikteknekey",speed-restrictions,"Elotkeisittit putupkey ukiskuel nekey",mi,positive,25,-8,5
 shipping-traffic,"Putupkey wikteknekey",ignore-whales,"Siaweisittit putupkey ukisisiney",mi,negative,-40,0,-5
 shipping-traffic,"Putupkey wikteknekey",detection-systems,"Weliku'tatit putupkey ukamlamun",mi,positive,20,-15,10
-ocean-acidification,"Kesisku samqwan",reduce-emissions,"Apjinik kesisku usitapon",mi,positive,30,-10,15
-ocean-acidification,"Kesisku samqwan",ignore-acidity,"Siawa'si kesisku usitapon",mi,negative,-25,0,-8
-ocean-acidification,"Kesisku samqwan",buffer-zones,"Eltasit iknmuey kesiskumun",mi,neutral,5,-20,0
 renewable-energy,"Samqwan lu'spusit",careful-planning,"Ankweyul eluktetasik putupkey netukliekey",mi,positive,15,5,20
 renewable-energy,"Samqwan lu'spusit",no-renewables,"Mu elukwey samqwan lu'spusit",mi,negative,-20,0,-15
 renewable-energy,"Samqwan lu'spusit",adaptive-technology,"Eluey kis-nukskwey lu'spusit",mi,positive,25,-5,15
