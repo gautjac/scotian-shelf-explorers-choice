@@ -27,34 +27,54 @@ export const detectInvalidCachedData = async (): Promise<boolean> => {
     const dbRequest = indexedDB.open('comprehensive_config_db', 1);
     
     return new Promise((resolve) => {
+      dbRequest.onupgradeneeded = (event) => {
+        const db = (event.target as IDBOpenDBRequest).result;
+        if (!db.objectStoreNames.contains('configs')) {
+          db.createObjectStore('configs', { keyPath: 'id' });
+        }
+      };
+      
       dbRequest.onsuccess = (event) => {
         const db = (event.target as IDBOpenDBRequest).result;
-        const transaction = db.transaction(['configs'], 'readonly');
-        const store = transaction.objectStore('configs');
-        const request = store.get('comprehensive_config');
         
-        request.onsuccess = () => {
-          const config = request.result?.data;
-          if (config?.scenarios) {
-            // Check if any language has invalid scenarios
-            for (const language of Object.keys(config.scenarios)) {
-              const scenarioIds = Object.keys(config.scenarios[language]);
-              const hasInvalidScenarios = scenarioIds.some(id => 
-                !validScenarios.includes(id.split('_')[0])
-              );
-              if (hasInvalidScenarios) {
-                console.log('Detected invalid cached scenarios:', scenarioIds.filter(id => 
+        // Check if object store exists
+        if (!db.objectStoreNames.contains('configs')) {
+          resolve(false);
+          return;
+        }
+        
+        try {
+          const transaction = db.transaction(['configs'], 'readonly');
+          const store = transaction.objectStore('configs');
+          const request = store.get('comprehensive_config');
+          
+          request.onsuccess = () => {
+            const config = request.result?.data;
+            if (config?.scenarios) {
+              // Check if any language has invalid scenarios
+              for (const language of Object.keys(config.scenarios)) {
+                const scenarioIds = Object.keys(config.scenarios[language]);
+                const hasInvalidScenarios = scenarioIds.some(id => 
                   !validScenarios.includes(id.split('_')[0])
-                ));
-                resolve(true);
-                return;
+                );
+                if (hasInvalidScenarios) {
+                  console.log('Detected invalid cached scenarios:', scenarioIds.filter(id => 
+                    !validScenarios.includes(id.split('_')[0])
+                  ));
+                  resolve(true);
+                  return;
+                }
               }
             }
-          }
+            resolve(false);
+          };
+          
+          request.onerror = () => resolve(false);
+          transaction.onerror = () => resolve(false);
+        } catch (transactionError) {
+          console.warn('Transaction error:', transactionError);
           resolve(false);
-        };
-        
-        request.onerror = () => resolve(false);
+        }
       };
       
       dbRequest.onerror = () => resolve(false);

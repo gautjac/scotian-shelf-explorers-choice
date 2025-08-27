@@ -20,29 +20,29 @@ export default defineConfig(({ mode }) => ({
         skipWaiting: true,
         clientsClaim: true,
         cleanupOutdatedCaches: true,
-        globPatterns: ['**/*.{js,css,html,ico,png,jpg,jpeg,svg,webp}'],
+        navigateFallbackDenylist: [/^\/_/],
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
             handler: 'CacheFirst',
             options: {
-              cacheName: 'google-fonts-cache-v2',
+              cacheName: 'google-fonts-cache-v4',
               expiration: {
                 maxEntries: 10,
-                maxAgeSeconds: 60 * 60 * 24 * 365 // 365 days
+                maxAgeSeconds: 60 * 60 * 24 * 365
               }
             }
           }
         ]
       },
       manifest: {
-        name: 'Nova Scotia Ocean Game - Clean Content',
-        short_name: 'Ocean Game v2.0',
-        description: 'An educational marine conservation game for Nova Scotia - Updated Content',
+        name: 'Nova Scotia Ocean Game - 5 Scenarios',
+        short_name: 'Ocean Game v3.0',
+        description: 'An educational marine conservation game for Nova Scotia - 5 Scenarios Only',
         theme_color: '#0369a1',
         background_color: '#ffffff',
         display: 'standalone',
-        start_url: '/',
+        start_url: '/?v=3.0',
         icons: [
           {
             src: '/placeholder.svg',
@@ -50,6 +50,9 @@ export default defineConfig(({ mode }) => ({
             type: 'image/svg+xml'
           }
         ]
+      },
+      devOptions: {
+        enabled: false
       }
     })
   ].filter(Boolean),

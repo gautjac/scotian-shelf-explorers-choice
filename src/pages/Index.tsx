@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { InvalidDataDetector } from '../components/InvalidDataDetector';
 import { AutoCacheValidator } from '../components/AutoCacheValidator';
+import { ContentVersionIndicator } from '../components/ContentVersionIndicator';
 import { LanguageSelectionScreen } from '../components/LanguageSelectionScreen';
 import { InactivityModal } from '../components/InactivityModal';
 import { ScenarioPreview } from '../components/ScenarioPreview';
@@ -127,6 +128,7 @@ const Index = () => {
     <>
       <AutoCacheValidator />
       <InvalidDataDetector />
+      <ContentVersionIndicator />
       
       {gamePhase === 'languageSelection' && (
         <LanguageSelectionScreen
