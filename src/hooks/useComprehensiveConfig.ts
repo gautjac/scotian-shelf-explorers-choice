@@ -108,13 +108,16 @@ export const useComprehensiveConfig = () => {
 
   // Get scenario text with override support
   const getScenarioText = (scenarioId: string, field: string, language: string = 'en') => {
-    console.log(`🔍 [DEBUG] getScenarioText(${scenarioId}, ${field}, ${language})`);
-    console.log(`📊 [DEBUG] Config available:`, !!config);
-    console.log(`📊 [DEBUG] Config scenarios:`, config?.scenarios);
+    console.log(`🔍 [SCENARIO-DEBUG] getScenarioText(${scenarioId}, ${field}, ${language})`);
+    console.log(`📊 [SCENARIO-DEBUG] Config available:`, !!config);
+    console.log(`📊 [SCENARIO-DEBUG] Config type:`, typeof config);
+    console.log(`📊 [SCENARIO-DEBUG] Config scenarios structure:`, config?.scenarios ? Object.keys(config.scenarios) : 'no scenarios');
     
+    // Check if we have cached override
     if (config?.scenarios?.[language]?.[scenarioId]?.[field]) {
       const override = config.scenarios[language][scenarioId][field];
-      console.log(`✅ [DEBUG] Found override for ${scenarioId}.${field}:`, override);
+      console.log(`⚠️ [SCENARIO-DEBUG] USING CACHED OVERRIDE for ${scenarioId}.${field}:`, override.substring(0, 100) + '...');
+      console.log(`⚠️ [SCENARIO-DEBUG] Override source: CACHED CONFIGURATION`);
       return override;
     }
     
@@ -125,19 +128,21 @@ export const useComprehensiveConfig = () => {
     const fallback = field === 'title' ? scenario?.title : 
                     field === 'description' ? scenario?.description : null;
     
-    console.log(`📋 [DEBUG] Using fallback for ${scenarioId}.${field}:`, fallback);
+    console.log(`✅ [SCENARIO-DEBUG] USING STATIC FALLBACK for ${scenarioId}.${field}:`, fallback?.substring(0, 100) + '...');
+    console.log(`✅ [SCENARIO-DEBUG] Fallback source: STATIC CONTENT`);
     return fallback;
   };
 
   // Get choice text with override support
   const getChoiceText = (scenarioId: string, choiceId: string, field: string, language: string = 'en') => {
     const compositeId = `${scenarioId}_${choiceId}`;
-    console.log(`🔍 [DEBUG] getChoiceText(${scenarioId}, ${choiceId}, ${field}, ${language})`);
-    console.log(`🔗 [DEBUG] Looking for composite ID: ${compositeId}`);
+    console.log(`🔍 [CHOICE-DEBUG] getChoiceText(${scenarioId}, ${choiceId}, ${field}, ${language})`);
+    console.log(`🔗 [CHOICE-DEBUG] Looking for composite ID: ${compositeId}`);
     
     if (config?.scenarios?.[language]?.[compositeId]?.[field]) {
       const override = config.scenarios[language][compositeId][field];
-      console.log(`✅ [DEBUG] Found choice override for ${compositeId}.${field}:`, override);
+      console.log(`⚠️ [CHOICE-DEBUG] USING CACHED OVERRIDE for ${compositeId}.${field}:`, override.substring(0, 100) + '...');
+      console.log(`⚠️ [CHOICE-DEBUG] Override source: CACHED CONFIGURATION`);
       return override;
     }
     
@@ -151,7 +156,8 @@ export const useComprehensiveConfig = () => {
                     field === 'pros' ? choice?.pros :
                     field === 'cons' ? choice?.cons : null;
     
-    console.log(`📋 [DEBUG] Using choice fallback for ${compositeId}.${field}:`, fallback);
+    console.log(`✅ [CHOICE-DEBUG] USING STATIC FALLBACK for ${compositeId}.${field}:`, fallback?.substring(0, 100) + '...');
+    console.log(`✅ [CHOICE-DEBUG] Fallback source: STATIC CONTENT`);
     return fallback;
   };
 

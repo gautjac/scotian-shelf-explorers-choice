@@ -15,6 +15,8 @@ import { CompletionScreen } from '../components/CompletionScreen';
 import { GamePlayingScreen } from '../components/GamePlayingScreen';
 import { HealthTransitionScreen } from '../components/HealthTransitionScreen';
 import { ContentManagerButton } from '../components/ContentManagerButton';
+import { RuntimeConfigDebugger } from '../components/RuntimeConfigDebugger';
+import { ContentHashVerifier } from '../components/ContentHashVerifier';
 import { useGameState } from '../hooks/useGameState';
 import { useGamePhase } from '../hooks/useGamePhase';
 import { scenarios } from '../data/content';
@@ -132,6 +134,8 @@ const Index = () => {
     <>
       <AutoCacheValidator />
       <InvalidDataDetector />
+      <RuntimeConfigDebugger />
+      <ContentHashVerifier />
       <NuclearCacheClear />
       <VersionMismatchDetector />
       <ContentVersionIndicator />

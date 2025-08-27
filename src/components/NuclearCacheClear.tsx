@@ -22,8 +22,22 @@ export const NuclearCacheClear: React.FC = () => {
       // Clear all possible caches
       await clearAllCache();
       
+      // Clear ALL localStorage keys
+      localStorage.clear();
+      
       // Clear session storage
       sessionStorage.clear();
+      
+      // Clear comprehensive configuration specifically
+      localStorage.removeItem('comprehensiveConfiguration');
+      localStorage.removeItem('impactConfiguration');
+      
+      // Force clear any remaining config keys
+      Object.keys(localStorage).forEach(key => {
+        if (key.includes('comprehensive') || key.includes('config') || key.includes('scenario')) {
+          localStorage.removeItem(key);
+        }
+      });
       
       // Unregister all service workers
       if ('serviceWorker' in navigator) {
