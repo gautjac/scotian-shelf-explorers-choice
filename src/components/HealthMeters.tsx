@@ -112,8 +112,10 @@ const AnimatedHealthMeter = ({ metricKey, value, previousValue, language, labels
     return 'from-red-400 to-red-500';
   };
 
+  const isPulsingRed = value < 50;
+
   const getAnimatedIcon = (type: string) => {
-    const iconClasses = `w-10 h-10 text-white transition-all duration-300 ${animationClass}`;
+    const iconClasses = `w-10 h-10 transition-all duration-300 ${animationClass} ${isPulsingRed ? 'text-red-100' : 'text-white'}`;
     switch (type) {
       case 'ecosystem':
         return <Waves className={iconClasses} />;
@@ -130,7 +132,7 @@ const AnimatedHealthMeter = ({ metricKey, value, previousValue, language, labels
     <div className="bg-card/95 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-border transition-all duration-500 group">
       {/* Elegant Icon Circle */}
       <div className="relative mb-6 flex justify-center">
-        <div className={`relative w-20 h-20 rounded-full bg-gradient-to-br ${getAnimatedHealthColor(value)} shadow-xl flex items-center justify-center transition-all duration-500 ${isAnimating ? 'animate-pulse' : ''}`}>
+        <div className={`relative w-20 h-20 rounded-full bg-gradient-to-br ${getAnimatedHealthColor(value)} shadow-xl flex items-center justify-center transition-all duration-500 ${isAnimating ? 'animate-pulse' : ''} ${isPulsingRed ? 'animate-pulse-red' : ''}`}>
           {getAnimatedIcon(metricKey)}
           {/* Subtle glow effect */}
           <div className="absolute inset-0 rounded-full bg-gradient-to-r from-white/20 to-transparent"></div>
@@ -155,7 +157,7 @@ const AnimatedHealthMeter = ({ metricKey, value, previousValue, language, labels
       <div className="relative mb-6">
         <div className="h-3 bg-muted rounded-full overflow-hidden shadow-inner">
           <div 
-            className={`h-full bg-gradient-to-r ${getAnimatedHealthColor(value)} transition-all duration-1000 ease-out rounded-full relative ${isAnimating ? 'animate-pulse' : ''}`}
+            className={`h-full bg-gradient-to-r ${getAnimatedHealthColor(value)} transition-all duration-1000 ease-out rounded-full relative ${isAnimating ? 'animate-pulse' : ''} ${isPulsingRed ? 'animate-pulse-red' : ''}`}
             style={{ width: `${value}%` }}
           >
             {/* Shine effect */}
@@ -166,7 +168,7 @@ const AnimatedHealthMeter = ({ metricKey, value, previousValue, language, labels
       
       {/* Status Badge */}
       <div className="text-center">
-        <span className={`inline-block px-4 py-2 rounded-full text-sm font-medium text-white bg-gradient-to-r ${getAnimatedHealthColor(value)} shadow-md transition-all duration-500 ${isAnimating ? 'scale-105' : ''}`}>
+        <span className={`inline-block px-4 py-2 rounded-full text-sm font-medium text-white bg-gradient-to-r ${getAnimatedHealthColor(value)} shadow-md transition-all duration-500 ${isAnimating ? 'scale-105' : ''} ${isPulsingRed ? 'animate-pulse-red' : ''}`}>
           {getHealthStatus(value, language)}
         </span>
       </div>

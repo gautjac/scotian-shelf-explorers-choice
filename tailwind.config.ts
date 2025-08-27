@@ -169,6 +169,17 @@ export default {
 						transform: 'scale(0.95)',
 						opacity: '0'
 					}
+				},
+				'pulse-red': {
+					'0%': {
+						boxShadow: '0 0 0 0 rgb(239 68 68 / 0.7)'
+					},
+					'50%': {
+						boxShadow: '0 0 0 10px rgb(239 68 68 / 0.3)'
+					},
+					'100%': {
+						boxShadow: '0 0 0 0 rgb(239 68 68 / 0)'
+					}
 				}
 			},
 			animation: {
@@ -181,7 +192,8 @@ export default {
 				'fade-cross-in': 'fade-cross-in 0.5s ease-out',
 				'fade-cross-out': 'fade-cross-out 0.5s ease-out',
 				'scale-modal-in': 'scale-modal-in 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-				'scale-modal-out': 'scale-modal-out 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+				'scale-modal-out': 'scale-modal-out 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+				'pulse-red': 'pulse-red 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
 			}
 		}
 	},
