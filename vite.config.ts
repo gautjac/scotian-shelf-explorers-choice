@@ -17,8 +17,8 @@ export default defineConfig(({ mode }) => ({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'robots.txt'],
       manifest: {
-        name: 'Nova Scotia Ocean Game v1.1',
-        short_name: 'Ocean Game',
+        name: 'Nova Scotia Ocean Game v1.2',
+        short_name: 'Ocean Game v1.2',
         description: 'An educational marine conservation game for Nova Scotia',
         theme_color: '#0369a1',
         background_color: '#ffffff',
@@ -34,12 +34,16 @@ export default defineConfig(({ mode }) => ({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,jpg,jpeg,svg,webp}'],
+        skipWaiting: true,
+        clientsClaim: true,
+        cleanupOutdatedCaches: true,
+        cacheId: 'ocean-game-v1.2',
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
             handler: 'CacheFirst',
             options: {
-              cacheName: 'google-fonts-cache',
+              cacheName: 'google-fonts-cache-v1.2',
               expiration: {
                 maxEntries: 10,
                 maxAgeSeconds: 60 * 60 * 24 * 365 // 365 days
