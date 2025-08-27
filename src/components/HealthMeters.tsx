@@ -5,6 +5,7 @@ import { Waves, DollarSign, Users, Fish } from 'lucide-react';
 
 interface HealthMetersProps {
   healthMetrics: HealthMetrics;
+  previousHealthMetrics?: HealthMetrics;
   language: 'en' | 'fr' | 'mi';
   showInitialAnimation?: boolean;
 }
@@ -48,50 +49,116 @@ interface AnimatedHealthMeterProps {
   language: 'en' | 'fr' | 'mi';
   labels: { [key: string]: string };
   getUIText: (screen: string, element: string, lang: string) => string | null;
+  animationDelay?: number;
 }
 
-const AnimatedHealthMeter = ({ metricKey, value, previousValue, language, labels, getUIText }: AnimatedHealthMeterProps) => {
+const AnimatedHealthMeter = ({ metricKey, value, previousValue, language, labels, getUIText, animationDelay = 0 }: AnimatedHealthMeterProps) => {
   const [displayValue, setDisplayValue] = useState(previousValue);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
+  const [showChangeIndicator, setShowChangeIndicator] = useState(false);
 
   useEffect(() => {
-    if (previousValue !== value) {
-      setIsAnimating(true);
-      
-      const animationDuration = 1500;
-      const startTime = Date.now();
-      const startValue = displayValue;
-      const endValue = value;
-      
-      const animate = () => {
-        const elapsed = Date.now() - startTime;
-        const progress = Math.min(elapsed / animationDuration, 1);
+    if (previousValue !== value && !hasStarted) {
+      const startAnimation = () => {
+        setHasStarted(true);
+        setIsAnimating(true);
+        setShowChangeIndicator(true);
         
-        // Easing function for smooth animation
-        const easeOut = 1 - Math.pow(1 - progress, 3);
-        const currentValue = Math.round(startValue + (endValue - startValue) * easeOut);
+        const animationDuration = 2000;
+        const startTime = Date.now();
+        const startValue = previousValue;
+        const endValue = value;
+        const change = endValue - startValue;
         
-        setDisplayValue(currentValue);
+        const animate = () => {
+          const elapsed = Date.now() - startTime;
+          const progress = Math.min(elapsed / animationDuration, 1);
+          
+          // Enhanced easing function with bounce effect for dramatic changes
+          const isDramaticChange = Math.abs(change) > 20;
+          let easeOut;
+          
+          if (isDramaticChange && progress > 0.8) {
+            // Add slight bounce for dramatic changes
+            const bounceProgress = (progress - 0.8) / 0.2;
+            const bounce = 1 + Math.sin(bounceProgress * Math.PI * 2) * 0.05 * (1 - bounceProgress);
+            easeOut = 0.8 + (1 - 0.8) * bounceProgress * bounce;
+          } else {
+            easeOut = 1 - Math.pow(1 - progress, 3);
+          }
+          
+          const currentValue = Math.round(startValue + change * easeOut);
+          setDisplayValue(currentValue);
+          
+          if (progress < 1) {
+            requestAnimationFrame(animate);
+          } else {
+            setIsAnimating(false);
+            // Hide change indicator after animation
+            setTimeout(() => setShowChangeIndicator(false), 1000);
+          }
+        };
         
-        if (progress < 1) {
-          requestAnimationFrame(animate);
-        } else {
-          setIsAnimating(false);
-        }
+        requestAnimationFrame(animate);
       };
       
-      requestAnimationFrame(animate);
+      // Apply staggered delay
+      setTimeout(startAnimation, animationDelay);
     }
-  }, [value, previousValue, displayValue]);
+  }, [value, previousValue, animationDelay, hasStarted]);
 
   const Icon = getIcon(metricKey);
   const isPulsingRed = displayValue < 50;
+  const change = value - previousValue;
+  const isDramaticChange = Math.abs(change) > 20;
+  const isPositiveChange = change > 0;
+  const isNegativeChange = change < 0;
 
   return (
-    <div className="text-center">
+    <div className={`text-center transition-all duration-500 ${!hasStarted ? 'opacity-50 scale-95' : 'opacity-100 scale-100'}`}>
       <div className="relative mb-4">
-        {/* Circular progress background */}
-        <div className="w-24 h-24 mx-auto">
+        {/* Change indicator */}
+        {showChangeIndicator && change !== 0 && (
+          <div className={`absolute -top-8 left-1/2 transform -translate-x-1/2 z-20 animate-fade-in ${
+            isPositiveChange ? 'text-emerald-400' : 'text-red-400'
+          } font-bold text-lg`}>
+            {isPositiveChange ? '+' : ''}{change}
+            <div className={`inline-block ml-1 ${isPositiveChange ? 'animate-bounce' : 'animate-pulse'}`}>
+              {isPositiveChange ? '↗' : '↘'}
+            </div>
+          </div>
+        )}
+        
+        {/* Particle effects for dramatic changes */}
+        {isAnimating && isDramaticChange && (
+          <div className="absolute inset-0 pointer-events-none">
+            {[...Array(8)].map((_, i) => (
+              <div
+                key={i}
+                className={`absolute w-2 h-2 rounded-full animate-ping ${
+                  isPositiveChange ? 'bg-emerald-400' : 'bg-red-400'
+                }`}
+                style={{
+                  top: `${20 + Math.sin(i * Math.PI / 4) * 30}%`,
+                  left: `${50 + Math.cos(i * Math.PI / 4) * 30}%`,
+                  animationDelay: `${i * 100}ms`,
+                  animationDuration: '1s'
+                }}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* Circular progress background with enhanced effects */}
+        <div className={`w-24 h-24 mx-auto relative ${
+          isAnimating && isDramaticChange ? (isNegativeChange ? 'animate-pulse' : 'animate-pulse') : ''
+        }`}>
+          {/* Glow effect for positive changes */}
+          {isAnimating && isPositiveChange && isDramaticChange && (
+            <div className="absolute inset-0 rounded-full bg-emerald-400/20 animate-ping" />
+          )}
+          
           <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
             {/* Background circle */}
             <circle
@@ -103,30 +170,44 @@ const AnimatedHealthMeter = ({ metricKey, value, previousValue, language, labels
               strokeWidth="8"
               className="text-slate-700/30"
             />
-            {/* Progress circle */}
+            {/* Progress circle with enhanced styling */}
             <circle
               cx="50"
               cy="50"
               r="45"
               fill="none"
-              stroke="currentColor"
+              stroke="url(#gradient)"
               strokeWidth="8"
               strokeDasharray={`${2 * Math.PI * 45}`}
               strokeDashoffset={`${2 * Math.PI * 45 * (1 - displayValue / 100)}`}
-              className={`transition-all duration-1000 ease-out ${
-                displayValue >= 80 ? 'text-emerald-500' :
-                displayValue >= 60 ? 'text-blue-500' :
-                displayValue >= 40 ? 'text-amber-500' :
-                'text-red-500'
-              }`}
+              className="transition-all duration-1000 ease-out drop-shadow-lg"
               strokeLinecap="round"
             />
+            {/* Gradient definitions */}
+            <defs>
+              <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" className={
+                  displayValue >= 80 ? 'stop-emerald-400' :
+                  displayValue >= 60 ? 'stop-blue-400' :
+                  displayValue >= 40 ? 'stop-amber-400' :
+                  'stop-red-400'
+                } />
+                <stop offset="100%" className={
+                  displayValue >= 80 ? 'stop-emerald-600' :
+                  displayValue >= 60 ? 'stop-blue-600' :
+                  displayValue >= 40 ? 'stop-amber-600' :
+                  'stop-red-600'
+                } />
+              </linearGradient>
+            </defs>
           </svg>
           
-          {/* Icon in center */}
+          {/* Icon in center with enhanced effects */}
           <div className="absolute inset-0 flex items-center justify-center">
             <Icon className={`w-8 h-8 transition-all duration-300 ${
-              isPulsingRed ? 'text-red-500' : 'text-white'
+              isAnimating && isDramaticChange ? 'animate-pulse scale-110' : ''
+            } ${
+              isPulsingRed ? 'text-red-500' : 'text-white drop-shadow-lg'
             }`} />
           </div>
         </div>
@@ -137,8 +218,12 @@ const AnimatedHealthMeter = ({ metricKey, value, previousValue, language, labels
         <h4 className="text-sm font-medium text-slate-200 mb-1">
           {labels[metricKey]}
         </h4>
-        <div className={`text-2xl font-bold text-white transition-all duration-300 ${
-          isAnimating ? 'scale-110' : ''
+        <div className={`text-2xl font-bold text-white transition-all duration-500 ${
+          isAnimating ? 'scale-125 drop-shadow-lg' : 'scale-100'
+        } ${
+          isAnimating && isDramaticChange && isNegativeChange ? 'animate-pulse text-red-400' : ''
+        } ${
+          isAnimating && isDramaticChange && isPositiveChange ? 'text-emerald-400' : ''
         }`}>
           {displayValue}%
         </div>
@@ -159,9 +244,9 @@ const AnimatedHealthMeter = ({ metricKey, value, previousValue, language, labels
   );
 };
 
-export const HealthMeters = ({ healthMetrics, language, showInitialAnimation = false }: HealthMetersProps) => {
-  const previousValuesRef = useRef<HealthMetrics>({ ...healthMetrics });
+export const HealthMeters = ({ healthMetrics, previousHealthMetrics, language, showInitialAnimation = false }: HealthMetersProps) => {
   const { getUIText } = useComprehensiveConfig();
+  const [titleAnimationComplete, setTitleAnimationComplete] = useState(false);
 
   const labels = {
     ecosystem: getUIText('HealthMeters', 'Ecosystem Health', language) || (language === 'en' ? 'Animals & Plants Health' : language === 'fr' ? 'Santé des animaux et plantes' : 'Ukamkinu\'kuom samqwan'),
@@ -169,14 +254,29 @@ export const HealthMeters = ({ healthMetrics, language, showInitialAnimation = f
     community: getUIText('HealthMeters', 'Community Health', language) || (language === 'en' ? 'People\'s Health' : language === 'fr' ? 'Santé des gens' : 'L\'nui samqwan')
   };
 
+  // Use passed previous values or fallback to current values
+  const prevValues = previousHealthMetrics || healthMetrics;
+
+  // Staggered animation delays
+  const animationDelays = {
+    ecosystem: 0,
+    economic: 600,
+    community: 1200
+  };
+
   useEffect(() => {
-    // Update previous values after render for next animation
-    previousValuesRef.current = { ...healthMetrics };
-  });
+    // Start title animation
+    const timer = setTimeout(() => {
+      setTitleAnimationComplete(true);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="w-full">
-      <h2 className="text-2xl lg:text-3xl font-bold text-center mb-8 text-slate-100">
+      <h2 className={`text-2xl lg:text-3xl font-bold text-center mb-8 text-slate-100 transition-all duration-1000 ${
+        titleAnimationComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+      }`}>
         {getUIText('HealthMeters', 'Marine Health Status', language) || 
          (language === 'en' ? 'How Healthy is the Ocean' : 
           language === 'fr' ? 'Comment va l\'océan' : 
@@ -185,15 +285,16 @@ export const HealthMeters = ({ healthMetrics, language, showInitialAnimation = f
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
         {Object.entries(healthMetrics).map(([metricKey, value]) => (
-          <div key={metricKey}>
+          <div key={metricKey} className="animate-fade-in">
             <AnimatedHealthMeter
-              key={metricKey}
+              key={`${metricKey}-${JSON.stringify(prevValues)}`}
               metricKey={metricKey}
               value={value}
-              previousValue={previousValuesRef.current[metricKey as keyof HealthMetrics]}
+              previousValue={prevValues[metricKey as keyof HealthMetrics]}
               language={language}
               labels={labels}
               getUIText={getUIText}
+              animationDelay={animationDelays[metricKey as keyof typeof animationDelays]}
             />
           </div>
         ))}

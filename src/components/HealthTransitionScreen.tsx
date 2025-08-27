@@ -46,7 +46,12 @@ export const HealthTransitionScreen = ({
           </p>
 
           {showMeters && <div className="mb-12 animate-fade-in">
-              <HealthMeters healthMetrics={currentHealthMetrics} language={language} showInitialAnimation={true} />
+              <HealthMeters 
+                healthMetrics={currentHealthMetrics} 
+                previousHealthMetrics={previousHealthMetrics}
+                language={language} 
+                showInitialAnimation={true} 
+              />
             </div>}
 
           <div className="flex flex-col items-center gap-6">
