@@ -14,12 +14,6 @@ renewable-energy,"Ocean Wind Power",adaptive-technology,"Design fish-friendly wi
 coastal-development,"Building by the Beach",green-development,"Use eco-friendly building methods",en,positive,20,-5,15
 coastal-development,"Building by the Beach",unrestricted-development,"Build wherever and however people want",en,negative,-30,10,-10
 coastal-development,"Building by the Beach",buffer-zones-coastal,"Leave natural spaces between buildings and water",en,positive,25,-8,12
-invasive-species,"Underwater Invaders",removal-programs,"Set up special traps to catch the invaders",en,positive,20,-10,8
-invasive-species,"Underwater Invaders",ignore-invaders,"Let the new species stay and see what happens",en,negative,-25,0,-5
-invasive-species,"Underwater Invaders",education-prevention,"Teach people how to stop new invaders from arriving",en,positive,15,-5,25
-climate-change,"The Warming Waters",renewable-energy,"Switch to wind and solar power",en,positive,25,-5,20
-climate-change,"The Warming Waters",ignore-climate,"Keep using coal and oil for energy",en,negative,-30,0,-15
-climate-change,"The Warming Waters",carbon-capture,"Protect kelp forests and salt marshes",en,positive,35,-8,10
 plastic-pollution,"Attaque de déchets!",ban-plastics,"Interdire les plastiques jetables comme les sacs",fr,positive,25,-5,15
 plastic-pollution,"Attaque de déchets!",ignore-problem,"Continuer à utiliser le plastique comme avant",fr,negative,-30,0,-10
 plastic-pollution,"Attaque de déchets!",beach-cleanup,"Organiser des fêtes de nettoyage de plage",fr,positive,10,5,20
@@ -35,12 +29,6 @@ renewable-energy,"Énergie éolienne océanique",adaptive-technology,"Concevoir 
 coastal-development,"Construction près de la plage",green-development,"Utiliser des méthodes de construction écologiques",fr,positive,20,-5,15
 coastal-development,"Construction près de la plage",unrestricted-development,"Construire où et comme les gens veulent",fr,negative,-30,10,-10
 coastal-development,"Construction près de la plage",buffer-zones-coastal,"Laisser des espaces naturels entre les bâtiments et l'eau",fr,positive,25,-8,12
-invasive-species,"Envahisseurs sous-marins",removal-programs,"Installer des pièges spéciaux pour attraper les envahisseurs",fr,positive,20,-10,8
-invasive-species,"Envahisseurs sous-marins",ignore-invaders,"Laisser les nouvelles espèces rester et voir ce qui arrive",fr,negative,-25,0,-5
-invasive-species,"Envahisseurs sous-marins",education-prevention,"Enseigner aux gens comment empêcher de nouveaux envahisseurs d'arriver",fr,positive,15,-5,25
-climate-change,"Les eaux qui se réchauffent",renewable-energy,"Passer à l'énergie éolienne et solaire",fr,positive,25,-5,20
-climate-change,"Les eaux qui se réchauffent",ignore-climate,"Continuer à utiliser le charbon et le pétrole pour l'énergie",fr,negative,-30,0,-15
-climate-change,"Les eaux qui se réchauffent",carbon-capture,"Protéger les forêts de varech et les marais salés",fr,positive,35,-8,10
 plastic-pollution,"Uksiknu pokteskey!",ban-plastics,"Kekluskap poktej ta'n telekiskuwapon",mi,positive,25,-5,15
 plastic-pollution,"Uksiknu pokteskey!",ignore-problem,"Siawa'si poktej teluewey",mi,negative,-30,0,-10
 plastic-pollution,"Uksiknu pokteskey!",beach-cleanup,"Etluktanej poktiskuom wulapekey",mi,positive,10,5,20
@@ -56,9 +44,3 @@ renewable-energy,"Samqwan lu'spusit",adaptive-technology,"Eluey kis-nukskwey lu'
 coastal-development,"Wiktwaqan kespukek",green-development,"Alasut wiktuaqan kisiwaktomk",mi,positive,20,-5,15
 coastal-development,"Wiktwaqan kespukek",unrestricted-development,"Wiktuaqan tami aq ta'n teluewey",mi,negative,-30,10,-10
 coastal-development,"Wiktwaqan kespukek",buffer-zones-coastal,"Pkiji apisqinekey wiktuaqan aq samqwan",mi,positive,25,-8,12
-invasive-species,"Ankemkewe'k samqwanikatl",removal-programs,"Elukwey kisipkisittikewey ankemkewe'k",mi,positive,20,-10,8
-invasive-species,"Ankemkewe'k samqwanikatl",ignore-invaders,"Pkitasik pilei samqwanikatl aq nemi'j koqoey kejiwaqek",mi,negative,-25,0,-5
-invasive-species,"Ankemkewe'k samqwanikatl",education-prevention,"Kina'muanej l'nui ta'n telkelmuk pilei ankemkewe'k",mi,positive,15,-5,25
-climate-change,"Kespusikanik samqwan",renewable-energy,"Ankamu'k lo'spusit aq naqu'set",mi,positive,25,-5,20
-climate-change,"Kespusikanik samqwan",ignore-climate,"Siawa'si kespusik",mi,negative,-30,0,-15
-climate-change,"Kespusikanik samqwan",carbon-capture,"Ankamtuin kluskap ukwatapskwey aq sipekil",mi,positive,35,-8,10

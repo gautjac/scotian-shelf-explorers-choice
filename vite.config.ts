@@ -17,7 +17,7 @@ export default defineConfig(({ mode }) => ({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'robots.txt'],
       manifest: {
-        name: 'Nova Scotia Ocean Game',
+        name: 'Nova Scotia Ocean Game v1.1',
         short_name: 'Ocean Game',
         description: 'An educational marine conservation game for Nova Scotia',
         theme_color: '#0369a1',
