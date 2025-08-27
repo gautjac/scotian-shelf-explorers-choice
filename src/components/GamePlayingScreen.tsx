@@ -24,6 +24,7 @@ export const GamePlayingScreen = ({
   onRestart,
   onBackToLanguageSelection
 }: GamePlayingScreenProps) => {
+  const scenarioProgress = `${gameState.currentScenarioIndex + 1}/5`;
   const { getScenarioText, getChoiceText } = useComprehensiveConfig();
   
   const title = getScenarioText(currentScenario.id, 'title', gameState.language) ?? currentScenario.title;
@@ -47,9 +48,14 @@ export const GamePlayingScreen = ({
             style={{ backgroundImage: `url(${currentScenario.imageUrl})` }}
           />
 
-          {/* Content Section */}
+          {/* Content Section with Scenario Progress */}
           <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-6 py-6 lg:px-8 lg:py-8 shadow-lg">
-            <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-900 mb-4">{title}</h2>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-900">{title}</h2>
+              <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg font-semibold text-lg">
+                {scenarioProgress}
+              </div>
+            </div>
             <p className="text-xl lg:text-2xl text-slate-700 leading-relaxed">
               {description}
             </p>

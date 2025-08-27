@@ -1,9 +1,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
-import { Choice } from '../types';
+import { Choice, GamePhase } from '../types';
 import { getChoiceImpact } from '../utils/impactConfiguration';
-
-type GamePhase = 'languageSelection' | 'preview' | 'playing' | 'consequence' | 'completed';
 
 export const useGamePhase = (lastActivity: number, resetGame: () => void) => {
   const [gamePhase, setGamePhase] = useState<GamePhase>('languageSelection');
@@ -31,8 +29,8 @@ export const useGamePhase = (lastActivity: number, resetGame: () => void) => {
   }, [lastActivity, gamePhase, showInactivityModal]);
 
   const handleLanguageSelect = useCallback(() => {
-    setGamePhase('preview');
-  }, []);
+    setGamePhase('playing');
+  }, []); // Go directly to playing, skip preview
 
   const handleShowPreview = useCallback(() => {
     setGamePhase('preview');
@@ -72,15 +70,22 @@ export const useGamePhase = (lastActivity: number, resetGame: () => void) => {
     if (selectedChoice) {
       const granularImpacts = getChoiceImpact(currentScenarioId, selectedChoice);
       makeChoice(currentScenarioId, selectedChoice.id, selectedChoice.impact, granularImpacts);
-      if (selectedChoice.nextScenarioId) {
-        advanceScenario(selectedChoice.nextScenarioId);
-        setGamePhase('playing');
-      } else {
-        setGamePhase('completed');
-      }
+      setGamePhase('healthTransition');
       setSelectedChoice(null);
     }
   }, [selectedChoice]);
+
+  const handleHealthTransitionComplete = useCallback((
+    advanceScenario: (scenarioId?: string) => void,
+    selectedChoice: Choice
+  ) => {
+    if (selectedChoice?.nextScenarioId) {
+      advanceScenario(selectedChoice.nextScenarioId);
+      setGamePhase('playing');
+    } else {
+      setGamePhase('completed');
+    }
+  }, []);
 
   const handleReturnToChoices = useCallback(() => {
     setSelectedChoice(null);
@@ -121,6 +126,7 @@ export const useGamePhase = (lastActivity: number, resetGame: () => void) => {
     handleScenarioSelect,
     handleChoiceSelect,
     handleConfirmChoice,
+    handleHealthTransitionComplete,
     handleReturnToChoices,
     handleRestart,
     handleInactivityStillHere,

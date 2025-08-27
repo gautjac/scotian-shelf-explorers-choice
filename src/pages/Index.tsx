@@ -6,6 +6,7 @@ import { ScenarioPreview } from '../components/ScenarioPreview';
 import { ConsequenceModal } from '../components/ConsequenceModal';
 import { CompletionScreen } from '../components/CompletionScreen';
 import { GamePlayingScreen } from '../components/GamePlayingScreen';
+import { HealthTransitionScreen } from '../components/HealthTransitionScreen';
 import { ContentManagerButton } from '../components/ContentManagerButton';
 import { useGameState } from '../hooks/useGameState';
 import { useGamePhase } from '../hooks/useGamePhase';
@@ -35,6 +36,7 @@ const Index = () => {
     handleScenarioSelect,
     handleChoiceSelect,
     handleConfirmChoice,
+    handleHealthTransitionComplete,
     handleReturnToChoices,
     handleRestart,
     handleInactivityStillHere,
@@ -112,9 +114,11 @@ const Index = () => {
     trackActivity();
   };
 
-  const handleShowPreviewWithTracking = () => {
-    handleShowPreview();
-    trackActivity();
+  const handleHealthTransitionCompleteWithTracking = () => {
+    if (selectedChoice) {
+      handleHealthTransitionComplete(advanceScenario, selectedChoice);
+      trackActivity();
+    }
   };
 
   return (
@@ -147,6 +151,16 @@ const Index = () => {
           onBackToPreview={handleBackToPreviewWithTracking}
           onRestart={handleRestartWithTracking}
           onBackToLanguageSelection={handleBackToLanguageSelectionWithTracking}
+        />
+      )}
+
+      {gamePhase === 'healthTransition' && selectedChoice && gameState.previousHealthMetrics && (
+        <HealthTransitionScreen
+          currentHealthMetrics={gameState.healthMetrics}
+          previousHealthMetrics={gameState.previousHealthMetrics}
+          language={gameState.language}
+          selectedChoice={selectedChoice}
+          onTransitionComplete={handleHealthTransitionCompleteWithTracking}
         />
       )}
 

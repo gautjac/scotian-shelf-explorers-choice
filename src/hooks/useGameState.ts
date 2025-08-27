@@ -5,6 +5,8 @@ import { marineSpecies } from '../data/content';
 import { useComprehensiveConfig } from './useComprehensiveConfig';
 import { getChoiceImpact } from '../utils/impactConfiguration';
 
+const scenarioOrder = ['plastic-pollution', 'fishing-practices', 'shipping-traffic', 'renewable-energy', 'coastal-development'];
+
 const initialGameState: GameState = {
   currentScenarioId: 'plastic-pollution',
   language: 'en',
@@ -18,6 +20,12 @@ const initialGameState: GameState = {
     economic: 70,
     community: 70
   },
+  previousHealthMetrics: {
+    ecosystem: 70,
+    economic: 70,
+    community: 70
+  },
+  currentScenarioIndex: 0,
   sessionStartTime: Date.now(),
   choicesMade: []
 };
@@ -33,6 +41,9 @@ export const useGameState = () => {
   const makeChoice = useCallback((scenarioId: string, choiceId: string, impact: 'positive' | 'negative' | 'neutral', granularImpacts?: { ecosystem: number; economic: number; community: number }) => {
     console.log('makeChoice called:', { scenarioId, choiceId, impact, granularImpacts });
     setGameState(prev => {
+      // Store current metrics as previous before updating
+      const previousHealthMetrics = { ...prev.healthMetrics };
+      
       const newSpeciesHealth = { ...prev.speciesHealth };
       const newHealthMetrics = { ...prev.healthMetrics };
       
@@ -111,6 +122,7 @@ export const useGameState = () => {
         ...prev,
         speciesHealth: newSpeciesHealth,
         healthMetrics: newHealthMetrics,
+        previousHealthMetrics,
         choicesMade: [...prev.choicesMade, {
           scenarioId,
           choiceId,
@@ -122,16 +134,24 @@ export const useGameState = () => {
   }, [getComprehensiveChoiceImpact]);
 
   const advanceScenario = useCallback((nextScenarioId?: string) => {
-    if (nextScenarioId) {
-      setGameState(prev => ({ ...prev, currentScenarioId: nextScenarioId }));
-    }
+    setGameState(prev => {
+      const currentIndex = scenarioOrder.findIndex(id => id === prev.currentScenarioId);
+      const nextIndex = nextScenarioId ? scenarioOrder.findIndex(id => id === nextScenarioId) : currentIndex + 1;
+      
+      return {
+        ...prev,
+        currentScenarioId: nextScenarioId || prev.currentScenarioId,
+        currentScenarioIndex: nextIndex >= 0 ? nextIndex : prev.currentScenarioIndex
+      };
+    });
   }, []);
 
   const resetGame = useCallback(() => {
     setGameState({
       ...initialGameState,
       language: gameState.language, // Keep current language
-      sessionStartTime: Date.now()
+      sessionStartTime: Date.now(),
+      currentScenarioIndex: 0
     });
   }, [gameState.language]);
 

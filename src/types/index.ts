@@ -1,4 +1,6 @@
 
+export type GamePhase = 'languageSelection' | 'preview' | 'playing' | 'consequence' | 'healthTransition' | 'completed';
+
 export interface Language {
   code: 'en' | 'fr' | 'mi';
   name: string;
@@ -47,6 +49,8 @@ export interface GameState {
   completedScenarios: string[];
   speciesHealth: Record<string, MarineSpecies['healthStatus']>;
   healthMetrics: HealthMetrics;
+  previousHealthMetrics?: HealthMetrics;
+  currentScenarioIndex: number;
   sessionStartTime: number;
   choicesMade: Array<{
     scenarioId: string;
