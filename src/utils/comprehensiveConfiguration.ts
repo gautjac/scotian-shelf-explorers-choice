@@ -61,10 +61,12 @@ ConsequenceModal,Positive Impact,Good Things,Bonnes choses,Weli koqoey,Pros sect
 ConsequenceModal,Negative Impact,Bad Things,Mauvaises choses,Maw koqoey,Cons section header
 ConsequenceModal,Confirm Button,Yes I Choose This,Oui je choisis cela,Ketu'k koqoey,Confirmation button
 ConsequenceModal,Return Button,Go Back to Choices,Retour aux choix,Eykisk koqoey elkewey,Cancel button
+ConsequenceModal,The Pros,The pros,Les avantages,Weli koqoey,Pros label
+ConsequenceModal,The Cons,The cons,Les inconvénients,Maw koqoey,Cons label
 GameActions,Back to Scenarios,Back to Stories,Retour aux histoires,Kluskap koqoey,Navigation button
 GameActions,Restart,Start Over,Recommencer,Pilei mawita'sin,Reset button
-CompletionScreen,Title,MISSION ACCOMPLISHED GUARDIAN!,Vous avez réussi!,Ankamkewey kespek!,Completion title
-CompletionScreen,Subtitle,Your choices have an impact!,Vous avez appris comment les choix des gens affectent les animaux marins près de la Nouvelle-Écosse,Wejkukuom talitakuom ketu samqwanikatl Kespukek,Achievement description
+CompletionScreen,Title,MISSION ACCOMPLISHED!,Vous avez réussi!,Ankamkewey kespek!,Completion title
+CompletionScreen,Subtitle,Your choices have an impact!,Vos choix ont un impact!,Kil koqoey ankamtimul!,Achievement description
 CompletionScreen,Message,Every choice we make changes ocean life. Things like plastic trash and fishing affect sea animals. Your choices today help decide what happens to the ocean tomorrow.,Chaque choix que nous faisons change la vie océanique. Des choses comme les déchets plastiques et la pêche affectent les animaux marins. Vos choix d'aujourd'hui aident à décider ce qui arrive à l'océan demain.,Msit koqoey elkewekl menaqanej samqwan ukamskusuwakon. Pekisk aq pilei pu'tu'n kil koqoey elkewek nukta samqwanikatl kepmikatl.,Educational message
 CompletionScreen,Encouragement,Want to see what happens with different choices? Try again and pick different things to see how they change the ocean.,Voulez-vous voir ce qui arrive avec différents choix? Essayez encore et choisissez différentes choses pour voir comment elles changent l'océan.,Ketu aqq koqoey nemituom? Ula koqoey elkewek aq nemi'j samqwan ankamtimul.,Replay encouragement
 CompletionScreen,Restart Button,Play Again,Jouer encore,Siawey ankamkewey,Restart CTA
@@ -72,6 +74,11 @@ CompletionScreen,Your Impact,How You Did,Comment vous avez fait,Kil wenjo'taqn,I
 CompletionScreen,Excellent Work,Great job! Your choices help keep the ocean healthy.,Excellent travail! Vos choix aident à garder l'océan en bonne santé.,Kelu wetulti'k! Kil koqoey elkewek pilei samqwanikatl ukepmikatl.,High positive score message
 CompletionScreen,Good Effort,Good work! Some of your choices help sea animals.,Bon travail! Certains de vos choix aident les animaux marins.,Pilei wetulti'k! Apjiw kil koqoey elkewek kepmikatl samqwanikatl.,Medium score message
 CompletionScreen,Try Again,Try again with different choices to help sea animals more.,Essayez encore avec différents choix pour aider davantage les animaux marins.,Aqq nikma koqoey elkewek pilei samqwanikatl ukepmikatil.,Low score message
+HealthTransitionScreen,Title,Ocean Impact,Impact sur l'océan,Kepkek ta'n telitaqsit,Impact screen title
+HealthTransitionScreen,Impact Text,Your choice has changed the ocean health...,Votre choix a changé la santé de l'océan...,Kil koqoey kesalul kepkek wula'tioqn...,Impact description
+HealthTransitionScreen,Next Scenario,Next scenario,Prochain scénario,Aq tett,Continue to next
+HealthTransitionScreen,Final Results,Final results,Résultats finaux,Klu'su'n,Go to completion
+HealthTransitionScreen,Next Button,Next,Suivant,Aqq,Continue button
 CompactHealthMeters,Marine Health,Ocean Health,Santé océanique,Samqwan ukamkinu'kuom,Health section title
 CompactHealthMeters,Ecosystem,Animals & Plants,Animaux et plantes,Ukamkinu'kuom,Ecosystem health label
 CompactHealthMeters,Economic,Money & Jobs,Argent et emplois,Toqwa'tu'k,Economic health label
@@ -80,10 +87,10 @@ HealthMeters,Marine Health Status,How Healthy is the Ocean,Comment va l'océan,S
 HealthMeters,Ecosystem Health,Animals & Plants Health,Santé des animaux et plantes,Ukamkinu'kuom samqwan,Full ecosystem label
 HealthMeters,Economic Health,Money & Jobs Health,Santé de l'argent et des emplois,Toqwa'tu'k samqwan,Full economic label
 HealthMeters,Community Health,People's Health,Santé des gens,L'nui samqwan,Full community label
-Health Status,Thriving,Doing Great,Très bien,Pilei,80%+ health status
-Health Status,Stable,Doing OK,Ça va,Nukek,60-79% health status
-Health Status,Declining,Not Good,Pas bon,Tepisq,40-59% health status
-Health Status,Critical,Very Bad,Très mauvais,Mekij,Below 40% health status
+HealthStatus,Thriving,Doing Great,Très bien,Pilei,80%+ health status
+HealthStatus,Stable,Doing OK,Ça va,Nukek,60-79% health status
+HealthStatus,Declining,Not Good,Pas bon,Tepisq,40-59% health status
+HealthStatus,Critical,Very Bad,Très mauvais,Mekij,Below 40% health status
 InactivityModal,Title,You've been away for a while,Vous êtes absent depuis un moment,Telkisqewe'k kiju,Inactivity modal title
 InactivityModal,Still Here Button,I'm still here,Je suis toujours là,Aqq tett naka,Still here button
 InactivityModal,Start Over Button,Start over,Recommencer,Pilei mawita'sin,Start over button

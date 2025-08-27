@@ -1,7 +1,7 @@
-
-import { HealthMetrics } from '../types';
-import { Waves, Coins, Heart } from 'lucide-react';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { HealthMetrics, Language } from '../types';
+import { useComprehensiveConfig } from '../hooks/useComprehensiveConfig';
+import { Waves, DollarSign, Users, Fish } from 'lucide-react';
 
 interface HealthMetersProps {
   healthMetrics: HealthMetrics;
@@ -10,49 +10,34 @@ interface HealthMetersProps {
 }
 
 const getHealthColor = (value: number) => {
-  if (value >= 80) return 'from-green-400 to-green-500';
+  if (value >= 80) return 'from-emerald-400 to-emerald-500';
   if (value >= 60) return 'from-blue-400 to-blue-500';
-  if (value >= 40) return 'from-yellow-400 to-yellow-500';
+  if (value >= 40) return 'from-amber-400 to-amber-500';
   return 'from-red-400 to-red-500';
 };
 
-const getHealthStatus = (value: number, language: 'en' | 'fr' | 'mi') => {
-  const status = value >= 80 ? 'thriving' : value >= 60 ? 'stable' : value >= 40 ? 'declining' : 'critical';
-  
-  const statusText = {
-    en: {
-      thriving: 'Doing Great',
-      stable: 'Doing OK',
-      declining: 'Not Good',
-      critical: 'Very Bad'
-    },
-    fr: {
-      thriving: 'Très bien',
-      stable: 'Ça va',
-      declining: 'Pas bon',
-      critical: 'Très mauvais'
-    },
-    mi: {
-      thriving: 'Pilei',
-      stable: 'Nukek',
-      declining: 'Tepisq',
-      critical: 'Mekij'
-    }
-  };
-
-  return statusText[language][status];
+const getHealthStatus = (value: number, language: 'en' | 'fr' | 'mi', getUIText: (screen: string, element: string, lang: string) => string | null): string => {
+  if (value >= 80) {
+    return getUIText('HealthStatus', 'Thriving', language) || (language === 'en' ? 'Doing Great' : language === 'fr' ? 'Très bien' : 'Pilei');
+  } else if (value >= 60) {
+    return getUIText('HealthStatus', 'Stable', language) || (language === 'en' ? 'Doing OK' : language === 'fr' ? 'Ça va' : 'Nukek');
+  } else if (value >= 40) {
+    return getUIText('HealthStatus', 'Declining', language) || (language === 'en' ? 'Not Good' : language === 'fr' ? 'Pas bon' : 'Tepisq');
+  } else {
+    return getUIText('HealthStatus', 'Critical', language) || (language === 'en' ? 'Very Bad' : language === 'fr' ? 'Très mauvais' : 'Mekij');
+  }
 };
 
 const getIcon = (type: string) => {
   switch (type) {
     case 'ecosystem':
-      return <Waves className="w-24 h-24 lg:w-32 lg:h-32 text-white" />;
+      return Fish;
     case 'economic':
-      return <Coins className="w-24 h-24 lg:w-32 lg:h-32 text-white" />;
+      return DollarSign;
     case 'community':
-      return <Heart className="w-24 h-24 lg:w-32 lg:h-32 text-white" />;
+      return Users;
     default:
-      return <Waves className="w-24 h-24 lg:w-32 lg:h-32 text-white" />;
+      return Waves;
   }
 };
 
@@ -61,194 +46,154 @@ interface AnimatedHealthMeterProps {
   value: number;
   previousValue: number;
   language: 'en' | 'fr' | 'mi';
-  labels: any;
+  labels: { [key: string]: string };
+  getUIText: (screen: string, element: string, lang: string) => string | null;
 }
 
-const AnimatedHealthMeter = ({ metricKey, value, previousValue, language, labels }: AnimatedHealthMeterProps) => {
+const AnimatedHealthMeter = ({ metricKey, value, previousValue, language, labels, getUIText }: AnimatedHealthMeterProps) => {
+  const [displayValue, setDisplayValue] = useState(previousValue);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [displayValue, setDisplayValue] = useState(value);
-  const [animationClass, setAnimationClass] = useState('');
-  
+
   useEffect(() => {
     if (previousValue !== value) {
-      const isPositive = value > previousValue;
-      const isNegative = value < previousValue;
-      
       setIsAnimating(true);
-      setAnimationClass(isPositive ? 'animate-pulse' : isNegative ? 'animate-bounce' : '');
       
-      // Animate the number counting
-      const startValue = previousValue;
-      const endValue = value;
-      const duration = 800;
+      const animationDuration = 1500;
       const startTime = Date.now();
+      const startValue = displayValue;
+      const endValue = value;
       
-      const updateValue = () => {
+      const animate = () => {
         const elapsed = Date.now() - startTime;
-        const progress = Math.min(elapsed / duration, 1);
+        const progress = Math.min(elapsed / animationDuration, 1);
+        
+        // Easing function for smooth animation
         const easeOut = 1 - Math.pow(1 - progress, 3);
         const currentValue = Math.round(startValue + (endValue - startValue) * easeOut);
         
         setDisplayValue(currentValue);
         
         if (progress < 1) {
-          requestAnimationFrame(updateValue);
+          requestAnimationFrame(animate);
         } else {
-          setTimeout(() => {
-            setIsAnimating(false);
-            setAnimationClass('');
-          }, 300);
+          setIsAnimating(false);
         }
       };
       
-      requestAnimationFrame(updateValue);
+      requestAnimationFrame(animate);
     }
-  }, [value, previousValue]);
+  }, [value, previousValue, displayValue]);
 
-  const getAnimatedHealthColor = (val: number) => {
-    if (val >= 80) return 'from-green-400 to-green-500';
-    if (val >= 60) return 'from-blue-400 to-blue-500';
-    if (val >= 40) return 'from-yellow-400 to-yellow-500';
-    return 'from-red-400 to-red-500';
-  };
-
-  const isPulsingRed = value < 50;
-
-  const getAnimatedIcon = (type: string) => {
-    const iconClasses = `w-10 h-10 transition-all duration-300 ${animationClass} ${isPulsingRed ? 'text-red-500' : 'text-white'}`;
-    switch (type) {
-      case 'ecosystem':
-        return <Waves className={iconClasses} />;
-      case 'economic':
-        return <Coins className={iconClasses} />;
-      case 'community':
-        return <Heart className={iconClasses} />;
-      default:
-        return <Waves className={iconClasses} />;
-    }
-  };
+  const Icon = getIcon(metricKey);
+  const isPulsingRed = displayValue < 50;
 
   return (
-    <div className="bg-card/95 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-border transition-all duration-500 group">
-      {/* Elegant Icon Circle */}
-      <div className="relative mb-6 flex justify-center">
-        <div className={`relative w-20 h-20 rounded-full bg-gradient-to-br ${getAnimatedHealthColor(value)} shadow-xl flex items-center justify-center transition-all duration-500 ${isAnimating ? 'animate-pulse' : ''} ${isPulsingRed ? 'animate-pulse-red' : ''}`}>
-          {getAnimatedIcon(metricKey)}
-          {/* Subtle glow effect */}
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-white/20 to-transparent"></div>
-          {/* Animated ring on change */}
-          {isAnimating && (
-            <div className="absolute -inset-2 rounded-full border-2 border-current opacity-30 animate-ping"></div>
-          )}
-        </div>
-      </div>
-
-      {/* Clean Typography */}
-      <div className="text-center mb-6">
-        <h4 className="text-lg font-semibold text-foreground mb-2 leading-tight">
-          {labels[language][metricKey as keyof typeof labels[typeof language]]}
-        </h4>
-        <div className={`text-4xl font-bold text-foreground transition-all duration-300 ${isAnimating ? 'scale-110' : ''}`}>
-          {displayValue}%
-        </div>
-      </div>
-      
-      {/* Sleek Progress Bar */}
-      <div className="relative mb-6">
-        <div className="h-3 bg-muted rounded-full overflow-hidden shadow-inner">
-          <div 
-            className={`h-full bg-gradient-to-r ${getAnimatedHealthColor(value)} transition-all duration-1000 ease-out rounded-full relative ${isAnimating ? 'animate-pulse' : ''} ${isPulsingRed ? 'animate-pulse-red' : ''}`}
-            style={{ width: `${value}%` }}
-          >
-            {/* Shine effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-full"></div>
+    <div className="text-center">
+      <div className="relative mb-4">
+        {/* Circular progress background */}
+        <div className="w-24 h-24 mx-auto">
+          <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+            {/* Background circle */}
+            <circle
+              cx="50"
+              cy="50"
+              r="45"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="8"
+              className="text-slate-700/30"
+            />
+            {/* Progress circle */}
+            <circle
+              cx="50"
+              cy="50"
+              r="45"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="8"
+              strokeDasharray={`${2 * Math.PI * 45}`}
+              strokeDashoffset={`${2 * Math.PI * 45 * (1 - displayValue / 100)}`}
+              className={`transition-all duration-1000 ease-out ${
+                displayValue >= 80 ? 'text-emerald-500' :
+                displayValue >= 60 ? 'text-blue-500' :
+                displayValue >= 40 ? 'text-amber-500' :
+                'text-red-500'
+              }`}
+              strokeLinecap="round"
+            />
+          </svg>
+          
+          {/* Icon in center */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Icon className={`w-8 h-8 transition-all duration-300 ${
+              isPulsingRed ? 'text-red-500' : 'text-white'
+            }`} />
           </div>
         </div>
       </div>
-      
+
+      {/* Label */}
+      <div className="mb-2">
+        <h4 className="text-sm font-medium text-slate-200 mb-1">
+          {labels[metricKey]}
+        </h4>
+        <div className={`text-2xl font-bold text-white transition-all duration-300 ${
+          isAnimating ? 'scale-110' : ''
+        }`}>
+          {displayValue}%
+        </div>
+      </div>
+
       {/* Status Badge */}
-      <div className="text-center">
-        <span className={`inline-block px-4 py-2 rounded-full text-sm font-medium transition-all duration-500 ${isAnimating ? 'scale-105' : ''} ${isPulsingRed ? 'animate-pulse-red text-red-500 bg-red-500/20 border border-red-500/30' : `text-white bg-gradient-to-r ${getAnimatedHealthColor(value)}`} shadow-md`}>
-          {getHealthStatus(value, language)}
-        </span>
+      <div className="flex justify-center">
+        <div className={`px-3 py-1 rounded-full text-xs font-medium ${
+          displayValue < 50 ? 'bg-red-500/20 text-red-500 border border-red-500/30' : 
+          displayValue >= 80 ? 'bg-emerald-500/20 text-emerald-600 border border-emerald-500/30' :
+          displayValue >= 60 ? 'bg-blue-500/20 text-blue-600 border border-blue-500/30' :
+          'bg-amber-500/20 text-amber-600 border border-amber-500/30'
+        }`}>
+          {getHealthStatus(displayValue, language, getUIText)}
+        </div>
       </div>
     </div>
   );
 };
 
-export const HealthMeters = ({ 
-  healthMetrics, 
-  language,
-  showInitialAnimation = false
-}: HealthMetersProps) => {
-  const previousMetrics = useRef<HealthMetrics>(
-    showInitialAnimation ? { ecosystem: 0, economic: 0, community: 0 } : healthMetrics
-  );
-  const [animationKey, setAnimationKey] = useState(0);
-
-  useEffect(() => {
-    if (showInitialAnimation) {
-      // Trigger initial animation on mount
-      setTimeout(() => {
-        setAnimationKey(prev => prev + 1);
-        previousMetrics.current = { ...healthMetrics };
-      }, 500);
-      return;
-    }
-
-    // Check if any metric has changed
-    const hasChanged = Object.keys(healthMetrics).some(
-      key => previousMetrics.current[key as keyof HealthMetrics] !== healthMetrics[key as keyof HealthMetrics]
-    );
-    
-    if (hasChanged) {
-      setAnimationKey(prev => prev + 1);
-      // Update previous metrics after a delay to allow animation to complete
-      setTimeout(() => {
-        previousMetrics.current = { ...healthMetrics };
-      }, 100);
-    }
-  }, [healthMetrics, showInitialAnimation]);
+export const HealthMeters = ({ healthMetrics, language, showInitialAnimation = false }: HealthMetersProps) => {
+  const previousValuesRef = useRef<HealthMetrics>({ ...healthMetrics });
+  const { getUIText } = useComprehensiveConfig();
 
   const labels = {
-    en: {
-      ecosystem: 'Animals & Plants Health',
-      economic: 'Money & Jobs Health',
-      community: 'People\'s Health'
-    },
-    fr: {
-      ecosystem: 'Santé des animaux et plantes',
-      economic: 'Santé de l\'argent et des emplois',
-      community: 'Santé des gens'
-    },
-    mi: {
-      ecosystem: 'Ukamkinu\'kuom samqwan',
-      economic: 'Toqwa\'tu\'k samqwan',
-      community: 'L\'nui samqwan'
-    }
+    ecosystem: getUIText('HealthMeters', 'Ecosystem Health', language) || (language === 'en' ? 'Animals & Plants Health' : language === 'fr' ? 'Santé des animaux et plantes' : 'Ukamkinu\'kuom samqwan'),
+    economic: getUIText('HealthMeters', 'Economic Health', language) || (language === 'en' ? 'Money & Jobs Health' : language === 'fr' ? 'Santé de l\'argent et des emplois' : 'Toqwa\'tu\'k samqwan'),
+    community: getUIText('HealthMeters', 'Community Health', language) || (language === 'en' ? 'People\'s Health' : language === 'fr' ? 'Santé des gens' : 'L\'nui samqwan')
   };
 
+  useEffect(() => {
+    // Update previous values after render for next animation
+    previousValuesRef.current = { ...healthMetrics };
+  });
+
   return (
-    <div className="bg-card/95 backdrop-blur-lg rounded-3xl p-8 shadow-2xl border border-border">
-      <h3 className="text-3xl lg:text-4xl font-bold text-foreground mb-8 text-center">
-        {language === 'en' && 'How Healthy is the Ocean?'}
-        {language === 'fr' && 'Comment va l\'océan?'}
-        {language === 'mi' && 'Samqwanikatl ukamkinu\'kuom?'}
-      </h3>
+    <div className="w-full">
+      <h2 className="text-2xl lg:text-3xl font-bold text-center mb-8 text-slate-100">
+        {getUIText('HealthMeters', 'Marine Health Status', language) || 
+         (language === 'en' ? 'How Healthy is the Ocean' : 
+          language === 'fr' ? 'Comment va l\'océan' : 
+          'Samqwanikatl ukamkinu\'kuom')}
+      </h2>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-        {Object.entries(healthMetrics).map(([key, value], index) => (
-          <div 
-            key={`${key}-${animationKey}`} 
-            className="animate-fade-in"
-            style={{ animationDelay: `${index * 0.15}s` }}
-          >
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+        {Object.entries(healthMetrics).map(([metricKey, value]) => (
+          <div key={metricKey}>
             <AnimatedHealthMeter
-              metricKey={key}
+              key={metricKey}
+              metricKey={metricKey}
               value={value}
-              previousValue={previousMetrics.current[key as keyof HealthMetrics]}
+              previousValue={previousValuesRef.current[metricKey as keyof HealthMetrics]}
               language={language}
               labels={labels}
+              getUIText={getUIText}
             />
           </div>
         ))}
