@@ -21,12 +21,13 @@ export default defineConfig(({ mode }) => ({
         clientsClaim: true,
         cleanupOutdatedCaches: true,
         navigateFallbackDenylist: [/^\/_/],
+        mode: 'production',
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
             handler: 'CacheFirst',
             options: {
-              cacheName: 'google-fonts-cache-v4',
+              cacheName: 'google-fonts-cache-v5',
               expiration: {
                 maxEntries: 10,
                 maxAgeSeconds: 60 * 60 * 24 * 365
@@ -37,12 +38,13 @@ export default defineConfig(({ mode }) => ({
       },
       manifest: {
         name: 'Nova Scotia Ocean Game - 5 Scenarios',
-        short_name: 'Ocean Game v3.0',
+        short_name: 'Ocean Game v4.0',
         description: 'An educational marine conservation game for Nova Scotia - 5 Scenarios Only',
         theme_color: '#0369a1',
         background_color: '#ffffff',
         display: 'standalone',
-        start_url: '/?v=3.0',
+        start_url: `/?v=4.0&t=${Date.now()}`,
+        orientation: 'any',
         icons: [
           {
             src: '/placeholder.svg',

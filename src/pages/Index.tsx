@@ -2,6 +2,8 @@
 import { useEffect, useState } from 'react';
 import { InvalidDataDetector } from '../components/InvalidDataDetector';
 import { AutoCacheValidator } from '../components/AutoCacheValidator';
+import { NuclearCacheClear } from '../components/NuclearCacheClear';
+import { VersionMismatchDetector } from '../components/VersionMismatchDetector';
 import { ContentVersionIndicator } from '../components/ContentVersionIndicator';
 import { LanguageSelectionScreen } from '../components/LanguageSelectionScreen';
 import { InactivityModal } from '../components/InactivityModal';
@@ -128,6 +130,8 @@ const Index = () => {
     <>
       <AutoCacheValidator />
       <InvalidDataDetector />
+      <NuclearCacheClear />
+      <VersionMismatchDetector />
       <ContentVersionIndicator />
       
       {gamePhase === 'languageSelection' && (
