@@ -2,7 +2,6 @@ import { FloatingLanguageHeader } from './FloatingLanguageHeader';
 import { HealthMeters } from './HealthMeters';
 import { Language, HealthMetrics } from '../types';
 import geometricBackground from '../assets/geometric-background.png';
-
 interface CompletionScreenProps {
   language: Language['code'];
   onLanguageChange: (language: Language['code']) => void;
@@ -41,11 +40,11 @@ const completionText = {
     choicesTitle: 'Kil wenjo\'taqn'
   }
 };
-export const CompletionScreen = ({ 
-  language, 
-  onLanguageChange, 
-  onRestart, 
-  choicesMade, 
+export const CompletionScreen = ({
+  language,
+  onLanguageChange,
+  onRestart,
+  choicesMade,
   healthMetrics,
   onBackToLanguageSelection
 }: CompletionScreenProps) => {
@@ -82,7 +81,11 @@ export const CompletionScreen = ({
     }
   };
   const healthMessage = getOverallHealthMessage();
-  return <div className="min-h-screen flex flex-col p-8 relative overflow-hidden" style={{ backgroundImage: `url(${geometricBackground})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+  return <div className="min-h-screen flex flex-col p-8 relative overflow-hidden" style={{
+    backgroundImage: `url(${geometricBackground})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center'
+  }}>
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-400/10 rounded-full animate-pulse" />
@@ -96,7 +99,7 @@ export const CompletionScreen = ({
 
       {/* Header */}
       <div className="relative z-10 text-center mb-8">
-        <div className="text-6xl mb-4 animate-bounce">🌊🏆</div>
+        
         <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 animate-fade-in">
           {content.title}
         </h1>
@@ -133,11 +136,7 @@ export const CompletionScreen = ({
         <div className="w-full animate-fade-in" style={{
         animationDelay: '1.5s'
       }}>
-          <HealthMeters 
-            healthMetrics={healthMetrics} 
-            language={language} 
-            showInitialAnimation={true}
-          />
+          <HealthMeters healthMetrics={healthMetrics} language={language} showInitialAnimation={true} />
         </div>
       </div>
 
@@ -166,11 +165,7 @@ export const CompletionScreen = ({
       </div>
 
       {/* Floating Language Header */}
-      <FloatingLanguageHeader
-        currentLanguage={language}
-        onLanguageChange={onLanguageChange}
-        onBackToLanguageSelection={onBackToLanguageSelection}
-      />
+      <FloatingLanguageHeader currentLanguage={language} onLanguageChange={onLanguageChange} onBackToLanguageSelection={onBackToLanguageSelection} />
 
       {/* Floating marine life decorations */}
       <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none">
