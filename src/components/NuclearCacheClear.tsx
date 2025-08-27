@@ -12,54 +12,119 @@ export const NuclearCacheClear: React.FC = () => {
   const handleNuclearClear = async () => {
     setIsClearing(true);
     
-    try {
-      toast({
-        title: "🚀 Nuclear Cache Clear Initiated",
-        description: "Clearing ALL cached data and forcing fresh reload...",
-        duration: 3000,
-      });
+    toast({
+      title: "Nuclear Cache Clear + Static Mode",
+      description: "Destroying ALL caches and enabling static content...",
+      duration: 3000,
+    });
 
-      // Clear all possible caches
-      await clearAllCache();
+    try {
+      console.log('💥 NUCLEAR: Starting TOTAL cache destruction + static mode...');
       
-      // Clear ALL localStorage keys
-      localStorage.clear();
+      // STEP 1: Clear ALL localStorage completely
+      const allKeys = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key) allKeys.push(key);
+      }
+      allKeys.forEach(key => localStorage.removeItem(key));
+      console.log('💥 NUCLEAR: ALL localStorage cleared:', allKeys.length, 'keys');
       
-      // Clear session storage
+      // STEP 2: Clear sessionStorage completely
       sessionStorage.clear();
+      console.log('💥 NUCLEAR: sessionStorage cleared');
       
-      // Clear comprehensive configuration specifically
-      localStorage.removeItem('comprehensiveConfiguration');
-      localStorage.removeItem('impactConfiguration');
+      // STEP 3: Clear ALL configuration storage types
+      try {
+        const { persistentStorage } = await import('../utils/persistentStorage');
+        await persistentStorage.clearAll();
+        console.log('💥 NUCLEAR: Persistent storage cleared');
+      } catch (error) {
+        console.log('💥 NUCLEAR: Persistent storage clear error (continuing):', error);
+      }
       
-      // Force clear any remaining config keys
-      Object.keys(localStorage).forEach(key => {
-        if (key.includes('comprehensive') || key.includes('config') || key.includes('scenario')) {
-          localStorage.removeItem(key);
+      // STEP 4: Clear cache manager
+      try {
+        await clearAllCache();
+        console.log('💥 NUCLEAR: Cache manager cleared');
+      } catch (error) {
+        console.log('💥 NUCLEAR: Cache manager clear error (continuing):', error);
+      }
+      
+      // STEP 5: Unregister ALL service workers
+      if ('serviceWorker' in navigator) {
+        try {
+          const registrations = await navigator.serviceWorker.getRegistrations();
+          for (const registration of registrations) {
+            await registration.unregister();
+          }
+          console.log('💥 NUCLEAR: Service workers unregistered:', registrations.length);
+        } catch (error) {
+          console.log('💥 NUCLEAR: Service worker clear error (continuing):', error);
         }
+      }
+      
+      // STEP 6: Clear ALL browser caches
+      if ('caches' in window) {
+        try {
+          const cacheNames = await caches.keys();
+          await Promise.all(cacheNames.map(name => caches.delete(name)));
+          console.log('💥 NUCLEAR: Browser caches deleted:', cacheNames.length);
+        } catch (error) {
+          console.log('💥 NUCLEAR: Browser cache clear error (continuing):', error);
+        }
+      }
+      
+      // STEP 7: Clear IndexedDB completely (aggressive)
+      try {
+        if ('indexedDB' in window) {
+          const dbDeleteRequest = indexedDB.deleteDatabase('OceanGuardianStorage');
+          dbDeleteRequest.onsuccess = () => console.log('💥 NUCLEAR: IndexedDB deleted');
+          dbDeleteRequest.onerror = () => console.log('💥 NUCLEAR: IndexedDB delete error (continuing)');
+        }
+      } catch (error) {
+        console.log('💥 NUCLEAR: IndexedDB delete error (continuing):', error);
+      }
+      
+      // STEP 8: Force static content mode
+      localStorage.setItem('force_static_content', 'true');
+      console.log('💥 NUCLEAR: Force static mode enabled');
+      
+      toast({
+        title: "Nuclear Destruction Complete",
+        description: "Reloading in static content mode...",
+        duration: 2000,
       });
       
-      // Unregister all service workers
-      if ('serviceWorker' in navigator) {
-        const registrations = await navigator.serviceWorker.getRegistrations();
-        await Promise.all(registrations.map(reg => reg.unregister()));
-      }
-      
-      // Clear all possible browser caches
-      if ('caches' in window) {
-        const cacheNames = await caches.keys();
-        await Promise.all(cacheNames.map(name => caches.delete(name)));
-      }
-      
-      // Force hard reload with maximum cache busting
-      const timestamp = Date.now();
-      const cacheBuster = `nuclear_clear=${timestamp}&v=4.0&force=true`;
-      window.location.href = `${window.location.origin}/?${cacheBuster}`;
+      // STEP 9: Force hard reload with static mode
+      setTimeout(() => {
+        const cacheBuster = `nuclear=${Date.now()}&force_static=true&v=6.0`;
+        const currentUrl = new URL(window.location.href);
+        currentUrl.searchParams.set('nuclear', Date.now().toString());
+        currentUrl.searchParams.set('force_static', 'true');
+        currentUrl.searchParams.set('v', '6.0');
+        currentUrl.searchParams.set('cache_bust', Math.random().toString());
+        
+        // Force replace location for hardest possible reload
+        window.location.replace(currentUrl.toString());
+      }, 1000);
       
     } catch (error) {
-      console.error('Nuclear cache clear failed:', error);
-      // Force reload anyway
-      window.location.reload();
+      console.error('💥 NUCLEAR: Critical error during nuclear clear:', error);
+      toast({
+        title: "Nuclear Clear Error",
+        description: "Force reloading with static mode anyway...",
+        variant: "destructive",
+      });
+      
+      // Force static mode and reload anyway
+      localStorage.setItem('force_static_content', 'true');
+      setTimeout(() => {
+        const currentUrl = new URL(window.location.href);
+        currentUrl.searchParams.set('force_static', 'true');
+        currentUrl.searchParams.set('emergency', 'true');
+        window.location.replace(currentUrl.toString());
+      }, 1000);
     }
   };
 

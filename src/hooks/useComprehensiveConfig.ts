@@ -9,6 +9,7 @@ export const useComprehensiveConfig = () => {
   const [config, setConfig] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [fallbackUIText, setFallbackUIText] = useState<any>(null);
+  const [forceStaticMode, setForceStaticMode] = useState(false);
 
   // Load configuration from persistent storage with localStorage fallback
   const reloadConfig = async () => {
@@ -83,8 +84,21 @@ export const useComprehensiveConfig = () => {
       console.error('Failed to parse fallback UI text:', error);
     }
 
-    // Load initial configuration
-    reloadConfig();
+    // Check for force static mode
+    const urlParams = new URLSearchParams(window.location.search);
+    const forceStatic = urlParams.get('force_static') === 'true' || 
+                       localStorage.getItem('force_static_content') === 'true';
+    setForceStaticMode(forceStatic);
+    
+    console.log('🚀 [STATIC-MODE] Force static content mode:', forceStatic);
+
+    // Load initial configuration unless force static mode is enabled
+    if (!forceStatic) {
+      reloadConfig();
+    } else {
+      console.log('⚡ [STATIC-MODE] Skipping config loading - using static content only');
+      setIsLoading(false);
+    }
   }, []);
 
   // Hot-reload configuration when uploads happen (same-tab) or in other tabs
@@ -106,59 +120,66 @@ export const useComprehensiveConfig = () => {
     };
   }, [reloadConfig]);
 
-  // Get scenario text with override support
+  // Get scenario text with STATIC CONTENT PRIORITY
   const getScenarioText = (scenarioId: string, field: string, language: string = 'en') => {
     console.log(`🔍 [SCENARIO-DEBUG] getScenarioText(${scenarioId}, ${field}, ${language})`);
-    console.log(`📊 [SCENARIO-DEBUG] Config available:`, !!config);
-    console.log(`📊 [SCENARIO-DEBUG] Config type:`, typeof config);
-    console.log(`📊 [SCENARIO-DEBUG] Config scenarios structure:`, config?.scenarios ? Object.keys(config.scenarios) : 'no scenarios');
+    console.log(`🔧 [STATIC-MODE] Force static mode:`, forceStaticMode);
     
-    // Check if we have cached override
-    if (config?.scenarios?.[language]?.[scenarioId]?.[field]) {
-      const override = config.scenarios[language][scenarioId][field];
-      console.log(`⚠️ [SCENARIO-DEBUG] USING CACHED OVERRIDE for ${scenarioId}.${field}:`, override.substring(0, 100) + '...');
-      console.log(`⚠️ [SCENARIO-DEBUG] Override source: CACHED CONFIGURATION`);
-      return override;
-    }
-    
-    // Fallback to original content
+    // ALWAYS USE STATIC CONTENT FIRST (reverse priority)
     const originalScenarios = scenarios[language as keyof typeof scenarios];
     const scenario = originalScenarios?.find(s => s.id === scenarioId);
     
-    const fallback = field === 'title' ? scenario?.title : 
-                    field === 'description' ? scenario?.description : null;
+    const staticText = field === 'title' ? scenario?.title : 
+                      field === 'description' ? scenario?.description : null;
     
-    console.log(`✅ [SCENARIO-DEBUG] USING STATIC FALLBACK for ${scenarioId}.${field}:`, fallback?.substring(0, 100) + '...');
-    console.log(`✅ [SCENARIO-DEBUG] Fallback source: STATIC CONTENT`);
-    return fallback;
-  };
-
-  // Get choice text with override support
-  const getChoiceText = (scenarioId: string, choiceId: string, field: string, language: string = 'en') => {
-    const compositeId = `${scenarioId}_${choiceId}`;
-    console.log(`🔍 [CHOICE-DEBUG] getChoiceText(${scenarioId}, ${choiceId}, ${field}, ${language})`);
-    console.log(`🔗 [CHOICE-DEBUG] Looking for composite ID: ${compositeId}`);
+    // In force static mode, ONLY return static content
+    if (forceStaticMode || !config) {
+      console.log(`⚡ [STATIC-MODE] USING STATIC CONTENT ONLY for ${scenarioId}.${field}:`, staticText?.substring(0, 100) + '...');
+      return staticText;
+    }
     
-    if (config?.scenarios?.[language]?.[compositeId]?.[field]) {
-      const override = config.scenarios[language][compositeId][field];
-      console.log(`⚠️ [CHOICE-DEBUG] USING CACHED OVERRIDE for ${compositeId}.${field}:`, override.substring(0, 100) + '...');
-      console.log(`⚠️ [CHOICE-DEBUG] Override source: CACHED CONFIGURATION`);
+    // Check for cached override only if static content is missing and not in force mode
+    if (!staticText && config?.scenarios?.[language]?.[scenarioId]?.[field]) {
+      const override = config.scenarios[language][scenarioId][field];
+      console.log(`📦 [SCENARIO-DEBUG] USING CACHED FALLBACK for ${scenarioId}.${field}:`, override.substring(0, 100) + '...');
       return override;
     }
     
-    // Fallback to original content
+    console.log(`✅ [SCENARIO-DEBUG] USING STATIC CONTENT for ${scenarioId}.${field}:`, staticText?.substring(0, 100) + '...');
+    return staticText;
+  };
+
+  // Get choice text with STATIC CONTENT PRIORITY  
+  const getChoiceText = (scenarioId: string, choiceId: string, field: string, language: string = 'en') => {
+    const compositeId = `${scenarioId}_${choiceId}`;
+    console.log(`🔍 [CHOICE-DEBUG] getChoiceText(${scenarioId}, ${choiceId}, ${field}, ${language})`);
+    console.log(`🔧 [STATIC-MODE] Force static mode:`, forceStaticMode);
+    
+    // ALWAYS USE STATIC CONTENT FIRST (reverse priority)
     const originalScenarios = scenarios[language as keyof typeof scenarios];
     const scenario = originalScenarios?.find(s => s.id === scenarioId);
     const choice = scenario?.choices.find(c => c.id === choiceId);
     
-    const fallback = field === 'text' ? choice?.text :
-                    field === 'consequence' ? choice?.consequence :
-                    field === 'pros' ? choice?.pros :
-                    field === 'cons' ? choice?.cons : null;
+    const staticText = field === 'text' ? choice?.text :
+                      field === 'consequence' ? choice?.consequence :
+                      field === 'pros' ? choice?.pros :
+                      field === 'cons' ? choice?.cons : null;
     
-    console.log(`✅ [CHOICE-DEBUG] USING STATIC FALLBACK for ${compositeId}.${field}:`, fallback?.substring(0, 100) + '...');
-    console.log(`✅ [CHOICE-DEBUG] Fallback source: STATIC CONTENT`);
-    return fallback;
+    // In force static mode, ONLY return static content
+    if (forceStaticMode || !config) {
+      console.log(`⚡ [STATIC-MODE] USING STATIC CONTENT ONLY for ${compositeId}.${field}:`, staticText?.substring(0, 100) + '...');
+      return staticText;
+    }
+    
+    // Check for cached override only if static content is missing and not in force mode
+    if (!staticText && config?.scenarios?.[language]?.[compositeId]?.[field]) {
+      const override = config.scenarios[language][compositeId][field];
+      console.log(`📦 [CHOICE-DEBUG] USING CACHED FALLBACK for ${compositeId}.${field}:`, override.substring(0, 100) + '...');
+      return override;
+    }
+    
+    console.log(`✅ [CHOICE-DEBUG] USING STATIC CONTENT for ${compositeId}.${field}:`, staticText?.substring(0, 100) + '...');
+    return staticText;
   };
 
   // Get choice impact values with override support
@@ -199,6 +220,22 @@ export const useComprehensiveConfig = () => {
   };
 
 
+  // Function to enable force static mode
+  const enableForceStaticMode = () => {
+    console.log('🚀 [STATIC-MODE] Enabling force static content mode');
+    localStorage.setItem('force_static_content', 'true');
+    setForceStaticMode(true);
+    setConfig(null); // Clear any cached config
+  };
+
+  // Function to disable force static mode
+  const disableForceStaticMode = () => {
+    console.log('🔄 [STATIC-MODE] Disabling force static content mode');
+    localStorage.removeItem('force_static_content');
+    setForceStaticMode(false);
+    reloadConfig(); // Reload config
+  };
+
   return {
     config,
     isLoading,
@@ -207,6 +244,9 @@ export const useComprehensiveConfig = () => {
     getChoiceImpact,
     getUIText,
     reloadConfig,
-    hasConfig: !!config
+    hasConfig: !!config,
+    forceStaticMode,
+    enableForceStaticMode,
+    disableForceStaticMode
   };
 };

@@ -17,6 +17,8 @@ import { HealthTransitionScreen } from '../components/HealthTransitionScreen';
 import { ContentManagerButton } from '../components/ContentManagerButton';
 import { RuntimeConfigDebugger } from '../components/RuntimeConfigDebugger';
 import { ContentHashVerifier } from '../components/ContentHashVerifier';
+import { StaticContentController } from '../components/StaticContentController';
+import { ContentDeploymentVerifier } from '../components/ContentDeploymentVerifier';
 import { useGameState } from '../hooks/useGameState';
 import { useGamePhase } from '../hooks/useGamePhase';
 import { scenarios } from '../data/content';
@@ -134,6 +136,8 @@ const Index = () => {
     <>
       <AutoCacheValidator />
       <InvalidDataDetector />
+      <ContentDeploymentVerifier />
+      <StaticContentController />
       <RuntimeConfigDebugger />
       <ContentHashVerifier />
       <NuclearCacheClear />
