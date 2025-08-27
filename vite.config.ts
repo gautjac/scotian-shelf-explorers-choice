@@ -16,10 +16,29 @@ export default defineConfig(({ mode }) => ({
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'robots.txt'],
+      workbox: {
+        skipWaiting: true,
+        clientsClaim: true,
+        cleanupOutdatedCaches: true,
+        globPatterns: ['**/*.{js,css,html,ico,png,jpg,jpeg,svg,webp}'],
+        runtimeCaching: [
+          {
+            urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'google-fonts-cache-v2',
+              expiration: {
+                maxEntries: 10,
+                maxAgeSeconds: 60 * 60 * 24 * 365 // 365 days
+              }
+            }
+          }
+        ]
+      },
       manifest: {
-        name: 'Nova Scotia Ocean Game',
-        short_name: 'Ocean Game',
-        description: 'An educational marine conservation game for Nova Scotia',
+        name: 'Nova Scotia Ocean Game - Clean Content',
+        short_name: 'Ocean Game v2.0',
+        description: 'An educational marine conservation game for Nova Scotia - Updated Content',
         theme_color: '#0369a1',
         background_color: '#ffffff',
         display: 'standalone',
@@ -29,22 +48,6 @@ export default defineConfig(({ mode }) => ({
             src: '/placeholder.svg',
             sizes: '192x192',
             type: 'image/svg+xml'
-          }
-        ]
-      },
-      workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,jpg,jpeg,svg,webp}'],
-        runtimeCaching: [
-          {
-            urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'google-fonts-cache',
-              expiration: {
-                maxEntries: 10,
-                maxAgeSeconds: 60 * 60 * 24 * 365 // 365 days
-              }
-            }
           }
         ]
       }

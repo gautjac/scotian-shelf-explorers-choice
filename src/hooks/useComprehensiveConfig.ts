@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { scenarios } from '../data/content';
 import { parseCopydeckCSVForFallback } from '../utils/comprehensiveConfiguration';
 import { retrieveConfiguration } from '../utils/persistentStorage';
+import { detectInvalidCachedData, clearAllCache, getValidScenarioIds } from '../utils/cacheManager';
 
 // Hook to manage comprehensive configuration
 export const useComprehensiveConfig = () => {
@@ -14,9 +15,45 @@ export const useComprehensiveConfig = () => {
     setIsLoading(true);
     console.log('🔄 [DEBUG] Reloading comprehensive config...');
     try {
+      // Check for invalid cached data first
+      const hasInvalidData = await detectInvalidCachedData();
+      
+      if (hasInvalidData) {
+        console.log('Invalid cached data detected, clearing all caches...');
+        await clearAllCache();
+        setConfig(null);
+        setIsLoading(false);
+        return;
+      }
+
       // Try persistent storage first
       let stored = await retrieveConfiguration('comprehensive');
       console.log('📦 [DEBUG] Retrieved from persistent storage:', stored);
+      
+      // Validate stored config
+      if (stored) {
+        const validScenarios = getValidScenarioIds();
+        let configIsValid = true;
+        
+        if (stored.scenarios) {
+          for (const language of Object.keys(stored.scenarios)) {
+            const scenarioIds = Object.keys(stored.scenarios[language]);
+            const hasInvalidScenarios = scenarioIds.some(id => 
+              !validScenarios.includes(id.split('_')[0])
+            );
+            if (hasInvalidScenarios) {
+              configIsValid = false;
+              break;
+            }
+          }
+        }
+        
+        if (!configIsValid) {
+          console.log('Stored config contains invalid scenarios, clearing...');
+          await clearAllCache();
+          stored = null;
+        }
+      }
       
       // Fallback to localStorage
       if (!stored) {
