@@ -160,7 +160,11 @@ const AnimatedHealthMeter = ({ metricKey, value, previousValue, language, labels
 };
 
 export const HealthMeters = ({ healthMetrics, language, showInitialAnimation = false }: HealthMetersProps) => {
-  const previousValuesRef = useRef<HealthMetrics>({ ...healthMetrics });
+  const previousValuesRef = useRef<HealthMetrics>(
+    showInitialAnimation 
+      ? { ecosystem: 0, economic: 0, community: 0 }
+      : { ...healthMetrics }
+  );
   const { getUIText } = useComprehensiveConfig();
 
   const labels = {
