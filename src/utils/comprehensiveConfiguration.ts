@@ -258,7 +258,12 @@ export const exportComprehensiveCSV = (): string => {
 
 // Parse comprehensive CSV and return structured configuration
 export const parseComprehensiveCSV = (csvContent: string) => {
+  console.log('🔧 [CSV-PARSE] Starting CSV parsing...');
+  console.log('🔧 [CSV-PARSE] First 200 chars:', csvContent.substring(0, 200));
+  
   const lines = csvContent.split('\n');
+  console.log('🔧 [CSV-PARSE] Total lines:', lines.length);
+  
   const config = {
     scenarios: {} as any,
     uiElements: {} as any,
@@ -284,17 +289,37 @@ export const parseComprehensiveCSV = (csvContent: string) => {
     
     const [section, type, id, language, field, content, ecosystemStr, economicStr, communityStr, notes] = values;
     
+    console.log('🔧 [CSV-PARSE] Processing row:', { section, type, id, language, field, content: content?.substring(0, 50) + '...' });
+    
     if (section === 'SCENARIOS') {
-      if (!config.scenarios[language]) config.scenarios[language] = {};
-      if (!config.scenarios[language][id]) config.scenarios[language][id] = {};
+      // Parse scenario ID to get main scenario and choice ID
+      const parts = id.split('_');
+      const scenarioId = parts[0];
+      const choiceId = parts.length > 1 ? parts[1] : null;
       
-      config.scenarios[language][id][field] = content;
+      if (!config.scenarios[scenarioId]) config.scenarios[scenarioId] = {};
+      if (!config.scenarios[scenarioId][language]) config.scenarios[scenarioId][language] = { choices: [] };
       
-      // Add impact values if present
-      if (ecosystemStr || economicStr || communityStr) {
-        config.scenarios[language][id].ecosystemImpact = parseInt(ecosystemStr) || 0;
-        config.scenarios[language][id].economicImpact = parseInt(economicStr) || 0;
-        config.scenarios[language][id].communityImpact = parseInt(communityStr) || 0;
+      if (type === 'title' || type === 'description') {
+        config.scenarios[scenarioId][language][field] = content;
+      } else if (choiceId && (type === 'choice' || type === 'consequence' || type === 'pros' || type === 'cons')) {
+        let choice = config.scenarios[scenarioId][language].choices.find((c: any) => c.id === choiceId);
+        if (!choice) {
+          choice = { id: choiceId };
+          config.scenarios[scenarioId][language].choices.push(choice);
+        }
+        
+        if (type === 'choice') choice.text = content;
+        else if (type === 'consequence') choice.consequence = content;
+        else if (type === 'pros') choice.pros = content;
+        else if (type === 'cons') choice.cons = content;
+        
+        // Add impact values if present
+        if (ecosystemStr || economicStr || communityStr) {
+          choice.ecosystemImpact = parseInt(ecosystemStr) || 0;
+          choice.economicImpact = parseInt(economicStr) || 0;
+          choice.communityImpact = parseInt(communityStr) || 0;
+        }
       }
     } else if (section === 'UI_ELEMENTS') {
       if (!config.uiElements[language]) config.uiElements[language] = {};

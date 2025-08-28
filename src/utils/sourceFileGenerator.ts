@@ -81,7 +81,11 @@ import kelpImg from '../assets/images/kelp.jpg';`;
   };
 
   const generateScenarios = () => {
+    console.log('🔧 [SOURCE-GEN] Generating scenarios from config...');
+    console.log('🔧 [SOURCE-GEN] Config scenarios:', config.scenarios);
+    
     if (!config.scenarios) {
+      console.log('⚠️ [SOURCE-GEN] No scenarios in config!');
       return 'export const scenarios: Record<Language[\'code\'], Scenario[]> = {};';
     }
 
@@ -95,10 +99,18 @@ import kelpImg from '../assets/images/kelp.jpg';`;
 
     // Extract scenarios from config
     Object.entries(config.scenarios).forEach(([scenarioId, scenarioData]: [string, any]) => {
+      console.log('🔧 [SOURCE-GEN] Processing scenario:', scenarioId, scenarioData);
       languages.forEach(lang => {
         if (scenarioData[lang]) {
           const scenario = scenarioData[lang];
           const choices = scenario.choices || [];
+          
+          console.log('🔧 [SOURCE-GEN] Adding scenario for', lang, ':', {
+            id: scenarioId,
+            title: scenario.title,
+            description: scenario.description?.substring(0, 50) + '...',
+            choiceCount: choices.length
+          });
           
           scenariosByLang[lang].push({
             id: scenarioId,

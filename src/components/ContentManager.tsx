@@ -96,6 +96,8 @@ export const ContentManager = ({ onClose }: ContentManagerProps) => {
       }
       
       const config = JSON.parse(configStr);
+      console.log('🔧 [DEBUG] Config for source generation:', config);
+      console.log('🔧 [DEBUG] First scenario in config:', config.scenarios?.['plastic-pollution']?.en);
       
       const success = downloadSourceFiles(config);
       
@@ -156,9 +158,19 @@ export const ContentManager = ({ onClose }: ContentManagerProps) => {
       if (isComprehensive) {
         // Parse comprehensive CSV
         console.log('📁 [DEBUG] Parsing comprehensive CSV...');
+        console.log('📁 [DEBUG] CSV content preview:', text.substring(0, 200));
         const comprehensiveConfig = parseComprehensiveCSV(text);
         console.log('📊 [DEBUG] Parsed config structure:', comprehensiveConfig);
         console.log('📊 [DEBUG] Scenarios available:', Object.keys(comprehensiveConfig.scenarios || {}));
+        
+        // Debug first scenario content
+        if (comprehensiveConfig.scenarios?.['plastic-pollution']?.en) {
+          const firstScenario = comprehensiveConfig.scenarios['plastic-pollution'].en;
+          console.log('🔍 [DEBUG] First scenario parsed:', {
+            title: firstScenario.title,
+            description: firstScenario.description?.substring(0, 100) + '...'
+          });
+        }
         
         const validationErrors = validateComprehensiveConfig(comprehensiveConfig);
         
