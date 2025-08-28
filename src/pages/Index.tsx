@@ -1,11 +1,5 @@
+
 import { useEffect, useState } from 'react';
-import { InvalidDataDetector } from '../components/InvalidDataDetector';
-import { AutoCacheValidator } from '../components/AutoCacheValidator';
-import { NuclearCacheClear } from '../components/NuclearCacheClear';
-import { VersionMismatchDetector } from '../components/VersionMismatchDetector';
-import { ContentVersionIndicator } from '../components/ContentVersionIndicator';
-import { DeploymentDiagnostics } from '../components/DeploymentDiagnostics';
-import { ForceRefreshButton } from '../components/ForceRefreshButton';
 import { LanguageSelectionScreen } from '../components/LanguageSelectionScreen';
 import { InactivityModal } from '../components/InactivityModal';
 import { ScenarioPreview } from '../components/ScenarioPreview';
@@ -14,9 +8,6 @@ import { CompletionScreen } from '../components/CompletionScreen';
 import { GamePlayingScreen } from '../components/GamePlayingScreen';
 import { HealthTransitionScreen } from '../components/HealthTransitionScreen';
 import { ContentManagerButton } from '../components/ContentManagerButton';
-import { RuntimeConfigDebugger } from '../components/RuntimeConfigDebugger';
-import { ContentHashVerifier } from '../components/ContentHashVerifier';
-import { ContentDeploymentVerifier } from '../components/ContentDeploymentVerifier';
 import { useGameState } from '../hooks/useGameState';
 import { useGamePhase } from '../hooks/useGamePhase';
 import { scenarios } from '../data/content';
@@ -132,18 +123,6 @@ const Index = () => {
 
   return (
     <>
-      <AutoCacheValidator />
-      <InvalidDataDetector />
-      <ContentDeploymentVerifier />
-      
-      <RuntimeConfigDebugger />
-      <ContentHashVerifier />
-      <NuclearCacheClear />
-      <VersionMismatchDetector />
-      <ContentVersionIndicator />
-      <DeploymentDiagnostics />
-      <ForceRefreshButton />
-      
       {gamePhase === 'languageSelection' && (
         <LanguageSelectionScreen
           onLanguageSelect={handleLanguageSelectWithTracking}

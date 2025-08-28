@@ -7,9 +7,6 @@ import { useToast } from '@/hooks/use-toast';
 import { exportChoicesToCSV, parseImpactCSV } from '../utils/impactConfiguration';
 import { exportComprehensiveCSV, parseComprehensiveCSV, validateComprehensiveConfig } from '../utils/comprehensiveConfiguration';
 import { Download, Upload, X } from 'lucide-react';
-import { StorageHealthIndicator } from './StorageHealthIndicator';
-import { OfflineStatus, OnlineIndicator } from './OfflineStatus';
-import { CacheClearButton } from './CacheClearButton';
 
 interface AdminPanelProps {
   onClose: () => void;
@@ -197,26 +194,6 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
             <p>• Upload modified CSV to apply changes</p>
             <p>• Changes require page refresh to take effect</p>
             <p>• The comprehensive CSV has sections: SCENARIOS, UI_ELEMENTS</p>
-          </div>
-        </CardContent>
-      </Card>
-      
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center justify-between">
-            Storage & Cache Management
-            <OnlineIndicator />
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <StorageHealthIndicator />
-          
-          <div className="pt-4 border-t">
-            <h4 className="text-sm font-medium mb-2">Cache Management</h4>
-            <p className="text-sm text-muted-foreground mb-3">
-              Use this if you're seeing outdated content that doesn't match the current 5 scenarios.
-            </p>
-            <CacheClearButton size="sm" />
           </div>
         </CardContent>
       </Card>

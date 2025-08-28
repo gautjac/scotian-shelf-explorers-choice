@@ -3,30 +3,34 @@ import { scenarios } from '../data/content';
 import { parseCopydeckCSVForFallback } from '../utils/comprehensiveConfiguration';
 import { retrieveConfiguration } from '../utils/persistentStorage';
 
-// Simplified hook that prioritizes static content
+// Hook to manage comprehensive configuration
 export const useComprehensiveConfig = () => {
   const [config, setConfig] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [fallbackUIText, setFallbackUIText] = useState<any>(null);
 
-  // Load configuration for CSV imports (optional overrides only)
+  // Load configuration from persistent storage with localStorage fallback
   const reloadConfig = async () => {
     setIsLoading(true);
+    console.log('🔄 [DEBUG] Reloading comprehensive config...');
     try {
-      // Try persistent storage for CSV imports
+      // Try persistent storage first
       let stored = await retrieveConfiguration('comprehensive');
+      console.log('📦 [DEBUG] Retrieved from persistent storage:', stored);
       
       // Fallback to localStorage
       if (!stored) {
         const localData = localStorage.getItem('comprehensiveConfiguration');
         if (localData) {
           stored = JSON.parse(localData);
+          console.log('💾 [DEBUG] Retrieved from localStorage:', stored);
         }
       }
       
+      console.log('✅ [DEBUG] Final config set:', stored);
       setConfig(stored || null);
     } catch (error) {
-      console.error('Failed to load configuration:', error);
+      console.error('❌ [DEBUG] Failed to load comprehensive configuration:', error);
       setConfig(null);
     } finally {
       setIsLoading(false);
@@ -42,11 +46,11 @@ export const useComprehensiveConfig = () => {
       console.error('Failed to parse fallback UI text:', error);
     }
 
-    // Load configuration for potential CSV overrides
+    // Load initial configuration
     reloadConfig();
   }, []);
 
-  // Hot-reload configuration when uploads happen
+  // Hot-reload configuration when uploads happen (same-tab) or in other tabs
   useEffect(() => {
     const handleConfigUpdated = () => reloadConfig();
     const handleStorage = (e: StorageEvent) => {
@@ -62,43 +66,53 @@ export const useComprehensiveConfig = () => {
     };
   }, [reloadConfig]);
 
-  // Get scenario text - prioritizes static content, uses CSV as override only
+  // Get scenario text with override support
   const getScenarioText = (scenarioId: string, field: string, language: string = 'en') => {
-    // Always use static content from offlineContent.ts first
+    console.log(`🔍 [DEBUG] getScenarioText(${scenarioId}, ${field}, ${language})`);
+    console.log(`📊 [DEBUG] Config available:`, !!config);
+    console.log(`📊 [DEBUG] Config scenarios:`, config?.scenarios);
+    
+    if (config?.scenarios?.[language]?.[scenarioId]?.[field]) {
+      const override = config.scenarios[language][scenarioId][field];
+      console.log(`✅ [DEBUG] Found override for ${scenarioId}.${field}:`, override);
+      return override;
+    }
+    
+    // Fallback to original content
     const originalScenarios = scenarios[language as keyof typeof scenarios];
     const scenario = originalScenarios?.find(s => s.id === scenarioId);
     
-    const staticText = field === 'title' ? scenario?.title : 
-                      field === 'description' ? scenario?.description : null;
+    const fallback = field === 'title' ? scenario?.title : 
+                    field === 'description' ? scenario?.description : null;
     
-    // Use CSV override only if static content is missing
-    if (!staticText && config?.scenarios?.[language]?.[scenarioId]?.[field]) {
-      return config.scenarios[language][scenarioId][field];
-    }
-    
-    return staticText || null;
+    console.log(`📋 [DEBUG] Using fallback for ${scenarioId}.${field}:`, fallback);
+    return fallback;
   };
 
-  // Get choice text - prioritizes static content, uses CSV as override only
+  // Get choice text with override support
   const getChoiceText = (scenarioId: string, choiceId: string, field: string, language: string = 'en') => {
     const compositeId = `${scenarioId}_${choiceId}`;
+    console.log(`🔍 [DEBUG] getChoiceText(${scenarioId}, ${choiceId}, ${field}, ${language})`);
+    console.log(`🔗 [DEBUG] Looking for composite ID: ${compositeId}`);
     
-    // Always use static content from offlineContent.ts first
+    if (config?.scenarios?.[language]?.[compositeId]?.[field]) {
+      const override = config.scenarios[language][compositeId][field];
+      console.log(`✅ [DEBUG] Found choice override for ${compositeId}.${field}:`, override);
+      return override;
+    }
+    
+    // Fallback to original content
     const originalScenarios = scenarios[language as keyof typeof scenarios];
     const scenario = originalScenarios?.find(s => s.id === scenarioId);
     const choice = scenario?.choices.find(c => c.id === choiceId);
     
-    const staticText = field === 'text' ? choice?.text :
-                      field === 'consequence' ? choice?.consequence :
-                      field === 'pros' ? choice?.pros :
-                      field === 'cons' ? choice?.cons : null;
+    const fallback = field === 'text' ? choice?.text :
+                    field === 'consequence' ? choice?.consequence :
+                    field === 'pros' ? choice?.pros :
+                    field === 'cons' ? choice?.cons : null;
     
-    // Use CSV override only if static content is missing
-    if (!staticText && config?.scenarios?.[language]?.[compositeId]?.[field]) {
-      return config.scenarios[language][compositeId][field];
-    }
-    
-    return staticText || null;
+    console.log(`📋 [DEBUG] Using choice fallback for ${compositeId}.${field}:`, fallback);
+    return fallback;
   };
 
   // Get choice impact values with override support
@@ -137,7 +151,6 @@ export const useComprehensiveConfig = () => {
     
     return null;
   };
-
 
 
   return {
