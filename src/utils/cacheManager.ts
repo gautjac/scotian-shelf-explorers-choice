@@ -51,12 +51,6 @@ export const clearAllCachedData = async () => {
       }
     }
     
-    // Force reload to ensure no cached content
-    setTimeout(() => {
-      console.log('🔄 [CACHE] Forcing hard reload after cache clear');
-      window.location.reload();
-    }, 1000);
-    
     // Fire event to notify components
     window.dispatchEvent(new CustomEvent('cache-cleared'));
     console.log('✅ [CACHE] Cache clearing complete - using offlineContent.ts as single source of truth');

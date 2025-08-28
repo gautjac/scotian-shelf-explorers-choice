@@ -75,30 +75,24 @@ const displayContentVerification = (info: any) => {
     <div><strong>First Scenario:</strong> ${info.scenarioId}</div>
     <div><strong>Title:</strong> ${info.title}</div>
     <div><strong>Preview:</strong> ${info.descriptionPreview}...</div>
-    <div><strong>Hash:</strong> ${info.contentHash}</div>
     <div><strong>Total:</strong> ${info.totalScenarios} scenarios</div>
-    <div><strong>Loaded:</strong> ${new Date(info.timestamp).toLocaleTimeString()}</div>
     <button onclick="this.parentElement.remove()" style="margin-top: 5px; padding: 2px 5px; background: #666; color: white; border: none; border-radius: 3px; cursor: pointer;">Close</button>
   `;
   
   document.body.appendChild(verifyDiv);
   
-  // Auto-remove after 10 seconds
+  // Auto-remove after 5 seconds
   setTimeout(() => {
     if (verifyDiv.parentElement) {
       verifyDiv.remove();
     }
-  }, 10000);
+  }, 5000);
 };
 
-// Initialize verification on load
+// Initialize verification on load - one time only
 export const initializeContentVerification = () => {
   console.log('🚀 [CONTENT-VERIFY] Initializing content verification system');
   
-  // Verify immediately
-  setTimeout(verifyContentSource, 1000);
-  
-  // Also verify on any route changes or updates
-  window.addEventListener('comprehensive-config-updated', verifyContentSource);
-  window.addEventListener('cache-cleared', verifyContentSource);
+  // Verify once after initial load
+  setTimeout(verifyContentSource, 2000);
 };
