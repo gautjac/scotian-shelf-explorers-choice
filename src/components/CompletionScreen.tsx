@@ -1,7 +1,6 @@
 import { HealthMetrics, Language, Choice } from '../types';
 import { HealthMeters } from './HealthMeters';
 import { FloatingLanguageHeader } from './FloatingLanguageHeader';
-import { useComprehensiveConfig } from '../hooks/useComprehensiveConfig';
 import geometricBackground from '../assets/geometric-background.png';
 
 interface CompletionScreenProps {
@@ -25,19 +24,21 @@ export const CompletionScreen = ({
   healthMetrics,
   onBackToLanguageSelection
 }: CompletionScreenProps) => {
-  const { getUIText } = useComprehensiveConfig();
   const overallHealth = (healthMetrics.ecosystem + healthMetrics.economic + healthMetrics.community) / 3;
 
   const getOverallHealthMessage = (health: number, language: Language['code']) => {
     if (health >= 75) {
-      return getUIText('CompletionScreen', 'Excellent Work', language) || 
-             'Great job! Your choices help keep the ocean healthy.';
+      return language === 'en' ? 'Great job! Your choices help keep the ocean healthy.' :
+             language === 'fr' ? 'Excellent travail! Vos choix aident à garder l\'océan en bonne santé.' :
+             'Pilei! Ketu kikewkulis wokisalutew kmu ukamkinu\'kuom samqwanikatl.';
     } else if (health >= 50) {
-      return getUIText('CompletionScreen', 'Good Effort', language) || 
-             'Good work! Some of your choices help sea animals.';
+      return language === 'en' ? 'Good work! Some of your choices help sea animals.' :
+             language === 'fr' ? 'Bon travail! Certains de vos choix aident les animaux marins.' :
+             'Wolteye! Kitpu ketu kikewkulis wokisalutew ukamlamuktal.';
     } else {
-      return getUIText('CompletionScreen', 'Try Again', language) || 
-             'Try again with different choices to help sea animals more.';
+      return language === 'en' ? 'Try again with different choices to help sea animals more.' :
+             language === 'fr' ? 'Essayez encore avec des choix différents pour aider davantage les animaux marins.' :
+             'Apoqot elkulewatultinisa pikiskaw wokisalutinisaq ukamlamuktal.';
     }
   };
 
@@ -60,17 +61,23 @@ export const CompletionScreen = ({
         
         <div className="text-center mb-12">
           <h1 className="text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-6 animate-pulse-glow">
-            {getUIText('CompletionScreen', 'Title', language) || 'MISSION ACCOMPLISHED!'}
+            {language === 'en' ? 'MISSION ACCOMPLISHED!' :
+             language === 'fr' ? 'MISSION ACCOMPLIE!' :
+             'LUKWAKN KISITAQ!'}
           </h1>
           
           <p className="text-2xl lg:text-3xl text-blue-100 mb-8">
-            {getUIText('CompletionScreen', 'Subtitle', language) || 'Your choices have an impact!'}
+            {language === 'en' ? 'Your choices have an impact!' :
+             language === 'fr' ? 'Vos choix ont un impact!' :
+             'Ketu kikewkulis mijuaqanikatl!'}
           </p>
         </div>
 
         <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 lg:p-12 mb-12">
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
-            {getUIText('CompletionScreen', 'Your Impact', language) || 'How You Did'}
+            {language === 'en' ? 'How You Did' :
+             language === 'fr' ? 'Comment vous avez fait' :
+             'Tami kisitulip'}
           </h2>
           
           <HealthMeters 
@@ -89,10 +96,14 @@ export const CompletionScreen = ({
         <div className="bg-white/15 backdrop-blur-sm rounded-3xl p-8 lg:p-12 mb-12">
           <h3 className="text-2xl lg:text-3xl font-bold text-white mb-6">What We Learned</h3>
           <p className="text-lg lg:text-xl text-blue-100 leading-relaxed mb-6">
-            {getUIText('CompletionScreen', 'Message', language) || 'Every choice we make changes ocean life. Things like plastic trash and fishing affect sea animals. Your choices today help decide what happens to the ocean tomorrow.'}
+            {language === 'en' ? 'Every choice we make changes ocean life. Things like plastic trash and fishing affect sea animals. Your choices today help decide what happens to the ocean tomorrow.' :
+             language === 'fr' ? 'Chaque choix que nous faisons change la vie océanique. Des choses comme les déchets plastiques et la pêche affectent les animaux marins. Vos choix d\'aujourd\'hui aident à décider ce qui arrive à l\'océan demain.' :
+             'Amu kikewkul kesalultultijik ukamkinu\'kuomk memajutew. Koqoey kaqtawlmuewakon aqq tmaluwewa wokisnuatutew ukamlamuktal. Ketu kikewkulis kesk\'tuk wokisalutew tami kiju kesaluatuk ukamkinu\'kuom saqipunk.'}
           </p>
           <p className="text-lg lg:text-xl text-blue-100 leading-relaxed">
-            {getUIText('CompletionScreen', 'Encouragement', language) || 'Want to see what happens with different choices? Try again and pick different things to see how they change the ocean.'}
+            {language === 'en' ? 'Want to see what happens with different choices? Try again and pick different things to see how they change the ocean.' :
+             language === 'fr' ? 'Voulez-vous voir ce qui se passe avec des choix différents? Essayez encore et choisissez des choses différentes pour voir comment elles changent l\'océan.' :
+             'Ula wape\'wol tami kiju kesaluk aptekutomuwakon kikewkulek? Apoqot elkulewatultinisa aqq netukulin aptekuton koqoey nenawisq uk ukamkinu\'kuomk.'}
           </p>
         </div>
 
@@ -101,7 +112,9 @@ export const CompletionScreen = ({
           onClick={onRestart}
           className="bg-white/20 hover:bg-white/30 text-white px-12 py-6 rounded-3xl font-bold text-2xl transition-all duration-200 shadow-xl border border-white/30 hover:scale-105"
         >
-          {getUIText('CompletionScreen', 'Restart Button', language) || 'Play Again'}
+          {language === 'en' ? 'Play Again' :
+           language === 'fr' ? 'Jouer encore' :
+           'Ap elkulewati'}
         </button>
         </div>
       </div>

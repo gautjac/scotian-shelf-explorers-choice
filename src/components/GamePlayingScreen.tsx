@@ -3,7 +3,6 @@ import { GameSidebar } from './GameSidebar';
 import { FloatingLanguageHeader } from './FloatingLanguageHeader';
 import { Scenario, GameState, Language } from '../types';
 import geometricBackground from '../assets/geometric-background.png';
-import { useComprehensiveConfig } from '../hooks/useComprehensiveConfig';
 
 interface GamePlayingScreenProps {
   gameState: GameState;
@@ -25,10 +24,6 @@ export const GamePlayingScreen = ({
   onBackToLanguageSelection
 }: GamePlayingScreenProps) => {
   const scenarioProgress = `${gameState.currentScenarioIndex + 1}/5`;
-  const { getScenarioText, getChoiceText } = useComprehensiveConfig();
-  
-  const title = getScenarioText(currentScenario.id, 'title', gameState.language) ?? currentScenario.title;
-  const description = getScenarioText(currentScenario.id, 'description', gameState.language) ?? currentScenario.description;
 
   const impactColors = {
     positive: 'bg-[#008BBF] active:bg-[#008BBF]/90 text-white',
@@ -51,13 +46,13 @@ export const GamePlayingScreen = ({
           {/* Content Section with Scenario Progress */}
           <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-6 py-6 lg:px-8 lg:py-8 shadow-lg">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-900">{title}</h2>
+              <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-900">{currentScenario.title}</h2>
               <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg font-semibold text-lg">
                 {scenarioProgress}
               </div>
             </div>
             <p className="text-xl lg:text-2xl text-slate-700 leading-relaxed">
-              {description}
+              {currentScenario.description}
             </p>
           </div>
 
@@ -77,7 +72,7 @@ export const GamePlayingScreen = ({
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-lg lg:text-xl xl:text-2xl leading-relaxed pr-4">
-                      {getChoiceText(currentScenario.id, choice.id, 'text', gameState.language) ?? choice.text}
+                      {choice.text}
                     </span>
                     <span className="text-2xl lg:text-3xl flex-shrink-0">→</span>
                   </div>
