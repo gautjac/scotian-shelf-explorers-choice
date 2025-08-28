@@ -330,6 +330,9 @@ export const parseComprehensiveCSV = (csvContent: string) => {
     }
   }
   
+  console.log('🔧 [CSV-PARSE] Final config structure:', config);
+  console.log('🔧 [CSV-PARSE] Scenarios found:', Object.keys(config.scenarios));
+  
   return config;
 };
 
@@ -374,13 +377,24 @@ export const validateComprehensiveConfig = (config: any): string[] => {
   // Check required languages
   const requiredLanguages = ['en', 'fr', 'mi'];
   
-  // Validate scenarios
+  // Validate scenarios (new structure: scenarios[scenarioId][language])
   if (config.scenarios) {
-    requiredLanguages.forEach(lang => {
-      if (!config.scenarios[lang]) {
-        errors.push(`Missing scenarios for language: ${lang}`);
-      }
-    });
+    const scenarioIds = Object.keys(config.scenarios);
+    if (scenarioIds.length === 0) {
+      errors.push('No scenarios found in configuration');
+    } else {
+      // Check each scenario has all required languages
+      scenarioIds.forEach(scenarioId => {
+        const scenario = config.scenarios[scenarioId];
+        requiredLanguages.forEach(lang => {
+          if (!scenario[lang]) {
+            errors.push(`Missing ${lang} translation for scenario: ${scenarioId}`);
+          }
+        });
+      });
+    }
+  } else {
+    errors.push('No scenarios section found');
   }
   
   // Validate UI elements
