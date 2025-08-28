@@ -115,10 +115,8 @@ const Index = () => {
   };
 
   const handleHealthTransitionCompleteWithTracking = () => {
-    if (selectedChoice) {
-      handleHealthTransitionComplete(advanceScenario, selectedChoice);
-      trackActivity();
-    }
+    handleHealthTransitionComplete(advanceScenario, gameState.currentScenarioIndex, 5);
+    trackActivity();
   };
 
   return (

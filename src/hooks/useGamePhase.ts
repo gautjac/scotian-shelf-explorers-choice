@@ -76,13 +76,16 @@ export const useGamePhase = (lastActivity: number, resetGame: () => void) => {
 
   const handleHealthTransitionComplete = useCallback((
     advanceScenario: (scenarioId?: string) => void,
-    selectedChoice: Choice
+    currentScenarioIndex: number,
+    totalScenarios: number
   ) => {
-    if (selectedChoice?.nextScenarioId) {
-      advanceScenario(selectedChoice.nextScenarioId);
-      setGamePhase('playing');
-    } else {
+    // Check if we've completed all scenarios (0-indexed, so compare with totalScenarios - 1)
+    if (currentScenarioIndex >= totalScenarios - 1) {
       setGamePhase('completed');
+    } else {
+      // Advance to next scenario in the sequence
+      advanceScenario();
+      setGamePhase('playing');
     }
     setSelectedChoice(null);
   }, []);
