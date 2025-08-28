@@ -66,17 +66,6 @@ export const HealthTransitionScreen = ({
           )}
 
           <div className="flex flex-col items-center gap-6">
-            <p className="text-lg text-blue-200">
-              {selectedChoice.nextScenarioId 
-                ? (language === 'en' ? 'Next scenario' :
-                   language === 'fr' ? 'Scénario suivant' :
-                   'Ukti luksowakan')
-                : (language === 'en' ? 'Final results' :
-                   language === 'fr' ? 'Résultats finaux' :
-                   'Kespek teluewein')
-              }
-            </p>
-            
             <button
               onClick={onTransitionComplete}
               className="bg-white/20 hover:bg-white/30 text-white px-8 py-4 rounded-2xl font-medium text-lg transition-colors duration-200 shadow-lg border border-white/30"
