@@ -3,14 +3,13 @@ export const clearAllCachedData = async () => {
   console.log('🧹 [CACHE] Starting comprehensive cache clear for single source of truth...');
   
   try {
-    // Clear localStorage with detailed logging
-    const keys = ['comprehensiveConfiguration', 'impactConfiguration', 'gameConfiguration', 'config', 'scenarios', 'content'];
-    keys.forEach(key => {
-      const had = localStorage.getItem(key) !== null;
+    // Clear localStorage completely for single source of truth
+    const allKeys = Object.keys(localStorage);
+    allKeys.forEach(key => {
       localStorage.removeItem(key);
-      if (had) console.log(`✅ [CACHE] Cleared localStorage key: ${key}`);
+      console.log(`🗑️ [CACHE] Cleared localStorage key: ${key}`);
     });
-    console.log('✅ [CACHE] All localStorage cleared');
+    console.log('✅ [CACHE] All localStorage cleared completely');
     
     // Clear IndexedDB more aggressively
     if ('indexedDB' in window) {
@@ -36,19 +35,27 @@ export const clearAllCachedData = async () => {
     sessionStorage.clear();
     console.log('✅ [CACHE] Cleared sessionStorage');
     
-    // Clear service worker cache if available
+    // Clear service worker cache more aggressively
     if ('caches' in window) {
-      caches.keys().then(cacheNames => {
-        return Promise.all(
-          cacheNames.map(cacheName => {
+      try {
+        const cacheNames = await caches.keys();
+        await Promise.all(
+          cacheNames.map(async cacheName => {
             console.log(`🗑️ [CACHE] Deleting cache: ${cacheName}`);
-            return caches.delete(cacheName);
+            return await caches.delete(cacheName);
           })
         );
-      }).then(() => {
         console.log('✅ [CACHE] All service worker caches cleared');
-      });
+      } catch (error) {
+        console.log('⚠️ [CACHE] Service worker cache deletion error:', error);
+      }
     }
+    
+    // Force reload to ensure no cached content
+    setTimeout(() => {
+      console.log('🔄 [CACHE] Forcing hard reload after cache clear');
+      window.location.reload();
+    }, 1000);
     
     // Fire event to notify components
     window.dispatchEvent(new CustomEvent('cache-cleared'));

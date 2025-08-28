@@ -172,9 +172,8 @@ export const ContentManager = ({ onClose }: ContentManagerProps) => {
           return;
         }
         
-        // Store comprehensive configuration in persistent storage
-        console.log('💾 [DEBUG] Storing comprehensive config...');
-        await storeConfiguration('comprehensive', comprehensiveConfig);
+        // Store configuration for source file generation only (not for runtime)
+        console.log('💾 [DEBUG] Storing config for source file generation...');
         localStorage.setItem('comprehensiveConfiguration', JSON.stringify(comprehensiveConfig));
         
         // Trigger immediate reload
@@ -189,8 +188,7 @@ export const ContentManager = ({ onClose }: ContentManagerProps) => {
         // Parse legacy impact CSV
         const impactConfig = parseImpactCSV(text);
         
-        // Store impact configuration in persistent storage
-        await storeConfiguration('impact', impactConfig);
+        // Store configuration for source file generation only (not for runtime)
         localStorage.setItem('impactConfiguration', JSON.stringify(impactConfig));
         
         toast({
@@ -295,9 +293,10 @@ export const ContentManager = ({ onClose }: ContentManagerProps) => {
                 <p><strong>Comprehensive CSV:</strong> All app text, scenario content, UI labels, and impact values in one file</p>
                 <p><strong>Impact Only CSV:</strong> Just scenario impact values (legacy format)</p>
                 <p>• Edit downloaded CSV in Excel/Google Sheets</p>
-                <p>• Upload modified CSV to apply changes immediately</p>
-                <p>• Generate source files after CSV import to make changes permanent in published apps</p>
-                <p>• Replace the downloaded .ts files in your project to publish your custom content</p>
+                <p>• Upload CSV to prepare for source file generation</p>
+                <p>• Generate source files after CSV import</p>
+                <p><strong>IMPORTANT:</strong> Replace src/data/offlineContent.ts and src/data/content.ts files on GitHub with downloaded files</p>
+                <p>• Changes only appear after GitHub file replacement and hard refresh (Ctrl+F5)</p>
                 <p>• Automatic backup created before each import</p>
               </div>
             </TabsContent>
