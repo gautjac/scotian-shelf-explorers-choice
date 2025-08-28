@@ -1,4 +1,5 @@
 import { Choice, Language } from '../types';
+import { useComprehensiveConfig } from '../hooks/useComprehensiveConfig';
 import geometricBackground from '../assets/geometric-background.png';
 interface ConsequenceModalProps {
   choice: Choice;
@@ -27,6 +28,13 @@ export const ConsequenceModal = ({
   isVisible
 }: ConsequenceModalProps) => {
   if (!isVisible) return null;
+  const {
+    getChoiceText,
+    getUIText
+  } = useComprehensiveConfig();
+  const choiceText = getChoiceText(scenarioId, choice.id, 'text', language) ?? choice.text;
+  const prosOverride = getChoiceText(scenarioId, choice.id, 'pros', language);
+  const consOverride = getChoiceText(scenarioId, choice.id, 'cons', language);
   return <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50 p-6 lg:p-8" style={{
     backgroundImage: `url(${geometricBackground})`,
     backgroundSize: 'cover',
@@ -37,19 +45,15 @@ export const ConsequenceModal = ({
           
           
           <h3 className="text-3xl lg:text-4xl xl:text-5xl font-bold mb-10 lg:mb-12">
-            {language === 'en' ? 'Think About What Happens' : 
-             language === 'fr' ? 'Réfléchissez aux conséquences' : 
-             'Nutakoqnet koqoey kiju kesalul'}
+            {getUIText('ConsequenceModal', 'Title', language) || 'Think About What Happens'}
           </h3>
 
           {/* Your Choice */}
           <div className="bg-white/20 rounded-2xl p-8 lg:p-10 mb-10">
             <h4 className="text-2xl lg:text-3xl font-semibold mb-6">
-              {language === 'en' ? 'Your Choice:' : 
-               language === 'fr' ? 'Votre choix:' : 
-               'Ketu kikewkul:'}
+              {getUIText('ConsequenceModal', 'Your Choice Label', language) || 'Your Choice:'}
             </h4>
-            <p className="text-xl lg:text-2xl leading-relaxed">{choice.text}</p>
+            <p className="text-xl lg:text-2xl leading-relaxed">{choiceText}</p>
           </div>
 
           {/* Pros and Cons */}
@@ -58,37 +62,29 @@ export const ConsequenceModal = ({
             <div className="bg-green-500/30 rounded-2xl p-8 lg:p-10">
               <h4 className="text-2xl lg:text-3xl font-semibold mb-6 flex items-center justify-center gap-3">
                 <span className="text-4xl">✅</span>
-                {language === 'en' ? 'The pros' : 
-                 language === 'fr' ? 'Les avantages' : 
-                 'Wolteyewal'}
+                {getUIText('ConsequenceModal', 'The Pros', language) || 'The pros'}
               </h4>
-              <p className="text-lg lg:text-xl leading-relaxed">{choice.pros}</p>
+              <p className="text-lg lg:text-xl leading-relaxed">{prosOverride ?? choice.pros}</p>
             </div>
 
             {/* Cons */}
             <div className="bg-red-500/30 rounded-2xl p-8 lg:p-10">
               <h4 className="text-2xl lg:text-3xl font-semibold mb-6 flex items-center justify-center gap-3">
                 <span className="text-4xl">❌</span>
-                {language === 'en' ? 'The cons' : 
-                 language === 'fr' ? 'Les inconvénients' : 
-                 'Majeyewal'}
+                {getUIText('ConsequenceModal', 'The Cons', language) || 'The cons'}
               </h4>
-              <p className="text-lg lg:text-xl leading-relaxed">{choice.cons}</p>
+              <p className="text-lg lg:text-xl leading-relaxed">{consOverride ?? choice.cons}</p>
             </div>
           </div>
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-6 lg:gap-8 justify-center">
             <button onClick={onReturn} className="bg-white/20 text-white px-12 py-6 lg:px-16 lg:py-8 rounded-2xl font-semibold text-2xl lg:text-3xl active:bg-white/40 transition-colors duration-200 shadow-lg min-h-[80px] lg:min-h-[100px] transform active:scale-95 border-2 border-white/40">
-              {language === 'en' ? 'Go Back to Choices' : 
-               language === 'fr' ? 'Retourner aux choix' : 
-               'Apoqnmuei kekoey'}
+              {getUIText('ConsequenceModal', 'Return Button', language) || 'Go Back to Choices'}
             </button>
             
             <button onClick={onConfirm} className="bg-white text-gray-800 px-12 py-6 lg:px-16 lg:py-8 rounded-2xl font-semibold text-2xl lg:text-3xl active:bg-gray-200 transition-colors duration-200 shadow-lg min-h-[80px] lg:min-h-[100px] transform active:scale-95">
-              {language === 'en' ? 'Yes I Choose This' : 
-               language === 'fr' ? 'Oui, je choisis ceci' : 
-               'E\'e, ula kikewk'}
+              {getUIText('ConsequenceModal', 'Confirm Button', language) || 'Yes I Choose This'}
             </button>
           </div>
         </div>

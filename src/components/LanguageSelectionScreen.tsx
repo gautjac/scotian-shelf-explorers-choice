@@ -2,6 +2,7 @@ import { Language } from '../types';
 import { languages } from '../data/content';
 import rockyShoreBackground from '../assets/rocky-shore-background.jpg';
 import { Leaf } from 'lucide-react';
+import { useComprehensiveConfig } from '../hooks/useComprehensiveConfig';
 
 interface LanguageSelectionScreenProps {
   onLanguageSelect: (language: Language['code']) => void;
@@ -20,6 +21,7 @@ const languageButtonText = {
 };
 
 export const LanguageSelectionScreen = ({ onLanguageSelect }: LanguageSelectionScreenProps) => {
+  const { getUIText } = useComprehensiveConfig();
   return (
     <div 
       className="min-h-screen w-full flex items-center justify-center bg-cover bg-center bg-no-repeat"

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { HealthMetrics, Language } from '../types';
+import { useComprehensiveConfig } from '../hooks/useComprehensiveConfig';
 import { Waves, DollarSign, Users, Fish } from 'lucide-react';
 
 interface HealthMetersProps {
@@ -15,15 +16,15 @@ const getHealthColor = (value: number) => {
   return 'from-red-400 to-red-500';
 };
 
-const getHealthStatus = (value: number, language: 'en' | 'fr' | 'mi'): string => {
+const getHealthStatus = (value: number, language: 'en' | 'fr' | 'mi', getUIText: (screen: string, element: string, lang: string) => string | null): string => {
   if (value >= 80) {
-    return language === 'en' ? 'Doing Great' : language === 'fr' ? 'Très bien' : 'Pilei';
+    return getUIText('HealthStatus', 'Thriving', language) || (language === 'en' ? 'Doing Great' : language === 'fr' ? 'Très bien' : 'Pilei');
   } else if (value >= 60) {
-    return language === 'en' ? 'Doing OK' : language === 'fr' ? 'Ça va' : 'Nukek';
+    return getUIText('HealthStatus', 'Stable', language) || (language === 'en' ? 'Doing OK' : language === 'fr' ? 'Ça va' : 'Nukek');
   } else if (value >= 40) {
-    return language === 'en' ? 'Not Good' : language === 'fr' ? 'Pas bon' : 'Tepisq';
+    return getUIText('HealthStatus', 'Declining', language) || (language === 'en' ? 'Not Good' : language === 'fr' ? 'Pas bon' : 'Tepisq');
   } else {
-    return language === 'en' ? 'Very Bad' : language === 'fr' ? 'Très mauvais' : 'Mekij';
+    return getUIText('HealthStatus', 'Critical', language) || (language === 'en' ? 'Very Bad' : language === 'fr' ? 'Très mauvais' : 'Mekij');
   }
 };
 
@@ -46,9 +47,10 @@ interface AnimatedHealthMeterProps {
   previousValue: number;
   language: 'en' | 'fr' | 'mi';
   labels: { [key: string]: string };
+  getUIText: (screen: string, element: string, lang: string) => string | null;
 }
 
-const AnimatedHealthMeter = ({ metricKey, value, previousValue, language, labels }: AnimatedHealthMeterProps) => {
+const AnimatedHealthMeter = ({ metricKey, value, previousValue, language, labels, getUIText }: AnimatedHealthMeterProps) => {
   const [displayValue, setDisplayValue] = useState(previousValue);
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -150,7 +152,7 @@ const AnimatedHealthMeter = ({ metricKey, value, previousValue, language, labels
           displayValue >= 60 ? 'bg-blue-500/20 text-blue-600 border border-blue-500/30' :
           'bg-amber-500/20 text-amber-600 border border-amber-500/30'
         }`}>
-          {getHealthStatus(displayValue, language)}
+          {getHealthStatus(displayValue, language, getUIText)}
         </div>
       </div>
     </div>
@@ -163,11 +165,12 @@ export const HealthMeters = ({ healthMetrics, language, showInitialAnimation = f
       ? { ecosystem: 0, economic: 0, community: 0 }
       : { ...healthMetrics }
   );
+  const { getUIText } = useComprehensiveConfig();
 
   const labels = {
-    ecosystem: language === 'en' ? 'Animals & Plants Health' : language === 'fr' ? 'Santé des animaux et plantes' : 'Ukamkinu\'kuom samqwan',
-    economic: language === 'en' ? 'Money & Jobs Health' : language === 'fr' ? 'Santé de l\'argent et des emplois' : 'Toqwa\'tu\'k samqwan',
-    community: language === 'en' ? 'People\'s Health' : language === 'fr' ? 'Santé des gens' : 'L\'nui samqwan'
+    ecosystem: getUIText('HealthMeters', 'Ecosystem Health', language) || (language === 'en' ? 'Animals & Plants Health' : language === 'fr' ? 'Santé des animaux et plantes' : 'Ukamkinu\'kuom samqwan'),
+    economic: getUIText('HealthMeters', 'Economic Health', language) || (language === 'en' ? 'Money & Jobs Health' : language === 'fr' ? 'Santé de l\'argent et des emplois' : 'Toqwa\'tu\'k samqwan'),
+    community: getUIText('HealthMeters', 'Community Health', language) || (language === 'en' ? 'People\'s Health' : language === 'fr' ? 'Santé des gens' : 'L\'nui samqwan')
   };
 
   useEffect(() => {
@@ -178,9 +181,10 @@ export const HealthMeters = ({ healthMetrics, language, showInitialAnimation = f
   return (
     <div className="w-full">
       <h2 className="text-2xl lg:text-3xl font-bold text-center mb-8 text-slate-100">
-        {language === 'en' ? 'How Healthy is the Ocean' : 
-         language === 'fr' ? 'Comment va l\'océan' : 
-         'Samqwanikatl ukamkinu\'kuom'}
+        {getUIText('HealthMeters', 'Marine Health Status', language) || 
+         (language === 'en' ? 'How Healthy is the Ocean' : 
+          language === 'fr' ? 'Comment va l\'océan' : 
+          'Samqwanikatl ukamkinu\'kuom')}
       </h2>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
@@ -193,6 +197,7 @@ export const HealthMeters = ({ healthMetrics, language, showInitialAnimation = f
               previousValue={previousValuesRef.current[metricKey as keyof HealthMetrics]}
               language={language}
               labels={labels}
+              getUIText={getUIText}
             />
           </div>
         ))}

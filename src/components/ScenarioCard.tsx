@@ -1,5 +1,6 @@
 
 import { Scenario, Language } from '../types';
+import { useComprehensiveConfig } from '../hooks/useComprehensiveConfig';
 
 interface ScenarioCardProps {
   scenario: Scenario;
@@ -14,6 +15,9 @@ const impactColors = {
 };
 
 export const ScenarioCard = ({ scenario, language, onChoiceSelect }: ScenarioCardProps) => {
+  const { getScenarioText, getChoiceText } = useComprehensiveConfig();
+  const title = getScenarioText(scenario.id, 'title', language) ?? scenario.title;
+  const description = getScenarioText(scenario.id, 'description', language) ?? scenario.description;
   return (
     <div className="h-full bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col">
       {/* Scenario image - optimized for sidebar layout */}
@@ -22,9 +26,9 @@ export const ScenarioCard = ({ scenario, language, onChoiceSelect }: ScenarioCar
 
       {/* Scenario content - scrollable if needed */}
       <div className="flex-1 p-8 lg:p-10 pb-8 lg:pb-12 flex flex-col overflow-y-auto">
-        <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-900 mb-6">{scenario.title}</h2>
+        <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-900 mb-6">{title}</h2>
         <p className="text-xl lg:text-2xl text-slate-700 leading-relaxed mb-8 lg:mb-10">
-          {scenario.description}
+          {description}
         </p>
 
         {/* Choices - optimized for touch interaction */}
@@ -43,7 +47,7 @@ export const ScenarioCard = ({ scenario, language, onChoiceSelect }: ScenarioCar
                 className={`w-full p-6 lg:p-8 rounded-2xl font-semibold text-left transition-all duration-300 transform shadow-xl active:scale-98 ${impactColors[choice.impact]} min-h-[100px] lg:min-h-[120px]`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-lg lg:text-xl xl:text-2xl leading-relaxed pr-4">{choice.text}</span>
+                  <span className="text-lg lg:text-xl xl:text-2xl leading-relaxed pr-4">{getChoiceText(scenario.id, choice.id, 'text', language) ?? choice.text}</span>
                   <span className="text-2xl lg:text-3xl flex-shrink-0">→</span>
                 </div>
               </button>
