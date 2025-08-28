@@ -136,7 +136,7 @@ export const useGameState = () => {
       
       return {
         ...prev,
-        currentScenarioId: nextScenarioId || prev.currentScenarioId,
+        currentScenarioId: nextScenarioId || (nextIndex < scenarioOrder.length ? scenarioOrder[nextIndex] : prev.currentScenarioId),
         currentScenarioIndex: nextIndex >= 0 ? nextIndex : prev.currentScenarioIndex
       };
     });
