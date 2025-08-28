@@ -7,8 +7,12 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import { ImageGenerator } from "./components/ImageGenerator";
 import { OfflineStatus } from "./components/OfflineStatus";
+import { initializeCacheClearing } from "./utils/cacheManager";
 
 const queryClient = new QueryClient();
+
+// Initialize cache clearing on app start to ensure single source of truth
+initializeCacheClearing();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>

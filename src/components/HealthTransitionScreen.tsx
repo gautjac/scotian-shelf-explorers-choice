@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { HealthMetrics, Language, Choice } from '../types';
 import { HealthMeters } from './HealthMeters';
-import { useComprehensiveConfig } from '../hooks/useComprehensiveConfig';
 import geometricBackground from '../assets/geometric-background.png';
 
 interface HealthTransitionScreenProps {
@@ -20,7 +19,6 @@ export const HealthTransitionScreen = ({
   onTransitionComplete
 }: HealthTransitionScreenProps) => {
   const [showMeters, setShowMeters] = useState(false);
-  const { getUIText } = useComprehensiveConfig();
 
   useEffect(() => {
     // Show meters after a brief delay
@@ -46,11 +44,15 @@ export const HealthTransitionScreen = ({
       <div className="bg-gradient-to-br from-[#0B424E]/90 to-[#0C556B]/90 backdrop-blur-sm rounded-3xl p-8 lg:p-12 max-w-6xl mx-auto text-white shadow-2xl animate-fade-in">
         <div className="text-center">
           <h2 className="text-4xl lg:text-5xl font-bold mb-8">
-            {getUIText('HealthTransitionScreen', 'Title', language) || 'Ocean Impact'}
+            {language === 'en' ? 'Ocean Impact' :
+             language === 'fr' ? 'Impact océanique' :
+             'Ukamkinu\'kuom elta\'sik'}
           </h2>
           
           <p className="text-xl lg:text-2xl mb-12 text-blue-100">
-            {getUIText('HealthTransitionScreen', 'Impact Text', language) || 'Your choice has changed the ocean health...'}
+            {language === 'en' ? 'Your choice has changed the ocean health...' :
+             language === 'fr' ? 'Votre choix a changé la santé de l\'océan...' :
+             'Kil keleweltaqan elta\'sip ukamkinu\'kuom samqwan...'}
           </p>
 
           {showMeters && (
@@ -66,8 +68,12 @@ export const HealthTransitionScreen = ({
           <div className="flex flex-col items-center gap-6">
             <p className="text-lg text-blue-200">
               {selectedChoice.nextScenarioId 
-                ? (getUIText('HealthTransitionScreen', 'Next Scenario', language) || 'Next scenario')
-                : (getUIText('HealthTransitionScreen', 'Final Results', language) || 'Final results')
+                ? (language === 'en' ? 'Next scenario' :
+                   language === 'fr' ? 'Scénario suivant' :
+                   'Ukti luksowakan')
+                : (language === 'en' ? 'Final results' :
+                   language === 'fr' ? 'Résultats finaux' :
+                   'Kespek teluewein')
               }
             </p>
             
@@ -75,7 +81,9 @@ export const HealthTransitionScreen = ({
               onClick={onTransitionComplete}
               className="bg-white/20 hover:bg-white/30 text-white px-8 py-4 rounded-2xl font-medium text-lg transition-colors duration-200 shadow-lg border border-white/30"
             >
-              {getUIText('HealthTransitionScreen', 'Next Button', language) || 'Next'}
+              {language === 'en' ? 'Next' :
+               language === 'fr' ? 'Suivant' :
+               'Ukti'}
             </button>
           </div>
         </div>

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Clock } from 'lucide-react';
 import { Button } from './ui/button';
 import { Language } from '../types';
-import { useComprehensiveConfig } from '../hooks/useComprehensiveConfig';
 
 interface InactivityModalProps {
   isVisible: boolean;
@@ -20,7 +19,6 @@ export const InactivityModal = ({
   onTimeout 
 }: InactivityModalProps) => {
   const [countdown, setCountdown] = useState(10);
-  const { getUIText } = useComprehensiveConfig();
 
   useEffect(() => {
     if (!isVisible) {
@@ -50,11 +48,15 @@ export const InactivityModal = ({
           <Clock size={64} className="text-primary" />
           
           <h2 className="text-2xl font-bold text-foreground">
-            {getUIText('InactivityModal', 'Title', language)}
+            {language === 'en' ? 'Are you still there?' :
+             language === 'fr' ? 'Êtes-vous toujours là?' :
+             'Ula mokwat etlit?'}
           </h2>
           
           <div className="text-sm text-muted-foreground">
-            {getUIText('InactivityModal', 'Auto Redirect', language)?.replace('{countdown}', countdown.toString())}
+            {language === 'en' ? `Returning to start in ${countdown} seconds...` :
+             language === 'fr' ? `Retour au début dans ${countdown} secondes...` :
+             `Aplutey mawlukewey ${countdown} sekun...`}
           </div>
           
           <div className="flex flex-col gap-3 w-full">
@@ -62,7 +64,9 @@ export const InactivityModal = ({
               onClick={onStillHere}
               className="w-full h-12 text-lg bg-[#00AE9F] text-white active:bg-[#00AE9F]/80"
             >
-              {getUIText('InactivityModal', 'Still Here Button', language)}
+              {language === 'en' ? 'Yes, I\'m still here!' :
+               language === 'fr' ? 'Oui, je suis toujours là!' :
+               'E\'e, mokwat etli!'}
             </Button>
             
             <Button 
@@ -70,7 +74,9 @@ export const InactivityModal = ({
               variant="outline"
               className="w-full h-12 text-lg border-[#00AE9F] text-[#00AE9F] active:bg-[#00AE9F]/10"
             >
-              {getUIText('InactivityModal', 'Start Over Button', language)}
+              {language === 'en' ? 'Start Over' :
+               language === 'fr' ? 'Recommencer' :
+               'Ap mawlukewi'}
             </Button>
           </div>
         </div>

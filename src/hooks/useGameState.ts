@@ -2,7 +2,6 @@
 import { useState, useCallback } from 'react';
 import { GameState, Language, MarineSpecies, HealthMetrics } from '../types';
 import { marineSpecies } from '../data/content';
-import { useComprehensiveConfig } from './useComprehensiveConfig';
 import { getChoiceImpact } from '../utils/impactConfiguration';
 
 const scenarioOrder = ['plastic-pollution', 'fishing-practices', 'shipping-traffic', 'renewable-energy', 'coastal-development'];
@@ -32,7 +31,6 @@ const initialGameState: GameState = {
 
 export const useGameState = () => {
   const [gameState, setGameState] = useState<GameState>(initialGameState);
-  const { getChoiceImpact: getComprehensiveChoiceImpact } = useComprehensiveConfig();
 
   const updateLanguage = useCallback((language: Language['code']) => {
     setGameState(prev => ({ ...prev, language }));
@@ -47,28 +45,26 @@ export const useGameState = () => {
       const newSpeciesHealth = { ...prev.speciesHealth };
       const newHealthMetrics = { ...prev.healthMetrics };
       
-      // Get impact values: prefer comprehensive CSV, then uploaded impact CSV, then passed granular, then content/legacy
-      let finalImpacts = getComprehensiveChoiceImpact(scenarioId, choiceId, prev.language) || null;
+      // Get impact values: try uploaded impact CSV first, then passed granular, then content/legacy
+      let finalImpacts = null;
       
-      if (!finalImpacts) {
-        // Try impact-only CSV from localStorage
-        try {
-          const raw = localStorage.getItem('impactConfiguration');
-          if (raw) {
-            const impactConfig = JSON.parse(raw);
-            const byScenario = impactConfig[scenarioId];
-            const byChoice = byScenario?.[choiceId];
-            if (byChoice && typeof byChoice.ecosystem === 'number' && typeof byChoice.economic === 'number' && typeof byChoice.community === 'number') {
-              finalImpacts = {
-                ecosystem: byChoice.ecosystem,
-                economic: byChoice.economic,
-                community: byChoice.community
-              };
-            }
+      // Try impact-only CSV from localStorage
+      try {
+        const raw = localStorage.getItem('impactConfiguration');
+        if (raw) {
+          const impactConfig = JSON.parse(raw);
+          const byScenario = impactConfig[scenarioId];
+          const byChoice = byScenario?.[choiceId];
+          if (byChoice && typeof byChoice.ecosystem === 'number' && typeof byChoice.economic === 'number' && typeof byChoice.community === 'number') {
+            finalImpacts = {
+              ecosystem: byChoice.ecosystem,
+              economic: byChoice.economic,
+              community: byChoice.community
+            };
           }
-        } catch (e) {
-          console.warn('Failed to read impactConfiguration from localStorage:', e);
         }
+      } catch (e) {
+        console.warn('Failed to read impactConfiguration from localStorage:', e);
       }
       
       if (!finalImpacts && granularImpacts) {
@@ -131,7 +127,7 @@ export const useGameState = () => {
         completedScenarios: [...prev.completedScenarios, scenarioId]
       };
     });
-  }, [getComprehensiveChoiceImpact]);
+  }, []);
 
   const advanceScenario = useCallback((nextScenarioId?: string) => {
     setGameState(prev => {

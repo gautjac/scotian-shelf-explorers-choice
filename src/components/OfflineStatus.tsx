@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Alert, AlertDescription } from './ui/alert';
 import { Wifi, WifiOff } from 'lucide-react';
-import { useComprehensiveConfig } from '../hooks/useComprehensiveConfig';
 import { Language } from '../types';
 
 interface OfflineStatusProps {
@@ -11,7 +10,6 @@ interface OfflineStatusProps {
 export const OfflineStatus = ({ language = 'en' }: OfflineStatusProps) => {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [showOfflineMessage, setShowOfflineMessage] = useState(false);
-  const { getUIText } = useComprehensiveConfig();
 
   useEffect(() => {
     const handleOnline = () => {
@@ -50,7 +48,9 @@ export const OfflineStatus = ({ language = 'en' }: OfflineStatusProps) => {
         <AlertDescription className="text-orange-800 dark:text-orange-200">
           <strong>Offline Mode</strong>
           <br />
-          {getUIText('OfflineStatus', 'Offline Message', language)}
+          {language === 'en' ? 'Game works offline. No internet connection needed.' :
+           language === 'fr' ? 'Le jeu fonctionne hors ligne. Aucune connexion Internet nécessaire.' :
+           'Alustumaqan teltoq mu\'in internet. Mu internet uksapa\'timk.'}
         </AlertDescription>
       </Alert>
     </div>
@@ -63,7 +63,6 @@ interface OnlineIndicatorProps {
 
 export const OnlineIndicator = ({ language = 'en' }: OnlineIndicatorProps) => {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
-  const { getUIText } = useComprehensiveConfig();
 
   useEffect(() => {
     const handleOnline = () => setIsOnline(true);
@@ -85,7 +84,10 @@ export const OnlineIndicator = ({ language = 'en' }: OnlineIndicatorProps) => {
       ) : (
         <WifiOff className="h-4 w-4 text-orange-500" />
       )}
-      <span>{isOnline ? getUIText('OfflineStatus', 'Online Text', language) : getUIText('OfflineStatus', 'Offline Text', language)}</span>
+      <span>{isOnline ? 
+        (language === 'en' ? 'Online' : language === 'fr' ? 'En ligne' : 'Online') : 
+        (language === 'en' ? 'Offline' : language === 'fr' ? 'Hors ligne' : 'Offline')
+      }</span>
     </div>
   );
 };
