@@ -19,7 +19,7 @@ import { DebugPanel } from './DebugPanel';
 
 interface ContentManagerProps {
   onClose: () => void;
-}
+} // Force rebuild
 
 export const ContentManager = ({ onClose }: ContentManagerProps) => {
   const [isUploading, setIsUploading] = useState(false);
