@@ -260,9 +260,19 @@ export const exportComprehensiveCSV = (): string => {
 export const parseComprehensiveCSV = (csvContent: string) => {
   console.log('🔧 [CSV-PARSE] Starting CSV parsing...');
   console.log('🔧 [CSV-PARSE] First 200 chars:', csvContent.substring(0, 200));
+  console.log('🔧 [CSV-PARSE] Last 200 chars:', csvContent.substring(csvContent.length - 200));
   
   const lines = csvContent.split('\n');
   console.log('🔧 [CSV-PARSE] Total lines:', lines.length);
+  console.log('🔧 [CSV-PARSE] Non-empty lines:', lines.filter(line => line.trim()).length);
+  
+  // Verify line distribution
+  let headerLines = 0;
+  let scenarioLines = 0;
+  let uiLines = 0;
+  let impactLines = 0;
+  let emptyLines = 0;
+  let invalidLines = 0;
   
   const config = {
     scenarios: {} as any,
@@ -273,11 +283,22 @@ export const parseComprehensiveCSV = (csvContent: string) => {
   // Skip header row
   for (let i = 1; i < lines.length; i++) {
     const line = lines[i].trim();
-    if (!line) continue;
+    if (!line) {
+      emptyLines++;
+      continue;
+    }
+    
+    if (i === 1) {
+      headerLines++;
+    }
     
     // Parse CSV (handle quoted strings)
     const matches = line.match(/(?:^|,)("(?:[^"]|"")*"|[^,]*)/g);
-    if (!matches || matches.length < 6) continue;
+    if (!matches || matches.length < 6) {
+      invalidLines++;
+      console.warn(`🔧 [CSV-PARSE] Invalid line ${i}: insufficient columns (${matches?.length || 0})`, line.substring(0, 100));
+      continue;
+    }
     
     const values = matches.map(match => 
       match.startsWith(',') ? match.slice(1) : match
@@ -289,7 +310,19 @@ export const parseComprehensiveCSV = (csvContent: string) => {
     
     const [section, type, id, language, field, content, ecosystemStr, economicStr, communityStr, notes] = values;
     
-    console.log('🔧 [CSV-PARSE] Processing row:', { section, type, id, language, field, content: content?.substring(0, 50) + '...' });
+    // Count line types
+    if (section === 'SCENARIOS') {
+      scenarioLines++;
+    } else if (section === 'UI_ELEMENTS') {
+      uiLines++;
+    } else if (section === 'IMPACT_VALUES') {
+      impactLines++;
+    }
+    
+    // Only log every 50th line to avoid spam, plus first/last few
+    if (i <= 5 || i >= lines.length - 5 || i % 50 === 0) {
+      console.log(`🔧 [CSV-PARSE] Line ${i}:`, { section, type, id, language, field, content: content?.substring(0, 50) + '...' });
+    }
     
     if (section === 'SCENARIOS') {
       // Parse scenario ID to get main scenario and choice ID
@@ -330,8 +363,31 @@ export const parseComprehensiveCSV = (csvContent: string) => {
     }
   }
   
-  console.log('🔧 [CSV-PARSE] Final config structure:', config);
+  // Final processing summary
+  console.log('🔧 [CSV-PARSE] Processing Summary:');
+  console.log(`  📊 Total lines processed: ${lines.length}`);
+  console.log(`  📊 Empty lines: ${emptyLines}`);
+  console.log(`  📊 Invalid lines: ${invalidLines}`);
+  console.log(`  📊 Scenario lines: ${scenarioLines}`);
+  console.log(`  📊 UI Element lines: ${uiLines}`);
+  console.log(`  📊 Impact Value lines: ${impactLines}`);
+  console.log(`  📊 Valid data lines: ${scenarioLines + uiLines + impactLines}`);
+  
+  console.log('🔧 [CSV-PARSE] Final config structure:', {
+    scenarios: Object.keys(config.scenarios),
+    uiLanguages: Object.keys(config.uiElements),
+    impactValues: Object.keys(config.impactValues)
+  });
   console.log('🔧 [CSV-PARSE] Scenarios found:', Object.keys(config.scenarios));
+  
+  // Detailed scenario content check
+  Object.keys(config.scenarios).forEach(scenarioId => {
+    const scenario = config.scenarios[scenarioId];
+    console.log(`🔧 [CSV-PARSE] Scenario ${scenarioId}:`, {
+      languages: Object.keys(scenario),
+      choicesInEn: scenario.en?.choices?.length || 0
+    });
+  });
   
   return config;
 };
