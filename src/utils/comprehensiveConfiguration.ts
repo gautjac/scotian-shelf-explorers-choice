@@ -1,7 +1,6 @@
 import { scenarios } from '../data/content';
 import { Choice } from '../types';
 import { getChoiceImpact } from './impactConfiguration';
-import Papa from 'papaparse';
 
 // CSV row interface for comprehensive export
 interface ComprehensiveConfigRow {
@@ -17,90 +16,30 @@ interface ComprehensiveConfigRow {
   notes?: string;
 }
 
-// Parse copydeck CSV content with proper CSV parsing
-export const parseCopydeckCSVContent = (csvContent: string) => {
-  console.log('📊 [CSV-PARSE] Starting improved CSV parsing...');
+// Parse copydeck CSV content
+const parseCopydeckCSVContent = (csvContent: string) => {
+  const lines = csvContent.split('\n');
+  const uiElements: any[] = [];
   
-  const parseResult = Papa.parse(csvContent, {
-    header: false,
-    skipEmptyLines: true,
-    quoteChar: '"',
-    escapeChar: '"',
-    delimiter: ',',
-    transform: (value: string) => value.trim()
-  });
-
-  if (parseResult.errors.length > 0) {
-    console.warn('⚠️ [CSV-PARSE] Parse errors:', parseResult.errors);
-  }
-
-  const rows = parseResult.data as string[][];
-  if (rows.length === 0) return { result: {}, errors: ['No data found in CSV'], successCount: 0 };
-  
-  const headers = rows[0];
-  console.log('📊 [CSV-PARSE] Headers found:', headers);
-  
-  // Map headers to language codes
-  const languageMap: { [key: string]: string } = {
-    'English': 'en',
-    'French': 'fr',
-    "Mi'kmaw": 'mi'
-  };
-  
-  const result: { [screenId: string]: { [elementId: string]: { [lang: string]: string } } } = {};
-  const errors: string[] = [];
-  let successCount = 0;
-  
-  for (let i = 1; i < rows.length; i++) {
-    const values = rows[i];
-    const lineNumber = i + 1;
+  // Skip header and empty lines
+  for (let i = 1; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (!line) continue;
     
-    if (values.length < 2) {
-      errors.push(`Line ${lineNumber}: Insufficient columns (need at least 2)`);
-      continue;
-    }
-    
-    const screenId = values[0];
-    const elementId = values[1];
-    
-    if (!screenId || !elementId) {
-      errors.push(`Line ${lineNumber}: Missing screen ID or element ID`);
-      continue;
-    }
-    
-    if (!result[screenId]) {
-      result[screenId] = {};
-    }
-    
-    if (!result[screenId][elementId]) {
-      result[screenId][elementId] = {};
-    }
-    
-    let hasValidContent = false;
-    
-    // Process language columns
-    for (let j = 2; j < Math.min(values.length, headers.length); j++) {
-      const headerName = headers[j];
-      const langCode = languageMap[headerName] || headerName.toLowerCase();
-      const value = values[j];
-      
-      if (value && value !== '""' && value !== "''") {
-        result[screenId][elementId][langCode] = value;
-        hasValidContent = true;
-      }
-    }
-    
-    if (hasValidContent) {
-      successCount++;
-      console.log(`✅ [CSV-PARSE] Line ${lineNumber}: ${screenId}.${elementId} imported successfully`);
-    } else {
-      errors.push(`Line ${lineNumber}: No valid content found for ${screenId}.${elementId}`);
+    const parts = line.split(',');
+    if (parts.length >= 5) {
+      uiElements.push({
+        screen: parts[0],
+        element: parts[1],
+        english: parts[2],
+        french: parts[3],
+        mikmaq: parts[4],
+        notes: parts[5] || ''
+      });
     }
   }
   
-  console.log(`📊 [CSV-PARSE] Import complete: ${successCount} entries imported, ${errors.length} errors`);
-  
-  return { result, errors, successCount };
+  return uiElements;
 };
 
 // UI text from copydeck.csv content
@@ -248,24 +187,43 @@ export const exportComprehensiveCSV = (): string => {
   
   // Add UI elements
   const uiElements = parseCopydeckCSVContent(uiTextContent);
-  if (uiElements.result) {
-    Object.entries(uiElements.result).forEach(([screenId, elements]) => {
-      Object.entries(elements).forEach(([elementId, langData]) => {
-        Object.entries(langData as Record<string, string>).forEach(([lang, content]) => {
-          if (content) {
-            rows.push({
-              section: 'UI_ELEMENTS',
-              type: 'ui_text',
-              id: `${screenId}_${elementId}`,
-              language: lang,
-              field: elementId,
-              content: content
-            });
-          }
-        });
+  uiElements.forEach(element => {
+    if (element.english) {
+      rows.push({
+        section: 'UI_ELEMENTS',
+        type: 'ui_text',
+        id: `${element.screen}_${element.element}`,
+        language: 'en',
+        field: element.element,
+        content: element.english,
+        notes: element.notes
       });
-    });
-  }
+    }
+    
+    if (element.french) {
+      rows.push({
+        section: 'UI_ELEMENTS',
+        type: 'ui_text',
+        id: `${element.screen}_${element.element}`,
+        language: 'fr',
+        field: element.element,
+        content: element.french,
+        notes: element.notes
+      });
+    }
+    
+    if (element.mikmaq) {
+      rows.push({
+        section: 'UI_ELEMENTS',
+        type: 'ui_text',
+        id: `${element.screen}_${element.element}`,
+        language: 'mi',
+        field: element.element,
+        content: element.mikmaq,
+        notes: element.notes
+      });
+    }
+  });
   
   // Create CSV header
   const header = [
@@ -300,135 +258,114 @@ export const exportComprehensiveCSV = (): string => {
 
 // Parse comprehensive CSV and return structured configuration
 export const parseComprehensiveCSV = (csvContent: string) => {
-  console.log('📊 [COMPREHENSIVE-CSV] Starting improved comprehensive CSV parsing...');
+  console.log('🔧 [CSV-PARSE] Starting CSV parsing...');
+  console.log('🔧 [CSV-PARSE] First 200 chars:', csvContent.substring(0, 200));
   
-  const parseResult = Papa.parse(csvContent, {
-    header: false,
-    skipEmptyLines: true,
-    quoteChar: '"',
-    escapeChar: '"',
-    delimiter: ',',
-    transform: (value: string) => value.trim()
-  });
-
-  if (parseResult.errors.length > 0) {
-    console.warn('⚠️ [COMPREHENSIVE-CSV] Parse errors:', parseResult.errors);
-  }
-
-  const rows = parseResult.data as string[][];
-  if (rows.length === 0) return { config: null, errors: ['No data found in CSV'], successCount: 0 };
+  const lines = csvContent.split('\n');
+  console.log('🔧 [CSV-PARSE] Total lines:', lines.length);
   
-  const headers = rows[0];
-  console.log('📊 [COMPREHENSIVE-CSV] Headers:', headers);
-  
-  const config: any = {
-    scenarios: {},
-    uiElements: {}
+  const config = {
+    scenarios: {} as any,
+    uiElements: {} as any,
+    impactValues: {} as any
   };
   
-  const errors: string[] = [];
-  let successCount = 0;
-  
-  for (let i = 1; i < rows.length; i++) {
-    const values = rows[i];
-    const lineNumber = i + 1;
+  // Skip header row
+  for (let i = 1; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (!line) continue;
     
-    if (values.length < 5) {
-      errors.push(`Line ${lineNumber}: Insufficient data (need at least 5 columns)`);
-      continue;
-    }
+    // Parse CSV (handle quoted strings)
+    const matches = line.match(/(?:^|,)("(?:[^"]|"")*"|[^,]*)/g);
+    if (!matches || matches.length < 6) continue;
     
-    const section = values[0];
-    const type = values[1];
-    const id = values[2];
-    const language = values[3];
-    const content = values[4];
+    const values = matches.map(match => 
+      match.startsWith(',') ? match.slice(1) : match
+    ).map(value => 
+      value.startsWith('"') && value.endsWith('"') 
+        ? value.slice(1, -1).replace(/""/g, '"')
+        : value
+    );
     
-    if (!section || !type || !id || !language || !content) {
-      errors.push(`Line ${lineNumber}: Missing required data (section, type, id, language, or content)`);
-      continue;
-    }
+    const [section, type, id, language, field, content, ecosystemStr, economicStr, communityStr, notes] = values;
     
-    console.log(`📊 [COMPREHENSIVE-CSV] Processing Line ${lineNumber}: ${section}.${type}.${id} (${language})`);
+    console.log('🔧 [CSV-PARSE] Processing row:', { section, type, id, language, field, content: content?.substring(0, 50) + '...' });
     
-    try {
-      if (section === 'SCENARIOS') {
-        if (!config.scenarios[id]) {
-          config.scenarios[id] = {};
-        }
-        if (!config.scenarios[id][language]) {
-          config.scenarios[id][language] = {};
-        }
-        config.scenarios[id][language][type] = content;
-        
-        // Handle impact values if present
-        if (values.length >= 8) {
-          const ecosystem = parseFloat(values[5]) || 0;
-          const economic = parseFloat(values[6]) || 0;
-          const community = parseFloat(values[7]) || 0;
-          
-          if (!config.scenarios[id][language].impacts) {
-            config.scenarios[id][language].impacts = {};
-          }
-          if (type.startsWith('choice_') && type.includes('_impact')) {
-            const choiceId = type.replace('_impact', '');
-            config.scenarios[id][language].impacts[choiceId] = {
-              ecosystem,
-              economic,
-              community
-            };
-          }
-        }
-      } else if (section === 'UI_ELEMENTS') {
-        if (!config.uiElements[type]) {
-          config.uiElements[type] = {};
-        }
-        if (!config.uiElements[type][id]) {
-          config.uiElements[type][id] = {};
-        }
-        config.uiElements[type][id][language] = content;
-      }
+    if (section === 'SCENARIOS') {
+      // Parse scenario ID to get main scenario and choice ID
+      const parts = id.split('_');
+      const scenarioId = parts[0];
+      const choiceId = parts.length > 1 ? parts[1] : null;
       
-      successCount++;
-    } catch (error) {
-      errors.push(`Line ${lineNumber}: Error processing data - ${error}`);
+      if (!config.scenarios[scenarioId]) config.scenarios[scenarioId] = {};
+      if (!config.scenarios[scenarioId][language]) config.scenarios[scenarioId][language] = { choices: [] };
+      
+      if (type === 'title' || type === 'description') {
+        config.scenarios[scenarioId][language][field] = content;
+      } else if (choiceId && (type === 'choice' || type === 'consequence' || type === 'pros' || type === 'cons')) {
+        let choice = config.scenarios[scenarioId][language].choices.find((c: any) => c.id === choiceId);
+        if (!choice) {
+          choice = { id: choiceId };
+          config.scenarios[scenarioId][language].choices.push(choice);
+        }
+        
+        if (type === 'choice') choice.text = content;
+        else if (type === 'consequence') choice.consequence = content;
+        else if (type === 'pros') choice.pros = content;
+        else if (type === 'cons') choice.cons = content;
+        
+        // Add impact values if present
+        if (ecosystemStr || economicStr || communityStr) {
+          choice.ecosystemImpact = parseInt(ecosystemStr) || 0;
+          choice.economicImpact = parseInt(economicStr) || 0;
+          choice.communityImpact = parseInt(communityStr) || 0;
+        }
+      }
+    } else if (section === 'UI_ELEMENTS') {
+      if (!config.uiElements[language]) config.uiElements[language] = {};
+      if (!config.uiElements[language][id]) config.uiElements[language][id] = {};
+      
+      config.uiElements[language][id][field] = content;
+      if (notes) config.uiElements[language][id].notes = notes;
     }
   }
   
-  console.log(`📊 [COMPREHENSIVE-CSV] Parsing complete: ${successCount} entries processed, ${errors.length} errors`);
-  return { config, errors, successCount };
+  console.log('🔧 [CSV-PARSE] Final config structure:', config);
+  console.log('🔧 [CSV-PARSE] Scenarios found:', Object.keys(config.scenarios));
+  
+  return config;
 };
 
 // Export utilities for fallback usage
 export const parseCopydeckCSVForFallback = () => {
-  const csvContent = `Screen,Element,English,French,Mi'kmaw
-WelcomeScreen,title,"Ocean Game","Jeu de l'océan","Wkte'pi Pugewa'kl"
-WelcomeScreen,playButton,"Let's Play!","Jouer!","A'tu'tukan!"
-WelcomeScreen,languageLabel,"Language","Langue","Na Teka'si"
-LanguageSelectionScreen,title,"Choose Your Language","Choisissez votre langue","Ketu' tettuel"
-LanguageSelectionScreen,englishButton,"English","Anglais","Aknu'tatimk"
-LanguageSelectionScreen,frenchButton,"French","Français","Pransisisk"
-LanguageSelectionScreen,mikmawButton,"Mi'kmaw","Mi'kmaw","Mi'kmaw"
-ScenarioPreview,healthLabel,"Ocean Health","Santé de l'océan","Maqamikewiktuk Ta'n Tel-ke'k"
-ScenarioPreview,economyLabel,"Economy","Économie","Ta'n Teluek"
-ScenarioPreview,ecosystemLabel,"Ecosystem","Écosystème","Ekowsistem"
-ScenarioPreview,communityLabel,"Community","Communauté","Weji'kewey"
-ScenarioPreview,nextButton,"Next","Suivant","A'lukwet"
-ScenarioPreview,previousButton,"Previous","Précédent","Sakiwi'k"
-ScenarioPreview,playButton,"Continue","Continuer","A'tu'tu"
-CompletionScreen,title,"Game Complete!","Jeu terminé!","Pugewa'kl Kiska'k!"
-CompletionScreen,subtitle,"Great job! You've made important decisions for Nova Scotia's ocean.","Excellent! Vous avez pris des décisions importantes pour l'océan de la Nouvelle-Écosse.","Wel Lukwet! Nemitu'nnaq Kijituek Pel-nuo'tisk Ukamkok Kespek."
-CompletionScreen,playAgainButton,"Play Again","Rejouer","A'tukwaqan"
-CompletionScreen,resultsTitle,"Your Impact","Votre impact","Msit Koqoey Kelulukw"
-CompletionScreen,overallHealthLabel,"Overall Ocean Health","Santé globale de l'océan","Msit Ta'n Wkte'k Te'luluk"
-CompletionScreen,goodOutcome,"The ocean is thriving!","L'océan prospère!","Wkte'k Ankweyul!"
-CompletionScreen,neutralOutcome,"The ocean is stable.","L'océan est stable.","Wkte'k Ketu' Teluek."
-CompletionScreen,poorOutcome,"The ocean needs help.","L'océan a besoin d'aide.","Wkte'k Ankamtimuk."
-GamePlayingScreen,choicesTitle,"What should we do?","Que devons-nous faire?","Koqoey Kelusite'tukw?"
-GamePlayingScreen,impactPreview,"This choice will affect:","Ce choix affectera:","Uknu'taqan Teliaq:"`;
+  const lines = uiTextContent.trim().split('\n');
+  const headers = lines[0].split(',');
+  const data: any = {};
   
-  const parseResult = parseCopydeckCSVContent(csvContent);
-  return parseResult.result || {};
+  // Map CSV headers to language codes
+  const languageMapping: { [key: string]: string } = {
+    'English': 'en',
+    'French': 'fr',
+    'Mi\'kmaw': 'mi'
+  };
+  
+  for (let i = 1; i < lines.length; i++) {
+    const values = lines[i].split(',');
+    const screen = values[0];
+    const element = values[1];
+    
+    for (let j = 2; j < headers.length; j++) {
+      const csvLanguage = headers[j];
+      const languageCode = languageMapping[csvLanguage] || csvLanguage;
+      const content = values[j];
+      
+      if (!data[languageCode]) data[languageCode] = {};
+      if (!data[languageCode][screen]) data[languageCode][screen] = {};
+      data[languageCode][screen][element] = content;
+    }
+  }
+  
+  return data;
 };
 
 export { uiTextContent };

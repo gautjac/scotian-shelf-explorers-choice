@@ -7,7 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { Alert, AlertDescription } from './ui/alert';
 import { useToast } from '@/hooks/use-toast';
 import { exportChoicesToCSV, parseImpactCSV } from '../utils/impactConfiguration';
-import { exportComprehensiveCSV, parseComprehensiveCSV, validateComprehensiveConfig, parseCopydeckCSVContent } from '../utils/comprehensiveConfiguration';
+import { exportComprehensiveCSV, parseComprehensiveCSV, validateComprehensiveConfig } from '../utils/comprehensiveConfiguration';
 import { createBackup } from '../utils/backupManager';
 import { storeConfiguration } from '../utils/persistentStorage';
 import { downloadSourceFiles } from '../utils/sourceFileGenerator';
@@ -19,7 +19,7 @@ import { DebugPanel } from './DebugPanel';
 
 interface ContentManagerProps {
   onClose: () => void;
-} // Force rebuild
+}
 
 export const ContentManager = ({ onClose }: ContentManagerProps) => {
   const [isUploading, setIsUploading] = useState(false);
@@ -123,132 +123,102 @@ export const ContentManager = ({ onClose }: ContentManagerProps) => {
   };
 
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.files) return;
-    
-    const file = event.target.files[0];
+    const file = event.target.files?.[0];
     if (!file) return;
+
+    setIsUploading(true);
     
-    const reader = new FileReader();
-    reader.onload = async (e) => {
-      const csvContent = e.target?.result as string;
+    try {
+      const text = await file.text();
       
-      if (file.name.includes('comprehensive') || file.name.includes('all_content')) {
-        console.log('📥 [IMPORT] Processing comprehensive CSV...');
+      // Detect file type by checking first line
+      const firstLine = text.split('\n')[0];
+      const isComprehensive = firstLine.includes('Section,Type,ID,Language,Field,Content');
+      
+      // Create automatic backup before import
+      try {
+        const backupType = isComprehensive ? 'comprehensive' : 'impact';
+        await createBackup(backupType, 'auto-import');
         
-        // Create backup before importing
-        try {
-          await createBackup('comprehensive', 'auto-import');
-        } catch (error) {
-          console.warn('Failed to create backup:', error);
-        }
+        toast({
+          title: "Backup Created",
+          description: "Automatic backup created before import.",
+        });
+      } catch (backupError) {
+        // Continue with import even if backup fails
+        console.warn('Failed to create auto-backup:', backupError);
         
-        const parseResult = parseComprehensiveCSV(csvContent);
-        
-        if (parseResult.config) {
-          // Store the comprehensive configuration
-          await storeConfiguration('comprehensive', parseResult.config);
-          
-          // Trigger config reload
-          window.dispatchEvent(new CustomEvent('configUpdate'));
-          
-          console.log('✅ [IMPORT] Comprehensive configuration imported successfully');
-          
-          let message = `Imported ${parseResult.successCount} entries successfully.`;
-          if (parseResult.errors.length > 0) {
-            message += ` ${parseResult.errors.length} errors encountered.`;
-            console.warn('⚠️ [IMPORT] Errors:', parseResult.errors);
-          }
-          
-          toast({
-            title: "Configuration Imported",
-            description: message,
-            variant: parseResult.errors.length > 0 ? "default" : "default",
-          });
-        } else {
-          console.error('❌ [IMPORT] Failed to parse comprehensive CSV');
-          console.error('❌ [IMPORT] Errors:', parseResult.errors);
-          toast({
-            title: "Import Failed",
-            description: `Failed to parse CSV: ${parseResult.errors.join(', ')}`,
-            variant: "destructive",
-          });
-        }
-      } else if (file.name.includes('impact')) {
-        console.log('📥 [IMPORT] Processing impact CSV...');
-        
-        // Create backup before importing
-        try {
-          await createBackup('impact', 'auto-import');
-        } catch (error) {
-          console.warn('Failed to create backup:', error);
-        }
-        
-        const parsedImpacts = parseImpactCSV(csvContent);
-        
-        if (parsedImpacts) {
-          // Store the impact configuration
-          await storeConfiguration('impact', parsedImpacts);
-          
-          console.log('✅ [IMPORT] Impact configuration imported successfully');
-          toast({
-            title: "Impact Configuration Imported",
-            description: "Impact configuration has been imported successfully.",
-          });
-        } else {
-          console.error('❌ [IMPORT] Failed to parse impact CSV');
-          toast({
-            title: "Import Failed",
-            description: "Failed to parse the impact CSV file.",
-            variant: "destructive",
-          });
-        }
-      } else {
-        console.log('📥 [IMPORT] Processing copydeck CSV...');
-        
-        // Create backup before importing
-        try {
-          await createBackup('comprehensive', 'auto-import');
-        } catch (error) {
-          console.warn('Failed to create backup:', error);
-        }
-        
-        const parseResult = parseCopydeckCSVContent(csvContent);
-        
-        if (parseResult.result && Object.keys(parseResult.result).length > 0) {
-          // Store the UI text configuration - use comprehensive type since UI text is part of it
-          const uiConfig = { uiElements: parseResult.result, scenarios: {} };
-          await storeConfiguration('comprehensive', uiConfig);
-          
-          // Trigger config reload
-          window.dispatchEvent(new CustomEvent('configUpdate'));
-          
-          let message = `Imported ${parseResult.successCount} UI text entries successfully.`;
-          if (parseResult.errors && parseResult.errors.length > 0) {
-            message += ` ${parseResult.errors.length} errors encountered.`;
-            console.warn('⚠️ [IMPORT] Errors:', parseResult.errors);
-          }
-          
-          console.log('✅ [IMPORT] UI text imported successfully');
-          toast({
-            title: "UI Text Imported",
-            description: message,
-          });
-        } else {
-          console.error('❌ [IMPORT] Failed to parse copydeck CSV');
-          if (parseResult.errors && parseResult.errors.length > 0) {
-            console.error('❌ [IMPORT] Errors:', parseResult.errors);
-          }
-          toast({
-            title: "Import Failed",
-            description: `Failed to parse CSV: ${parseResult.errors?.join(', ') || 'Unknown error'}`,
-            variant: "destructive",
-          });
-        }
+        toast({
+          title: "Backup Warning",
+          description: "Could not create backup, but continuing with import.",
+          variant: "destructive",
+        });
       }
-    };
-    
-    reader.readAsText(file);
-    event.target.value = '';
+      
+      if (isComprehensive) {
+        // Parse comprehensive CSV
+        console.log('📁 [DEBUG] Parsing comprehensive CSV...');
+        console.log('📁 [DEBUG] CSV content preview:', text.substring(0, 200));
+        const comprehensiveConfig = parseComprehensiveCSV(text);
+        console.log('📊 [DEBUG] Parsed config structure:', comprehensiveConfig);
+        console.log('📊 [DEBUG] Scenarios available:', Object.keys(comprehensiveConfig.scenarios || {}));
+        
+        // Debug first scenario content
+        if (comprehensiveConfig.scenarios?.['plastic-pollution']?.en) {
+          const firstScenario = comprehensiveConfig.scenarios['plastic-pollution'].en;
+          console.log('🔍 [DEBUG] First scenario parsed:', {
+            title: firstScenario.title,
+            description: firstScenario.description?.substring(0, 100) + '...'
+          });
+        }
+        
+        const validationErrors = validateComprehensiveConfig(comprehensiveConfig);
+        
+        if (validationErrors.length > 0) {
+          console.error('❌ [DEBUG] Validation errors:', validationErrors);
+          toast({
+            title: "Validation Failed",
+            description: `Configuration errors: ${validationErrors.join(', ')}`,
+            variant: "destructive",
+          });
+          return;
+        }
+        
+        // Store configuration for source file generation only (not for runtime)
+        console.log('💾 [DEBUG] Storing config for source file generation...');
+        localStorage.setItem('comprehensiveConfiguration', JSON.stringify(comprehensiveConfig));
+        
+        // Trigger immediate reload
+        window.dispatchEvent(new CustomEvent('comprehensive-config-updated'));
+        console.log('🔔 [DEBUG] Dispatched config update event');
+        
+        toast({
+          title: "Comprehensive CSV Uploaded",
+          description: "Applied immediately. Your content and impacts are now live.",
+        });
+      } else {
+        // Parse legacy impact CSV
+        const impactConfig = parseImpactCSV(text);
+        
+        // Store configuration for source file generation only (not for runtime)
+        localStorage.setItem('impactConfiguration', JSON.stringify(impactConfig));
+        
+        toast({
+          title: "Impact CSV Uploaded",
+          description: `Applied immediately. Imported ${Object.keys(impactConfig).length} scenarios.`,
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Upload Failed",
+        description: "Failed to parse CSV file. Check the format.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsUploading(false);
+      // Clear the input
+      event.target.value = '';
+    }
   };
 
   return (
