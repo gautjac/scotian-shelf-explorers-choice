@@ -1,0 +1,382 @@
+Section,Type,ID,Language,Field,Content,Ecosystem Impact (-50 to +50),Economic Impact (-50 to +50),Community Impact (-50 to +50),Notes
+SCENARIOS,title,plastic-pollution,en,title,1. Trash Attack!,,,,
+SCENARIOS,description,plastic-pollution,en,description,Plastic bags and bottles are washing up daily on Nova Scotia's beaches. Sea turtles think plastic bags are jellyfish and try to eat them. Fish and seabirds get tangled up in bottle rings. What should we do to help?,,,,
+SCENARIOS,choice,plastic-pollution_ban-plastics,en,text,"Ban certain single-use plastics, like produce bags and cling wrap",20,-5,5,
+SCENARIOS,consequence,plastic-pollution_ban-plastics,en,consequence,Less plastic trash ends up in our oceans. ,,,,
+SCENARIOS,pros,plastic-pollution_ban-plastics,en,pros,Fewer marine animals will be hurt by plastic. Beaches become cleaner over time.,,,,
+SCENARIOS,cons,plastic-pollution_ban-plastics,en,cons,People may not have access to products they want. Some things may get more expensive.,,,,
+SCENARIOS,choice,plastic-pollution_ignore-problem,en,text,Keep using plastic but create better recycling programs,-30,0,-10,
+SCENARIOS,consequence,plastic-pollution_ignore-problem,en,consequence,Less plastic gets into the ocean. But many plastics are hard to recycle and may still pollute the environment.,,,,
+SCENARIOS,pros,plastic-pollution_ignore-problem,en,pros,People have access to the same products they do now.,,,,
+SCENARIOS,cons,plastic-pollution_ignore-problem,en,cons,Sea turtles and fish keep getting hurt. Beaches remain littered.,,,,
+SCENARIOS,choice,plastic-pollution_beach-cleanup,en,text,Organize community beach clean ups,10,0,20,
+SCENARIOS,consequence,plastic-pollution_beach-cleanup,en,consequence,Helps protect marine life right away.  ,,,,
+SCENARIOS,pros,plastic-pollution_beach-cleanup,en,pros, Every piece of trash we pick up helps keep animals safe and our beaches beautiful. Brings communities together around a shared goal.,,,,
+SCENARIOS,cons,plastic-pollution_beach-cleanup,en,cons,Only cleans up old trash. New plastic keeps coming unless we change our habits.,,,,
+SCENARIOS,title,fishing-practices,en,title,Fish for the Future,,,,
+SCENARIOS,description,fishing-practices,en,description,"Fishing boats catch many tons of fish every day near Nova Scotia. Fishing gives people jobs and provides nutritious food. But if we catch too many fish, nothing will be left for the future. How can we fish smartly and sustainably?",,,,
+SCENARIOS,choice,fishing-practices_sustainable-quotas,en,text,Set stricter limits on how many fish we can catch,25,-5,10,
+SCENARIOS,consequence,fishing-practices_sustainable-quotas,en,consequence,"By leaving enough fish behind, we make sure the population can continue to regenerate. ",,,,
+SCENARIOS,pros,fishing-practices_sustainable-quotas,en,pros,Fish populations stay healthy and grow. Fishing jobs last for many years.,,,,
+SCENARIOS,cons,fishing-practices_sustainable-quotas,en,cons,Fishers may earn less money at first,,,,
+SCENARIOS,choice,fishing-practices_unlimited-fishing,en,text,Catch only species that are most abundant,-35,15,-15,
+SCENARIOS,consequence,fishing-practices_unlimited-fishing,en,consequence," Even the most abundant species can be overfished. Without clear limits, they may eventually dissapear. ",,,,
+SCENARIOS,pros,fishing-practices_unlimited-fishing,en,pros,Fishers make more money in the short term.,,,,
+SCENARIOS,cons,fishing-practices_unlimited-fishing,en,cons,Some fish species vanish. Fishing jobs decline in the long term. ,,,,
+SCENARIOS,choice,fishing-practices_marine-reserves,en,text,Create protected zones with no fishing allowed,30,-10,5,
+SCENARIOS,consequence,fishing-practices_marine-reserves,en,consequence," Well-placed protected zones give fish safe places to grow and reproduce.  When fish leave these areas, they replenish other places too. ",,,,
+SCENARIOS,pros,fishing-practices_marine-reserves,en,pros,Fish populations stay healthy and grow. ,,,,
+SCENARIOS,cons,fishing-practices_marine-reserves,en,cons,Fewer places are left to fish. Overfishing can still continue elsewhere. ,,,,
+SCENARIOS,title,shipping-traffic,en,title,Whale Highway Danger,,,,
+SCENARIOS,description,shipping-traffic,en,description,"Large ships that carry goods and people across the ocean sometimes hit North Atlantic right whales. With fewer than than 400 left in the world, this species is at risk of extinction. How should we help?",,,,
+SCENARIOS,choice,shipping-traffic_speed-restrictions,en,text,Slow ships down in areas where whales are abundant.,15,-8,0,
+SCENARIOS,consequence,shipping-traffic_speed-restrictions,en,consequence,"When ships move more slowly, they are less likely to kill a whale if they hit one. It's like a speed limit for the ocean.",,,,
+SCENARIOS,pros,shipping-traffic_speed-restrictions,en,pros,Saves whale lives.,,,,
+SCENARIOS,cons,shipping-traffic_speed-restrictions,en,cons,"Ships take longer to deliver goods, slowing down our supply chain. Shipping also costs more money, which could mean products we rely on get more expensive. ",,,,
+SCENARIOS,choice,shipping-traffic_ignore-whales,en,text,Move shipping lanes to completely avoid feeding ground and migratory routes,10,-5,0,
+SCENARIOS,consequence,shipping-traffic_ignore-whales,en,consequence,Fewer whales get hit and die if ships are moved from the areas where they are most common.,,,,
+SCENARIOS,pros,shipping-traffic_ignore-whales,en,pros,The North Atlantic right whale population will have a better chance of recovering. ,,,,
+SCENARIOS,cons,shipping-traffic_ignore-whales,en,cons,It could take longer to get the products we need. Whales can still swim into new shipping lanes. ,,,,
+SCENARIOS,choice,shipping-traffic_detection-systems,en,text,Put whale-spotting personnel and technology on ships,25,-15,5,
+SCENARIOS,consequence,shipping-traffic_detection-systems,en,consequence, Satellite data  and spotters can alert ship captains when whales are nearby. ,,,,
+SCENARIOS,pros,shipping-traffic_detection-systems,en,pros,Ships have the informatoin to avoid hitting whales. ,,,,
+SCENARIOS,cons,shipping-traffic_detection-systems,en,cons,"Creates additional costs for shipping companies, which may get passed on to customers.",,,,
+SCENARIOS,title,renewable-energy,en,title,Ocean Wind Power,,,,
+SCENARIOS,description,renewable-energy,en,description,"Nova Scotia wants to build large wind turbines in the ocean. These could power our homes with clean electricity, reducing our carbon footprint. But building and operating them might cause noise that disturbs whales, fish, and seabirds. What's the best plan?",,,,
+SCENARIOS,choice,renewable-energy_careful-planning,en,text,Plan carefully to avoid whale and bird migration routes,15,5,20,
+SCENARIOS,consequence,renewable-energy_careful-planning,en,consequence, We get more clean energy while protecting busy animal highways.,,,,
+SCENARIOS,pros,renewable-energy_careful-planning,en,pros,We can lower our carbon footprint without hurting marine life.,,,,
+SCENARIOS,cons,renewable-energy_careful-planning,en,cons,Takes longer to plan. May be further from shore and more expensive.,,,,
+SCENARIOS,choice,renewable-energy_no-renewables,en,text,Ban the construction of ocean wind farms ,-10,-5,-15,
+SCENARIOS,consequence,renewable-energy_no-renewables,en,consequence,"While some animals are kept safe from noise pollution, we have less clean energy. ",,,,
+SCENARIOS,pros,renewable-energy_no-renewables,en,pros,"No added stress to whales, fish and seabirds from noise pollution",,,,
+SCENARIOS,cons,renewable-energy_no-renewables,en,cons,"We may have to keep burning fossil fuels, which impacts even more marine species. ",,,,
+SCENARIOS,choice,renewable-energy_adaptive-technology,en,text,Design quieter wind turbines,20,-5,15,
+SCENARIOS,consequence,renewable-energy_adaptive-technology,en,consequence, New quiet designs minimize noise and may become artificial reefs that attract fish and other sea life.,,,,
+SCENARIOS,pros,renewable-energy_adaptive-technology,en,pros,Reduces noise pollution and its impacts on marine life.,,,,
+SCENARIOS,cons,renewable-energy_adaptive-technology,en,cons,More expensive to develop. New technology might not always work as expected.,,,,
+SCENARIOS,title,coastal-development,en,title,Building by the Beach,,,,
+SCENARIOS,description,coastal-development,en,description,"More people are moving to Nova Scotia's beautiful coastline. New houses, cottages, and hotels are being built. But development can damage coastal habitats and cause pollution and erosion. How should we build responsibly?",,,,
+SCENARIOS,choice,coastal-development_green-development,en,text,Use building methods that minimize the harm to habitats and water quality.,20,-5,15,
+SCENARIOS,consequence,coastal-development_green-development,en,consequence,There is less pollution in the environment. ,,,,
+SCENARIOS,pros,coastal-development_green-development,en,pros,Coastal and marine ecosystems are not as badly impacted. ,,,,
+SCENARIOS,cons,coastal-development_green-development,en,cons,More expensive to build. Takes longer to finish projects.,,,,
+SCENARIOS,choice,coastal-development_unrestricted-development,en,text,Prevent all development on coastal lands,30,-10,-10,
+SCENARIOS,consequence,coastal-development_unrestricted-development,en,consequence,Coastal habitats and public access to the shoreline are protected,,,,
+SCENARIOS,pros,coastal-development_unrestricted-development,en,pros,Ecosystems can thrive. ,,,,
+SCENARIOS,cons,coastal-development_unrestricted-development,en,cons,Reduces the area available for people to live and forces them to build further inland.,,,,
+SCENARIOS,choice,coastal-development_buffer-zones-coastal,en,text,Build further from shore. Leave natural spaces between buildings and water,25,-8,12,
+SCENARIOS,consequence,coastal-development_buffer-zones-coastal,en,consequence," These coastal buffers zones work like filters, cleaning dirty water before it reaches the ocean.",,,,
+SCENARIOS,pros,coastal-development_buffer-zones-coastal,en,pros,Water quality is maintained and houses are safer from storms.,,,,
+SCENARIOS,cons,coastal-development_buffer-zones-coastal,en,cons,Less space available for building. Ocean views are reduced. ,,,,
+SCENARIOS,title,plastic-pollution,fr,title,Les déchets à l’attaque !,,,,
+SCENARIOS,description,plastic-pollution,fr,description,"Des sacs et des bouteilles en plastique s’échouent quotidiennement sur les plages de la Nouvelle-Écosse. Les tortues de mer prennent ces sacs plastiques pour des méduses, et essaient de les manger. Les poissons et les oiseaux marins se font prendre dans des anneaux de bouteille. Que devrions-nous faire pour aider ?",,,,
+SCENARIOS,choice,plastic-pollution_ban-plastics,fr,text,"Interdire certains plastiques à usage unique, comme les sacs en plastique pour les fruits et légumes ainsi que le film alimentaire.",20,-5,5,
+SCENARIOS,consequence,plastic-pollution_ban-plastics,fr,consequence,Moins de déchets plastiques finissent dans nos océans.,,,,
+SCENARIOS,pros,plastic-pollution_ban-plastics,fr,pros,Moins d’animaux marins seront blessés par du plastique. Les plages deviendront plus propres avec le temps.,,,,
+SCENARIOS,cons,plastic-pollution_ban-plastics,fr,cons,Il se peut que les gens n’aient pas accès aux produits qu’ils veulent. Le prix de certaines choses peut augmenter.,,,,
+SCENARIOS,choice,plastic-pollution_ignore-problem,fr,text,Continuer à utiliser du plastique mais créer de meilleurs programmes de recyclage.,-30,0,-10,
+SCENARIOS,consequence,plastic-pollution_ignore-problem,fr,consequence,"Moins de plastique se retrouve dans l’océan. Mais de nombreux plastiques sont difficiles à recycler, et il se peut qu’ils continuent à polluer l’environnement.",,,,
+SCENARIOS,pros,plastic-pollution_ignore-problem,fr,pros,Les gens ont accès aux mêmes produits que ceux auxquels ils ont accès présentement.,,,,
+SCENARIOS,cons,plastic-pollution_ignore-problem,fr,cons,Les tortues de mer et les poissons continuent de se faire blesser. Les plages restent jonchées de déchets.,,,,
+SCENARIOS,choice,plastic-pollution_beach-cleanup,fr,text,Organiser des opérations communautaires de nettoyage des plages.,10,0,20,
+SCENARIOS,consequence,plastic-pollution_beach-cleanup,fr,consequence,Cela aide tout de suite à protéger la faune et la flore marines.,,,,
+SCENARIOS,pros,plastic-pollution_beach-cleanup,fr,pros,Chaque déchet que nous ramassons aide à garder les animaux en sécurité et à faire en sorte que nos plages restent magnifiques. Cela réunit les communautés autour d’un objectif commun.,,,,
+SCENARIOS,cons,plastic-pollution_beach-cleanup,fr,cons,Cela ne permet que de ramasser les vieux déchets. De nouveaux déchets plastiques continuent d’arriver à moins que nous ne changions nos habitudes.,,,,
+SCENARIOS,title,fishing-practices,fr,title,Pêcher avec l’avenir en tête,,,,
+SCENARIOS,description,fishing-practices,fr,description,"Les bateaux de pêche capturent chaque jour de nombreuses tonnes de poissons près de la Nouvelle-Écosse. La pêche fournit aux gens des emplois et des aliments nutritifs. Mais si nous attrapons trop de poissons, il ne restera rien pour l’avenir. Comment pouvons-nous pêcher de manière intelligente et durable ?",,,,
+SCENARIOS,choice,fishing-practices_sustainable-quotas,fr,text,Fixer des limites plus strictes quant à la quantité de poissons que nous pouvons pêcher.,25,-5,10,
+SCENARIOS,consequence,fishing-practices_sustainable-quotas,fr,consequence,"En laissant suffisamment de poissons dans les océans, nous faisons en sorte que leurs populations puissent continuer à se régénérer.",,,,
+SCENARIOS,pros,fishing-practices_sustainable-quotas,fr,pros,Les populations de poissons demeurent en santé et se développent. Les emplois de la pêche sont maintenus pendant de nombreuses années.,,,,
+SCENARIOS,cons,fishing-practices_sustainable-quotas,fr,cons,Il se peut que les pêcheur.euse.s gagnent moins d’argent dans un premier temps.,,,,
+SCENARIOS,choice,fishing-practices_unlimited-fishing,fr,text,N’attraper que les espèces les plus abondantes,-35,15,-15,
+SCENARIOS,consequence,fishing-practices_unlimited-fishing,fr,consequence,"Même les espèces les plus abondantes peuvent être surexploitées. Sans des limites claires, ces espèces pourraient finir par disparaître.",,,,
+SCENARIOS,pros,fishing-practices_unlimited-fishing,fr,pros,Les pêcheur.euse.s font plus d’argent à court terme.,,,,
+SCENARIOS,cons,fishing-practices_unlimited-fishing,fr,cons,Certaines espèces de poissons disparaissent. Les emplois du domaine de la pêche se rarifient sur le long terme.,,,,
+SCENARIOS,choice,fishing-practices_marine-reserves,fr,text,Créer des zones protégées où la pêche est interdite.,30,-10,5,
+SCENARIOS,consequence,fishing-practices_marine-reserves,fr,consequence,"Des zones protégées bien placées offrent aux poissons des endroits sécuritaires où grandir et se reproduire. Quand les poissons quittent ces zones, ils contribuent aussi à « réapprovisionner » d’autres endroits.",,,,
+SCENARIOS,pros,fishing-practices_marine-reserves,fr,pros,Les populations de poissons demeurent en santé et grandissent.,,,,
+SCENARIOS,cons,fishing-practices_marine-reserves,fr,cons,Il reste moins d’endroits où pêcher. La surpêche peut quand même se poursuivre ailleurs.,,,,
+SCENARIOS,title,shipping-traffic,fr,title,Danger sur les « autoroutes » des baleines,,,,
+SCENARIOS,description,shipping-traffic,fr,description,"Les grands navires qui transportent des marchandises et des personnes sur l’océan entrent parfois en collision avec des baleines noires de l’Atlantique Nord. Avec moins de 400 spécimens restants dans le monde entier, cette espèce est menacée d’extinction. Que devrions-nous faire pour aider ?",,,,
+SCENARIOS,choice,shipping-traffic_speed-restrictions,fr,text,Ralentir les navires dans les zones où les baleines sont présentes en grand nombre.,15,-8,0,
+SCENARIOS,consequence,shipping-traffic_speed-restrictions,fr,consequence,"Quand les navires se déplacent plus lentement, il y a moins de risque qu’ils ne tuent une baleine s’ils entrent en collision avec l’une d’elles. C’est comme une limite de vitesse pour l’océan.",,,,
+SCENARIOS,pros,shipping-traffic_speed-restrictions,fr,pros,Cela sauve des baleines.,,,,
+SCENARIOS,cons,shipping-traffic_speed-restrictions,fr,cons,"Cela prend plus de temps aux navires pour livrer les marchandises, ce qui ralentit notre chaîne d’approvisionnement. Le transport de marchandises coûte également plus cher, ce qui pourrait signifier que le prix des produits dont nous avons besoin augmente.",,,,
+SCENARIOS,choice,shipping-traffic_ignore-whales,fr,text,Déplacer les voies maritimes pour complètement éviter les aires d’alimentation et les voies migratoires.,10,-5,0,
+SCENARIOS,consequence,shipping-traffic_ignore-whales,fr,consequence,Moins de baleines se font frapper et meurent si les navires sont déplacés des zones où l’on en dénombre le plus.,,,,
+SCENARIOS,pros,shipping-traffic_ignore-whales,fr,pros,La population de baleines noires de l’Atlantique Nord aura plus de chance de récupérer.,,,,
+SCENARIOS,cons,shipping-traffic_ignore-whales,fr,cons,Cela pourrait prendre plus de temps pour obtenir les produits dont nous avons besoin. Les baleines peuvent encore se déplacer vers de nouvelles voies de navigation.,,,,
+SCENARIOS,choice,shipping-traffic_detection-systems,fr,text,Prévoir sur les navires du personnel et de la technologie pour observer les baleines.,25,-15,5,
+SCENARIOS,consequence,shipping-traffic_detection-systems,fr,consequence,Les données satellitaires et les observateur.trice.s peuvent alerter les capitaines des navires quand des baleines se trouvent à proximité.,,,,
+SCENARIOS,pros,shipping-traffic_detection-systems,fr,pros,Les navires disposent des informations nécessaires pour éviter de frapper des baleines.,,,,
+SCENARIOS,cons,shipping-traffic_detection-systems,fr,cons,"Cela engendre des frais supplémentaires pour les sociétés de transport maritime, des frais qui pourraient être répercutés sur les client.e.s.",,,,
+SCENARIOS,title,renewable-energy,fr,title,Énergie éolienne marine,,,,
+SCENARIOS,description,renewable-energy,fr,description,"La Nouvelle-Écosse veut construire de grandes éoliennes dans l’océan. Celles-ci pourraient alimenter nos maisons en énergie avec de l’électricité propre, réduisant ainsi notre empreinte carbone. Mais leur construction et leur exploitation pourraient engendrer du bruit susceptible de déranger les baleines, les poissons, et les oiseaux marins. Quel est le meilleur plan ?",,,,
+SCENARIOS,choice,renewable-energy_careful-planning,fr,text,Planifier soigneusement d’éviter les voies migratoires des baleines et des oiseaux.,15,5,20,
+SCENARIOS,consequence,renewable-energy_careful-planning,fr,consequence,Nous obtenons plus d’énergie propre tout en protégeant les « autoroutes » très fréquentées des animaux.,,,,
+SCENARIOS,pros,renewable-energy_careful-planning,fr,pros,Nous pouvons réduire notre empreinte carbone sans porter atteinte à la faune et à la flore marines.,,,,
+SCENARIOS,cons,renewable-energy_careful-planning,fr,cons,"Cela prend plus de temps à planifier. Cette solution pourrait impliquer de s’éloigner des côtes, et coûter plus cher.",,,,
+SCENARIOS,choice,renewable-energy_no-renewables,fr,text,Interdire la construction de parcs éoliens au large,-10,-5,-15,
+SCENARIOS,consequence,renewable-energy_no-renewables,fr,consequence,"Si certains animaux sont épargnés par la pollution sonore, en revanche, nous avons moins d’énergie propre.",,,,
+SCENARIOS,pros,renewable-energy_no-renewables,fr,pros,"Pas de stress supplémentaire résultant de la pollution sonore pour les baleines, les poissons et les oiseaux marins.",,,,
+SCENARIOS,cons,renewable-energy_no-renewables,fr,cons,"Il se peut que nous ayons à continuer de brûler des combustibles fossiles, ce qui aurait un impact encore plus important sur les espèces marines.",,,,
+SCENARIOS,choice,renewable-energy_adaptive-technology,fr,text,Concevoir des éoliennes moins bruyantes,20,-5,15,
+SCENARIOS,consequence,renewable-energy_adaptive-technology,fr,consequence,"De nouvelles conceptions de modèles silencieux minimisent le bruit, et pourraient devenir des récifs artificiels qui attireraient les poissons et autres espèces marines.",,,,
+SCENARIOS,pros,renewable-energy_adaptive-technology,fr,pros,Cela réduit la pollution sonore et ses effets sur le milieu biologique marin.,,,,
+SCENARIOS,cons,renewable-energy_adaptive-technology,fr,cons,Option plus dispendieuse à développer. La nouvelle technologie pourrait ne pas toujours fonctionner tel que prévu.,,,,
+SCENARIOS,title,coastal-development,fr,title,Construire près de la plage,,,,
+SCENARIOS,description,coastal-development,fr,description,"De plus en plus de gens décident de s’installer le long du merveilleux littoral de la Nouvelle-Écosse. On y construit de nouvelles maisons, des chalets ainsi que des hôtels. Mais le développement immobilier peut endommager les habitats naturels côtiers, et causer de la pollution et de l’érosion. Comment devrions-nous nous y prendre pour construire de manière responsable ?",,,,
+SCENARIOS,choice,coastal-development_green-development,fr,text,Avoir recours à des méthodes permettant de minimiser les dommages causés aux habitats naturels et à la qualité de l’eau.,20,-5,15,
+SCENARIOS,consequence,coastal-development_green-development,fr,consequence,L’environnement est moins pollué.,,,,
+SCENARIOS,pros,coastal-development_green-development,fr,pros,Les écosystèmes côtiers et marins ne sont pas aussi durement touchés.,,,,
+SCENARIOS,cons,coastal-development_green-development,fr,cons,Option plus dispendieuse pour construire. Cela prend plus de temps pour terminer des projets.,,,,
+SCENARIOS,choice,coastal-development_unrestricted-development,fr,text,Empêcher tout développement sur les terrains côtiers,30,-10,-10,
+SCENARIOS,consequence,coastal-development_unrestricted-development,fr,consequence,Les habitats naturels côtiers et l’accès public au littoral sont protégés.,,,,
+SCENARIOS,pros,coastal-development_unrestricted-development,fr,pros,Les écosystèmes peuvent s’épanouir.,,,,
+SCENARIOS,cons,coastal-development_unrestricted-development,fr,cons,"Cela réduit les zones où les gens peuvent vivre, et les force à construire plus à l’intérieur des terres.",,,,
+SCENARIOS,choice,coastal-development_buffer-zones-coastal,fr,text,Construire plus loin des côtes. Laisser davantage d’espaces naturels entre les constructions et l’eau,25,-8,12,
+SCENARIOS,consequence,coastal-development_buffer-zones-coastal,fr,consequence,Ces zones tampons côtières fonctionnent comme des filtres nettoyant l’eau sale avant qu’elle n’atteigne l’océan.,,,,
+SCENARIOS,pros,coastal-development_buffer-zones-coastal,fr,pros,"La qualité de l’eau est maintenue, et les maisons sont davantage à l’abri des tempêtes.",,,,
+SCENARIOS,cons,coastal-development_buffer-zones-coastal,fr,cons,Moins d’espace disponible pour construire. Il y a moins de constructions avec vue sur l’océan.,,,,
+SCENARIOS,title,plastic-pollution,mi,title,Kaqawej maqamikew!,,,,
+SCENARIOS,description,plastic-pollution,mi,description,Oqwa! Kaqawej aqq plastik ma't wetapekl wuskitqamu'k puksit. Mimkitamuj kisi'kt wipusultip plastik ma't na jellyfish aqq kesalultijik mu'in. Nkmuj na ji'nm kesimqwatijik?,,,,
+SCENARIOS,choice,plastic-pollution_ban-plastics,mi,text,Maqamitenej kaqawej plastik ma'tujik,20,-5,5,
+SCENARIOS,consequence,plastic-pollution_ban-plastics,mi,consequence,"Wela wetultip! Apoqnmuej plastik, samqwan napeskamultijik wjit teli nktuei. Puktusk, tuwalskisk, aqq nemitisk kesalayik apoqonmuej.",,,,
+SCENARIOS,pros,plastic-pollution_ban-plastics,mi,pros,Samqwan nkamlamulkwayik. Puksitik wjit apoqonmueyik.,,,,
+SCENARIOS,cons,plastic-pollution_ban-plastics,mi,cons,L'nuk elt klamnultijik teli weluiktalanku ma'tajik.,,,,
+SCENARIOS,choice,plastic-pollution_ignore-problem,mi,text,Kmutu kesipkwatultinenej plastik,-30,0,-10,
+SCENARIOS,consequence,plastic-pollution_ignore-problem,mi,consequence,Mawi! Samqwan kesipawayik plastik ni'p. Uktukamkw wjit puktayik kaqawej.,,,,
+SCENARIOS,pros,plastic-pollution_ignore-problem,mi,pros,L'nuk ma ta'n teltultijik mu'in kesalkwatultinenej.,,,,
+SCENARIOS,cons,plastic-pollution_ignore-problem,mi,cons,Mimkitamuj aqq nkmuj kisi'kt kespayik. Puksitik apoqoneykw.,,,,
+SCENARIOS,choice,plastic-pollution_beach-cleanup,mi,text,Mawulkultimkenej apoqonmuewey,10,0,20,
+SCENARIOS,consequence,plastic-pollution_beach-cleanup,mi,consequence,"Wela! Kisu'k kaqawej naskwatimk, ap naskwataq samqwan. Aq wjit wintaponej witapikiktuk!",,,,
+SCENARIOS,pros,plastic-pollution_beach-cleanup,mi,pros,Nukwaan ankotunemul samqwanuwa. L'nuk kesteltanej weluey.,,,,
+SCENARIOS,cons,plastic-pollution_beach-cleanup,mi,cons,Mutt kesanskomik amsqwan kaqawej. Skitqamu kaqawej teluewey.,,,,
+SCENARIOS,title,fishing-practices,mi,title,Kesalultijik aqq Kiskukewey,,,,
+SCENARIOS,description,fishing-practices,mi,description,Kesalultijik wjit Nova Scotia aqq kesalultijik wjit puktuk. Kesalultijik wjit puktuk aqq kesalultijik wjit puktuk. Kesalultijik wjit puktuk aqq kesalultijik wjit puktuk. Kesalultijik wjit puktuk aqq kesalultijik wjit puktuk. Kesalultijik wjit puktuk aqq kesalultijik wjit puktuk. Kesalultijik wjit puktuk aqq kesalultijik wjit puktuk.,,,,
+SCENARIOS,choice,fishing-practices_sustainable-quotas,mi,text,Kesalultijik wjit puktuk,25,-5,10,
+SCENARIOS,consequence,fishing-practices_sustainable-quotas,mi,consequence,Kesalultijik wjit puktuk,,,,
+SCENARIOS,pros,fishing-practices_sustainable-quotas,mi,pros,Kesalultijik wjit puktuk,,,,
+SCENARIOS,cons,fishing-practices_sustainable-quotas,mi,cons,Kesalultijik wjit puktuk,,,,
+SCENARIOS,choice,fishing-practices_unlimited-fishing,mi,text,Kesalultijik wjit puktuk,-35,15,-15,
+SCENARIOS,consequence,fishing-practices_unlimited-fishing,mi,consequence,Kesalultijik wjit puktuk,,,,
+SCENARIOS,pros,fishing-practices_unlimited-fishing,mi,pros,Kesalultijik wjit puktuk,,,,
+SCENARIOS,cons,fishing-practices_unlimited-fishing,mi,cons,Kesalultijik wjit puktuk,,,,
+SCENARIOS,choice,fishing-practices_marine-reserves,mi,text,Kesalultijik wjit puktuk,30,-10,5,
+SCENARIOS,consequence,fishing-practices_marine-reserves,mi,consequence,Kesalultijik wjit puktuk,,,,
+SCENARIOS,pros,fishing-practices_marine-reserves,mi,pros,Kesalultijik wjit puktuk,,,,
+SCENARIOS,cons,fishing-practices_marine-reserves,mi,cons,Kesalultijik wjit puktuk,,,,
+SCENARIOS,title,shipping-traffic,mi,title,Kesalultijik aqq Kiskukewey,,,,
+SCENARIOS,description,shipping-traffic,mi,description,Kesalultijik wjit Nova Scotia aqq kesalultijik wjit puktuk. Kesalultijik wjit puktuk.,,,,
+SCENARIOS,choice,shipping-traffic_speed-restrictions,mi,text,Kesalultijik wjit puktuk,15,-8,0,
+SCENARIOS,consequence,shipping-traffic_speed-restrictions,mi,consequence,Kesalultijik wjit puktuk,,,,
+SCENARIOS,pros,shipping-traffic_speed-restrictions,mi,pros,Kesalultijik wjit puktuk,,,,
+SCENARIOS,cons,shipping-traffic_speed-restrictions,mi,cons,Kesalultijik wjit puktuk,,,,
+SCENARIOS,choice,shipping-traffic_ignore-whales,mi,text,Kesalultijik wjit puktuk,10,-5,0,
+SCENARIOS,consequence,shipping-traffic_ignore-whales,mi,consequence,Kesalultijik wjit puktuk,,,,
+SCENARIOS,pros,shipping-traffic_ignore-whales,mi,pros,Kesalultijik wjit puktuk,,,,
+SCENARIOS,cons,shipping-traffic_ignore-whales,mi,cons,Kesalultijik wjit puktuk,,,,
+SCENARIOS,choice,shipping-traffic_detection-systems,mi,text,Kesalultijik wjit puktuk,25,-15,5,
+SCENARIOS,consequence,shipping-traffic_detection-systems,mi,consequence,Kesalultijik wjit puktuk,,,,
+SCENARIOS,pros,shipping-traffic_detection-systems,mi,pros,Kesalultijik wjit puktuk,,,,
+SCENARIOS,cons,shipping-traffic_detection-systems,mi,cons,Kesalultijik wjit puktuk,,,,
+SCENARIOS,title,renewable-energy,mi,title,Kesalultijik aqq Kiskukewey,,,,
+SCENARIOS,description,renewable-energy,mi,description,Kesalultijik wjit Nova Scotia aqq kesalultijik wjit puktuk.,,,,
+SCENARIOS,choice,renewable-energy_careful-planning,mi,text,Kesalultijik wjit puktuk,15,5,20,
+SCENARIOS,consequence,renewable-energy_careful-planning,mi,consequence,Kesalultijik wjit puktuk,,,,
+SCENARIOS,pros,renewable-energy_careful-planning,mi,pros,Kesalultijik wjit puktuk,,,,
+SCENARIOS,cons,renewable-energy_careful-planning,mi,cons,Kesalultijik wjit puktuk,,,,
+SCENARIOS,choice,renewable-energy_no-renewables,mi,text,Kesalultijik wjit puktuk,-10,-5,-15,
+SCENARIOS,consequence,renewable-energy_no-renewables,mi,consequence,Kesalultijik wjit puktuk,,,,
+SCENARIOS,pros,renewable-energy_no-renewables,mi,pros,Kesalultijik wjit puktuk,,,,
+SCENARIOS,cons,renewable-energy_no-renewables,mi,cons,Kesalultijik wjit puktuk,,,,
+SCENARIOS,choice,renewable-energy_adaptive-technology,mi,text,Kesalultijik wjit puktuk,20,-5,15,
+SCENARIOS,consequence,renewable-energy_adaptive-technology,mi,consequence,Kesalultijik wjit puktuk,,,,
+SCENARIOS,pros,renewable-energy_adaptive-technology,mi,pros,Kesalultijik wjit puktuk,,,,
+SCENARIOS,cons,renewable-energy_adaptive-technology,mi,cons,Kesalultijik wjit puktuk,,,,
+SCENARIOS,title,coastal-development,mi,title,Kesalultijik aqq Kiskukewey,,,,
+SCENARIOS,description,coastal-development,mi,description,Kesalultijik wjit Nova Scotia aqq kesalultijik wjit puktuk.,,,,
+SCENARIOS,choice,coastal-development_green-development,mi,text,Kesalultijik wjit puktuk,20,-5,15,
+SCENARIOS,consequence,coastal-development_green-development,mi,consequence,Kesalultijik wjit puktuk,,,,
+SCENARIOS,pros,coastal-development_green-development,mi,pros,Kesalultijik wjit puktuk,,,,
+SCENARIOS,cons,coastal-development_green-development,mi,cons,Kesalultijik wjit puktuk,,,,
+SCENARIOS,choice,coastal-development_unrestricted-development,mi,text,Kesalultijik wjit puktuk,30,-10,-10,
+SCENARIOS,consequence,coastal-development_unrestricted-development,mi,consequence,Kesalultijik wjit puktuk,,,,
+SCENARIOS,pros,coastal-development_unrestricted-development,mi,pros,Kesalultijik wjit puktuk,,,,
+SCENARIOS,cons,coastal-development_unrestricted-development,mi,cons,Kesalultijik wjit puktuk,,,,
+SCENARIOS,choice,coastal-development_buffer-zones-coastal,mi,text,Kesalultijik wjit puktuk,25,-8,12,
+SCENARIOS,consequence,coastal-development_buffer-zones-coastal,mi,consequence,Kesalultijik wjit puktuk,,,,
+SCENARIOS,pros,coastal-development_buffer-zones-coastal,mi,pros,Kesalultijik wjit puktuk,,,,
+SCENARIOS,cons,coastal-development_buffer-zones-coastal,mi,cons,Kesalultijik wjit puktuk,,,,
+UI_ELEMENTS,ui_text,WelcomeScreen_Title,en,Title,Guardians of the Scotian Shelf,,,,Main title
+UI_ELEMENTS,ui_text,WelcomeScreen_Title,fr,Title,Gardiens du plateau continental scotian,,,,Main title
+UI_ELEMENTS,ui_text,WelcomeScreen_Title,mi,Title,Ankamkewe'k Kespukek,,,,Main title
+UI_ELEMENTS,ui_text,WelcomeScreen_Subtitle,en,Subtitle,See how people's choices affect sea life near Nova Scotia,,,,Subtitle description
+UI_ELEMENTS,ui_text,WelcomeScreen_Subtitle,fr,Subtitle,Vois comment les choix des gens affectent la faune et la flore marines près de la Nouvelle-Écosse ,,,,Subtitle description
+UI_ELEMENTS,ui_text,WelcomeScreen_Subtitle,mi,Subtitle,Wejkukuom talimkewe'k samqwanikatl Kespukek,,,,Subtitle description
+UI_ELEMENTS,ui_text,WelcomeScreen_Start Button,en,Start Button,Start Playing,,,,Main CTA button
+UI_ELEMENTS,ui_text,WelcomeScreen_Start Button,fr,Start Button,Commencer à jouer,,,,Main CTA button
+UI_ELEMENTS,ui_text,WelcomeScreen_Start Button,mi,Start Button,Mawita'n,,,,Main CTA button
+UI_ELEMENTS,ui_text,WelcomeScreen_Touch Instruction,en,Touch Instruction,Touch to start,,,,Bottom instruction text
+UI_ELEMENTS,ui_text,WelcomeScreen_Touch Instruction,fr,Touch Instruction,Touche pour démarrer,,,,Bottom instruction text
+UI_ELEMENTS,ui_text,WelcomeScreen_Touch Instruction,mi,Touch Instruction,Pekowsin mawita'si'k,,,,Bottom instruction text
+UI_ELEMENTS,ui_text,ScenarioPreview_Title,en,Title,Your Ocean Challenge,,,,Main heading
+UI_ELEMENTS,ui_text,ScenarioPreview_Title,fr,Title,Ton défi océan ,,,,Main heading
+UI_ELEMENTS,ui_text,ScenarioPreview_Title,mi,Title,Samqwan alasutmaqan petkik,,,,Main heading
+UI_ELEMENTS,ui_text,ScenarioPreview_Subtitle,en,Subtitle,Look at what you will do,,,,Description
+UI_ELEMENTS,ui_text,ScenarioPreview_Subtitle,fr,Subtitle,Regardez ce que vous ferez,,,,Description
+UI_ELEMENTS,ui_text,ScenarioPreview_Subtitle,mi,Subtitle,Nemi'j koqoey ketu nemitultine'k,,,,Description
+UI_ELEMENTS,ui_text,ScenarioPreview_Start Button,en,Start Button,Start Challenge,,,,Main CTA
+UI_ELEMENTS,ui_text,ScenarioPreview_Start Button,fr,Start Button,Commencer l'aventure,,,,Main CTA
+UI_ELEMENTS,ui_text,ScenarioPreview_Start Button,mi,Start Button,Mawita'n kiskukewey,,,,Main CTA
+UI_ELEMENTS,ui_text,ScenarioPreview_Back Button,en,Back Button,Go Back,,,,Navigation button
+UI_ELEMENTS,ui_text,ScenarioPreview_Back Button,fr,Back Button,Retourner,,,,Navigation button
+UI_ELEMENTS,ui_text,ScenarioPreview_Back Button,mi,Back Button,Apijiw piluei,,,,Navigation button
+UI_ELEMENTS,ui_text,ScenarioPreview_Instruction,en,Instruction,You will make important choices,,,,Info text
+UI_ELEMENTS,ui_text,ScenarioPreview_Instruction,fr,Instruction,Vous ferez des choix importants,,,,Info text
+UI_ELEMENTS,ui_text,ScenarioPreview_Instruction,mi,Instruction,Msit koqoey ketu elkewek,,,,Info text
+UI_ELEMENTS,ui_text,ScenarioPreview_Select Scenario,en,Select Scenario,Click on any story to start there,,,,Action instruction
+UI_ELEMENTS,ui_text,ScenarioPreview_Select Scenario,fr,Select Scenario,Cliquez sur une histoire pour commencer,,,,Action instruction
+UI_ELEMENTS,ui_text,ScenarioPreview_Select Scenario,mi,Select Scenario,Pekowsin koqoey mawita'si'k,,,,Action instruction
+UI_ELEMENTS,ui_text,ScenarioCard_Question Prompt,en,Question Prompt,What would you do?,,,,Choice selection prompt
+UI_ELEMENTS,ui_text,ScenarioCard_Question Prompt,fr,Question Prompt,Que ferais-tu,,,,Choice selection prompt
+UI_ELEMENTS,ui_text,ScenarioCard_Question Prompt,mi,Question Prompt,Koqoey ketu elkewek?,,,,Choice selection prompt
+UI_ELEMENTS,ui_text,ConsequenceModal_Title,en,Title,Think About What Happens,,,,Modal heading
+UI_ELEMENTS,ui_text,ConsequenceModal_Title,fr,Title,Pense à ce qui se passe ,,,,Modal heading
+UI_ELEMENTS,ui_text,ConsequenceModal_Title,mi,Title,Ankweyul koqoey wejkukewek,,,,Modal heading
+UI_ELEMENTS,ui_text,ConsequenceModal_Your Choice Label,en,Your Choice Label,Your Choice:,,,,Section label
+UI_ELEMENTS,ui_text,ConsequenceModal_Your Choice Label,fr,Your Choice Label,Ton choix ,,,,Section label
+UI_ELEMENTS,ui_text,ConsequenceModal_Your Choice Label,mi,Your Choice Label,Kil koqoey:,,,,Section label
+UI_ELEMENTS,ui_text,ConsequenceModal_Positive Impact,en,Positive Impact,Positives,,,,Pros section header
+UI_ELEMENTS,ui_text,ConsequenceModal_Positive Impact,fr,Positive Impact,Point positifs,,,,Pros section header
+UI_ELEMENTS,ui_text,ConsequenceModal_Positive Impact,mi,Positive Impact,Weli koqoey,,,,Pros section header
+UI_ELEMENTS,ui_text,ConsequenceModal_Negative Impact,en,Negative Impact,Negatives,,,,Cons section header
+UI_ELEMENTS,ui_text,ConsequenceModal_Negative Impact,fr,Negative Impact,Points négatifs,,,,Cons section header
+UI_ELEMENTS,ui_text,ConsequenceModal_Negative Impact,mi,Negative Impact,Maw koqoey,,,,Cons section header
+UI_ELEMENTS,ui_text,ConsequenceModal_Confirm Button,en,Confirm Button,Yes I Choose This,,,,Confirmation button
+UI_ELEMENTS,ui_text,ConsequenceModal_Confirm Button,fr,Confirm Button,"Oui, je choisis ça.",,,,Confirmation button
+UI_ELEMENTS,ui_text,ConsequenceModal_Confirm Button,mi,Confirm Button,Ketu'k koqoey,,,,Confirmation button
+UI_ELEMENTS,ui_text,ConsequenceModal_Return Button,en,Return Button,Go Back to Choices,,,,Cancel button
+UI_ELEMENTS,ui_text,ConsequenceModal_Return Button,fr,Return Button,Retour aux choix,,,,Cancel button
+UI_ELEMENTS,ui_text,ConsequenceModal_Return Button,mi,Return Button,Eykisk koqoey elkewey,,,,Cancel button
+UI_ELEMENTS,ui_text,ConsequenceModal_The Pros,en,The Pros,The pros,,,,Pros label
+UI_ELEMENTS,ui_text,ConsequenceModal_The Pros,fr,The Pros,Les avantages,,,,Pros label
+UI_ELEMENTS,ui_text,ConsequenceModal_The Pros,mi,The Pros,Weli koqoey,,,,Pros label
+UI_ELEMENTS,ui_text,ConsequenceModal_The Cons,en,The Cons,The cons,,,,Cons label
+UI_ELEMENTS,ui_text,ConsequenceModal_The Cons,fr,The Cons,Les inconvénients,,,,Cons label
+UI_ELEMENTS,ui_text,ConsequenceModal_The Cons,mi,The Cons,Maw koqoey,,,,Cons label
+UI_ELEMENTS,ui_text,GameActions_Back to Scenarios,en,Back to Scenarios,Back to Stories,,,,Navigation button
+UI_ELEMENTS,ui_text,GameActions_Back to Scenarios,fr,Back to Scenarios,Retour aux histoires,,,,Navigation button
+UI_ELEMENTS,ui_text,GameActions_Back to Scenarios,mi,Back to Scenarios,Kluskap koqoey,,,,Navigation button
+UI_ELEMENTS,ui_text,GameActions_Restart,en,Restart,Start Over,,,,Reset button
+UI_ELEMENTS,ui_text,GameActions_Restart,fr,Restart,Recommencer,,,,Reset button
+UI_ELEMENTS,ui_text,GameActions_Restart,mi,Restart,Pilei mawita'sin,,,,Reset button
+UI_ELEMENTS,ui_text,CompletionScreen_Title,en,Title,MISSION ACCOMPLISHED!,,,,Completion title
+UI_ELEMENTS,ui_text,CompletionScreen_Title,fr,Title,Vous avez réussi!,,,,Completion title
+UI_ELEMENTS,ui_text,CompletionScreen_Title,mi,Title,Ankamkewey kespek!,,,,Completion title
+UI_ELEMENTS,ui_text,CompletionScreen_Subtitle,en,Subtitle,Your choices have an impact!,,,,Achievement description
+UI_ELEMENTS,ui_text,CompletionScreen_Subtitle,fr,Subtitle,Vos choix ont un impact!,,,,Achievement description
+UI_ELEMENTS,ui_text,CompletionScreen_Subtitle,mi,Subtitle,Kil koqoey ankamtimul!,,,,Achievement description
+UI_ELEMENTS,ui_text,CompletionScreen_Message,en,Message,"Every choice we make changes ocean life. Pollution, development  and fishing affect sea life in many ways. Your choices today help decide what happens to the ocean tomorrow.",,,,Educational message
+UI_ELEMENTS,ui_text,CompletionScreen_Message,fr,Message,"Chaque choix que nous faisons modifie le milieu océanique. La pollution, le développement immobilier, et la pêche affectent les écosystèmes marins de bien des manières. Les choix que tu fais aujourd’hui décident de ce qui arrivera à l’océan demain.",,,,Educational message
+UI_ELEMENTS,ui_text,CompletionScreen_Message,mi,Message,Msit koqoey elkewekl menaqanej samqwan ukamskusuwakon. Pekisk aq pilei pu'tu'n kil koqoey elkewek nukta samqwanikatl kepmikatl.,,,,Educational message
+UI_ELEMENTS,ui_text,CompletionScreen_Encouragement,en,Encouragement,Want to see what happens with different choices? Try again and pick different options to see how they change the ocean.,,,,Replay encouragement
+UI_ELEMENTS,ui_text,CompletionScreen_Encouragement,fr,Encouragement,"Tu veux voir ce qui se passe en fonction de différents choix ? Essaie encore, et choisis différentes options pour voir leurs effets sur l’océan.",,,,Replay encouragement
+UI_ELEMENTS,ui_text,CompletionScreen_Encouragement,mi,Encouragement,Ketu aqq koqoey nemituom? Ula koqoey elkewek aq nemi'j samqwan ankamtimul.,,,,Replay encouragement
+UI_ELEMENTS,ui_text,CompletionScreen_Restart Button,en,Restart Button,Play Again,,,,Restart CTA
+UI_ELEMENTS,ui_text,CompletionScreen_Restart Button,fr,Restart Button,Jouer encore,,,,Restart CTA
+UI_ELEMENTS,ui_text,CompletionScreen_Restart Button,mi,Restart Button,Siawey ankamkewey,,,,Restart CTA
+UI_ELEMENTS,ui_text,CompletionScreen_Your Impact,en,Your Impact,How You Did,,,,Impact section title
+UI_ELEMENTS,ui_text,CompletionScreen_Your Impact,fr,Your Impact,Comment vous avez fait,,,,Impact section title
+UI_ELEMENTS,ui_text,CompletionScreen_Your Impact,mi,Your Impact,Kil wenjo'taqn,,,,Impact section title
+UI_ELEMENTS,ui_text,CompletionScreen_Excellent Work,en,Excellent Work,Great job! Your choices help keep the ocean healthy.,,,,High positive score message
+UI_ELEMENTS,ui_text,CompletionScreen_Excellent Work,fr,Excellent Work,Bon travail ! Tes choix aident à garder l’océan en santé. ,,,,High positive score message
+UI_ELEMENTS,ui_text,CompletionScreen_Excellent Work,mi,Excellent Work,Kelu wetulti'k! Kil koqoey elkewek pilei samqwanikatl ukepmikatl.,,,,High positive score message
+UI_ELEMENTS,ui_text,CompletionScreen_Good Effort,en,Good Effort,Good work! Some of your choices help sea animals.,,,,Medium score message
+UI_ELEMENTS,ui_text,CompletionScreen_Good Effort,fr,Good Effort,Bon travail! Certains de vos choix aident les animaux marins.,,,,Medium score message
+UI_ELEMENTS,ui_text,CompletionScreen_Good Effort,mi,Good Effort,Pilei wetulti'k! Apjiw kil koqoey elkewek kepmikatl samqwanikatl.,,,,Medium score message
+UI_ELEMENTS,ui_text,CompletionScreen_Try Again,en,Try Again,Try again with different choices to help sea animals more.,,,,Low score message
+UI_ELEMENTS,ui_text,CompletionScreen_Try Again,fr,Try Again,Essaie encore avec différents choix pour aider à mieux protéger la faune et la flore marines.,,,,Low score message
+UI_ELEMENTS,ui_text,CompletionScreen_Try Again,mi,Try Again,Aqq nikma koqoey elkewek pilei samqwanikatl ukepmikatil.,,,,Low score message
+UI_ELEMENTS,ui_text,HealthTransitionScreen_Title,en,Title,Ocean Impact,,,,Impact screen title
+UI_ELEMENTS,ui_text,HealthTransitionScreen_Title,fr,Title,Effet sur l’océan ,,,,Impact screen title
+UI_ELEMENTS,ui_text,HealthTransitionScreen_Title,mi,Title,Kepkek ta'n telitaqsit,,,,Impact screen title
+UI_ELEMENTS,ui_text,HealthTransitionScreen_Impact Text,en,Impact Text,Your choice has changed the ocean health...,,,,Impact description
+UI_ELEMENTS,ui_text,HealthTransitionScreen_Impact Text,fr,Impact Text,Votre choix a changé la santé de l'océan...,,,,Impact description
+UI_ELEMENTS,ui_text,HealthTransitionScreen_Impact Text,mi,Impact Text,Kil koqoey kesalul kepkek wula'tioqn...,,,,Impact description
+UI_ELEMENTS,ui_text,HealthTransitionScreen_Next Scenario,en,Next Scenario,Next scenario,,,,Continue to next
+UI_ELEMENTS,ui_text,HealthTransitionScreen_Next Scenario,fr,Next Scenario,Prochain scénario,,,,Continue to next
+UI_ELEMENTS,ui_text,HealthTransitionScreen_Next Scenario,mi,Next Scenario,Aq tett,,,,Continue to next
+UI_ELEMENTS,ui_text,HealthTransitionScreen_Final Results,en,Final Results,Final results,,,,Go to completion
+UI_ELEMENTS,ui_text,HealthTransitionScreen_Final Results,fr,Final Results,Résultats finals,,,,Go to completion
+UI_ELEMENTS,ui_text,HealthTransitionScreen_Final Results,mi,Final Results,Klu'su'n,,,,Go to completion
+UI_ELEMENTS,ui_text,HealthTransitionScreen_Next Button,en,Next Button,Next,,,,Continue button
+UI_ELEMENTS,ui_text,HealthTransitionScreen_Next Button,fr,Next Button,Suivant,,,,Continue button
+UI_ELEMENTS,ui_text,HealthTransitionScreen_Next Button,mi,Next Button,Aqq,,,,Continue button
+UI_ELEMENTS,ui_text,CompactHealthMeters_Marine Health,en,Marine Health,Ocean Health,,,,Health section title
+UI_ELEMENTS,ui_text,CompactHealthMeters_Marine Health,fr,Marine Health,Santé de l'océan,,,,Health section title
+UI_ELEMENTS,ui_text,CompactHealthMeters_Marine Health,mi,Marine Health,Samqwan ukamkinu'kuom,,,,Health section title
+UI_ELEMENTS,ui_text,CompactHealthMeters_Ecosystem,en,Ecosystem,Animals & Plants,,,,Ecosystem health label
+UI_ELEMENTS,ui_text,CompactHealthMeters_Ecosystem,fr,Ecosystem,Animaux et plantes,,,,Ecosystem health label
+UI_ELEMENTS,ui_text,CompactHealthMeters_Ecosystem,mi,Ecosystem,Ukamkinu'kuom,,,,Ecosystem health label
+UI_ELEMENTS,ui_text,CompactHealthMeters_Economic,en,Economic,Money & Jobs,,,,Economic health label
+UI_ELEMENTS,ui_text,CompactHealthMeters_Economic,fr,Economic,Économie,,,,Economic health label
+UI_ELEMENTS,ui_text,CompactHealthMeters_Economic,mi,Economic,Toqwa'tu'k,,,,Economic health label
+UI_ELEMENTS,ui_text,CompactHealthMeters_Community,en,Community,People,,,,Community health label
+UI_ELEMENTS,ui_text,CompactHealthMeters_Community,fr,Community,Les gens,,,,Community health label
+UI_ELEMENTS,ui_text,CompactHealthMeters_Community,mi,Community,L'nui,,,,Community health label
+UI_ELEMENTS,ui_text,HealthMeters_Marine Health Status,en,Marine Health Status,How Healthy is the Ocean,,,,Full health display title
+UI_ELEMENTS,ui_text,HealthMeters_Marine Health Status,fr,Marine Health Status,Comment va l'océan,,,,Full health display title
+UI_ELEMENTS,ui_text,HealthMeters_Marine Health Status,mi,Marine Health Status,Samqwanikatl ukamkinu'kuom,,,,Full health display title
+UI_ELEMENTS,ui_text,HealthMeters_Ecosystem Health,en,Ecosystem Health,Animals & Plants Health,,,,Full ecosystem label
+UI_ELEMENTS,ui_text,HealthMeters_Ecosystem Health,fr,Ecosystem Health,Santé des animaux et plantes,,,,Full ecosystem label
+UI_ELEMENTS,ui_text,HealthMeters_Ecosystem Health,mi,Ecosystem Health,Ukamkinu'kuom samqwan,,,,Full ecosystem label
+UI_ELEMENTS,ui_text,HealthMeters_Economic Health,en,Economic Health,Money & Jobs Health,,,,Full economic label
+UI_ELEMENTS,ui_text,HealthMeters_Economic Health,fr,Economic Health,Santé de l'argent et des emplois,,,,Full economic label
+UI_ELEMENTS,ui_text,HealthMeters_Economic Health,mi,Economic Health,Toqwa'tu'k samqwan,,,,Full economic label
+UI_ELEMENTS,ui_text,HealthMeters_Community Health,en,Community Health,People's Health,,,,Full community label
+UI_ELEMENTS,ui_text,HealthMeters_Community Health,fr,Community Health,Santé des gens,,,,Full community label
+UI_ELEMENTS,ui_text,HealthMeters_Community Health,mi,Community Health,L'nui samqwan,,,,Full community label
+UI_ELEMENTS,ui_text,HealthStatus_Thriving,en,Thriving,Doing Great,,,,80%+ health status
+UI_ELEMENTS,ui_text,HealthStatus_Thriving,fr,Thriving,Ça va très bien ,,,,80%+ health status
+UI_ELEMENTS,ui_text,HealthStatus_Thriving,mi,Thriving,Pilei,,,,80%+ health status
+UI_ELEMENTS,ui_text,HealthStatus_Stable,en,Stable,Doing OK,,,,60-79% health status
+UI_ELEMENTS,ui_text,HealthStatus_Stable,fr,Stable,Ça va bien,,,,60-79% health status
+UI_ELEMENTS,ui_text,HealthStatus_Stable,mi,Stable,Nukek,,,,60-79% health status
+UI_ELEMENTS,ui_text,HealthStatus_Declining,en,Declining,Not Good,,,,40-59% health status
+UI_ELEMENTS,ui_text,HealthStatus_Declining,fr,Declining,Ça ne va pas bien,,,,40-59% health status
+UI_ELEMENTS,ui_text,HealthStatus_Declining,mi,Declining,Tepisq,,,,40-59% health status
+UI_ELEMENTS,ui_text,HealthStatus_Critical,en,Critical,Very Bad,,,,Below 40% health status
+UI_ELEMENTS,ui_text,HealthStatus_Critical,fr,Critical,Ça va très mal,,,,Below 40% health status
+UI_ELEMENTS,ui_text,HealthStatus_Critical,mi,Critical,Mekij,,,,Below 40% health status
+UI_ELEMENTS,ui_text,InactivityModal_Title,en,Title,You've been away for a while,,,,Inactivity modal title
+UI_ELEMENTS,ui_text,InactivityModal_Title,fr,Title,Vous êtes absent depuis un moment,,,,Inactivity modal title
+UI_ELEMENTS,ui_text,InactivityModal_Title,mi,Title,Telkisqewe'k kiju,,,,Inactivity modal title
+UI_ELEMENTS,ui_text,InactivityModal_Still Here Button,en,Still Here Button,I'm still here,,,,Still here button
+UI_ELEMENTS,ui_text,InactivityModal_Still Here Button,fr,Still Here Button,Je suis toujours là,,,,Still here button
+UI_ELEMENTS,ui_text,InactivityModal_Still Here Button,mi,Still Here Button,Aqq tett naka,,,,Still here button
+UI_ELEMENTS,ui_text,InactivityModal_Start Over Button,en,Start Over Button,Start over,,,,Start over button
+UI_ELEMENTS,ui_text,InactivityModal_Start Over Button,fr,Start Over Button,Recommencer,,,,Start over button
+UI_ELEMENTS,ui_text,InactivityModal_Start Over Button,mi,Start Over Button,Pilei mawita'sin,,,,Start over button
+UI_ELEMENTS,ui_text,InactivityModal_Auto Redirect,en,Auto Redirect,Auto-redirect in {countdown} seconds,,,,Auto redirect countdown
+UI_ELEMENTS,ui_text,InactivityModal_Auto Redirect,fr,Auto Redirect,Redirection automatique dans {countdown} secondes,,,,Auto redirect countdown
+UI_ELEMENTS,ui_text,InactivityModal_Auto Redirect,mi,Auto Redirect,Apijiw-kijatukun {countdown} sekunt,,,,Auto redirect countdown
+UI_ELEMENTS,ui_text,LanguageSelector_English Button,en,English Button,English,,,,English language button
+UI_ELEMENTS,ui_text,LanguageSelector_English Button,fr,English Button,English,,,,English language button
+UI_ELEMENTS,ui_text,LanguageSelector_English Button,mi,English Button,English,,,,English language button
+UI_ELEMENTS,ui_text,LanguageSelector_French Button,en,French Button,Français,,,,French language button
+UI_ELEMENTS,ui_text,LanguageSelector_French Button,fr,French Button,Français,,,,French language button
+UI_ELEMENTS,ui_text,LanguageSelector_French Button,mi,French Button,Français,,,,French language button
+UI_ELEMENTS,ui_text,LanguageSelector_Mikmaw Button,en,Mikmaw Button,Mi'kmaw,,,,Mi'kmaw language button
+UI_ELEMENTS,ui_text,LanguageSelector_Mikmaw Button,fr,Mikmaw Button,Mi'kmaw,,,,Mi'kmaw language button
+UI_ELEMENTS,ui_text,LanguageSelector_Mikmaw Button,mi,Mikmaw Button,Mi'kmaw,,,,Mi'kmaw language button
+UI_ELEMENTS,ui_text,OfflineStatus_Offline Message,en,Offline Message,You're currently offline,,,,Offline status message
+UI_ELEMENTS,ui_text,OfflineStatus_Offline Message,fr,Offline Message,Vous êtes actuellement hors ligne,,,,Offline status message
+UI_ELEMENTS,ui_text,OfflineStatus_Offline Message,mi,Offline Message,Maw kelulti'k,,,,Offline status message
+UI_ELEMENTS,ui_text,OfflineStatus_Online Text,en,Online Text,Online,,,,Online status text
+UI_ELEMENTS,ui_text,OfflineStatus_Online Text,fr,Online Text,En ligne,,,,Online status text
+UI_ELEMENTS,ui_text,OfflineStatus_Online Text,mi,Online Text,Kelulti'k,,,,Online status text
+UI_ELEMENTS,ui_text,OfflineStatus_Offline Text,en,Offline Text,Offline,,,,Offline status text
+UI_ELEMENTS,ui_text,OfflineStatus_Offline Text,fr,Offline Text,Hors ligne,,,,Offline status text
+UI_ELEMENTS,ui_text,OfflineStatus_Offline Text,mi,Offline Text,Maw kelulti'k,,,,Offline status text
