@@ -32,7 +32,7 @@ export const ScenarioCard = ({ scenario, language, onChoiceSelect }: ScenarioCar
         {/* Choices - optimized for touch interaction */}
         <div className="flex flex-col">
           <h3 className="text-2xl lg:text-3xl font-semibold text-slate-800 mb-6 lg:mb-8">
-            {getUIText('ScenarioCard', 'What_Would_You_Do', language) || 'What would you do?'}
+            {getUIText('ScenarioCard', 'Question Prompt', language) || 'What would you do?'}
           </h3>
           
           <div className="space-y-4 lg:space-y-6">
