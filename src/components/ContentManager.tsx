@@ -16,6 +16,7 @@ import { EditorGuide } from './EditorGuide';
 import { BackupManager } from './BackupManager';
 import { StorageHealthIndicator } from './StorageHealthIndicator';
 import { DebugPanel } from './DebugPanel';
+import { clearAllCachedData } from '../utils/cacheManager';
 
 interface ContentManagerProps {
   onClose: () => void;
@@ -122,6 +123,17 @@ export const ContentManager = ({ onClose }: ContentManagerProps) => {
         description: "Failed to access configuration data.",
         variant: "destructive",
       });
+    }
+  };
+
+  const handleResetContentCache = async () => {
+    try {
+      toast({ title: 'Clearing content cache', description: 'Removing overrides and caches…' });
+      await clearAllCachedData();
+      toast({ title: 'Cache cleared', description: 'Reloading with fresh CSV…' });
+      setTimeout(() => window.location.reload(), 300);
+    } catch (error) {
+      toast({ title: 'Reset failed', description: 'Try a hard refresh (Ctrl+F5).', variant: 'destructive' });
     }
   };
 
@@ -322,6 +334,16 @@ export const ContentManager = ({ onClose }: ContentManagerProps) => {
 
             <TabsContent value="storage-health" className="px-6 pb-6 space-y-4">
               <StorageHealthIndicator />
+
+              <div className="space-y-2">
+                <Label>Reset Content Cache</Label>
+                <Button onClick={handleResetContentCache} className="w-full" variant="destructive">
+                  <Database className="h-4 w-4 mr-2" /> Reset Content Cache & Hard Refresh
+                </Button>
+                <div className="text-xs text-muted-foreground">
+                  Clears local overrides, IndexedDB, and PWA caches, then reloads the app from the CSV.
+                </div>
+              </div>
               
               <Card>
                 <CardHeader>

@@ -1,16 +1,16 @@
-import { Language, Scenario, MarineSpecies } from '../types';
+import { Language, Scenario, MarineSpecies } from '@/types';
 
 // Import local images
-import plasticPollutionImg from '../assets/images/plastic-pollution.jpg';
-import fishingPracticesImg from '../assets/images/fishing-practices.jpg';
-import shippingTrafficImg from '../assets/images/shipping-traffic.jpg';
-import oceanAcidificationImg from '../assets/images/ocean-acidification.jpg';
-import renewableEnergyImg from '../assets/images/renewable-energy.jpg';
-import coastalDevelopmentImg from '../assets/images/coastal-development.jpg';
-import lobsterImg from '../assets/images/lobster.jpg';
-import codImg from '../assets/images/cod.jpg';
-import whaleImg from '../assets/images/whale.jpg';
-import kelpImg from '../assets/images/kelp.jpg';
+import plasticPollutionImg from '@/assets/images/plastic-pollution.jpg';
+import fishingPracticesImg from '@/assets/images/fishing-practices.jpg';
+import shippingTrafficImg from '@/assets/images/shipping-traffic.jpg';
+import oceanAcidificationImg from '@/assets/images/ocean-acidification.jpg';
+import renewableEnergyImg from '@/assets/images/renewable-energy.jpg';
+import coastalDevelopmentImg from '@/assets/images/coastal-development.jpg';
+import lobsterImg from '@/assets/images/lobster.jpg';
+import codImg from '@/assets/images/cod.jpg';
+import whaleImg from '@/assets/images/whale.jpg';
+import kelpImg from '@/assets/images/kelp.jpg';
 
 export const languages: Language[] = [
   { code: 'en', name: 'English', nativeName: 'English' },
