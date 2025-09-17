@@ -8,6 +8,7 @@ export const useComprehensiveConfig = () => {
   const [config, setConfig] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [staticConfig, setStaticConfig] = useState<any>(null);
+  const [staticConfigLoaded, setStaticConfigLoaded] = useState(false);
 
   // Load static CSV configuration as default source of truth
   const loadStaticConfig = async () => {
@@ -15,10 +16,12 @@ export const useComprehensiveConfig = () => {
       console.log('🔄 [CONFIG] Loading static CSV configuration...');
       const staticCfg = await loadStaticCSVConfiguration();
       setStaticConfig(staticCfg);
+      setStaticConfigLoaded(true);
       console.log('✅ [CONFIG] Static CSV configuration loaded');
     } catch (error) {
       console.error('❌ [CONFIG] Failed to load static CSV configuration:', error);
       setStaticConfig(null);
+      setStaticConfigLoaded(true); // Still mark as loaded even on error to prevent infinite loading
     }
   };
 
@@ -46,7 +49,10 @@ export const useComprehensiveConfig = () => {
       console.error('❌ [DEBUG] Failed to load comprehensive configuration:', error);
       setConfig(null);
     } finally {
-      setIsLoading(false);
+      // Only mark as not loading when both static config and user config are loaded
+      if (staticConfigLoaded) {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -57,6 +63,13 @@ export const useComprehensiveConfig = () => {
     // Load initial configuration (user overrides)
     reloadConfig();
   }, []);
+
+  // Update isLoading when staticConfigLoaded changes
+  useEffect(() => {
+    if (staticConfigLoaded) {
+      setIsLoading(false);
+    }
+  }, [staticConfigLoaded]);
 
   // Hot-reload configuration when uploads happen (same-tab) or in other tabs
   useEffect(() => {
@@ -211,6 +224,6 @@ export const useComprehensiveConfig = () => {
     getChoiceImpact,
     getUIText,
     reloadConfig,
-    hasConfig: !!config || !!staticConfig
+    hasConfig: !!(config || staticConfig)
   };
 };

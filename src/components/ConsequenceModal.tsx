@@ -27,9 +27,43 @@ export const ConsequenceModal = ({
   onReturn,
   isVisible
 }: ConsequenceModalProps) => {
-  const { getUIText } = useComprehensiveConfig();
+  const { getUIText, isLoading } = useComprehensiveConfig();
   
   if (!isVisible) return null;
+
+  if (isLoading) {
+    return (
+      <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50 p-6 lg:p-8" style={{
+        backgroundImage: `url(${geometricBackground})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}>
+        <div className="bg-slate-400/80 rounded-3xl p-10 lg:p-12 max-w-6xl lg:max-w-7xl mx-auto text-white animate-scale-in shadow-2xl animate-pulse">
+          <div className="text-center">
+            <div className="h-12 bg-white/20 rounded mb-10" />
+            <div className="bg-white/20 rounded-2xl p-8 lg:p-10 mb-10">
+              <div className="h-8 bg-white/20 rounded mb-6" />
+              <div className="h-6 bg-white/20 rounded" />
+            </div>
+            <div className="grid md:grid-cols-2 gap-8 lg:gap-10 mb-12">
+              <div className="bg-white/20 rounded-2xl p-8 lg:p-10">
+                <div className="h-8 bg-white/20 rounded mb-6" />
+                <div className="h-20 bg-white/20 rounded" />
+              </div>
+              <div className="bg-white/20 rounded-2xl p-8 lg:p-10">
+                <div className="h-8 bg-white/20 rounded mb-6" />
+                <div className="h-20 bg-white/20 rounded" />
+              </div>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-6 lg:gap-8 justify-center">
+              <div className="h-20 bg-white/20 rounded-2xl flex-1" />
+              <div className="h-20 bg-white/20 rounded-2xl flex-1" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
   return <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50 p-6 lg:p-8" style={{
     backgroundImage: `url(${geometricBackground})`,
     backgroundSize: 'cover',

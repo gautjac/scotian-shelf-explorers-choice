@@ -15,7 +15,26 @@ const impactColors = {
 };
 
 export const ScenarioCard = ({ scenario, language, onChoiceSelect }: ScenarioCardProps) => {
-  const { getUIText } = useComprehensiveConfig();
+  const { getUIText, isLoading } = useComprehensiveConfig();
+  
+  // Show loading state to prevent flash of English text
+  if (isLoading) {
+    return (
+      <div className="h-full bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col animate-pulse">
+        <div className="h-96 lg:h-[26rem] bg-slate-200 flex-shrink-0" />
+        <div className="flex-1 p-8 lg:p-10 pb-8 lg:pb-12 flex flex-col">
+          <div className="h-8 bg-slate-200 rounded mb-6" />
+          <div className="h-6 bg-slate-200 rounded mb-4" />
+          <div className="h-6 bg-slate-200 rounded mb-8" />
+          <div className="space-y-4">
+            <div className="h-20 bg-slate-200 rounded-2xl" />
+            <div className="h-20 bg-slate-200 rounded-2xl" />
+            <div className="h-20 bg-slate-200 rounded-2xl" />
+          </div>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="h-full bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col">
       {/* Scenario image - optimized for sidebar layout */}

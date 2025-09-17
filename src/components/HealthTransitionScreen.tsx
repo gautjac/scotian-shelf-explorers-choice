@@ -20,7 +20,29 @@ export const HealthTransitionScreen = ({
   onTransitionComplete
 }: HealthTransitionScreenProps) => {
   const [showMeters, setShowMeters] = useState(false);
-  const { getUIText } = useComprehensiveConfig();
+  const { getUIText, isLoading } = useComprehensiveConfig();
+
+  if (isLoading) {
+    return (
+      <div 
+        className="min-h-screen flex items-center justify-center p-6 lg:p-8 animate-pulse"
+        style={{
+          backgroundImage: `url(${geometricBackground})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      >
+        <div className="bg-slate-400/80 backdrop-blur-sm rounded-3xl p-8 lg:p-12 max-w-6xl mx-auto text-white shadow-2xl">
+          <div className="text-center">
+            <div className="h-12 bg-white/20 rounded mb-8" />
+            <div className="h-6 bg-white/20 rounded mb-12" />
+            <div className="h-40 bg-white/20 rounded mb-12" />
+            <div className="h-12 bg-white/20 rounded-2xl w-48 mx-auto" />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   useEffect(() => {
     // Show meters after a brief delay
