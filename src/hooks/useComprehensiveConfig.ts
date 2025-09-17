@@ -176,15 +176,26 @@ export const useComprehensiveConfig = () => {
   // Get UI text with CSV as source of truth and user override support
   const getUIText = (screenId: string, elementId: string, language: string = 'en') => {
     const compositeId = `${screenId}_${elementId}`;
+    const combinedId = `${screenId} ${elementId}`;
     
-    // Check user overrides first
+    // Check user overrides first - try exact elementId
     if (config?.uiElements?.[language]?.[compositeId]?.[elementId]) {
       return config.uiElements[language][compositeId][elementId];
     }
     
-    // Use static CSV as primary source
+    // Check user overrides - try combined format (e.g., "Progress Label")
+    if (config?.uiElements?.[language]?.[compositeId]?.[combinedId]) {
+      return config.uiElements[language][compositeId][combinedId];
+    }
+    
+    // Use static CSV as primary source - try exact elementId
     if (staticConfig?.uiElements?.[language]?.[compositeId]?.[elementId]) {
       return staticConfig.uiElements[language][compositeId][elementId];
+    }
+    
+    // Use static CSV - try combined format (e.g., "Progress Label")
+    if (staticConfig?.uiElements?.[language]?.[compositeId]?.[combinedId]) {
+      return staticConfig.uiElements[language][compositeId][combinedId];
     }
     
     return null;
