@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { HealthMetrics, Language } from '../types';
 import { Waves, DollarSign, Users, Fish } from 'lucide-react';
+import { useComprehensiveConfig } from '../hooks/useComprehensiveConfig';
 
 interface HealthMetersProps {
   healthMetrics: HealthMetrics;
@@ -164,10 +165,17 @@ export const HealthMeters = ({ healthMetrics, language, showInitialAnimation = f
       : { ...healthMetrics }
   );
 
+  const { getUIText } = useComprehensiveConfig();
+  
+  const getHealthLabel = (metricKey: string) => {
+    const labelKey = metricKey.charAt(0).toUpperCase() + metricKey.slice(1) + '_Health';
+    return getUIText('HealthMeters', labelKey, language) || metricKey;
+  };
+
   const labels = {
-    ecosystem: language === 'en' ? 'Animals & Plants Health' : language === 'fr' ? 'Santé des animaux et plantes' : 'Ukamkinu\'kuom samqwan',
-    economic: language === 'en' ? 'Money & Jobs Health' : language === 'fr' ? 'Santé de l\'argent et des emplois' : 'Toqwa\'tu\'k samqwan',
-    community: language === 'en' ? 'People\'s Health' : language === 'fr' ? 'Santé des gens' : 'L\'nui samqwan'
+    ecosystem: getHealthLabel('ecosystem'),
+    economic: getHealthLabel('economic'), 
+    community: getHealthLabel('community')
   };
 
   useEffect(() => {

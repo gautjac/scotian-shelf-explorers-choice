@@ -86,41 +86,6 @@ export const CompactHealthMeters = ({
     }
   }, [healthMetrics]);
 
-  const labels = {
-    en: {
-      ecosystem: 'Animals & Plants',
-      economic: 'Money & Jobs',
-      community: 'People'
-    },
-    fr: {
-      ecosystem: 'Animaux et plantes',
-      economic: 'Argent et emplois',
-      community: 'Gens'
-    },
-    mi: {
-      ecosystem: 'Ukamkinu\'kuom',
-      economic: 'Toqwa\'tu\'k',
-      community: 'L\'nui'
-    }
-  };
-
-  const descriptions = {
-    en: {
-      ecosystem: 'Fish, whales, plants and other sea life',
-      economic: 'Fishing jobs and coastal businesses',
-      community: 'Health and wellbeing of communities'
-    },
-    fr: {
-      ecosystem: 'Poissons, baleines, plantes et autres vies marines',
-      economic: 'Emplois de pêche et entreprises côtières',
-      community: 'Santé et bien-être des communautés'
-    },
-    mi: {
-      ecosystem: 'Namu, puktew, maskiku aq aqq samqwan mimaji\'kuom',
-      economic: 'Ami\'kuew koqoey aq kespukwitk lukwaqnej',
-      community: 'Wela\'lin aq welameq l\'nuiwoq'
-    }
-  };
 
   // Get dynamic UI text
   const titleText = getUIText('CompactHealthMeters', 'Title', language) || 
@@ -128,12 +93,12 @@ export const CompactHealthMeters = ({
 
   const getLabelText = (key: string) => {
     const labelKey = key.charAt(0).toUpperCase() + key.slice(1);
-    return getUIText('CompactHealthMeters', labelKey, language) || labels[language][key as keyof typeof labels[typeof language]];
+    return getUIText('CompactHealthMeters', labelKey, language) || key;
   };
 
   const getSubtitleText = (key: string) => {
     const subtitleKey = key.charAt(0).toUpperCase() + key.slice(1) + '_Subtitle';
-    return getUIText('CompactHealthMeters', subtitleKey, language) || descriptions[language][key as keyof typeof descriptions[typeof language]];
+    return getUIText('CompactHealthMeters', subtitleKey, language) || '';
   };
 
   return (
