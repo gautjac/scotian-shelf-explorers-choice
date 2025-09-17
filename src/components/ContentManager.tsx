@@ -54,9 +54,12 @@ export const ContentManager = ({ onClose }: ContentManagerProps) => {
     }
   };
 
-  const handleDownloadComprehensiveCSV = () => {
+  const handleDownloadComprehensiveCSV = async () => {
     try {
-      const csvContent = exportComprehensiveCSV();
+      // Fetch the actual fixed CSV file instead of generating from hardcoded data
+      const response = await fetch('/fixed_comprehensive_config.csv');
+      const csvContent = await response.text();
+      
       const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
       const link = document.createElement('a');
       const url = URL.createObjectURL(blob);
