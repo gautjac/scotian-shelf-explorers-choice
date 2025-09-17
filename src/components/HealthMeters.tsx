@@ -18,13 +18,13 @@ const getHealthColor = (value: number) => {
 
 const getHealthStatus = (value: number, language: 'en' | 'fr' | 'mi', getUIText: any): string => {
   if (value >= 80) {
-    return getUIText('HealthMeters', 'Doing_Great', language) || 'Doing Great';
+    return getUIText('HealthStatus', 'Thriving', language) || 'Doing Great';
   } else if (value >= 60) {
-    return getUIText('HealthMeters', 'Doing_OK', language) || 'Doing OK';
+    return getUIText('HealthStatus', 'Stable', language) || 'Doing OK';
   } else if (value >= 40) {
-    return getUIText('HealthMeters', 'Not_Good', language) || 'Not Good';
+    return getUIText('HealthStatus', 'Declining', language) || 'Not Good';
   } else {
-    return getUIText('HealthMeters', 'Very_Bad', language) || 'Very Bad';
+    return getUIText('HealthStatus', 'Critical', language) || 'Very Bad';
   }
 };
 
@@ -169,8 +169,13 @@ export const HealthMeters = ({ healthMetrics, language, showInitialAnimation = f
   const { getUIText } = useComprehensiveConfig();
   
   const getHealthLabel = (metricKey: string) => {
-    const labelKey = metricKey.charAt(0).toUpperCase() + metricKey.slice(1) + '_Health';
-    return getUIText('HealthMeters', labelKey, language) || metricKey;
+    const map: Record<string, string> = {
+      ecosystem: 'Ecosystem Health',
+      economic: 'Economic Health',
+      community: 'Community Health',
+    };
+    const elementId = map[metricKey] || metricKey;
+    return getUIText('HealthMeters', elementId, language) || metricKey;
   };
 
   const labels = {
@@ -187,7 +192,7 @@ export const HealthMeters = ({ healthMetrics, language, showInitialAnimation = f
   return (
     <div className="w-full">
       <h2 className="text-2xl lg:text-3xl font-bold text-center mb-8 text-slate-100">
-        {getUIText('HealthMeters', 'How_Healthy_Ocean', language) || 'How Healthy is the Ocean'}
+        {getUIText('HealthMeters', 'Marine Health Status', language) || 'How Healthy is the Ocean'}
       </h2>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
