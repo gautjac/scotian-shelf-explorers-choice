@@ -31,8 +31,9 @@ export const GameSidebar = ({
               {getUIText('Progress', 'Label', language) || 'Progress'}
             </div>
             <div className="text-lg font-bold text-[#0C556B]">
-              {currentScenarioIndex + 1} / 5 
-              {getUIText('Progress', 'Counter', language) || ' completed'}
+              {(getUIText('Progress', 'Counter', language) || '{current} / {total} completed')
+                .replace('{current}', (currentScenarioIndex + 1).toString())
+                .replace('{total}', '5')}
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2 mt-3">
               <div className="bg-[#0C556B] h-2 rounded-full transition-all duration-300" style={{
