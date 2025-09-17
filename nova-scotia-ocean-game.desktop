@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Nova Scotia Ocean Game
+GenericName=Educational Marine Game
+Comment=An educational marine conservation game for Nova Scotia - Kiosk Mode
+Icon=nova-scotia-ocean-game
+Exec=nova-scotia-ocean-game
+Terminal=false
+StartupNotify=true
+Categories=Education;Game;Science;
+Keywords=education;marine;conservation;ocean;game;kiosk;
+StartupWMClass=nova-scotia-ocean-game

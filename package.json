@@ -11,6 +11,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@electron-forge/cli": "^7.9.0",
+    "@electron-forge/maker-deb": "^7.9.0",
+    "@electron-forge/maker-zip": "^7.9.0",
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",
@@ -44,7 +47,10 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.0.0",
     "date-fns": "^3.6.0",
+    "electron": "^38.1.1",
     "embla-carousel-react": "^8.3.0",
     "input-otp": "^1.2.4",
     "lucide-react": "^0.462.0",
@@ -61,6 +67,7 @@
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^0.9.3",
     "vite-plugin-pwa": "^1.0.2",
+    "wait-on": "^9.0.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
