@@ -1,5 +1,6 @@
 
 import { Scenario, Language } from '../types';
+import { useComprehensiveConfig } from '../hooks/useComprehensiveConfig';
 
 interface ScenarioCardProps {
   scenario: Scenario;
@@ -14,6 +15,7 @@ const impactColors = {
 };
 
 export const ScenarioCard = ({ scenario, language, onChoiceSelect }: ScenarioCardProps) => {
+  const { getUIText } = useComprehensiveConfig();
   return (
     <div className="h-full bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col">
       {/* Scenario image - optimized for sidebar layout */}
@@ -30,9 +32,7 @@ export const ScenarioCard = ({ scenario, language, onChoiceSelect }: ScenarioCar
         {/* Choices - optimized for touch interaction */}
         <div className="flex flex-col">
           <h3 className="text-2xl lg:text-3xl font-semibold text-slate-800 mb-6 lg:mb-8">
-            {language === 'en' && 'What would you do?'}
-            {language === 'fr' && 'Que feriez-vous?'}
-            {language === 'mi' && 'Koqoey ketu elkewek?'}
+            {getUIText('ScenarioCard', 'What_Would_You_Do', language) || 'What would you do?'}
           </h3>
           
           <div className="space-y-4 lg:space-y-6">

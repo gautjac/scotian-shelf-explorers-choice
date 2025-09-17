@@ -1,5 +1,6 @@
 import { CompactHealthMeters } from './CompactHealthMeters';
 import { HealthMetrics, Language } from '../types';
+import { useComprehensiveConfig } from '../hooks/useComprehensiveConfig';
 interface GameSidebarProps {
   healthMetrics: HealthMetrics;
   language: Language['code'];
@@ -14,6 +15,8 @@ export const GameSidebar = ({
   onBackToPreview,
   onRestart
 }: GameSidebarProps) => {
+  const { getUIText } = useComprehensiveConfig();
+  
   return <div className="w-full h-full p-6 lg:p-8 overflow-y-auto flex flex-col">
       {/* Health Meters - compact version for sidebar */}
       <div className="mb-4">
@@ -25,15 +28,11 @@ export const GameSidebar = ({
         <div className="bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-lg">
           <div className="text-center">
             <div className="text-sm font-medium text-gray-700 mb-2">
-              {language === 'en' && 'Progress'}
-              {language === 'fr' && 'Progrès'}
-              {language === 'mi' && 'Mawkina\'tiek'}
+              {getUIText('GameSidebar', 'Progress', language) || 'Progress'}
             </div>
             <div className="text-lg font-bold text-[#0C556B]">
               {currentScenarioIndex + 1} / 5 
-              {language === 'en' && ' completed'}
-              {language === 'fr' && ' complétés'}
-              {language === 'mi' && ' kespek'}
+              {getUIText('GameSidebar', 'Completed', language) || ' completed'}
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2 mt-3">
               <div className="bg-[#0C556B] h-2 rounded-full transition-all duration-300" style={{

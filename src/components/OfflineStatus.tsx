@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react';
 import { Alert, AlertDescription } from './ui/alert';
 import { Wifi, WifiOff } from 'lucide-react';
 import { Language } from '../types';
+import { useComprehensiveConfig } from '../hooks/useComprehensiveConfig';
 
 interface OfflineStatusProps {
   language?: Language['code'];
 }
 
 export const OfflineStatus = ({ language = 'en' }: OfflineStatusProps) => {
+  const { getUIText } = useComprehensiveConfig();
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [showOfflineMessage, setShowOfflineMessage] = useState(false);
 
@@ -46,11 +48,9 @@ export const OfflineStatus = ({ language = 'en' }: OfflineStatusProps) => {
       <Alert className="border-l-4 border-l-orange-500 bg-orange-50 dark:bg-orange-950/20">
         <WifiOff className="h-4 w-4 text-orange-600" />
         <AlertDescription className="text-orange-800 dark:text-orange-200">
-          <strong>Offline Mode</strong>
+          <strong>{getUIText('OfflineStatus', 'Offline_Mode', language) || 'Offline Mode'}</strong>
           <br />
-          {language === 'en' ? 'Game works offline. No internet connection needed.' :
-           language === 'fr' ? 'Le jeu fonctionne hors ligne. Aucune connexion Internet nécessaire.' :
-           'Alustumaqan teltoq mu\'in internet. Mu internet uksapa\'timk.'}
+          {getUIText('OfflineStatus', 'Offline_Message', language) || 'Game works offline. No internet connection needed.'}
         </AlertDescription>
       </Alert>
     </div>
@@ -62,6 +62,7 @@ interface OnlineIndicatorProps {
 }
 
 export const OnlineIndicator = ({ language = 'en' }: OnlineIndicatorProps) => {
+  const { getUIText } = useComprehensiveConfig();
   const [isOnline, setIsOnline] = useState(navigator.onLine);
 
   useEffect(() => {
@@ -85,8 +86,8 @@ export const OnlineIndicator = ({ language = 'en' }: OnlineIndicatorProps) => {
         <WifiOff className="h-4 w-4 text-orange-500" />
       )}
       <span>{isOnline ? 
-        (language === 'en' ? 'Online' : language === 'fr' ? 'En ligne' : 'Online') : 
-        (language === 'en' ? 'Offline' : language === 'fr' ? 'Hors ligne' : 'Offline')
+        (getUIText('OnlineIndicator', 'Online', language) || 'Online') : 
+        (getUIText('OnlineIndicator', 'Offline', language) || 'Offline')
       }</span>
     </div>
   );

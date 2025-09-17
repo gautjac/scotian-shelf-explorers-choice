@@ -3,6 +3,7 @@ import { GameSidebar } from './GameSidebar';
 import { FloatingLanguageHeader } from './FloatingLanguageHeader';
 import { Scenario, GameState, Language } from '../types';
 import geometricBackground from '../assets/geometric-background.png';
+import { useComprehensiveConfig } from '../hooks/useComprehensiveConfig';
 
 
 interface GamePlayingScreenProps {
@@ -24,6 +25,7 @@ export const GamePlayingScreen = ({
   onRestart,
   onBackToLanguageSelection
 }: GamePlayingScreenProps) => {
+  const { getUIText } = useComprehensiveConfig();
   const scenarioProgress = `${gameState.currentScenarioIndex + 1}/5`;
 
   const impactColors = {
@@ -60,9 +62,7 @@ export const GamePlayingScreen = ({
           {/* Choices Section with Header */}
           <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 lg:p-8 shadow-lg overflow-y-auto">
             <h3 className="text-2xl lg:text-3xl font-semibold text-slate-800 text-center mb-6">
-              {gameState.language === 'en' && 'What would you do?'}
-              {gameState.language === 'fr' && 'Que feriez-vous?'}
-              {gameState.language === 'mi' && 'Koqoey ketu elkewek?'}
+              {getUIText('GamePlayingScreen', 'What_Would_You_Do', gameState.language) || 'What would you do?'}
             </h3>
             <div className="space-y-4 lg:space-y-6">
               {currentScenario.choices.map((choice, index) => (

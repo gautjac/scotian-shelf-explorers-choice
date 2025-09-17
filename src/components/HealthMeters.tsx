@@ -16,15 +16,15 @@ const getHealthColor = (value: number) => {
   return 'from-red-400 to-red-500';
 };
 
-const getHealthStatus = (value: number, language: 'en' | 'fr' | 'mi'): string => {
+const getHealthStatus = (value: number, language: 'en' | 'fr' | 'mi', getUIText: any): string => {
   if (value >= 80) {
-    return language === 'en' ? 'Doing Great' : language === 'fr' ? 'Très bien' : 'Pilei';
+    return getUIText('HealthMeters', 'Doing_Great', language) || 'Doing Great';
   } else if (value >= 60) {
-    return language === 'en' ? 'Doing OK' : language === 'fr' ? 'Ça va' : 'Nukek';
+    return getUIText('HealthMeters', 'Doing_OK', language) || 'Doing OK';
   } else if (value >= 40) {
-    return language === 'en' ? 'Not Good' : language === 'fr' ? 'Pas bon' : 'Tepisq';
+    return getUIText('HealthMeters', 'Not_Good', language) || 'Not Good';
   } else {
-    return language === 'en' ? 'Very Bad' : language === 'fr' ? 'Très mauvais' : 'Mekij';
+    return getUIText('HealthMeters', 'Very_Bad', language) || 'Very Bad';
   }
 };
 
@@ -50,6 +50,7 @@ interface AnimatedHealthMeterProps {
 }
 
 const AnimatedHealthMeter = ({ metricKey, value, previousValue, language, labels }: AnimatedHealthMeterProps) => {
+  const { getUIText } = useComprehensiveConfig();
   const [displayValue, setDisplayValue] = useState(previousValue);
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -151,7 +152,7 @@ const AnimatedHealthMeter = ({ metricKey, value, previousValue, language, labels
           displayValue >= 60 ? 'bg-blue-500/20 text-blue-600 border border-blue-500/30' :
           'bg-amber-500/20 text-amber-600 border border-amber-500/30'
         }`}>
-          {getHealthStatus(displayValue, language)}
+          {getHealthStatus(displayValue, language, getUIText)}
         </div>
       </div>
     </div>
@@ -186,9 +187,7 @@ export const HealthMeters = ({ healthMetrics, language, showInitialAnimation = f
   return (
     <div className="w-full">
       <h2 className="text-2xl lg:text-3xl font-bold text-center mb-8 text-slate-100">
-        {language === 'en' ? 'How Healthy is the Ocean' : 
-         language === 'fr' ? 'Comment va l\'océan' : 
-         'Samqwanikatl ukamkinu\'kuom'}
+        {getUIText('HealthMeters', 'How_Healthy_Ocean', language) || 'How Healthy is the Ocean'}
       </h2>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
