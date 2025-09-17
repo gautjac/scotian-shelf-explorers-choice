@@ -62,7 +62,7 @@ export const GamePlayingScreen = ({
           {/* Choices Section with Header */}
           <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 lg:p-8 shadow-lg overflow-y-auto">
             <h3 className="text-2xl lg:text-3xl font-semibold text-slate-800 text-center mb-6">
-              {getUIText('GamePlayingScreen', 'What_Would_You_Do', gameState.language) || 'What would you do?'}
+              {getUIText('ScenarioCard', 'Question Prompt', gameState.language) || 'What would you do?'}
             </h3>
             <div className="space-y-4 lg:space-y-6">
               {currentScenario.choices.map((choice, index) => (

@@ -48,9 +48,9 @@ export const OfflineStatus = ({ language = 'en' }: OfflineStatusProps) => {
       <Alert className="border-l-4 border-l-orange-500 bg-orange-50 dark:bg-orange-950/20">
         <WifiOff className="h-4 w-4 text-orange-600" />
         <AlertDescription className="text-orange-800 dark:text-orange-200">
-          <strong>{getUIText('OfflineStatus', 'Offline_Mode', language) || 'Offline Mode'}</strong>
+          <strong>{getUIText('OfflineStatus', 'Offline Mode', language) || 'Offline Mode'}</strong>
           <br />
-          {getUIText('OfflineStatus', 'Offline_Message', language) || 'Game works offline. No internet connection needed.'}
+          {getUIText('OfflineStatus', 'Offline Message', language) || 'Game works offline. No internet connection needed.'}
         </AlertDescription>
       </Alert>
     </div>
@@ -86,8 +86,8 @@ export const OnlineIndicator = ({ language = 'en' }: OnlineIndicatorProps) => {
         <WifiOff className="h-4 w-4 text-orange-500" />
       )}
       <span>{isOnline ? 
-        (getUIText('OnlineIndicator', 'Online', language) || 'Online') : 
-        (getUIText('OnlineIndicator', 'Offline', language) || 'Offline')
+        (getUIText('OfflineStatus', 'Online Text', language) || 'Online') : 
+        (getUIText('OfflineStatus', 'Offline Text', language) || 'Offline')
       }</span>
     </div>
   );

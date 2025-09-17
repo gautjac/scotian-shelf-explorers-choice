@@ -28,11 +28,11 @@ export const GameSidebar = ({
         <div className="bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-lg">
           <div className="text-center">
             <div className="text-sm font-medium text-gray-700 mb-2">
-              {getUIText('GameSidebar', 'Progress', language) || 'Progress'}
+              {getUIText('Progress', 'Label', language) || 'Progress'}
             </div>
             <div className="text-lg font-bold text-[#0C556B]">
               {currentScenarioIndex + 1} / 5 
-              {getUIText('GameSidebar', 'Completed', language) || ' completed'}
+              {getUIText('Progress', 'Counter', language) || ' completed'}
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2 mt-3">
               <div className="bg-[#0C556B] h-2 rounded-full transition-all duration-300" style={{

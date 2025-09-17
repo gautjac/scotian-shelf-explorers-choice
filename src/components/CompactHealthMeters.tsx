@@ -97,7 +97,7 @@ export const CompactHealthMeters = ({
   };
 
   const getSubtitleText = (key: string) => {
-    const subtitleKey = key.charAt(0).toUpperCase() + key.slice(1) + '_Subtitle';
+    const subtitleKey = key.charAt(0).toUpperCase() + key.slice(1) + ' Subtitle';
     return getUIText('CompactHealthMeters', subtitleKey, language) || '';
   };
 
