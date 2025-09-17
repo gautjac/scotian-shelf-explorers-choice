@@ -141,10 +141,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
           impact: 'neutral',
           consequence: '"When ships move more slowly',
           pros: 'Saves whale lives.',
-          cons: 'Ships take longer to deliver goods, slowing down our supply chain. Shipping also costs more money, which could mean products we rely on get more expensive. ',
-          ecosystemImpact: 0,
-          economicImpact: 0,
-          communityImpact: 0
+          cons: 'Ships take longer to deliver goods, slowing down our supply chain. Shipping also costs more money, which could mean products we rely on get more expensive. '
         },
         {
           id: 'ignore-whales',
