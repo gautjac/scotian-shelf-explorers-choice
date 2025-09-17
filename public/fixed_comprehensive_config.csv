@@ -380,3 +380,21 @@ UI_ELEMENTS,ui_text,OfflineStatus_Online Text,mi,Online Text,Kelulti'k,,,,Online
 UI_ELEMENTS,ui_text,OfflineStatus_Offline Text,en,Offline Text,Offline,,,,Offline status text
 UI_ELEMENTS,ui_text,OfflineStatus_Offline Text,fr,Offline Text,Hors ligne,,,,Offline status text
 UI_ELEMENTS,ui_text,OfflineStatus_Offline Text,mi,Offline Text,Maw kelulti'k,,,,Offline status text
+UI_ELEMENTS,ui_text,CompactHealthMeters_Title,en,Title,Ocean Health,,,,Main health meters title
+UI_ELEMENTS,ui_text,CompactHealthMeters_Title,fr,Title,Santé océanique,,,,Main health meters title
+UI_ELEMENTS,ui_text,CompactHealthMeters_Title,mi,Title,Samqwan ukamkinu'kuom,,,,Main health meters title
+UI_ELEMENTS,ui_text,CompactHealthMeters_Ecosystem_Subtitle,en,Ecosystem Subtitle,Fish whales plants and other marine life,,,,Ecosystem health subtitle
+UI_ELEMENTS,ui_text,CompactHealthMeters_Ecosystem_Subtitle,fr,Ecosystem Subtitle,Poissons baleines plantes et autres vies marines,,,,Ecosystem health subtitle
+UI_ELEMENTS,ui_text,CompactHealthMeters_Ecosystem_Subtitle,mi,Ecosystem Subtitle,Nam tett pukwesultiek,,,,Ecosystem health subtitle
+UI_ELEMENTS,ui_text,CompactHealthMeters_Economic_Subtitle,en,Economic Subtitle,Fishing jobs and coastal businesses,,,,Economic health subtitle
+UI_ELEMENTS,ui_text,CompactHealthMeters_Economic_Subtitle,fr,Economic Subtitle,Emplois de pêche et entreprises côtières,,,,Economic health subtitle
+UI_ELEMENTS,ui_text,CompactHealthMeters_Economic_Subtitle,mi,Economic Subtitle,Lukwaqan na nekmultimk,,,,Economic health subtitle
+UI_ELEMENTS,ui_text,CompactHealthMeters_Community_Subtitle,en,Community Subtitle,Health and wellbeing of communities,,,,Community health subtitle
+UI_ELEMENTS,ui_text,CompactHealthMeters_Community_Subtitle,fr,Community Subtitle,Santé et bien-être des communautés,,,,Community health subtitle
+UI_ELEMENTS,ui_text,CompactHealthMeters_Community_Subtitle,mi,Community Subtitle,L'nui samqwan,,,,Community health subtitle
+UI_ELEMENTS,ui_text,Progress_Label,en,Progress Label,Progress,,,,Progress indicator label
+UI_ELEMENTS,ui_text,Progress_Label,fr,Progress Label,Progrès,,,,Progress indicator label
+UI_ELEMENTS,ui_text,Progress_Label,mi,Progress Label,Kiseluktuk,,,,Progress indicator label
+UI_ELEMENTS,ui_text,Progress_Counter,en,Progress Counter,{current} / {total} completed,,,,Progress counter text
+UI_ELEMENTS,ui_text,Progress_Counter,fr,Progress Counter,{current} / {total} complétés,,,,Progress counter text
+UI_ELEMENTS,ui_text,Progress_Counter,mi,Progress Counter,{current} / {total} kisuloq,,,,Progress counter text

@@ -2,6 +2,7 @@
 import { HealthMetrics } from '../types';
 import { Waves, Coins, Heart } from 'lucide-react';
 import { useEffect, useState, useRef } from 'react';
+import { useComprehensiveConfig } from '../hooks/useComprehensiveConfig';
 
 interface CompactHealthMetersProps {
   healthMetrics: HealthMetrics;
@@ -60,6 +61,7 @@ export const CompactHealthMeters = ({
   language
 }: CompactHealthMetersProps) => {
   console.log('CompactHealthMeters received props:', healthMetrics);
+  const { getUIText } = useComprehensiveConfig();
   const previousMetrics = useRef<HealthMetrics>({ ecosystem: 70, economic: 70, community: 70 });
   const [changedMetrics, setChangedMetrics] = useState<Set<string>>(new Set());
 
@@ -120,12 +122,19 @@ export const CompactHealthMeters = ({
     }
   };
 
+  // Get dynamic UI text
+  const titleText = getUIText('CompactHealthMeters', 'Title', language) || 
+    (language === 'en' ? 'Ocean Health' : language === 'fr' ? 'Santé océanique' : 'Samqwan ukamkinu\'kuom');
+
+  const getSubtitleText = (key: string) => {
+    const subtitleKey = key.charAt(0).toUpperCase() + key.slice(1) + '_Subtitle';
+    return getUIText('CompactHealthMeters', subtitleKey, language) || descriptions[language][key as keyof typeof descriptions[typeof language]];
+  };
+
   return (
     <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl min-h-[130%]">
       <h3 className="text-3xl font-bold text-slate-700 mb-12 text-center">
-        {language === 'en' && 'Ocean Health'}
-        {language === 'fr' && 'Santé océanique'}
-        {language === 'mi' && 'Samqwan ukamkinu\'kuom'}
+        {titleText}
       </h3>
       
       <div className="space-y-8">
@@ -150,7 +159,7 @@ export const CompactHealthMeters = ({
                   {labels[language][key as keyof typeof labels[typeof language]]}
                 </div>
                 <div className="text-base text-slate-500 mb-2">
-                  {descriptions[language][key as keyof typeof descriptions[typeof language]]}
+                  {getSubtitleText(key)}
                 </div>
                 
                 {/* Animated Progress Bar */}
