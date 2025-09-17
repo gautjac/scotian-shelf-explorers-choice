@@ -153,45 +153,8 @@ export const exportComprehensiveCSV = (): string => {
     });
   });
   
-  // Add UI elements
-  const uiElements = parseCopydeckCSVContent(uiTextContent);
-  uiElements.forEach(element => {
-    if (element.english) {
-      rows.push({
-        section: 'UI_ELEMENTS',
-        type: 'ui_text',
-        id: `${element.screen}_${element.element}`,
-        language: 'en',
-        field: element.element,
-        content: element.english,
-        notes: element.notes
-      });
-    }
-    
-    if (element.french) {
-      rows.push({
-        section: 'UI_ELEMENTS',
-        type: 'ui_text',
-        id: `${element.screen}_${element.element}`,
-        language: 'fr',
-        field: element.element,
-        content: element.french,
-        notes: element.notes
-      });
-    }
-    
-    if (element.mikmaq) {
-      rows.push({
-        section: 'UI_ELEMENTS',
-        type: 'ui_text',
-        id: `${element.screen}_${element.element}`,
-        language: 'mi',
-        field: element.element,
-        content: element.mikmaq,
-        notes: element.notes
-      });
-    }
-  });
+  // Note: UI elements should be managed through the static CSV file now
+  // No longer adding hardcoded UI elements to export
   
   // Create CSV header
   const header = [
@@ -364,19 +327,6 @@ export const parseComprehensiveCSV = (csvContent: string) => {
 export const parseCopydeckCSVForFallback = () => {
   console.log('⚠️ [DEPRECATED] parseCopydeckCSVForFallback called - this should not be used anymore');
   return {};
-    
-    for (let j = 2; j < headers.length; j++) {
-      const csvLanguage = headers[j];
-      const languageCode = languageMapping[csvLanguage] || csvLanguage;
-      const content = values[j];
-      
-      if (!data[languageCode]) data[languageCode] = {};
-      if (!data[languageCode][screen]) data[languageCode][screen] = {};
-      data[languageCode][screen][element] = content;
-    }
-  }
-  
-  return data;
 };
 
 // Validate comprehensive configuration
