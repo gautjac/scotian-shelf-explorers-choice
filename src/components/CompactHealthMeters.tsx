@@ -126,6 +126,11 @@ export const CompactHealthMeters = ({
   const titleText = getUIText('CompactHealthMeters', 'Title', language) || 
     (language === 'en' ? 'Ocean Health' : language === 'fr' ? 'Santé océanique' : 'Samqwan ukamkinu\'kuom');
 
+  const getLabelText = (key: string) => {
+    const labelKey = key.charAt(0).toUpperCase() + key.slice(1);
+    return getUIText('CompactHealthMeters', labelKey, language) || labels[language][key as keyof typeof labels[typeof language]];
+  };
+
   const getSubtitleText = (key: string) => {
     const subtitleKey = key.charAt(0).toUpperCase() + key.slice(1) + '_Subtitle';
     return getUIText('CompactHealthMeters', subtitleKey, language) || descriptions[language][key as keyof typeof descriptions[typeof language]];
@@ -156,7 +161,7 @@ export const CompactHealthMeters = ({
               {/* Content */}
               <div className="flex-1 min-w-0">
                 <div className="text-xl font-semibold text-slate-700 mb-1 truncate">
-                  {labels[language][key as keyof typeof labels[typeof language]]}
+                  {getLabelText(key)}
                 </div>
                 <div className="text-base text-slate-500 mb-2">
                   {getSubtitleText(key)}
