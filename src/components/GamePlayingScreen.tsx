@@ -34,7 +34,7 @@ export const GamePlayingScreen = ({
       <div className="min-h-screen flex relative animate-pulse" style={{ backgroundImage: `url(${geometricBackground})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
         <div className="w-2/3 h-screen flex flex-col">
           <div className="min-h-full p-6 lg:p-8 pb-24 lg:pb-32 grid grid-rows-[auto_auto_auto] gap-6 overflow-hidden">
-            <div className="h-88 lg:h-120 bg-slate-200/80 rounded-2xl" />
+            <div className="h-[18.7rem] lg:h-[25.5rem] bg-slate-200/80 rounded-2xl" />
             <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-6 py-6 lg:px-8 lg:py-8">
               <div className="h-8 bg-slate-200 rounded mb-4" />
               <div className="h-6 bg-slate-200 rounded mb-2" />
@@ -68,7 +68,7 @@ export const GamePlayingScreen = ({
         <div className="min-h-full p-6 lg:p-8 pb-24 lg:pb-32 grid grid-rows-[auto_auto_auto] gap-6 overflow-hidden">
           {/* Scenario Image */}
           <div 
-            className="h-88 lg:h-120 bg-cover bg-center rounded-2xl shadow-lg" 
+            className="h-[18.7rem] lg:h-[25.5rem] bg-cover bg-center rounded-2xl shadow-lg" 
             style={{ backgroundImage: `url(${currentScenario.imageUrl})` }}
           />
 
