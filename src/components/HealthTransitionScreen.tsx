@@ -22,6 +22,17 @@ export const HealthTransitionScreen = ({
   const [showMeters, setShowMeters] = useState(false);
   const { getUIText, isLoading } = useComprehensiveConfig();
 
+  useEffect(() => {
+    // Show meters after a brief delay
+    const showTimer = setTimeout(() => {
+      setShowMeters(true);
+    }, 500);
+
+    return () => {
+      clearTimeout(showTimer);
+    };
+  }, []);
+
   if (isLoading) {
     return (
       <div 
@@ -43,17 +54,6 @@ export const HealthTransitionScreen = ({
       </div>
     );
   }
-
-  useEffect(() => {
-    // Show meters after a brief delay
-    const showTimer = setTimeout(() => {
-      setShowMeters(true);
-    }, 500);
-
-    return () => {
-      clearTimeout(showTimer);
-    };
-  }, []);
 
 
   return (
