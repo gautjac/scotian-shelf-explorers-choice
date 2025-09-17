@@ -6,7 +6,8 @@ import { Label } from './ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { exportChoicesToCSV, parseImpactCSV } from '../utils/impactConfiguration';
 import { exportComprehensiveCSV, parseComprehensiveCSV, validateComprehensiveConfig } from '../utils/comprehensiveConfiguration';
-import { Download, Upload, X } from 'lucide-react';
+import { resetContentCache } from '../utils/cacheManager';
+import { Download, Upload, X, RefreshCw } from 'lucide-react';
 
 interface AdminPanelProps {
   onClose: () => void;
@@ -67,6 +68,22 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
       toast({
         title: "Download Failed",
         description: "Failed to export comprehensive CSV file.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleResetCache = async () => {
+    try {
+      await resetContentCache();
+      toast({
+        title: "Cache Reset",
+        description: "Content cache cleared. CSV changes should now be visible.",
+      });
+    } catch (error) {
+      toast({
+        title: "Reset Failed",
+        description: "Failed to reset content cache.",
         variant: "destructive",
       });
     }
@@ -167,6 +184,21 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
                 Download Impact Values Only
               </Button>
             </div>
+          </div>
+          
+          <div className="space-y-2">
+            <Label>Cache Management</Label>
+            <Button 
+              onClick={handleResetCache} 
+              className="w-full"
+              variant="secondary"
+            >
+              <RefreshCw className="h-4 w-4 mr-2" />
+              Reset Content Cache
+            </Button>
+            <p className="text-xs text-muted-foreground">
+              Clear cached overrides to see CSV file changes
+            </p>
           </div>
           
           <div className="space-y-2">

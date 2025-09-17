@@ -3,7 +3,7 @@ export const clearAllCachedData = async () => {
   console.log('🧹 [CACHE] Starting comprehensive cache clear for single source of truth...');
   
   try {
-    // Clear localStorage completely for single source of truth
+    // Clear localStorage completely, especially configuration overrides
     const allKeys = Object.keys(localStorage);
     allKeys.forEach(key => {
       localStorage.removeItem(key);
@@ -11,11 +11,19 @@ export const clearAllCachedData = async () => {
     });
     console.log('✅ [CACHE] All localStorage cleared completely');
     
-    // Clear IndexedDB more aggressively
+    // Clear IndexedDB more comprehensively - targeting known Ocean Guardian databases
     if ('indexedDB' in window) {
       try {
-        // List of possible database names to clear
-        const dbNames = ['PersistentStorage', 'GameStorage', 'ConfigStorage', 'ContentStorage'];
+        // List of possible database names to clear (including Ocean Guardian specific ones)
+        const dbNames = [
+          'PersistentStorage', 
+          'GameStorage', 
+          'ConfigStorage', 
+          'ContentStorage',
+          'OceanGuardianStorage',  // This is likely where persistent overrides are stored
+          'ocean-guardian-db',
+          'comprehensive-config'
+        ];
         
         for (const dbName of dbNames) {
           const deleteRequest = indexedDB.deleteDatabase(dbName);
@@ -35,7 +43,7 @@ export const clearAllCachedData = async () => {
     sessionStorage.clear();
     console.log('✅ [CACHE] Cleared sessionStorage');
     
-    // Clear service worker cache more aggressively
+    // Clear service worker cache more aggressively, targeting Ocean Guardian caches
     if ('caches' in window) {
       try {
         const cacheNames = await caches.keys();
@@ -51,12 +59,67 @@ export const clearAllCachedData = async () => {
       }
     }
     
-    // Fire event to notify components
+    // Fire event to notify components to reload from CSV
     window.dispatchEvent(new CustomEvent('cache-cleared'));
-    console.log('✅ [CACHE] Cache clearing complete - using offlineContent.ts as single source of truth');
+    window.dispatchEvent(new CustomEvent('comprehensive-config-updated'));
+    console.log('✅ [CACHE] Cache clearing complete - CSV changes should now be visible');
     
   } catch (error) {
     console.error('❌ [CACHE] Error clearing cache:', error);
+  }
+};
+
+// Reset content cache specifically for configuration overrides
+export const resetContentCache = async () => {
+  console.log('🔄 [CACHE] Resetting content cache to prioritize CSV changes...');
+  
+  try {
+    // Clear specific configuration keys from localStorage
+    const configKeys = [
+      'comprehensiveConfiguration',
+      'impactConfiguration', 
+      'gameState',
+      'persistentConfig'
+    ];
+    
+    configKeys.forEach(key => {
+      if (localStorage.getItem(key)) {
+        localStorage.removeItem(key);
+        console.log(`🗑️ [CACHE] Removed override: ${key}`);
+      }
+    });
+    
+    // Clear Ocean Guardian specific IndexedDB storage
+    if ('indexedDB' in window) {
+      const oceanDBNames = ['OceanGuardianStorage', 'ocean-guardian-content'];
+      for (const dbName of oceanDBNames) {
+        const deleteRequest = indexedDB.deleteDatabase(dbName);
+        deleteRequest.onsuccess = () => {
+          console.log(`✅ [CACHE] Cleared Ocean Guardian DB: ${dbName}`);
+        };
+      }
+    }
+    
+    // Clear specific cache entries for Ocean Guardian content
+    if ('caches' in window) {
+      try {
+        const oceanCacheNames = ['ocean-guardian-content', 'comprehensive-config'];
+        for (const cacheName of oceanCacheNames) {
+          await caches.delete(cacheName);
+          console.log(`✅ [CACHE] Cleared Ocean Guardian cache: ${cacheName}`);
+        }
+      } catch (error) {
+        console.log('⚠️ [CACHE] Ocean Guardian cache deletion error:', error);
+      }
+    }
+    
+    // Notify components to reload from static CSV
+    window.dispatchEvent(new CustomEvent('cache-cleared'));
+    window.dispatchEvent(new CustomEvent('comprehensive-config-updated'));
+    console.log('✅ [CACHE] Content cache reset complete - CSV should now be primary source');
+    
+  } catch (error) {
+    console.error('❌ [CACHE] Error resetting content cache:', error);
   }
 };
 
