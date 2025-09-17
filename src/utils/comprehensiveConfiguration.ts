@@ -46,7 +46,9 @@ const parseCopydeckCSVContent = (csvContent: string) => {
 export const loadStaticCSVConfiguration = async (): Promise<any> => {
   try {
     console.log('🔄 [STATIC-CSV] Loading static CSV configuration...');
-    const response = await fetch('/fixed_comprehensive_config.csv');
+    // Add cache-busting parameter to ensure latest content is loaded
+    const cacheBuster = new Date().getTime();
+    const response = await fetch(`/fixed_comprehensive_config.csv?v=${cacheBuster}`);
     
     if (!response.ok) {
       throw new Error(`Failed to fetch CSV: ${response.status} ${response.statusText}`);
