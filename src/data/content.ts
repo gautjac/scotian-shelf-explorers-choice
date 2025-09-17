@@ -3,4 +3,4 @@ export {
   languages, 
   scenarios, 
   marineSpecies 
-} from './offlineContent';
+} from '../offlineContent';
