@@ -61,33 +61,11 @@ export const CompactHealthMeters = ({
   language
 }: CompactHealthMetersProps) => {
   console.log('CompactHealthMeters received props:', healthMetrics);
+  
+  // Always call ALL hooks in the same order - Rules of Hooks
   const { getUIText, isLoading } = useComprehensiveConfig();
   const previousMetrics = useRef<HealthMetrics>({ ecosystem: 70, economic: 70, community: 70 });
   const [changedMetrics, setChangedMetrics] = useState<Set<string>>(new Set());
-
-  if (isLoading) {
-    return (
-      <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl min-h-[130%] animate-pulse">
-        <div className="h-8 bg-slate-200 rounded mb-12" />
-        <div className="space-y-8">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="flex items-center gap-8">
-              <div className="w-24 h-24 rounded-full bg-slate-200" />
-              <div className="flex-1">
-                <div className="h-6 bg-slate-200 rounded mb-1" />
-                <div className="h-4 bg-slate-200 rounded mb-2" />
-                <div className="h-6 bg-slate-200 rounded mb-2" />
-                <div className="flex justify-between">
-                  <div className="h-8 bg-slate-200 rounded w-16" />
-                  <div className="h-8 bg-slate-200 rounded w-20" />
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
 
   useEffect(() => {
     console.log('Comparing metrics:', { previous: previousMetrics.current, current: healthMetrics });
@@ -124,6 +102,31 @@ export const CompactHealthMeters = ({
     const subtitleKey = key.charAt(0).toUpperCase() + key.slice(1) + ' Subtitle';
     return getUIText('CompactHealthMeters', subtitleKey, language) || '';
   };
+
+  // Handle loading state AFTER all hooks are called
+  if (isLoading) {
+    return (
+      <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl min-h-[130%] animate-pulse">
+        <div className="h-8 bg-slate-200 rounded mb-12" />
+        <div className="space-y-8">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="flex items-center gap-8">
+              <div className="w-24 h-24 rounded-full bg-slate-200" />
+              <div className="flex-1">
+                <div className="h-6 bg-slate-200 rounded mb-1" />
+                <div className="h-4 bg-slate-200 rounded mb-2" />
+                <div className="h-6 bg-slate-200 rounded mb-2" />
+                <div className="flex justify-between">
+                  <div className="h-8 bg-slate-200 rounded w-16" />
+                  <div className="h-8 bg-slate-200 rounded w-20" />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl min-h-[130%]">
