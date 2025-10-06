@@ -10,12 +10,10 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
-  base: mode === 'production' ? './' : '/',
   plugins: [
     react(),
     mode === 'development' && componentTagger(),
-// Disable PWA in Electron mode, enable for web
-    process.env.ELECTRON !== 'true' && VitePWA({
+    VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'robots.txt'],
       manifest: {
