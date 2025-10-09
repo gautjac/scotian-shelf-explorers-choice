@@ -27,9 +27,23 @@ export const LanguageSelectionScreen = ({ onLanguageSelect }: LanguageSelectionS
         loop 
         muted 
         playsInline
+        preload="auto"
         className="absolute inset-0 w-full h-full object-cover z-0"
+        onError={(e) => {
+          console.error('[LanguageSelectionScreen] Background video error', e);
+        }}
+        onLoadedMetadata={() => {
+          console.info('[LanguageSelectionScreen] Background video metadata loaded');
+        }}
+        onCanPlay={() => {
+          console.info('[LanguageSelectionScreen] Background video can play');
+        }}
+        onPlay={() => {
+          console.info('[LanguageSelectionScreen] Background video playing');
+        }}
       >
         <source src={droneBeachVideo} type="video/mp4" />
+        Your browser does not support the video tag.
       </video>
       
       <div className="relative z-10 flex flex-col items-center gap-8 p-8 w-full">
