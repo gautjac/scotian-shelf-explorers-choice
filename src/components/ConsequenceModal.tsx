@@ -97,7 +97,7 @@ export const ConsequenceModal = ({
             </div>
 
             {/* Cons */}
-            <div className="bg-red-500/30 rounded-2xl p-8 lg:p-10">
+            <div className="bg-[#0072A0]/30 rounded-2xl p-8 lg:p-10">
               <h4 className="text-2xl lg:text-3xl font-semibold mb-6 flex items-center justify-center gap-3">
                 <span className="text-4xl">❌</span>
                 {getUIText('ConsequenceModal', 'The Cons', language) || 'The cons'}
