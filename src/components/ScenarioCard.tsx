@@ -62,7 +62,7 @@ export const ScenarioCard = ({ scenario, language, onChoiceSelect }: ScenarioCar
                 className={`w-full p-6 lg:p-8 rounded-2xl font-semibold text-left transition-all duration-300 transform shadow-xl active:scale-98 ${impactColors[choice.impact]} min-h-[100px] lg:min-h-[120px]`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-helvetica text-white leading-relaxed pr-4">{choice.text}</span>
+                  <span className="font-helvetica text-white text-2xl leading-relaxed pr-4">{choice.text}</span>
                   <span className="text-2xl lg:text-3xl flex-shrink-0">→</span>
                 </div>
               </button>
