@@ -49,11 +49,16 @@ export const clearAllCachedData = async () => {
         const cacheNames = await caches.keys();
         await Promise.all(
           cacheNames.map(async cacheName => {
+            // Keep video cache and workbox precache, only clear config/data caches
+            if (cacheName.includes('video-cache') || cacheName.includes('workbox-precache')) {
+              console.log(`🎬 [CACHE] Preserving cache: ${cacheName}`);
+              return;
+            }
             console.log(`🗑️ [CACHE] Deleting cache: ${cacheName}`);
             return await caches.delete(cacheName);
           })
         );
-        console.log('✅ [CACHE] All service worker caches cleared');
+        console.log('✅ [CACHE] Configuration caches cleared, video cache preserved');
       } catch (error) {
         console.log('⚠️ [CACHE] Service worker cache deletion error:', error);
       }
