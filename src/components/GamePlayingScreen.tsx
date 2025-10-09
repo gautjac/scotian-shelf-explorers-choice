@@ -98,7 +98,7 @@ export const GamePlayingScreen = ({
                   className={`w-full p-4 lg:p-6 rounded-xl font-semibold text-left transition-all duration-300 transform shadow-md active:scale-98 ${impactColors[choice.impact]} min-h-[80px] lg:min-h-[100px]`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-helvetica text-primary leading-relaxed pr-4">
+                    <span className="font-helvetica text-white leading-relaxed pr-4">
                       {choice.text}
                     </span>
                     <span className="text-2xl lg:text-3xl flex-shrink-0">→</span>
