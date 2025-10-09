@@ -65,7 +65,7 @@ export const GamePlayingScreen = ({
       {/* Main Content Area - 2/3 of screen with Grid Layout */}
       <div className="w-2/3 h-screen flex flex-col">
         {/* Main Content Grid with bottom padding for floating header */}
-        <div className="min-h-full p-6 lg:p-8 pb-24 lg:pb-32 grid grid-rows-[auto_auto_auto] gap-6 overflow-hidden">
+        <div className="min-h-full p-6 lg:p-8 pb-32 lg:pb-40 grid grid-rows-[auto_auto_auto] gap-8 overflow-hidden">
           {/* Scenario Image */}
           <div 
             className="h-[16.83rem] lg:h-[22.95rem] bg-cover bg-center rounded-2xl shadow-lg" 
@@ -90,7 +90,7 @@ export const GamePlayingScreen = ({
             <h3 className="font-helvetica text-secondary font-semibold text-slate-800 text-center mb-6">
               {getUIText('ScenarioCard', 'Question Prompt', gameState.language) || 'What would you do?'}
             </h3>
-            <div className="space-y-4 lg:space-y-6">
+            <div className="space-y-5 lg:space-y-7">
               {currentScenario.choices.map((choice, index) => (
                 <button
                   key={choice.id}

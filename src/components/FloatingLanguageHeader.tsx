@@ -21,7 +21,7 @@ export const FloatingLanguageHeader = ({
   onBackToLanguageSelection 
 }: FloatingLanguageHeaderProps) => {
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 p-4">
+    <div className="fixed bottom-0 left-0 right-0 z-50 p-6 lg:p-8">
       <div className="flex items-center justify-between w-full">
         {/* Language selection buttons */}
         <div className="flex gap-6">
