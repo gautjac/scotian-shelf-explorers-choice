@@ -1,6 +1,6 @@
 import { Language } from '../types';
 import { languages } from '../data/content';
-import droneBeachVideo from '../assets/DroneBeachLoop-HD 1080p.mov';
+import droneBeachVideo from '../assets/DroneBeachLoop-HD 1080p.mp4';
 import compassIcon from '../assets/CompassIcon.png';
 
 interface LanguageSelectionScreenProps {
