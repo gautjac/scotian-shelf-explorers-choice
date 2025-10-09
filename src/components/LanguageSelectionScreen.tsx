@@ -1,6 +1,6 @@
 import { Language } from '../types';
 import { languages } from '../data/content';
-import rockyShoreBackground from '../assets/rocky-shore-background.jpg';
+import droneBeachVideo from '../assets/DroneBeachLoop-HD 1080p.mov';
 import { Leaf } from 'lucide-react';
 
 interface LanguageSelectionScreenProps {
@@ -21,11 +21,18 @@ const languageButtonText = {
 
 export const LanguageSelectionScreen = ({ onLanguageSelect }: LanguageSelectionScreenProps) => {
   return (
-    <div 
-      className="min-h-screen w-full flex items-center justify-center bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: `url(${rockyShoreBackground})` }}
-    >
-      <div className="flex flex-col items-center gap-8 p-8 w-full">
+    <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden">
+      <video 
+        autoPlay 
+        loop 
+        muted 
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover z-0"
+      >
+        <source src={droneBeachVideo} type="video/mp4" />
+      </video>
+      
+      <div className="relative z-10 flex flex-col items-center gap-8 p-8 w-full">
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 w-full max-w-[75vw]">
           {languages.map((lang) => {
             const buttonText = languageButtonText[lang.code];
