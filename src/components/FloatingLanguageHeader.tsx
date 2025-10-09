@@ -1,6 +1,7 @@
 import { ArrowLeft } from 'lucide-react';
 import { languages } from '../data/content';
 import { Language } from '../types';
+import speechBubbleIcon from '../assets/SpeechBubble.png';
 
 interface FloatingLanguageHeaderProps {
   currentLanguage: Language['code'];
@@ -23,19 +24,24 @@ export const FloatingLanguageHeader = ({
     <div className="fixed bottom-0 left-0 right-0 z-50 p-4">
       <div className="flex items-center justify-between w-full">
         {/* Language selection buttons */}
-        <div className="flex gap-3">
+        <div className="flex gap-6">
           {languages.map((lang) => (
             <button
               key={lang.code}
               onClick={() => onLanguageChange(lang.code)}
-              className={`px-4 py-2 rounded-lg text-sm lg:text-base font-bold transition-all duration-200 ${
+              className={`w-[450px] h-[100px] rounded-full border-4 border-white text-3xl font-bold transition-all duration-200 flex items-center justify-center gap-4 ${
                 languageColors[lang.code]
               } ${
                 currentLanguage === lang.code
-                  ? 'ring-4 ring-white/50 scale-105'
+                  ? 'scale-105'
                   : ''
               }`}
             >
+              <img 
+                src={speechBubbleIcon} 
+                alt="" 
+                className="w-14 h-14 brightness-0 invert"
+              />
               {lang.nativeName}
             </button>
           ))}
