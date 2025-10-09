@@ -23,6 +23,7 @@ export const LanguageSelectionScreen = ({ onLanguageSelect }: LanguageSelectionS
   return (
     <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden">
       <video 
+        src={droneBeachVideo}
         autoPlay 
         loop 
         muted 
@@ -33,7 +34,7 @@ export const LanguageSelectionScreen = ({ onLanguageSelect }: LanguageSelectionS
           console.error('[LanguageSelectionScreen] Background video error', e);
         }}
         onLoadedMetadata={() => {
-          console.info('[LanguageSelectionScreen] Background video metadata loaded');
+          console.info('[LanguageSelectionScreen] Background video metadata loaded', { src: droneBeachVideo });
         }}
         onCanPlay={() => {
           console.info('[LanguageSelectionScreen] Background video can play');
@@ -41,10 +42,7 @@ export const LanguageSelectionScreen = ({ onLanguageSelect }: LanguageSelectionS
         onPlay={() => {
           console.info('[LanguageSelectionScreen] Background video playing');
         }}
-      >
-        <source src={droneBeachVideo} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+      />
       
       <div className="relative z-10 flex flex-col items-center gap-8 p-8 w-full">
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 w-full max-w-[75vw]">
