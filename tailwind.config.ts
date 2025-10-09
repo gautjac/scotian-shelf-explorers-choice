@@ -21,6 +21,11 @@ export default {
 			fontFamily: {
 				'helvetica': ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
 			},
+			fontSize: {
+				'heading': ['72px', { lineHeight: '1.2', fontWeight: '500' }],
+				'primary': ['32px', { lineHeight: '38.4px', fontWeight: '400' }],
+				'secondary': ['27px', { lineHeight: '32.4px', fontWeight: '400' }],
+			},
 			height: {
 				'88': '22rem',
 				'120': '30rem',

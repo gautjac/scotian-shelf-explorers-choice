@@ -75,19 +75,19 @@ export const GamePlayingScreen = ({
           {/* Content Section with Scenario Progress */}
           <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-6 py-6 lg:px-8 lg:py-8 shadow-lg">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-900">{currentScenario.title}</h2>
+              <h2 className="font-helvetica text-heading text-blue-900">{currentScenario.title}</h2>
               <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg font-semibold text-lg">
                 {scenarioProgress}
               </div>
             </div>
-            <p className="text-xl lg:text-2xl text-slate-700 leading-relaxed">
+            <p className="font-helvetica text-primary text-slate-700 leading-relaxed">
               {currentScenario.description}
             </p>
           </div>
 
           {/* Choices Section with Header */}
           <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 lg:p-8 shadow-lg overflow-y-auto">
-            <h3 className="text-2xl lg:text-3xl font-semibold text-slate-800 text-center mb-6">
+            <h3 className="font-helvetica text-secondary font-semibold text-slate-800 text-center mb-6">
               {getUIText('ScenarioCard', 'Question Prompt', gameState.language) || 'What would you do?'}
             </h3>
             <div className="space-y-4 lg:space-y-6">
@@ -98,7 +98,7 @@ export const GamePlayingScreen = ({
                   className={`w-full p-4 lg:p-6 rounded-xl font-semibold text-left transition-all duration-300 transform shadow-md active:scale-98 ${impactColors[choice.impact]} min-h-[80px] lg:min-h-[100px]`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-lg lg:text-xl xl:text-2xl leading-relaxed pr-4">
+                    <span className="font-helvetica text-primary leading-relaxed pr-4">
                       {choice.text}
                     </span>
                     <span className="text-2xl lg:text-3xl flex-shrink-0">→</span>

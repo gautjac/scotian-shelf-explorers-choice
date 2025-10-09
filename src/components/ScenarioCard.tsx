@@ -43,14 +43,14 @@ export const ScenarioCard = ({ scenario, language, onChoiceSelect }: ScenarioCar
 
       {/* Scenario content - scrollable if needed */}
       <div className="flex-1 p-8 lg:p-10 pb-8 lg:pb-12 flex flex-col overflow-y-auto">
-        <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-900 mb-6">{scenario.title}</h2>
-        <p className="text-xl lg:text-2xl text-slate-700 leading-relaxed mb-8 lg:mb-10">
+        <h2 className="font-helvetica text-heading text-blue-900 mb-6">{scenario.title}</h2>
+        <p className="font-helvetica text-primary text-slate-700 leading-relaxed mb-8 lg:mb-10">
           {scenario.description}
         </p>
 
         {/* Choices - optimized for touch interaction */}
         <div className="flex flex-col">
-          <h3 className="text-2xl lg:text-3xl font-semibold text-slate-800 mb-6 lg:mb-8">
+          <h3 className="font-helvetica text-secondary font-semibold text-slate-800 mb-6 lg:mb-8">
             {getUIText('ScenarioCard', 'Question Prompt', language) || 'What would you do?'}
           </h3>
           
@@ -62,7 +62,7 @@ export const ScenarioCard = ({ scenario, language, onChoiceSelect }: ScenarioCar
                 className={`w-full p-6 lg:p-8 rounded-2xl font-semibold text-left transition-all duration-300 transform shadow-xl active:scale-98 ${impactColors[choice.impact]} min-h-[100px] lg:min-h-[120px]`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-lg lg:text-xl xl:text-2xl leading-relaxed pr-4">{choice.text}</span>
+                  <span className="font-helvetica text-primary leading-relaxed pr-4">{choice.text}</span>
                   <span className="text-2xl lg:text-3xl flex-shrink-0">→</span>
                 </div>
               </button>
