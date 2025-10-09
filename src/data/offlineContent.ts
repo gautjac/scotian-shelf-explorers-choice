@@ -13,9 +13,9 @@ import whaleImg from '../assets/images/whale.jpg';
 import kelpImg from '../assets/images/kelp.jpg';
 
 export const languages: Language[] = [
+  { code: 'mi', name: "Mi'kmaq", nativeName: "Mi'kmaq" },
   { code: 'en', name: 'English', nativeName: 'English' },
-  { code: 'fr', name: 'French', nativeName: 'Français' },
-  { code: 'mi', name: "Mi'kmaq", nativeName: "Mi'kmaq" }
+  { code: 'fr', name: 'French', nativeName: 'Français' }
 ];
 
 export const marineSpecies: MarineSpecies[] = [

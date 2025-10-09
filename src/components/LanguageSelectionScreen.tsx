@@ -1,7 +1,7 @@
 import { Language } from '../types';
 import { languages } from '../data/content';
 import droneBeachVideo from '../assets/DroneBeachLoop-HD 1080p.mov';
-import { Leaf } from 'lucide-react';
+import compassIcon from '../assets/CompassIcon.png';
 
 interface LanguageSelectionScreenProps {
   onLanguageSelect: (language: Language['code']) => void;
@@ -44,7 +44,7 @@ export const LanguageSelectionScreen = ({ onLanguageSelect }: LanguageSelectionS
                   languageColors[lang.code]
                 }`}
               >
-                <Leaf size={32} className="lg:w-10 lg:h-10" />
+                <img src={compassIcon} alt="" className="w-10 h-10" />
                 <div className="text-center">
                   {buttonText.map((line, index) => (
                     <div key={index} className="text-4xl lg:text-6xl xl:text-7xl font-helvetica font-medium">
