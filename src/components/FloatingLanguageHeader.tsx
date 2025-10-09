@@ -28,7 +28,7 @@ export const FloatingLanguageHeader = ({
             <button
               key={lang.code}
               onClick={() => onLanguageChange(lang.code)}
-              className={`px-4 py-2 rounded-lg text-sm lg:text-base font-bold transition-all duration-200 ${
+              className={`w-[650px] h-[182px] rounded-lg text-4xl font-bold transition-all duration-200 flex items-center justify-center ${
                 languageColors[lang.code]
               } ${
                 currentLanguage === lang.code
