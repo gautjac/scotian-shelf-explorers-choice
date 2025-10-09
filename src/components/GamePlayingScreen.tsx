@@ -55,9 +55,9 @@ export const GamePlayingScreen = ({
   }
 
   const impactColors = {
-    positive: 'bg-[#0072A0] active:bg-[#0072A0]/90 text-white',
-    negative: 'bg-[#0B424E] active:bg-[#0B424E]/90 text-white',
-    neutral: 'bg-[#0B424E] active:bg-[#0B424E]/90 text-white'
+    positive: 'bg-[#0072A0] active:bg-[#0072A0]/90 !text-white',
+    negative: 'bg-[#0B424E] active:bg-[#0B424E]/90 !text-white',
+    neutral: 'bg-[#0B424E] active:bg-[#0B424E]/90 !text-white'
   };
 
   return (
