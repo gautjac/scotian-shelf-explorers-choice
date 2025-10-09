@@ -44,7 +44,11 @@ export const LanguageSelectionScreen = ({ onLanguageSelect }: LanguageSelectionS
                   languageColors[lang.code]
                 }`}
               >
-                <img src={compassIcon} alt="" className="w-10 h-10" />
+                <img 
+                  src={compassIcon} 
+                  alt="" 
+                  className={`w-[66px] h-[66px] ${lang.code === 'mi' ? 'brightness-0' : ''}`}
+                />
                 <div className="text-center">
                   {buttonText.map((line, index) => (
                     <div key={index} className="text-4xl lg:text-6xl xl:text-7xl font-helvetica font-medium">
