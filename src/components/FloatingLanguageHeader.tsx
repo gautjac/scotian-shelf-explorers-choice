@@ -50,7 +50,7 @@ export const FloatingLanguageHeader = ({
         {/* Back button */}
         <button
           onClick={onBackToLanguageSelection}
-          className="w-[140px] h-[140px] rounded-3xl bg-[#00AE9F] hover:bg-[#00AE9F]/90 active:bg-[#00AE9F]/80 transition-all duration-200 flex items-center justify-center"
+          className="w-[140px] h-[100px] rounded-3xl bg-[#00AE9F] hover:bg-[#00AE9F]/90 active:bg-[#00AE9F]/80 transition-all duration-200 flex items-center justify-center"
         >
           <Undo2 className="w-16 h-16 text-white" />
         </button>
