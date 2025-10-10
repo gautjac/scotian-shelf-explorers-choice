@@ -29,7 +29,7 @@ export const FloatingLanguageHeader = ({
             <button
               key={lang.code}
               onClick={() => onLanguageChange(lang.code)}
-              className={`w-[450px] h-[100px] rounded-full font-helvetica text-primary font-bold transition-all duration-200 flex items-center justify-center gap-4 ${
+              className={`w-[450px] h-[100px] rounded-2xl font-helvetica text-5xl font-bold transition-all duration-200 flex items-center justify-center gap-4 ${
                 languageColors[lang.code]
               } ${
                 currentLanguage === lang.code
@@ -40,7 +40,7 @@ export const FloatingLanguageHeader = ({
               <img 
                 src={speechBubbleIcon} 
                 alt="" 
-                className="w-14 h-14 brightness-0 invert"
+                className={`w-14 h-14 ${lang.code === 'mi' ? '' : 'brightness-0 invert'}`}
               />
               {lang.nativeName}
             </button>
