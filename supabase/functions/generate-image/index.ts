@@ -112,7 +112,7 @@ serve(async (req) => {
 
   } catch (error) {
     return new Response(JSON.stringify({ 
-      error: error.message 
+      error: error instanceof Error ? error.message : 'An error occurred'
     }), { 
       status: 400, 
       headers: { ...corsHeaders, 'Content-Type': 'application/json' } 

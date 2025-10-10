@@ -2,7 +2,7 @@ import { Language } from '../types';
 import { languages } from '../data/content';
 import droneBeachVideo from '../assets/drone-beach-loop-1080.mp4';
 import compassIcon from '../assets/CompassIcon.png';
-import rockyShoreBackground from '../assets/rocky-shore-background.jpg';
+import posterFrame from '../assets/posterframe.jpg';
 
 interface LanguageSelectionScreenProps {
   onLanguageSelect: (language: Language['code']) => void;
@@ -30,7 +30,7 @@ export const LanguageSelectionScreen = ({ onLanguageSelect }: LanguageSelectionS
         muted 
         playsInline
         preload="metadata"
-        poster={rockyShoreBackground}
+        poster={posterFrame}
         className="absolute inset-0 w-full h-full object-cover z-0"
         onError={(e) => {
           console.error('[LanguageSelectionScreen] Background video error', e);
