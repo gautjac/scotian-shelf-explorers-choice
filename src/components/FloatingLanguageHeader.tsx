@@ -1,4 +1,4 @@
-import { ArrowLeft } from 'lucide-react';
+import { Undo2 } from 'lucide-react';
 import { languages } from '../data/content';
 import { Language } from '../types';
 import speechBubbleIcon from '../assets/SpeechBubble.png';
@@ -50,9 +50,9 @@ export const FloatingLanguageHeader = ({
         {/* Back button */}
         <button
           onClick={onBackToLanguageSelection}
-          className="w-12 h-12 lg:w-16 lg:h-16 rounded-lg active:bg-white/20 transition-all duration-200 flex items-center justify-center"
+          className="w-[140px] h-[140px] rounded-3xl bg-[#00AE9F] hover:bg-[#00AE9F]/90 active:bg-[#00AE9F]/80 transition-all duration-200 flex items-center justify-center"
         >
-          <ArrowLeft className="w-6 h-6 lg:w-8 lg:h-8 text-white" />
+          <Undo2 className="w-16 h-16 text-white" />
         </button>
       </div>
     </div>
