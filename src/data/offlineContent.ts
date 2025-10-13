@@ -13,9 +13,9 @@ import whaleImg from '../assets/images/whale.jpg';
 import kelpImg from '../assets/images/kelp.jpg';
 
 export const languages: Language[] = [
-  { code: 'mi', name: "Mi'kmaq", nativeName: "Mi'kmaq" },
   { code: 'en', name: 'English', nativeName: 'English' },
-  { code: 'fr', name: 'French', nativeName: 'Français' }
+  { code: 'fr', name: 'French', nativeName: 'Français' },
+  { code: 'mi', name: "Mi'kmaq", nativeName: "Mi'kmaq" }
 ];
 
 export const marineSpecies: MarineSpecies[] = [
@@ -49,7 +49,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
   en: [
     {
       id: 'plastic-pollution',
-      title: '1. Trash Attack!',
+      title: 'Trash Attack!',
       description: 'Plastic bags and bottles are washing up daily on Nova Scotia\'s beaches. Sea turtles think plastic bags are jellyfish and try to eat them. Fish and seabirds get tangled up in bottle rings. What should we do to help?',
       imageUrl: plasticPollutionImg,
       choices: [
