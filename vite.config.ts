@@ -15,7 +15,7 @@ export default defineConfig(({ mode }) => ({
     mode === 'development' && componentTagger(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'robots.txt'],
+      includeAssets: ['favicon.ico', 'robots.txt', 'icon-*.png', '*.csv', 'fonts/*.woff2'],
       manifest: {
         name: 'Nova Scotia Ocean Game',
         short_name: 'Ocean Game',
@@ -26,23 +26,54 @@ export default defineConfig(({ mode }) => ({
         start_url: '/',
         icons: [
           {
-            src: '/placeholder.svg',
+            src: '/icon-192x192.png',
             sizes: '192x192',
-            type: 'image/svg+xml'
+            type: 'image/png',
+            purpose: 'any maskable'
+          },
+          {
+            src: '/icon-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any maskable'
           }
         ]
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,jpg,jpeg,svg,webp,woff2}'],
+        globPatterns: ['**/*.{js,css,html,ico,png,jpg,jpeg,svg,webp,woff2,csv}'],
+        navigateFallback: '/index.html',
+        navigateFallbackDenylist: [/^\/api/, /^\/supabase/],
         runtimeCaching: [
           {
-            urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
+            urlPattern: /\.(?:png|jpg|jpeg|svg|webp|gif|ico)$/i,
             handler: 'CacheFirst',
             options: {
-              cacheName: 'google-fonts-cache',
+              cacheName: 'images-cache',
+              expiration: {
+                maxEntries: 100,
+                maxAgeSeconds: 60 * 60 * 24 * 30 // 30 days
+              }
+            }
+          },
+          {
+            urlPattern: /\.(?:woff2|woff|ttf)$/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'fonts-cache',
               expiration: {
                 maxEntries: 10,
                 maxAgeSeconds: 60 * 60 * 24 * 365 // 365 days
+              }
+            }
+          },
+          {
+            urlPattern: /\.(?:csv|json)$/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'data-cache',
+              expiration: {
+                maxEntries: 20,
+                maxAgeSeconds: 60 * 60 * 24 * 7 // 7 days
               }
             }
           },

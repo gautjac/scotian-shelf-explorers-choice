@@ -130,13 +130,16 @@ export const resetContentCache = async () => {
 
 // Initialize cache clearing on app start
 export const initializeCacheClearing = () => {
-  console.log('🚀 [CACHE] Initializing cache management for single source of truth (offlineContent.ts)');
-  console.log('🔧 [CACHE] Eliminating all dynamic configuration overrides...');
-  clearAllCachedData();
+  console.log('🚀 [CACHE] PWA Mode: Cache management disabled for offline functionality');
+  console.log('ℹ️ [CACHE] Service worker caches will persist for offline support');
   
-  // Also clear on page reload to be extra sure
-  window.addEventListener('beforeunload', () => {
-    console.log('🔄 [CACHE] Page unloading - clearing cache to ensure fresh start');
-    clearAllCachedData();
-  });
+  // DISABLED: Do not clear caches automatically - this breaks PWA offline functionality
+  // clearAllCachedData();
+  
+  // DISABLED: Do not clear on page reload - service worker needs persistent caches
+  // window.addEventListener('beforeunload', () => {
+  //   clearAllCachedData();
+  // });
+  
+  console.log('✅ [CACHE] PWA offline mode active - caches preserved');
 };
