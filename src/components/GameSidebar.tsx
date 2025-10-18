@@ -17,7 +17,7 @@ export const GameSidebar = ({
 }: GameSidebarProps) => {
   const { getUIText } = useComprehensiveConfig();
   
-  return <div className="w-full h-full p-6 lg:p-8 overflow-y-auto flex flex-col">
+  return <div className="w-full h-full p-6 lg:p-8 flex flex-col">
       {/* Health Meters - compact version for sidebar */}
       <div className="mb-4">
         <CompactHealthMeters healthMetrics={healthMetrics} language={language} />

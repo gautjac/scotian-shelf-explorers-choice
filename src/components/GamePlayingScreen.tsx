@@ -65,15 +65,15 @@ export const GamePlayingScreen = ({
       {/* Main Content Area - 2/3 of screen with Grid Layout */}
       <div className="w-2/3 h-screen flex flex-col">
         {/* Main Content Grid with bottom padding for floating header */}
-        <div className="min-h-full p-6 lg:p-8 pb-32 lg:pb-40 grid grid-rows-[auto_auto_auto] gap-8 overflow-hidden">
+        <div className="min-h-full p-6 pb-28 grid grid-rows-[auto_auto_auto] gap-6">
           {/* Scenario Image */}
           <div 
-            className="h-[16.83rem] lg:h-[22.95rem] bg-cover bg-center rounded-2xl shadow-lg" 
+            className="h-[18rem] bg-cover bg-center rounded-2xl shadow-lg" 
             style={{ backgroundImage: `url(${currentScenario.imageUrl})` }}
           />
 
           {/* Content Section with Scenario Progress */}
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-6 py-6 lg:px-8 lg:py-8 shadow-lg">
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-6 py-5 shadow-lg">
             <div className="flex items-center justify-between mb-4">
               <h2 className="font-helvetica text-heading text-blue-900">{currentScenario.title}</h2>
               <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg font-semibold text-lg">
@@ -86,16 +86,16 @@ export const GamePlayingScreen = ({
           </div>
 
           {/* Choices Section with Header */}
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 lg:p-8 shadow-lg overflow-y-auto">
-            <h3 className="font-helvetica text-secondary font-semibold text-slate-800 text-center mb-6">
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg overflow-y-auto">
+            <h3 className="font-helvetica text-secondary font-semibold text-slate-800 text-center mb-5">
               {getUIText('ScenarioCard', 'Question Prompt', gameState.language) || 'What would you do?'}
             </h3>
-            <div className="space-y-5 lg:space-y-7">
+            <div className="space-y-5">
               {currentScenario.choices.map((choice, index) => (
                 <button
                   key={choice.id}
                   onClick={() => onChoiceSelect(choice.id)}
-                  className={`w-full p-4 lg:p-6 rounded-xl font-semibold text-left transition-all duration-300 transform shadow-md active:scale-98 ${impactColors[choice.impact]} min-h-[80px] lg:min-h-[100px]`}
+                  className={`w-full p-4 rounded-xl font-semibold text-left transition-all duration-300 transform shadow-md active:scale-98 ${impactColors[choice.impact]} min-h-[85px]`}
                 >
                   <div className="flex items-center justify-between">
                     <span className="font-helvetica text-white text-2xl leading-relaxed pr-4">

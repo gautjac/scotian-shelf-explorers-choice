@@ -46,11 +46,11 @@ const getHealthStatus = (value: number, language: 'en' | 'fr' | 'mi') => {
 const getIcon = (type: string) => {
   switch (type) {
     case 'ecosystem':
-      return <Waves className="w-16 h-16 text-white" />;
+      return <Waves className="w-14 h-14 text-white" />;
     case 'economic':
-      return <Coins className="w-16 h-16 text-white" />;
+      return <Coins className="w-14 h-14 text-white" />;
     case 'community':
-      return <Heart className="w-16 h-16 text-white" />;
+      return <Heart className="w-14 h-14 text-white" />;
     default:
       return <Waves className="w-8 h-8 text-white" />;
   }
@@ -106,19 +106,19 @@ export const CompactHealthMeters = ({
   // Handle loading state AFTER all hooks are called
   if (isLoading) {
     return (
-      <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl min-h-[130%] animate-pulse">
-        <div className="h-8 bg-slate-200 rounded mb-12" />
-        <div className="space-y-8">
+      <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-5 shadow-xl animate-pulse">
+        <div className="h-7 bg-slate-200 rounded mb-8" />
+        <div className="space-y-6">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="flex items-center gap-8">
-              <div className="w-24 h-24 rounded-full bg-slate-200" />
+            <div key={i} className="flex items-center gap-6">
+              <div className="w-20 h-20 rounded-full bg-slate-200" />
               <div className="flex-1">
-                <div className="h-6 bg-slate-200 rounded mb-1" />
+                <div className="h-5 bg-slate-200 rounded mb-1" />
                 <div className="h-4 bg-slate-200 rounded mb-2" />
-                <div className="h-6 bg-slate-200 rounded mb-2" />
+                <div className="h-5 bg-slate-200 rounded mb-2" />
                 <div className="flex justify-between">
-                  <div className="h-8 bg-slate-200 rounded w-16" />
-                  <div className="h-8 bg-slate-200 rounded w-20" />
+                  <div className="h-7 bg-slate-200 rounded w-16" />
+                  <div className="h-7 bg-slate-200 rounded w-20" />
                 </div>
               </div>
             </div>
@@ -129,38 +129,38 @@ export const CompactHealthMeters = ({
   }
 
   return (
-    <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl min-h-[130%]">
-      <h3 className="text-3xl font-bold text-slate-700 mb-12 text-center">
+    <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-5 shadow-xl">
+      <h3 className="text-2xl font-bold text-slate-700 mb-8 text-center">
         {titleText}
       </h3>
       
-      <div className="space-y-8">
+      <div className="space-y-6">
         {Object.entries(healthMetrics).map(([key, value]) => {
           const isChanged = changedMetrics.has(key);
           return (
-            <div key={key} className={`flex items-center gap-8 transition-all duration-300`}>
+            <div key={key} className={`flex items-center gap-6 transition-all duration-300`}>
               {/* Icon with animation */}
-              <div className={`w-24 h-24 rounded-full bg-slate-600 border-4 border-white shadow-lg flex items-center justify-center flex-shrink-0 transition-all duration-500 ${isChanged ? 'animate-pulse shadow-xl' : ''}`}>
+              <div className={`w-20 h-20 rounded-full bg-slate-600 border-4 border-white shadow-lg flex items-center justify-center flex-shrink-0 transition-all duration-500 ${isChanged ? 'animate-pulse shadow-xl' : ''}`}>
                 <div className={`transition-all duration-300 ${isChanged ? 'animate-pulse' : ''}`}>
                   {getIcon(key)}
                 </div>
                 {/* Ripple effect on change */}
                 {isChanged && (
-                  <div className="absolute w-24 h-24 rounded-full border-2 border-blue-400/50 animate-ping"></div>
+                  <div className="absolute w-20 h-20 rounded-full border-2 border-blue-400/50 animate-ping"></div>
                 )}
               </div>
 
               {/* Content */}
               <div className="flex-1 min-w-0">
-                <div className="text-xl font-semibold text-slate-700 mb-1 truncate">
+                <div className="text-lg font-semibold text-slate-700 mb-1 truncate">
                   {getLabelText(key)}
                 </div>
-                <div className="text-base text-slate-500 mb-2">
+                <div className="text-sm text-slate-500 mb-2">
                   {getSubtitleText(key)}
                 </div>
                 
                 {/* Animated Progress Bar */}
-                <div className="relative h-6 bg-slate-300 rounded-full border-2 border-white shadow-inner overflow-hidden mb-2">
+                <div className="relative h-5 bg-slate-300 rounded-full border-2 border-white shadow-inner overflow-hidden mb-2">
                   <div 
                     className={`h-full ${getHealthColor(value)} transition-all duration-1000 ease-out rounded-full relative ${isChanged ? 'animate-pulse' : ''}`}
                     style={{ width: `${value}%` }}
@@ -176,10 +176,10 @@ export const CompactHealthMeters = ({
                 
                 {/* Value and Status with animation */}
                 <div className="flex justify-between items-center">
-                  <span className={`text-3xl font-bold text-slate-600 transition-all duration-300`}>
+                  <span className={`text-2xl font-bold text-slate-600 transition-all duration-300`}>
                     {value}%
                   </span>
-                  <span className={`text-base px-4 py-2 rounded-full text-white font-medium ${getHealthColor(value)} transition-all duration-500 ${isChanged ? 'shadow-lg' : ''}`}>
+                  <span className={`text-sm px-3 py-1 rounded-full text-white font-medium ${getHealthColor(value)} transition-all duration-500 ${isChanged ? 'shadow-lg' : ''}`}>
                     {getHealthStatus(value, language)}
                   </span>
                 </div>

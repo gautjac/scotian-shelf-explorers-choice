@@ -51,14 +51,14 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenar
   };
 
   return (
-    <div className="min-h-screen p-6 lg:p-8 relative" style={{ backgroundImage: `url(${geometricBackground})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+    <div className="min-h-screen p-6 relative" style={{ backgroundImage: `url(${geometricBackground})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl lg:text-6xl font-bold text-white mb-4">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4">
             {content.title}
           </h1>
-          <p className="text-2xl lg:text-3xl text-[#CDE2ED] mb-6">
+          <p className="text-xl lg:text-2xl text-[#CDE2ED] mb-6">
             {content.subtitle}
           </p>
           {onScenarioSelect && (
@@ -69,8 +69,8 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenar
         </div>
 
         {/* Scenario Grid */}
-        <div className="grid gap-8 mb-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+        <div className="grid gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             {previewScenarios.slice(0, 3).map((scenario, index) => (
             <div
               key={scenario.id}
@@ -83,7 +83,7 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenar
             >
               {/* Scenario Image */}
               <div 
-                className="h-48 bg-cover bg-center relative"
+                className="h-40 bg-cover bg-center relative"
                 style={{ backgroundImage: `url(${scenario.imageUrl})` }}
               >
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0B424E]/80 to-transparent" />
@@ -98,11 +98,11 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenar
               </div>
 
               {/* Scenario Content */}
-              <div className="p-6">
-                <h3 className="text-xl lg:text-2xl font-bold text-white mb-3">
+              <div className="p-4">
+                <h3 className="text-xl font-bold text-white mb-2">
                   {scenario.title}
                 </h3>
-                <p className="text-[#CDE2ED] text-base lg:text-lg leading-relaxed">
+                <p className="text-[#CDE2ED] text-base leading-relaxed">
                   {scenario.description.length > 120 ? `${scenario.description.substring(0, 120)}...` : scenario.description}
                 </p>
               </div>
@@ -113,7 +113,7 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenar
           {/* Second row with 2 scenarios centered */}
           {previewScenarios.length > 3 && (
             <div className="flex justify-center">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
                 {previewScenarios.slice(3, 5).map((scenario, index) => (
                   <div
                     key={scenario.id}
@@ -126,7 +126,7 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenar
                   >
                     {/* Scenario Image */}
                     <div 
-                      className="h-48 bg-cover bg-center relative"
+                      className="h-40 bg-cover bg-center relative"
                       style={{ backgroundImage: `url(${scenario.imageUrl})` }}
                     >
                       <div className="absolute inset-0 bg-gradient-to-t from-[#0B424E]/80 to-transparent" />
@@ -141,11 +141,11 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenar
                     </div>
 
                     {/* Scenario Content */}
-                    <div className="p-6">
-                      <h3 className="text-xl lg:text-2xl font-bold text-white mb-3">
+                    <div className="p-4">
+                      <h3 className="text-xl font-bold text-white mb-2">
                         {scenario.title}
                       </h3>
-                      <p className="text-[#CDE2ED] text-base lg:text-lg leading-relaxed">
+                      <p className="text-[#CDE2ED] text-base leading-relaxed">
                         {scenario.description.length > 120 ? `${scenario.description.substring(0, 120)}...` : scenario.description}
                       </p>
                     </div>
@@ -160,13 +160,13 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenar
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
           <button
             onClick={onBack}
-            className="bg-[#0B424E]/30 backdrop-blur-sm text-white px-12 py-6 lg:px-16 lg:py-8 rounded-full text-xl lg:text-2xl font-medium shadow-xl active:bg-[#0B424E]/50 transition-all duration-300 min-h-[80px] lg:min-h-[100px]"
+            className="bg-[#0B424E]/30 backdrop-blur-sm text-white px-12 py-4 lg:px-16 lg:py-5 rounded-full text-xl lg:text-2xl font-medium shadow-xl active:bg-[#0B424E]/50 transition-all duration-300 min-h-[70px] lg:min-h-[80px]"
           >
             {content.backButton}
           </button>
           <button
             onClick={onStart}
-            className="bg-white text-[#0B424E] px-16 py-6 lg:px-20 lg:py-8 rounded-full text-xl lg:text-2xl font-bold shadow-2xl transform active:scale-95 transition-all duration-300 min-h-[80px] lg:min-h-[100px]"
+            className="bg-white text-[#0B424E] px-16 py-4 lg:px-20 lg:py-5 rounded-full text-xl lg:text-2xl font-bold shadow-2xl transform active:scale-95 transition-all duration-300 min-h-[70px] lg:min-h-[80px]"
           >
             {content.startButton}
           </button>
