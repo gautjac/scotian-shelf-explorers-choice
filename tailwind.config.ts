@@ -18,9 +18,9 @@ export default {
 			}
 		},
 		extend: {
-			fontFamily: {
-				'helvetica': ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
-			},
+		fontFamily: {
+			'helvetica': ['Helvetica Neue Cyr', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
+		},
 			fontSize: {
 				'heading': ['72px', { lineHeight: '1.2', fontWeight: '500' }],
 				'primary': ['32px', { lineHeight: '38.4px', fontWeight: '400' }],
