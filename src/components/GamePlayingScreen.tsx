@@ -80,7 +80,7 @@ export const GamePlayingScreen = ({
                 {scenarioProgress}
               </div>
             </div>
-            <p className="font-helvetica text-primary text-slate-700 leading-relaxed">
+            <p className="font-helvetica text-xl text-slate-700 leading-relaxed">
               {currentScenario.description}
             </p>
           </div>
