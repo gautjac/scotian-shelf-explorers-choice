@@ -57,24 +57,24 @@ export const CompletionScreen = ({
         onBackToLanguageSelection={onBackToLanguageSelection}
       />
 
-      <div className="bg-gradient-to-br from-[#0B424E]/95 to-[#0C556B]/95 backdrop-blur-sm rounded-3xl p-8 max-w-6xl mx-auto text-white shadow-2xl animate-fade-in mb-32">
+      <div className="bg-gradient-to-br from-[#0B424E]/95 to-[#0C556B]/95 backdrop-blur-sm rounded-3xl p-7 max-w-6xl mx-auto text-white shadow-2xl animate-fade-in mb-32">
         
-        <div className="text-center mb-8">
-          <h1 className="text-5xl lg:text-6xl font-bold text-white mb-4 animate-pulse-glow">
+        <div className="text-center mb-7">
+          <h1 className="text-[2.75rem] lg:text-5xl font-bold text-white mb-3 animate-pulse-glow">
             {language === 'en' ? 'MISSION ACCOMPLISHED!' :
              language === 'fr' ? 'MISSION ACCOMPLIE!' :
              'LUKI\'K KJISA\'TUK!'}
           </h1>
           
-          <p className="text-xl lg:text-2xl text-blue-100 mb-6">
+          <p className="text-lg lg:text-xl text-blue-100 mb-5">
             {language === 'en' ? 'Your choices have an impact!' :
              language === 'fr' ? 'Vos choix ont un impact!' :
              'Kil keleweltaqanik elta\'sikl!'}
           </p>
         </div>
 
-        <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 mb-8">
-          <h2 className="text-2xl lg:text-3xl font-bold text-white mb-4">
+        <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-7 mb-7">
+          <h2 className="text-xl lg:text-2xl font-bold text-white mb-3">
             {language === 'en' ? 'How You Did' :
              language === 'fr' ? 'Comment vous avez fait' :
              'Tan teltulit'}
@@ -86,23 +86,25 @@ export const CompletionScreen = ({
             showInitialAnimation={true}
           />
           
-          <div className="mt-6 p-5 bg-white/10 rounded-2xl">
-            <p className="text-base lg:text-lg text-center text-blue-100">
+          <div className="mt-5 p-4 bg-white/10 rounded-2xl">
+            <p className="text-sm lg:text-base text-center text-blue-100">
               {getOverallHealthMessage(overallHealth, language)}
             </p>
           </div>
         </div>
 
-        <div className="bg-white/15 backdrop-blur-sm rounded-3xl p-8 mb-8">
-          <h3 className="text-xl lg:text-2xl font-bold text-white mb-4">
+        <div className="bg-white/15 backdrop-blur-sm rounded-3xl p-7 mb-7">
+          <h3 className="text-lg lg:text-xl font-bold text-white mb-3">
             {language === 'en' ? 'What We Learned' :
              language === 'fr' ? 'Ce que nous avons appris' :
              'Koqoey kinu\'tm\'neu'}
           </h3>
-          <p className="text-base lg:text-lg text-blue-100 leading-normal mb-4">
-...
+          <p className="text-sm lg:text-base text-blue-100 leading-normal mb-3">
+            {language === 'en' ? 'Every choice we make affects the ocean and its animals. Some choices help them grow stronger, while others can make things harder for them.' :
+             language === 'fr' ? 'Chaque choix que nous faisons affecte l\'océan et ses animaux. Certains choix les aident à devenir plus forts, tandis que d\'autres peuvent rendre les choses plus difficiles pour eux.' :
+             'Maw keleweltaqan etluemk elta\'sikl ukamkinu\'kuom aqq koqwei. Alt keleweltaqanik welta\'timk kjipusqeltimk, ula pekisesk koqoey a\'sutmukl mawijo\'tmikl.'}
           </p>
-          <p className="text-base lg:text-lg text-blue-100 leading-normal">
+          <p className="text-sm lg:text-base text-blue-100 leading-normal">
             {language === 'en' ? 'Want to see what happens with different choices? Try again and pick different things to see how they change the ocean.' :
              language === 'fr' ? 'Voulez-vous voir ce qui se passe avec des choix différents? Essayez à nouveau et choisissez des choses différentes pour voir comment elles changent l\'océan.' :
              'Welta\'si nemu\'l tan teluen pekisesk keleweltaqanik? Ap siawa\'tul aqq kelewel pekisesk koqoey nemu\'l tan elta\'sikl ukamkinu\'kuom.'}
@@ -112,7 +114,7 @@ export const CompletionScreen = ({
         <div className="text-center">
         <button
           onClick={onRestart}
-          className="bg-white/20 hover:bg-white/30 text-white px-12 py-4 rounded-3xl font-bold text-xl transition-all duration-200 shadow-xl border border-white/30 hover:scale-105"
+          className="bg-white/20 hover:bg-white/30 text-white px-10 py-3 rounded-3xl font-bold text-lg transition-all duration-200 shadow-xl border border-white/30 hover:scale-105"
         >
           {language === 'en' ? 'Play Again' :
            language === 'fr' ? 'Jouer encore' :
