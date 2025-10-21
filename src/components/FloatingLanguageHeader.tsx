@@ -7,6 +7,7 @@ interface FloatingLanguageHeaderProps {
   currentLanguage: Language['code'];
   onLanguageChange: (language: Language['code']) => void;
   onBackToLanguageSelection: () => void;
+  variant?: 'floating' | 'inline';
 }
 
 const languageColors = {
@@ -18,10 +19,15 @@ const languageColors = {
 export const FloatingLanguageHeader = ({ 
   currentLanguage, 
   onLanguageChange, 
-  onBackToLanguageSelection 
+  onBackToLanguageSelection,
+  variant = 'floating'
 }: FloatingLanguageHeaderProps) => {
+  const containerClass = variant === 'floating'
+    ? 'fixed bottom-0 left-0 right-0 z-50 p-4'
+    : 'w-full';
+  
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 p-4">
+    <div className={containerClass}>
       <div className="flex items-center justify-between w-full">
         {/* Language selection buttons */}
         <div className="flex gap-4">
