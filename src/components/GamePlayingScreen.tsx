@@ -86,7 +86,7 @@ export const GamePlayingScreen = ({
           </div>
 
           {/* Choices Section with Header */}
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-5 shadow-lg overflow-y-auto">
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-6 py-2 shadow-lg overflow-y-auto">
             <h3 className="font-helvetica text-secondary font-semibold text-slate-800 text-center mb-4">
               {getUIText('ScenarioCard', 'Question Prompt', gameState.language) || 'What would you do?'}
             </h3>
