@@ -45,10 +45,9 @@ const parseCopydeckCSVContent = (csvContent: string) => {
 // Function to load static CSV configuration file
 export const loadStaticCSVConfiguration = async (): Promise<any> => {
   try {
-    console.log('🔄 [STATIC-CSV] Loading static CSV configuration...');
-    // Add cache-busting parameter to ensure latest content is loaded
-    const cacheBuster = new Date().getTime();
-    const response = await fetch(`/fixed_comprehensive_config.csv?v=${cacheBuster}`);
+    console.log('🔄 [STATIC-CSV] Loading static CSV configuration from PWA cache...');
+    // No cache-busting - PWA will cache this file for offline use
+    const response = await fetch('/fixed_comprehensive_config.csv');
     
     if (!response.ok) {
       throw new Error(`Failed to fetch CSV: ${response.status} ${response.statusText}`);

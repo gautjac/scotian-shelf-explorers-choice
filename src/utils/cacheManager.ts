@@ -1,26 +1,25 @@
-// Utility to clear all cached configuration data and ensure single source of truth
+// Clear user overrides (localStorage and IndexedDB) while preserving PWA caches
 export const clearAllCachedData = async () => {
-  console.log('🧹 [CACHE] Starting comprehensive cache clear for single source of truth...');
+  console.log('🧹 [CACHE] Clearing user overrides (localStorage/IndexedDB only)...');
   
   try {
-    // Clear localStorage completely, especially configuration overrides
+    // Clear localStorage - user configuration overrides
     const allKeys = Object.keys(localStorage);
     allKeys.forEach(key => {
       localStorage.removeItem(key);
       console.log(`🗑️ [CACHE] Cleared localStorage key: ${key}`);
     });
-    console.log('✅ [CACHE] All localStorage cleared completely');
+    console.log('✅ [CACHE] All localStorage cleared');
     
-    // Clear IndexedDB more comprehensively - targeting known Ocean Guardian databases
+    // Clear IndexedDB - user configuration overrides
     if ('indexedDB' in window) {
       try {
-        // List of possible database names to clear (including Ocean Guardian specific ones)
         const dbNames = [
           'PersistentStorage', 
           'GameStorage', 
           'ConfigStorage', 
           'ContentStorage',
-          'OceanGuardianStorage',  // This is likely where persistent overrides are stored
+          'OceanGuardianStorage',
           'ocean-guardian-db',
           'comprehensive-config'
         ];
@@ -39,35 +38,17 @@ export const clearAllCachedData = async () => {
       }
     }
     
-    // Clear any session storage
+    // Clear session storage
     sessionStorage.clear();
     console.log('✅ [CACHE] Cleared sessionStorage');
     
-    // Clear service worker cache more aggressively, targeting Ocean Guardian caches
-    if ('caches' in window) {
-      try {
-        const cacheNames = await caches.keys();
-        await Promise.all(
-          cacheNames.map(async cacheName => {
-            // Keep video cache and workbox precache, only clear config/data caches
-            if (cacheName.includes('video-cache') || cacheName.includes('workbox-precache')) {
-              console.log(`🎬 [CACHE] Preserving cache: ${cacheName}`);
-              return;
-            }
-            console.log(`🗑️ [CACHE] Deleting cache: ${cacheName}`);
-            return await caches.delete(cacheName);
-          })
-        );
-        console.log('✅ [CACHE] Configuration caches cleared, video cache preserved');
-      } catch (error) {
-        console.log('⚠️ [CACHE] Service worker cache deletion error:', error);
-      }
-    }
+    // IMPORTANT: Do NOT clear service worker caches - they contain PWA assets for offline use
+    console.log('✅ [CACHE] PWA caches preserved for offline functionality');
     
-    // Fire event to notify components to reload from CSV
+    // Notify components to reload configuration
     window.dispatchEvent(new CustomEvent('cache-cleared'));
     window.dispatchEvent(new CustomEvent('comprehensive-config-updated'));
-    console.log('✅ [CACHE] Cache clearing complete - CSV changes should now be visible');
+    console.log('✅ [CACHE] User overrides cleared - app will use published CSV content');
     
   } catch (error) {
     console.error('❌ [CACHE] Error clearing cache:', error);
@@ -130,13 +111,9 @@ export const resetContentCache = async () => {
 
 // Initialize cache clearing on app start
 export const initializeCacheClearing = () => {
-  console.log('🚀 [CACHE] Initializing cache management for single source of truth (offlineContent.ts)');
-  console.log('🔧 [CACHE] Eliminating all dynamic configuration overrides...');
-  clearAllCachedData();
+  console.log('🚀 [CACHE] Cache manager initialized - PWA caches preserved for offline use');
+  console.log('🔧 [CACHE] CSV-First architecture: Published CSV is the source of truth');
   
-  // Also clear on page reload to be extra sure
-  window.addEventListener('beforeunload', () => {
-    console.log('🔄 [CACHE] Page unloading - clearing cache to ensure fresh start');
-    clearAllCachedData();
-  });
+  // Clear user overrides on app start to ensure published content is used
+  clearAllCachedData();
 };
