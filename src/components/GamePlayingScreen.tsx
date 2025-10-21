@@ -65,7 +65,7 @@ export const GamePlayingScreen = ({
       {/* Main Content Area - 2/3 of screen with Grid Layout */}
       <div className="w-2/3 h-screen flex flex-col">
         {/* Main Content Grid with bottom padding for floating header */}
-        <div className="min-h-full p-6 pb-24 grid grid-rows-[auto_auto_auto] gap-4">
+        <div className="min-h-full p-6 pb-24 grid grid-rows-[auto_auto_auto] gap-3">
           {/* Scenario Image */}
           <div 
             className="h-[12rem] bg-cover bg-center rounded-2xl shadow-lg" 
@@ -73,8 +73,8 @@ export const GamePlayingScreen = ({
           />
 
           {/* Content Section with Scenario Progress */}
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-lg">
-            <div className="flex items-center justify-between mb-4">
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-6 py-3 shadow-lg">
+            <div className="flex items-center justify-between mb-3">
               <h2 className="font-helvetica text-4xl text-blue-900">{currentScenario.title}</h2>
               <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg font-semibold text-lg">
                 {scenarioProgress}
@@ -86,11 +86,11 @@ export const GamePlayingScreen = ({
           </div>
 
           {/* Choices Section with Header */}
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg overflow-y-auto">
-            <h3 className="font-helvetica text-secondary font-semibold text-slate-800 text-center mb-5">
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-5 shadow-lg overflow-y-auto">
+            <h3 className="font-helvetica text-secondary font-semibold text-slate-800 text-center mb-4">
               {getUIText('ScenarioCard', 'Question Prompt', gameState.language) || 'What would you do?'}
             </h3>
-            <div className="space-y-4">
+            <div className="space-y-3">
               {currentScenario.choices.map((choice, index) => (
                 <button
                   key={choice.id}
