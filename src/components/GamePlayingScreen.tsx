@@ -73,7 +73,7 @@ export const GamePlayingScreen = ({
           />
 
           {/* Content Section with Scenario Progress */}
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-6 py-2 shadow-lg">
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-6 shadow-lg">
             <div className="flex items-center justify-between mb-3">
               <h2 className="font-helvetica text-4xl text-blue-900">{currentScenario.title}</h2>
               <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg font-semibold text-lg">
@@ -86,7 +86,7 @@ export const GamePlayingScreen = ({
           </div>
 
           {/* Choices Section with Header */}
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-6 py-2 shadow-lg overflow-y-auto">
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-6 pt-4 pb-6 shadow-lg overflow-y-auto">
             <h3 className="font-helvetica text-secondary font-semibold text-slate-800 text-center mb-4">
               {getUIText('ScenarioCard', 'Question Prompt', gameState.language) || 'What would you do?'}
             </h3>
@@ -109,12 +109,14 @@ export const GamePlayingScreen = ({
           </div>
 
           {/* Language Selection - Inline */}
-          <FloatingLanguageHeader
-            currentLanguage={gameState.language}
-            onLanguageChange={onLanguageChange}
-            onBackToLanguageSelection={onBackToLanguageSelection}
-            variant="inline"
-          />
+          <div className="pt-2">
+            <FloatingLanguageHeader
+              currentLanguage={gameState.language}
+              onLanguageChange={onLanguageChange}
+              onBackToLanguageSelection={onBackToLanguageSelection}
+              variant="inline"
+            />
+          </div>
         </div>
       </div>
 
