@@ -65,15 +65,15 @@ export const GamePlayingScreen = ({
       {/* Main Content Area - 2/3 of screen with Grid Layout */}
       <div className="w-2/3 h-screen flex flex-col">
         {/* Main Content Grid with equal spacing */}
-        <div className="min-h-full p-4 grid grid-rows-[auto_auto_auto_auto] gap-2">
+        <div className="min-h-full p-6 grid grid-rows-[1fr_1fr_1fr_auto] gap-6">
           {/* Scenario Image */}
           <div 
-            className="h-[9rem] bg-cover bg-center rounded-2xl shadow-lg" 
+            className="bg-cover bg-center rounded-2xl shadow-lg" 
             style={{ backgroundImage: `url(${currentScenario.imageUrl})` }}
           />
 
           {/* Content Section with Scenario Progress */}
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-6 pt-4 pb-3 shadow-lg">
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
             <div className="flex items-center justify-between mb-3">
               <h2 className="font-helvetica text-3xl text-blue-900">{currentScenario.title}</h2>
               <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg font-semibold text-lg">
@@ -86,7 +86,7 @@ export const GamePlayingScreen = ({
           </div>
 
           {/* Choices Section with Header */}
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-6 pt-4 pb-6 shadow-lg overflow-y-auto">
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg overflow-y-auto">
             <h3 className="font-helvetica text-secondary font-semibold text-slate-800 text-center mb-4">
               {getUIText('ScenarioCard', 'Question Prompt', gameState.language) || 'What would you do?'}
             </h3>
@@ -109,7 +109,7 @@ export const GamePlayingScreen = ({
           </div>
 
           {/* Language Selection - Inline */}
-          <div className="pt-2">
+          <div>
             <FloatingLanguageHeader
               currentLanguage={gameState.language}
               onLanguageChange={onLanguageChange}
