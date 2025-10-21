@@ -1,10 +1,18 @@
 import { useState } from 'react';
-import { Settings, FileText } from 'lucide-react';
+import { useSearchParams } from 'react-router-dom';
+import { FileText } from 'lucide-react';
 import { Button } from './ui/button';
 import { ContentManager } from './ContentManager';
 
 export const ContentManagerButton = () => {
   const [showContentManager, setShowContentManager] = useState(false);
+  const [searchParams] = useSearchParams();
+  const isAdminMode = searchParams.get('admin') === 'true';
+
+  // Hide button if not in admin mode
+  if (!isAdminMode) {
+    return null;
+  }
 
   return (
     <>
