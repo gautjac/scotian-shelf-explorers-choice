@@ -65,15 +65,15 @@ export const GamePlayingScreen = ({
       {/* Main Content Area - 2/3 of screen with Grid Layout */}
       <div className="w-2/3 h-screen flex flex-col">
         {/* Main Content Grid with bottom padding for floating header */}
-        <div className="min-h-full p-6 pb-28 grid grid-rows-[auto_auto_auto] gap-6">
+        <div className="min-h-full p-6 pb-24 grid grid-rows-[auto_auto_auto] gap-4">
           {/* Scenario Image */}
           <div 
-            className="h-[18rem] bg-cover bg-center rounded-2xl shadow-lg" 
+            className="h-[12rem] bg-cover bg-center rounded-2xl shadow-lg" 
             style={{ backgroundImage: `url(${currentScenario.imageUrl})` }}
           />
 
           {/* Content Section with Scenario Progress */}
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-6 py-5 shadow-lg">
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-lg">
             <div className="flex items-center justify-between mb-4">
               <h2 className="font-helvetica text-4xl text-blue-900">{currentScenario.title}</h2>
               <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg font-semibold text-lg">
@@ -90,7 +90,7 @@ export const GamePlayingScreen = ({
             <h3 className="font-helvetica text-secondary font-semibold text-slate-800 text-center mb-5">
               {getUIText('ScenarioCard', 'Question Prompt', gameState.language) || 'What would you do?'}
             </h3>
-            <div className="space-y-5">
+            <div className="space-y-4">
               {currentScenario.choices.map((choice, index) => (
                 <button
                   key={choice.id}
