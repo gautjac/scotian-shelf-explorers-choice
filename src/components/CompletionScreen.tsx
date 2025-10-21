@@ -44,7 +44,7 @@ export const CompletionScreen = ({
 
   return (
     <div 
-      className="min-h-screen flex flex-col items-center justify-center p-6 lg:p-8"
+      className="min-h-screen flex flex-col items-center justify-center p-6 lg:p-8 pb-40"
       style={{
         backgroundImage: `url(${geometricBackground})`,
         backgroundSize: 'cover',
@@ -57,7 +57,7 @@ export const CompletionScreen = ({
         onBackToLanguageSelection={onBackToLanguageSelection}
       />
 
-      <div className="bg-gradient-to-br from-[#0B424E]/95 to-[#0C556B]/95 backdrop-blur-sm rounded-3xl p-8 max-w-6xl mx-auto text-white shadow-2xl animate-fade-in">
+      <div className="bg-gradient-to-br from-[#0B424E]/95 to-[#0C556B]/95 backdrop-blur-sm rounded-3xl p-8 max-w-6xl mx-auto text-white shadow-2xl animate-fade-in mb-32">
         
         <div className="text-center mb-8">
           <h1 className="text-5xl lg:text-6xl font-bold text-white mb-4 animate-pulse-glow">
@@ -121,24 +121,6 @@ export const CompletionScreen = ({
         </div>
       </div>
 
-      {/* Animated Marine Life */}
-      <div className="fixed bottom-0 left-0 w-full h-32 pointer-events-none overflow-hidden">
-        <div className="relative w-full h-full">
-          {[...Array(6)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute bottom-4 animate-swim-by text-4xl"
-              style={{
-                left: `${-10 + (i * 25)}%`,
-                animationDelay: `${i * 2}s`,
-                animationDuration: `${15 + (i * 3)}s`
-              }}
-            >
-              {['🐟', '🐠', '🦈', '🐙', '🦀', '🐡'][i]}
-            </div>
-          ))}
-        </div>
-      </div>
     </div>
   );
 };
