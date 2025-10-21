@@ -75,7 +75,7 @@ export const GamePlayingScreen = ({
           {/* Content Section with Scenario Progress */}
           <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-6 py-5 shadow-lg">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="font-helvetica text-heading text-blue-900">{currentScenario.title}</h2>
+              <h2 className="font-helvetica text-subheading text-blue-900">{currentScenario.title}</h2>
               <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg font-semibold text-lg">
                 {scenarioProgress}
               </div>
