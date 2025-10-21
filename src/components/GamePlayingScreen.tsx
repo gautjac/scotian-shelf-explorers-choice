@@ -65,7 +65,7 @@ export const GamePlayingScreen = ({
       {/* Main Content Area - 2/3 of screen with Grid Layout */}
       <div className="w-2/3 h-screen flex flex-col">
         {/* Main Content Grid with bottom padding for floating header */}
-        <div className="min-h-full p-6 pb-24 grid grid-rows-[auto_auto_auto] gap-3">
+        <div className="min-h-full p-6 pb-24 grid grid-rows-[auto_auto_auto] gap-2">
           {/* Scenario Image */}
           <div 
             className="h-[12rem] bg-cover bg-center rounded-2xl shadow-lg" 
