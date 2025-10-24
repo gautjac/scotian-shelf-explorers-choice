@@ -44,7 +44,7 @@ export const CompletionScreen = ({
 
   return (
     <div 
-      className="min-h-screen flex flex-col items-center justify-center p-6 lg:p-8 pb-40"
+      className="min-h-screen flex flex-col items-center justify-center p-6 lg:p-8 pb-40 bg-black"
       style={{
         backgroundImage: `url(${geometricBackground})`,
         backgroundSize: 'cover',

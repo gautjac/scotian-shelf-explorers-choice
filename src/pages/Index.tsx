@@ -121,7 +121,7 @@ const Index = () => {
   };
 
   return (
-    <>
+    <div className="min-h-screen bg-black">
       {gamePhase === 'languageSelection' && (
         <LanguageSelectionScreen
           onLanguageSelect={handleLanguageSelectWithTracking}
@@ -199,7 +199,7 @@ const Index = () => {
         onStartOver={() => { handleInactivityStartOver(); trackActivity(); }}
         onTimeout={handleInactivityTimeout}
       />
-    </>
+    </div>
   );
 };
 

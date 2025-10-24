@@ -36,7 +36,7 @@ export const HealthTransitionScreen = ({
   if (isLoading) {
     return (
       <div 
-        className="min-h-screen flex items-center justify-center p-6 lg:p-8 animate-pulse"
+        className="min-h-screen flex items-center justify-center p-6 lg:p-8 animate-pulse bg-black"
         style={{
           backgroundImage: `url(${geometricBackground})`,
           backgroundSize: 'cover',
@@ -58,7 +58,7 @@ export const HealthTransitionScreen = ({
 
   return (
     <div 
-      className="min-h-screen flex items-center justify-center p-6 lg:p-8"
+      className="min-h-screen flex items-center justify-center p-6 lg:p-8 bg-black"
       style={{
         backgroundImage: `url(${geometricBackground})`,
         backgroundSize: 'cover',
