@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => ({
         short_name: 'Ocean Game',
         description: 'An educational marine conservation game for Nova Scotia',
         theme_color: '#0369a1',
-        background_color: '#ffffff',
+        background_color: '#000000',
         display: 'standalone',
         start_url: '/',
         icons: [
