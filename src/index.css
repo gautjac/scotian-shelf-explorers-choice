@@ -107,3 +107,14 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .bg-geometric-dark {
+    /* Solid background first - prevents white flash */
+    background-color: #0a1929;
+    background-image: url('/src/assets/geometric-background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}

@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import { LanguageSelectionScreen } from '../components/LanguageSelectionScreen';
 import { InactivityModal } from '../components/InactivityModal';
 import { ScenarioPreview } from '../components/ScenarioPreview';
@@ -122,29 +123,31 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-black">
-      {gamePhase === 'languageSelection' && (
-        <LanguageSelectionScreen
-          onLanguageSelect={handleLanguageSelectWithTracking}
-          isExiting={isExiting}
-        />
-      )}
+      <AnimatePresence mode="wait">
+        {gamePhase === 'languageSelection' && (
+          <LanguageSelectionScreen
+            key="language-selection"
+            onLanguageSelect={handleLanguageSelectWithTracking}
+            isExiting={isExiting}
+          />
+        )}
 
+        {gamePhase === 'preview' && (
+          <ScenarioPreview
+            key="preview"
+            scenarios={currentScenarios}
+            language={gameState.language}
+            onStart={handleStartWithTracking}
+            onBack={handleBackToLanguageSelectionWithTracking}
+            onScenarioSelect={handleScenarioSelectWithTracking}
+            onLanguageChange={handleLanguageChange}
+            onBackToLanguageSelection={handleBackToLanguageSelectionWithTracking}
+          />
+        )}
 
-      {gamePhase === 'preview' && (
-        <ScenarioPreview
-          scenarios={currentScenarios}
-          language={gameState.language}
-          onStart={handleStartWithTracking}
-          onBack={handleBackToLanguageSelectionWithTracking}
-          onScenarioSelect={handleScenarioSelectWithTracking}
-          onLanguageChange={handleLanguageChange}
-          onBackToLanguageSelection={handleBackToLanguageSelectionWithTracking}
-        />
-      )}
-
-      {gamePhase === 'playing' && currentScenario && (
-        <div className="bg-black min-h-screen">
+        {gamePhase === 'playing' && currentScenario && (
           <GamePlayingScreen
+            key="playing"
             gameState={gameState}
             currentScenario={currentScenario}
             onLanguageChange={handleLanguageChange}
@@ -153,29 +156,31 @@ const Index = () => {
             onRestart={handleRestartWithTracking}
             onBackToLanguageSelection={handleBackToLanguageSelectionWithTracking}
           />
-        </div>
-      )}
+        )}
 
-      {gamePhase === 'healthTransition' && selectedChoice && gameState.previousHealthMetrics && (
-        <HealthTransitionScreen
-          currentHealthMetrics={gameState.healthMetrics}
-          previousHealthMetrics={gameState.previousHealthMetrics}
-          language={gameState.language}
-          selectedChoice={selectedChoice}
-          onTransitionComplete={handleHealthTransitionCompleteWithTracking}
-        />
-      )}
+        {gamePhase === 'healthTransition' && selectedChoice && gameState.previousHealthMetrics && (
+          <HealthTransitionScreen
+            key="health-transition"
+            currentHealthMetrics={gameState.healthMetrics}
+            previousHealthMetrics={gameState.previousHealthMetrics}
+            language={gameState.language}
+            selectedChoice={selectedChoice}
+            onTransitionComplete={handleHealthTransitionCompleteWithTracking}
+          />
+        )}
 
-      {gamePhase === 'completed' && (
-        <CompletionScreen
-          language={gameState.language}
-          onLanguageChange={handleLanguageChange}
-          onRestart={handleRestartWithTracking}
-          choicesMade={gameState.choicesMade}
-          healthMetrics={gameState.healthMetrics}
-          onBackToLanguageSelection={handleBackToLanguageSelectionWithTracking}
-        />
-      )}
+        {gamePhase === 'completed' && (
+          <CompletionScreen
+            key="completed"
+            language={gameState.language}
+            onLanguageChange={handleLanguageChange}
+            onRestart={handleRestartWithTracking}
+            choicesMade={gameState.choicesMade}
+            healthMetrics={gameState.healthMetrics}
+            onBackToLanguageSelection={handleBackToLanguageSelectionWithTracking}
+          />
+        )}
+      </AnimatePresence>
 
       {gamePhase === 'consequence' && selectedChoice && (
         <div className="fixed inset-0 z-50 animate-scale-modal-in">
