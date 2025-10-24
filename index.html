@@ -6,9 +6,18 @@
     <meta name="theme-color" content="#000000" />
     <style>
       html, body, #root { background-color: #000 !important; margin: 0; padding: 0; }
-      #preload-blocker { position: fixed; inset: 0; background: #000; z-index: 9999; pointer-events: none; }
-      @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
-      #preload-blocker { animation: fadeOut 0.3s ease 0.1s forwards; }
+      #preload-blocker { 
+        position: fixed; 
+        inset: 0; 
+        background: #000; 
+        z-index: 2147483647; 
+        pointer-events: none;
+        opacity: 1;
+        transition: opacity 0.3s ease;
+      }
+      #preload-blocker.fade-out { 
+        opacity: 0; 
+      }
     </style>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
