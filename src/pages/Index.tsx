@@ -143,15 +143,17 @@ const Index = () => {
       )}
 
       {gamePhase === 'playing' && currentScenario && (
-        <GamePlayingScreen
-          gameState={gameState}
-          currentScenario={currentScenario}
-          onLanguageChange={handleLanguageChange}
-          onChoiceSelect={handleChoiceSelectWithTracking}
-          onBackToPreview={handleBackToPreviewWithTracking}
-          onRestart={handleRestartWithTracking}
-          onBackToLanguageSelection={handleBackToLanguageSelectionWithTracking}
-        />
+        <div className="bg-black min-h-screen">
+          <GamePlayingScreen
+            gameState={gameState}
+            currentScenario={currentScenario}
+            onLanguageChange={handleLanguageChange}
+            onChoiceSelect={handleChoiceSelectWithTracking}
+            onBackToPreview={handleBackToPreviewWithTracking}
+            onRestart={handleRestartWithTracking}
+            onBackToLanguageSelection={handleBackToLanguageSelectionWithTracking}
+          />
+        </div>
       )}
 
       {gamePhase === 'healthTransition' && selectedChoice && gameState.previousHealthMetrics && (

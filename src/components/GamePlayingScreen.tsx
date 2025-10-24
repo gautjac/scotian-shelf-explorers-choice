@@ -32,7 +32,7 @@ export const GamePlayingScreen = ({
   // Show loading state to prevent flash of English text
   if (isLoading) {
     return (
-      <div className="min-h-screen flex relative animate-pulse" style={{ backgroundImage: `url(${geometricBackground})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      <div className="min-h-screen flex relative animate-pulse bg-black" style={{ backgroundImage: `url(${geometricBackground})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
         <div className="w-2/3 h-screen flex flex-col">
           <div className="min-h-full p-6 lg:p-8 pb-24 lg:pb-32 grid grid-rows-[auto_auto_auto] gap-6 overflow-hidden">
             <div className="h-[16.83rem] lg:h-[22.95rem] bg-slate-200/80 rounded-2xl" />
@@ -63,7 +63,7 @@ export const GamePlayingScreen = ({
 
   return (
     <motion.div 
-      className="min-h-screen flex relative" 
+      className="min-h-screen flex relative bg-black" 
       style={{ backgroundImage: `url(${geometricBackground})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
