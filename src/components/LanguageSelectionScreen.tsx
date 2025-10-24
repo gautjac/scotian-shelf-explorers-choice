@@ -32,7 +32,7 @@ export const LanguageSelectionScreen = ({ onLanguageSelect }: LanguageSelectionS
     // Wait for animation to complete before changing screen
     setTimeout(() => {
       onLanguageSelect(language);
-    }, 800);
+    }, 1600);
   };
 
   return (
@@ -45,7 +45,7 @@ export const LanguageSelectionScreen = ({ onLanguageSelect }: LanguageSelectionS
         playsInline
         preload="metadata"
         poster={posterFrame}
-        className={`absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-800 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}
+        className={`absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-[1600ms] ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}
         onError={(e) => {
           console.error('[LanguageSelectionScreen] Background video error', e);
         }}
@@ -61,7 +61,7 @@ export const LanguageSelectionScreen = ({ onLanguageSelect }: LanguageSelectionS
       />
       
       <div className="relative z-10 flex flex-col items-center gap-8 p-8 w-full">
-        <div className={`flex flex-col lg:flex-row gap-6 lg:gap-8 w-full max-w-[75vw] transition-all duration-800 ${isTransitioning ? 'translate-y-[100vh] opacity-0' : 'translate-y-0 opacity-100'}`}>
+        <div className={`flex flex-col lg:flex-row gap-6 lg:gap-8 w-full max-w-[75vw] transition-all duration-[1600ms] ${isTransitioning ? 'translate-y-[100vh] opacity-0' : 'translate-y-0 opacity-100'}`}>
           {languages.map((lang) => {
             const buttonText = languageButtonText[lang.code];
             return (
