@@ -11,3 +11,15 @@ initializeContentVerification();
 setTimeout(debugStoredContent, 3000);
 
 createRoot(document.getElementById("root")!).render(<App />);
+
+// Hide preload blocker after first paint
+const hidePreload = () => {
+  const el = document.getElementById('preload-blocker');
+  if (!el) return;
+  // Wait one frame to ensure React painted at least once
+  requestAnimationFrame(() => {
+    el.classList.add('fade-out');
+    setTimeout(() => el.remove(), 350);
+  });
+};
+hidePreload();
