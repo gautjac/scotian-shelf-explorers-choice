@@ -7,6 +7,7 @@ export const useGamePhase = (lastActivity: number, resetGame: () => void) => {
   const [gamePhase, setGamePhase] = useState<GamePhase>('languageSelection');
   const [selectedChoice, setSelectedChoice] = useState<Choice | null>(null);
   const [showInactivityModal, setShowInactivityModal] = useState(false);
+  const [isExiting, setIsExiting] = useState(false);
 
   // Inactivity detection - show modal after 60 seconds, auto-redirect after 10 more seconds
   useEffect(() => {
@@ -29,7 +30,12 @@ export const useGamePhase = (lastActivity: number, resetGame: () => void) => {
   }, [lastActivity, gamePhase, showInactivityModal]);
 
   const handleLanguageSelect = useCallback(() => {
-    setGamePhase('playing');
+    setIsExiting(true);
+    // Wait 1000ms for exit animation to complete
+    setTimeout(() => {
+      setGamePhase('playing');
+      setIsExiting(false);
+    }, 1000);
   }, []); // Go directly to playing, skip preview
 
   const handleShowPreview = useCallback(() => {
@@ -121,6 +127,7 @@ export const useGamePhase = (lastActivity: number, resetGame: () => void) => {
     gamePhase,
     selectedChoice,
     showInactivityModal,
+    isExiting,
     handleLanguageSelect,
     handleShowPreview,
     handleStart,

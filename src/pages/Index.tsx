@@ -28,6 +28,7 @@ const Index = () => {
     gamePhase,
     selectedChoice,
     showInactivityModal,
+    isExiting,
     handleLanguageSelect,
     handleShowPreview,
     handleStart,
@@ -124,6 +125,7 @@ const Index = () => {
       {gamePhase === 'languageSelection' && (
         <LanguageSelectionScreen
           onLanguageSelect={handleLanguageSelectWithTracking}
+          isExiting={isExiting}
         />
       )}
 

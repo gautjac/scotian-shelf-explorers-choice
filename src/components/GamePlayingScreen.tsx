@@ -4,6 +4,7 @@ import { FloatingLanguageHeader } from './FloatingLanguageHeader';
 import { Scenario, GameState, Language } from '../types';
 import geometricBackground from '../assets/geometric-background.png';
 import { useComprehensiveConfig } from '../hooks/useComprehensiveConfig';
+import { motion } from 'framer-motion';
 
 
 interface GamePlayingScreenProps {
@@ -61,7 +62,13 @@ export const GamePlayingScreen = ({
   };
 
   return (
-    <div className="min-h-screen flex relative" style={{ backgroundImage: `url(${geometricBackground})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+    <motion.div 
+      className="min-h-screen flex relative" 
+      style={{ backgroundImage: `url(${geometricBackground})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
       {/* Main Content Area - 2/3 of screen with Grid Layout */}
       <div className="w-2/3 h-screen flex flex-col">
         {/* Main Content Grid with equal spacing */}
@@ -130,6 +137,6 @@ export const GamePlayingScreen = ({
           onRestart={onRestart}
         />
       </div>
-    </div>
+    </motion.div>
   );
 };
