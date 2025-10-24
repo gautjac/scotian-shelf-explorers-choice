@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#000000" />
+    <style>
+      html, body, #root { background-color: #000 !important; margin: 0; padding: 0; }
+      #preload-blocker { position: fixed; inset: 0; background: #000; z-index: 9999; pointer-events: none; }
+      @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
+      #preload-blocker { animation: fadeOut 0.3s ease 0.1s forwards; }
+    </style>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title>scotian-shelf-explorers-choice</title>
@@ -21,6 +27,7 @@
   </head>
 
   <body style="background-color: #000000;">
+    <div id="preload-blocker"></div>
     <div id="root" style="min-height: 100vh; background-color: #000000;"></div>
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>

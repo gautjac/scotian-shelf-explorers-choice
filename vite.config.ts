@@ -33,6 +33,9 @@ export default defineConfig(({ mode }) => ({
         ]
       },
       workbox: {
+        cleanupOutdatedCaches: true,
+        clientsClaim: true,
+        skipWaiting: true,
         globPatterns: ['**/*.{js,css,html,ico,png,jpg,jpeg,svg,webp,woff2,csv}'],
         runtimeCaching: [
           {

@@ -32,7 +32,7 @@ export const LanguageSelectionScreen = ({ onLanguageSelect, isExiting }: Languag
         muted 
         playsInline
         preload="metadata"
-        poster={posterFrame}
+        poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100%25' height='100%25' fill='%23000'/%3E%3C/svg%3E"
         className="absolute inset-0 w-full h-full object-cover z-0"
         initial={{ opacity: 1, scale: 1 }}
         animate={isExiting ? { opacity: 0, scale: 1.1 } : { opacity: 1, scale: 1 }}
