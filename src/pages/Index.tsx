@@ -141,17 +141,15 @@ const Index = () => {
       )}
 
       {gamePhase === 'playing' && currentScenario && (
-        <div className="animate-fade-in">
-          <GamePlayingScreen
-            gameState={gameState}
-            currentScenario={currentScenario}
-            onLanguageChange={handleLanguageChange}
-            onChoiceSelect={handleChoiceSelectWithTracking}
-            onBackToPreview={handleBackToPreviewWithTracking}
-            onRestart={handleRestartWithTracking}
-            onBackToLanguageSelection={handleBackToLanguageSelectionWithTracking}
-          />
-        </div>
+        <GamePlayingScreen
+          gameState={gameState}
+          currentScenario={currentScenario}
+          onLanguageChange={handleLanguageChange}
+          onChoiceSelect={handleChoiceSelectWithTracking}
+          onBackToPreview={handleBackToPreviewWithTracking}
+          onRestart={handleRestartWithTracking}
+          onBackToLanguageSelection={handleBackToLanguageSelectionWithTracking}
+        />
       )}
 
       {gamePhase === 'healthTransition' && selectedChoice && gameState.previousHealthMetrics && (
