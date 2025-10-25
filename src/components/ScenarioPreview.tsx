@@ -1,6 +1,5 @@
 import { Language, Scenario } from '../types';
 import { FloatingLanguageHeader } from './FloatingLanguageHeader';
-import geometricBackground from '../assets/geometric-background.png';
 
 interface ScenarioPreviewProps {
   scenarios: Scenario[];
@@ -51,7 +50,7 @@ export const ScenarioPreview = ({ scenarios, language, onStart, onBack, onScenar
   };
 
   return (
-    <div className="min-h-screen p-6 relative bg-black" style={{ backgroundImage: `url(${geometricBackground})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+    <div className="min-h-screen p-6 relative bg-geometric-dark">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">

@@ -79,7 +79,12 @@ export const GamePlayingScreen = ({
           />
 
           {/* Content Section with Scenario Progress */}
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+          <motion.div 
+            className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.15, duration: 0.3 }}
+          >
             <div className="flex items-center justify-between mb-3">
               <h2 className="font-helvetica text-3xl text-blue-900">{currentScenario.title}</h2>
               <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg font-semibold text-lg">
@@ -89,10 +94,15 @@ export const GamePlayingScreen = ({
             <p className="font-helvetica text-xl text-slate-700 leading-relaxed">
               {currentScenario.description}
             </p>
-          </div>
+          </motion.div>
 
           {/* Choices Section with Header */}
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg overflow-y-auto">
+          <motion.div 
+            className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg overflow-y-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.25, duration: 0.3 }}
+          >
             <h3 className="font-helvetica text-secondary font-semibold text-slate-800 text-center mb-4">
               {getUIText('ScenarioCard', 'Question Prompt', gameState.language) || 'What would you do?'}
             </h3>
@@ -112,7 +122,7 @@ export const GamePlayingScreen = ({
                 </button>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Language Selection - Inline */}
           <div>

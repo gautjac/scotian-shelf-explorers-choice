@@ -15,45 +15,59 @@ createRoot(document.getElementById("root")!).render(<App />);
 // Detect if we're in Lovable preview
 const isLovablePreview = !!document.querySelector('script[src*="gptengineer.js"]');
 
-const safelyHidePreload = (extraDelay = 0) => {
-  const blocker = document.getElementById('preload-blocker');
-  if (!blocker) return;
+const blocker = document.getElementById('preload-blocker');
+if (blocker) document.body.appendChild(blocker);
+
+let hid = false;
+let sawFirstPaint = false;
+const start = performance.now();
+let lastMutationAt = performance.now();
+
+// Monitor DOM mutations to keep blocker on top and track "quiet window"
+const mo = new MutationObserver(() => {
+  lastMutationAt = performance.now();
+  // Keep blocker last in the body to stay on top
+  const b = document.getElementById('preload-blocker');
+  if (b && document.body.lastElementChild !== b) {
+    document.body.appendChild(b);
+  }
+});
+mo.observe(document.body, { childList: true, subtree: false });
+
+const tryHide = () => {
+  if (hid || !sawFirstPaint) return;
+  const quietFor = performance.now() - lastMutationAt;
+  const elapsed = performance.now() - start;
+  const minTime = isLovablePreview ? 1000 : 800;
   
-  // Ensure we're the last child so we're above any equal z-index overlays
-  document.body.appendChild(blocker);
-
-  const doFade = () => {
-    requestAnimationFrame(() => {
+  if (quietFor >= 500 && elapsed >= minTime) {
+    hid = true;
+    mo.disconnect();
+    // Re-append one last time to be safe
+    const b = document.getElementById('preload-blocker');
+    if (b) {
+      document.body.appendChild(b);
       requestAnimationFrame(() => {
-        blocker.classList.add('fade-out');
-        setTimeout(() => blocker.remove(), 350);
+        requestAnimationFrame(() => {
+          b.classList.add('fade-out');
+          setTimeout(() => b.remove(), 350);
+        });
       });
-    });
-  };
-
-  if (extraDelay > 0) {
-    setTimeout(doFade, extraDelay);
+    }
   } else {
-    doFade();
+    requestAnimationFrame(tryHide);
   }
 };
 
-let hid = false;
-const hideOnce = (delay = 0) => {
-  if (hid) return;
-  hid = true;
-  safelyHidePreload(delay);
-};
-
-// Prefer First Contentful Paint if available
+// First paint detection
 try {
   if ('PerformanceObserver' in window) {
     const po = new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
         if (entry.name === 'first-contentful-paint') {
           po.disconnect();
-          // Delay slightly in preview to outlast the editor overlay
-          hideOnce(isLovablePreview ? 200 : 0);
+          sawFirstPaint = true;
+          requestAnimationFrame(tryHide);
           break;
         }
       }
@@ -66,8 +80,19 @@ try {
 
 // Fallback: window load
 window.addEventListener('load', () => {
-  hideOnce(isLovablePreview ? 250 : 0);
+  sawFirstPaint = true;
+  requestAnimationFrame(tryHide);
 });
 
 // Final failsafe
-setTimeout(() => hideOnce(0), 3000);
+setTimeout(() => {
+  if (!hid) {
+    hid = true;
+    mo.disconnect();
+    const b = document.getElementById('preload-blocker');
+    if (b) {
+      b.classList.add('fade-out');
+      setTimeout(() => b.remove(), 350);
+    }
+  }
+}, 4000);

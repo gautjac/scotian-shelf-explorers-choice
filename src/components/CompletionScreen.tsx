@@ -1,7 +1,6 @@
 import { HealthMetrics, Language, Choice } from '../types';
 import { HealthMeters } from './HealthMeters';
 import { FloatingLanguageHeader } from './FloatingLanguageHeader';
-import geometricBackground from '../assets/geometric-background.png';
 
 interface CompletionScreenProps {
   language: Language['code'];
@@ -44,12 +43,7 @@ export const CompletionScreen = ({
 
   return (
     <div 
-      className="min-h-screen flex flex-col items-center justify-center p-6 lg:p-8 pb-40 bg-black"
-      style={{
-        backgroundImage: `url(${geometricBackground})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-      }}
+      className="min-h-screen flex flex-col items-center justify-center p-6 lg:p-8 pb-40 bg-geometric-dark"
     >
       <FloatingLanguageHeader 
         currentLanguage={language}

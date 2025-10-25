@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { HealthMetrics, Language, Choice } from '../types';
 import { HealthMeters } from './HealthMeters';
 import { useComprehensiveConfig } from '../hooks/useComprehensiveConfig';
-import geometricBackground from '../assets/geometric-background.png';
 
 interface HealthTransitionScreenProps {
   currentHealthMetrics: HealthMetrics;
@@ -36,12 +35,7 @@ export const HealthTransitionScreen = ({
   if (isLoading) {
     return (
       <div 
-        className="min-h-screen flex items-center justify-center p-6 lg:p-8 animate-pulse bg-black"
-        style={{
-          backgroundImage: `url(${geometricBackground})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        }}
+        className="min-h-screen flex items-center justify-center p-6 lg:p-8 animate-pulse bg-geometric-dark"
       >
         <div className="bg-slate-400/80 backdrop-blur-sm rounded-3xl p-8 lg:p-12 max-w-6xl mx-auto text-white shadow-2xl">
           <div className="text-center">
@@ -58,12 +52,7 @@ export const HealthTransitionScreen = ({
 
   return (
     <div 
-      className="min-h-screen flex items-center justify-center p-6 lg:p-8 bg-black"
-      style={{
-        backgroundImage: `url(${geometricBackground})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-      }}
+      className="min-h-screen flex items-center justify-center p-6 lg:p-8 bg-geometric-dark"
     >
       <div className="bg-gradient-to-br from-[#0B424E]/90 to-[#0C556B]/90 backdrop-blur-sm rounded-3xl p-8 lg:p-12 max-w-6xl mx-auto text-white shadow-2xl animate-fade-in">
         <div className="text-center">

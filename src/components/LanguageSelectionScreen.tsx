@@ -24,7 +24,7 @@ const languageButtonText = {
 
 export const LanguageSelectionScreen = ({ onLanguageSelect, isExiting }: LanguageSelectionScreenProps) => {
   return (
-    <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-black">
+    <div className="fixed inset-0 z-[2147483000] flex items-center justify-center overflow-hidden bg-black">
       <motion.video 
         src={droneBeachVideo}
         autoPlay 

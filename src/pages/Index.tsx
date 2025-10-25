@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { LanguageSelectionScreen } from '../components/LanguageSelectionScreen';
 import { InactivityModal } from '../components/InactivityModal';
 import { ScenarioPreview } from '../components/ScenarioPreview';
@@ -14,6 +14,7 @@ import { useGamePhase } from '../hooks/useGamePhase';
 import { scenarios } from '../data/content';
 
 const Index = () => {
+  const [showCurtain, setShowCurtain] = useState(false);
   
   const {
     gameState,
@@ -65,6 +66,7 @@ const Index = () => {
   const currentScenario = currentScenarios?.find(s => s.id === gameState.currentScenarioId);
 
   const handleLanguageSelectWithTracking = (language: 'en' | 'fr' | 'mi') => {
+    setShowCurtain(true);
     updateLanguage(language);
     handleLanguageSelect();
     trackActivity();
@@ -121,8 +123,33 @@ const Index = () => {
     trackActivity();
   };
 
+  // Hide curtain after new screen mounts
+  useEffect(() => {
+    if (gamePhase === 'playing' || gamePhase === 'preview') {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setShowCurtain(false);
+        });
+      });
+    }
+  }, [gamePhase]);
+
   return (
     <div className="min-h-screen bg-black">
+      {/* Transition Curtain */}
+      <AnimatePresence>
+        {showCurtain && (
+          <motion.div
+            key="transition-curtain"
+            className="fixed inset-0 z-[2147483200] bg-black pointer-events-none"
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          />
+        )}
+      </AnimatePresence>
+
       <AnimatePresence mode="wait">
         {gamePhase === 'languageSelection' && (
           <LanguageSelectionScreen
