@@ -66,10 +66,11 @@ const Index = () => {
   const currentScenario = currentScenarios?.find(s => s.id === gameState.currentScenarioId);
 
   const handleLanguageSelectWithTracking = (language: 'en' | 'fr' | 'mi') => {
-    setShowCurtain(true);
     updateLanguage(language);
     handleLanguageSelect();
     trackActivity();
+    // Delay curtain until after button slide-down animation completes
+    setTimeout(() => setShowCurtain(true), 1000);
   };
 
   const handleLanguageChange = (language: 'en' | 'fr' | 'mi') => {
