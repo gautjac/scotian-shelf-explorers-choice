@@ -218,6 +218,7 @@ const Index = () => {
             scenarioId={gameState.currentScenarioId}
             onConfirm={handleConfirmChoiceWithTracking}
             onReturn={handleReturnToChoicesWithTracking}
+            onLanguageChange={handleLanguageChange}
             isVisible={true}
           />
         </div>
