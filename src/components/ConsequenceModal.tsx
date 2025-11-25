@@ -1,8 +1,6 @@
 import { Choice, Language } from '../types';
 import geometricBackground from '../assets/geometric-background.png';
 import { useComprehensiveConfig } from '../hooks/useComprehensiveConfig';
-import { languages } from '../data/content';
-import speechBubbleIcon from '../assets/SpeechBubble.png';
 
 interface ConsequenceModalProps {
   choice: Choice;
@@ -10,7 +8,6 @@ interface ConsequenceModalProps {
   scenarioId: string;
   onConfirm: () => void;
   onReturn: () => void;
-  onLanguageChange: (language: Language['code']) => void;
   isVisible: boolean;
 }
 const impactEmojis = {
@@ -23,19 +20,12 @@ const impactColors = {
   negative: 'from-[#0072A0] to-[#0C556B]',
   neutral: 'from-blue-500 to-indigo-600'
 };
-
-const languageColors = {
-  mi: 'bg-[#FBD026] text-black active:bg-[#FBD026]/80',
-  en: 'bg-[#00AE9F] text-white active:bg-[#00AE9F]/80',
-  fr: 'bg-[#AD4557] text-white active:bg-[#AD4557]/80'
-};
 export const ConsequenceModal = ({
   choice,
   language,
   scenarioId,
   onConfirm,
   onReturn,
-  onLanguageChange,
   isVisible
 }: ConsequenceModalProps) => {
   const { getUIText, isLoading } = useComprehensiveConfig();
@@ -118,7 +108,7 @@ export const ConsequenceModal = ({
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-8">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <button onClick={onReturn} className="bg-[#0B424E] text-white px-12 py-4 lg:px-16 lg:py-5 rounded-2xl font-semibold text-2xl active:bg-[#0B424E]/90 transition-colors duration-200 shadow-lg min-h-[70px] lg:min-h-[80px] transform active:scale-95 border-2 border-white/40">
               {getUIText('ConsequenceModal', 'Return Button', language) || 'Go Back to Choices'}
             </button>
@@ -126,30 +116,6 @@ export const ConsequenceModal = ({
             <button onClick={onConfirm} className="bg-white text-gray-800 px-12 py-4 lg:px-16 lg:py-5 rounded-2xl font-semibold text-2xl active:bg-gray-200 transition-colors duration-200 shadow-lg min-h-[70px] lg:min-h-[80px] transform active:scale-95">
               {getUIText('ConsequenceModal', 'Confirm Button', language) || 'Yes I Choose This'}
             </button>
-          </div>
-
-          {/* Language Selection Buttons */}
-          <div className="flex gap-4 justify-center flex-wrap">
-            {languages.map((lang) => (
-              <button
-                key={lang.code}
-                onClick={() => onLanguageChange(lang.code)}
-                className={`w-[289px] min-h-[70px] rounded-2xl font-helvetica text-4xl font-bold transition-all duration-200 flex items-center justify-start gap-2 pl-6 ${
-                  languageColors[lang.code]
-                } ${
-                  language === lang.code
-                    ? 'scale-105 border-4 border-white'
-                    : 'border-4 border-transparent'
-                }`}
-              >
-                <img 
-                  src={speechBubbleIcon} 
-                  alt="" 
-                  className={`w-12 h-12 ${lang.code === 'mi' ? 'brightness-0' : 'brightness-0 invert'}`}
-                />
-                {lang.nativeName}
-              </button>
-            ))}
           </div>
         </div>
       </div>

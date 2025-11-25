@@ -9,6 +9,7 @@ import { CompletionScreen } from '../components/CompletionScreen';
 import { GamePlayingScreen } from '../components/GamePlayingScreen';
 import { HealthTransitionScreen } from '../components/HealthTransitionScreen';
 import { ContentManagerButton } from '../components/ContentManagerButton';
+import { FloatingLanguageHeader } from '../components/FloatingLanguageHeader';
 import { useGameState } from '../hooks/useGameState';
 import { useGamePhase } from '../hooks/useGamePhase';
 import { scenarios } from '../data/content';
@@ -211,17 +212,24 @@ const Index = () => {
       </AnimatePresence>
 
       {gamePhase === 'consequence' && selectedChoice && (
-        <div className="fixed inset-0 z-50 animate-scale-modal-in">
-          <ConsequenceModal
-            choice={selectedChoice}
-            language={gameState.language}
-            scenarioId={gameState.currentScenarioId}
-            onConfirm={handleConfirmChoiceWithTracking}
-            onReturn={handleReturnToChoicesWithTracking}
+        <>
+          <div className="fixed inset-0 z-50 animate-scale-modal-in">
+            <ConsequenceModal
+              choice={selectedChoice}
+              language={gameState.language}
+              scenarioId={gameState.currentScenarioId}
+              onConfirm={handleConfirmChoiceWithTracking}
+              onReturn={handleReturnToChoicesWithTracking}
+              isVisible={true}
+            />
+          </div>
+          <FloatingLanguageHeader
+            currentLanguage={gameState.language}
             onLanguageChange={handleLanguageChange}
-            isVisible={true}
+            onBackToLanguageSelection={handleBackToLanguageSelectionWithTracking}
+            variant="floating"
           />
-        </div>
+        </>
       )}
       
       <ContentManagerButton />
