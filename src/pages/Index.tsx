@@ -188,14 +188,22 @@ const Index = () => {
         )}
 
         {gamePhase === 'healthTransition' && selectedChoice && gameState.previousHealthMetrics && (
-          <HealthTransitionScreen
-            key="health-transition"
-            currentHealthMetrics={gameState.healthMetrics}
-            previousHealthMetrics={gameState.previousHealthMetrics}
-            language={gameState.language}
-            selectedChoice={selectedChoice}
-            onTransitionComplete={handleHealthTransitionCompleteWithTracking}
-          />
+          <>
+            <HealthTransitionScreen
+              key="health-transition"
+              currentHealthMetrics={gameState.healthMetrics}
+              previousHealthMetrics={gameState.previousHealthMetrics}
+              language={gameState.language}
+              selectedChoice={selectedChoice}
+              onTransitionComplete={handleHealthTransitionCompleteWithTracking}
+            />
+            <FloatingLanguageHeader
+              currentLanguage={gameState.language}
+              onLanguageChange={handleLanguageChange}
+              onBackToLanguageSelection={handleBackToLanguageSelectionWithTracking}
+              variant="floating"
+            />
+          </>
         )}
 
         {gamePhase === 'completed' && (
