@@ -1,6 +1,7 @@
 
 import { GameSidebar } from './GameSidebar';
 import { FloatingLanguageHeader } from './FloatingLanguageHeader';
+import { PhotoCredit } from './PhotoCredit';
 import { Scenario, GameState, Language } from '../types';
 import { useComprehensiveConfig } from '../hooks/useComprehensiveConfig';
 import { motion } from 'framer-motion';
@@ -74,9 +75,13 @@ export const GamePlayingScreen = ({
         <div className="min-h-full p-6 grid grid-rows-[1fr_0.57fr_1.10fr_auto] gap-6">
           {/* Scenario Image */}
           <div 
-            className="bg-cover bg-center rounded-2xl shadow-lg" 
+            className="relative bg-cover bg-center rounded-2xl shadow-lg" 
             style={{ backgroundImage: `url(${currentScenario.imageUrl})` }}
-          />
+          >
+            {currentScenario.photoCredit && (
+              <PhotoCredit credit={currentScenario.photoCredit} />
+            )}
+          </div>
 
           {/* Content Section with Scenario Progress */}
           <motion.div 
