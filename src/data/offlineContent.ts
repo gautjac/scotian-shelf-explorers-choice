@@ -52,6 +52,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
       title: 'Trash Attack!',
       description: 'Plastic bags and bottles are washing up daily on Nova Scotia\'s beaches. Sea turtles think plastic bags are jellyfish and try to eat them. Fish and seabirds get tangled up in bottle rings. What should we do to help?',
       imageUrl: plasticPollutionImg,
+      photoCredit: 'Photo: Ocean Conservancy',
       choices: [
         {
           id: 'ban-plastics',

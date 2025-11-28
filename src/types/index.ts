@@ -28,6 +28,7 @@ export interface Scenario {
   imageUrl: string;
   choices: Choice[];
   isEnding?: boolean;
+  photoCredit?: string;
 }
 
 export interface MarineSpecies {
