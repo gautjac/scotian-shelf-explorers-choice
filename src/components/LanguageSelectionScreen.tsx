@@ -13,7 +13,7 @@ interface LanguageSelectionScreenProps {
 const languageColors = {
   mi: 'bg-[#FBD026] text-black active:bg-[#FBD026]/80', // Mi'kmaw - Yellow
   en: 'bg-[#00AE9F] text-white active:bg-[#00AE9F]/80', // English - Teal
-  fr: 'bg-[#E53E3E] text-white active:bg-[#E53E3E]/80'  // French - Red
+  fr: 'bg-[#AD4557] text-white active:bg-[#AD4557]/80'  // French - Maroon
 };
 
 const languageButtonText = {
