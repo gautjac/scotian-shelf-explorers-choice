@@ -47,6 +47,15 @@ export const verifyContentSource = () => {
 };
 
 const displayContentVerification = (info: any) => {
+  // Only show visual overlay in admin mode
+  const urlParams = new URLSearchParams(window.location.search);
+  const isAdminMode = urlParams.get('admin') === 'true';
+  
+  if (!isAdminMode) {
+    console.log('📊 [CONTENT-VERIFY] Visual overlay hidden (not in admin mode)');
+    return;
+  }
+  
   // Create verification display element
   const existingVerify = document.getElementById('content-verification');
   if (existingVerify) {
