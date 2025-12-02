@@ -52,7 +52,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
       title: 'Trash Attack!',
       description: 'Plastic bags and bottles are washing up daily on Nova Scotia\'s beaches. Sea turtles think plastic bags are jellyfish and try to eat them. Fish and seabirds get tangled up in bottle rings. What should we do to help?',
       imageUrl: plasticPollutionImg,
-      photoCredit: 'Photo: Ocean Conservancy',
+      photoCredit: 'Photo: Adobe Stock',
       choices: [
         {
           id: 'ban-plastics',
@@ -94,7 +94,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
       title: 'Fish for the Future',
       description: 'Fishing boats catch many tons of fish every day near Nova Scotia. Fishing gives people jobs and provides nutritious food. But if we catch too many fish, nothing will be left for the future. How can we fish smartly and sustainably?',
       imageUrl: fishingPracticesImg,
-      photoCredit: 'Photo: Stock Image',
+      photoCredit: 'Photo: Adobe Stock',
       choices: [
         {
           id: 'sustainable-quotas',
@@ -136,7 +136,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
       title: 'Whale Highway Danger',
       description: 'Large ships that carry goods and people across the ocean sometimes hit North Atlantic right whales. With fewer than than 400 left in the world, this species is at risk of extinction. How should we help?',
       imageUrl: shippingTrafficImg,
-      photoCredit: 'Photo: Stock Image',
+      photoCredit: 'Photo: Adobe Stock',
       choices: [
         {
           id: 'speed-restrictions',
@@ -178,7 +178,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
       title: 'Ocean Wind Power',
       description: 'Nova Scotia wants to build large wind turbines in the ocean. These could power our homes with clean electricity, reducing our carbon footprint. But building and operating them might cause noise that disturbs whales, fish, and seabirds. What\'s the best plan?',
       imageUrl: renewableEnergyImg,
-      photoCredit: 'Photo: Stock Image',
+      photoCredit: 'Photo: Adobe Stock',
       choices: [
         {
           id: 'careful-planning',
@@ -220,7 +220,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
       title: 'Building by the Beach',
       description: 'More people are moving to Nova Scotia\'s beautiful coastline. New houses, cottages, and hotels are being built. But development can damage coastal habitats and cause pollution and erosion. How should we build responsibly?',
       imageUrl: coastalDevelopmentImg,
-      photoCredit: 'Photo: Stock Image',
+      photoCredit: 'Photo: Adobe Stock',
       choices: [
         {
           id: 'green-development',
@@ -264,7 +264,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
       title: 'Les déchets à l’attaque !',
       description: 'Des sacs et des bouteilles en plastique s’échouent quotidiennement sur les plages de la Nouvelle-Écosse. Les tortues de mer prennent ces sacs plastiques pour des méduses, et essaient de les manger. Les poissons et les oiseaux marins se font prendre dans des anneaux de bouteille. Que devrions-nous faire pour aider ?',
       imageUrl: plasticPollutionImg,
-      photoCredit: 'Photo: Stock Image',
+      photoCredit: 'Photo: Adobe Stock',
       choices: [
         {
           id: 'ban-plastics',
@@ -306,7 +306,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
       title: 'Pêcher avec l’avenir en tête',
       description: 'Les bateaux de pêche capturent chaque jour de nombreuses tonnes de poissons près de la Nouvelle-Écosse. La pêche fournit aux gens des emplois et des aliments nutritifs. Mais si nous attrapons trop de poissons, il ne restera rien pour l’avenir. Comment pouvons-nous pêcher de manière intelligente et durable ?',
       imageUrl: fishingPracticesImg,
-      photoCredit: 'Photo: Stock Image',
+      photoCredit: 'Photo: Adobe Stock',
       choices: [
         {
           id: 'sustainable-quotas',
@@ -348,7 +348,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
       title: 'Danger sur les « autoroutes » des baleines',
       description: 'Les grands navires qui transportent des marchandises et des personnes sur l’océan entrent parfois en collision avec des baleines noires de l’Atlantique Nord. Avec moins de 400 spécimens restants dans le monde entier, cette espèce est menacée d’extinction. Que devrions-nous faire pour aider ?',
       imageUrl: shippingTrafficImg,
-      photoCredit: 'Photo: Stock Image',
+      photoCredit: 'Photo: Adobe Stock',
       choices: [
         {
           id: 'speed-restrictions',
@@ -390,7 +390,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
       title: 'Énergie éolienne marine',
       description: 'La Nouvelle-Écosse veut construire de grandes éoliennes dans l’océan. Celles-ci pourraient alimenter nos maisons en énergie avec de l’électricité propre, réduisant ainsi notre empreinte carbone. Mais leur construction et leur exploitation pourraient engendrer du bruit susceptible de déranger les baleines, les poissons, et les oiseaux marins. Quel est le meilleur plan ?',
       imageUrl: renewableEnergyImg,
-      photoCredit: 'Photo: Stock Image',
+      photoCredit: 'Photo: Adobe Stock',
       choices: [
         {
           id: 'careful-planning',
@@ -432,7 +432,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
       title: 'Construire près de la plage',
       description: 'De plus en plus de gens décident de s’installer le long du merveilleux littoral de la Nouvelle-Écosse. On y construit de nouvelles maisons, des chalets ainsi que des hôtels. Mais le développement immobilier peut endommager les habitats naturels côtiers, et causer de la pollution et de l’érosion. Comment devrions-nous nous y prendre pour construire de manière responsable ?',
       imageUrl: coastalDevelopmentImg,
-      photoCredit: 'Photo: Stock Image',
+      photoCredit: 'Photo: Adobe Stock',
       choices: [
         {
           id: 'green-development',
@@ -476,7 +476,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
       title: 'Ejiklekemk Matne’n!',
       description: 'Plastic’l munti’l aqq pu’tayk na ne’yijuwultijik te’sikiskek ta’n No’pa Sko’saewe’l atuomkl. Apaqtukewe’k mikjikjik telte’tmi’titl na plastic’l munti’l na sasap aqq wetnu’kwalsultijik malqotminew. Nme’j aqq apaqtukewe’k-jipji’jk na amjimoqpilsultijik ta’n na pu’taye’l wasoqa’taqnn. Kisi-tal-lukwutitesnu apoqnmatminew?',
       imageUrl: plasticPollutionImg,
-      photoCredit: 'Photo: Stock Image',
+      photoCredit: 'Photo: Adobe Stock',
       choices: [
         {
           id: 'ban-plastics',
@@ -518,7 +518,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
       title: 'Kwitame ukjit ta’n elmi’knik',
       description: 'Ekwitamemkewe’l walipotl mesna’tiji pituimtlnaqnn ta’n nme’jk te’sikiskek kijkuk No’pa Sko’sa. Ekwitamemk iknmuaj mimajuinu’k lukwaqn aqq iknmuetoq tajikamu’k mijipjewey. Katu na kinu msnu’k asamelkik nme’jk, ma koqoey wkskwiaqtnuk ukjit elmi’knik. Tal-kisi kwitamtitesnu seskwo’ltimk aqq westawiatmk?',
       imageUrl: fishingPracticesImg,
-      photoCredit: 'Photo: Stock Image',
+      photoCredit: 'Photo: Adobe Stock',
       choices: [
         {
           id: 'sustainable-quotas',
@@ -560,7 +560,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
       title: 'Putupey Espawti Anko’tmk',
       description: 'Meski’kl puktewu’lkl ta’n kelnekl welamu’kl aqq mimajuinu’k asoqmtaqtek apaqt jijuaqa me’ta’tiji Oqwatnukewe’k Atlantice’k inaqne’k putupk. Elt naji-tekle’jijik jel mu 400 weskwiejik ula wksitqamuk, ula nme’jk na ta’n lukwaqna’lujik na ketmaqsenujik. Tal-kisi apoqnmua’titisnen?',
       imageUrl: shippingTrafficImg,
-      photoCredit: 'Photo: Stock Image',
+      photoCredit: 'Photo: Adobe Stock',
       choices: [
         {
           id: 'speed-restrictions',
@@ -602,7 +602,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
       title: 'Apaqtukewey Pju’sney Mlkikno’ti',
       description: 'No’pa Sko’sa ketu’ eltoq meski’k pju’sne’l turbine-el ta’n na apaqtuk. Ula na kisi-mlkiknewa’tutal kiknal elt waqme’k wetatenemamk, nisa’toq carboney telteskmk. Katu eltmk aqq maliaptmk nekemowe’l jiptuk kisa’tutew kesikawta’q ta’n lukwaqna’lata putupk, nme’jk, aqq apaqtukewe’k-jipji’jk. Koqoey maw-klu’k kisitasiktitew?',
       imageUrl: renewableEnergyImg,
-      photoCredit: 'Photo: Stock Image',
+      photoCredit: 'Photo: Adobe Stock',
       choices: [
         {
           id: 'careful-planning',
@@ -644,7 +644,7 @@ export const scenarios: Record<Language['code'], Scenario[]> = {
       title: 'Eltmk ta’n Atuomkiktuke’l',
       description: 'Me’ mimajuinu’k na eluksultijik No’pa Sko’saewey welamu’k qasqe’ke’l. Pilikann, wenji’kuo’mji’jl, aqq hotel na eltasikl. Katu eltasik kisi-sioqte’tal qasqe’kewe’l wikultimkl aqq kisa’tutew mejike’k aqq nisukwiaq. Tal-kisi eltutisnen mnaqaj?',
       imageUrl: coastalDevelopmentImg,
-      photoCredit: 'Photo: Stock Image',
+      photoCredit: 'Photo: Adobe Stock',
       choices: [
         {
           id: 'green-development',
