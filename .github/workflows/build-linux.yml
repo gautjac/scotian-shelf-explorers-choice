@@ -5,6 +5,9 @@ on:
     branches: [Debian-test]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,16 +20,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Build Vite app
         run: npx vite build
 
       - name: Build Linux packages
         run: npx electron-builder --linux --x64
+
+      - name: List build artifacts
+        run: ls -lh release/
 
       - name: Upload AppImage
         uses: actions/upload-artifact@v4
