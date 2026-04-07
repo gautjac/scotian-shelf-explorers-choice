@@ -28,7 +28,7 @@ jobs:
         run: npx vite build
 
       - name: Build Linux packages
-        run: npx electron-builder --linux --x64
+        run: npx electron-builder --linux --x64 --publish never
 
       - name: List build artifacts
         run: ls -lh release/
