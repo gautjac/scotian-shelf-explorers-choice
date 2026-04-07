@@ -6,41 +6,48 @@
     <meta name="theme-color" content="#000000" />
     <style>
       html, body, #root { background-color: #000 !important; margin: 0; padding: 0; }
-      #preload-blocker { 
-        position: fixed; 
-        inset: 0; 
-        background: #000; 
-        z-index: 2147483647; 
+      /* Prevent all touch zoom and text selection for kiosk mode */
+      html, body {
+        touch-action: manipulation;
+        -webkit-user-select: none;
+        user-select: none;
+        overflow: hidden;
+      }
+      #preload-blocker {
+        position: fixed;
+        inset: 0;
+        background: #000;
+        z-index: 2147483647;
         pointer-events: none;
         opacity: 1;
         transition: opacity 0.3s ease;
         will-change: opacity;
       }
-      #preload-blocker.fade-out { 
-        opacity: 0; 
+      #preload-blocker.fade-out {
+        opacity: 0;
       }
     </style>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <title>scotian-shelf-explorers-choice</title>
-    <meta name="description" content="Lovable Generated Project" />
-    <meta name="author" content="Lovable" />
-
-    <meta property="og:title" content="scotian-shelf-explorers-choice" />
-    <meta property="og:description" content="Lovable Generated Project" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <title>Scotian Shelf Explorer's Choice</title>
+    <meta name="description" content="Scotian Shelf Explorer's Choice - Museum Kiosk" />
   </head>
 
   <body style="background-color: #000000;">
     <div id="preload-blocker"></div>
     <div id="root" style="min-height: 100vh; background-color: #000000;"></div>
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    <script>
+      // Disable right-click context menu
+      document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+      // Disable Ctrl+scroll zoom
+      document.addEventListener('wheel', function(e) { if (e.ctrlKey) e.preventDefault(); }, { passive: false });
+      // Disable keyboard zoom shortcuts
+      document.addEventListener('keydown', function(e) {
+        if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '-' || e.key === '=' || e.key === '0')) {
+          e.preventDefault();
+        }
+      });
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

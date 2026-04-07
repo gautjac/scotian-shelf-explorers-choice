@@ -1,0 +1,74 @@
+name: Build Linux Packages
+
+on:
+  push:
+    branches: [Debian-test]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Vite app
+        run: npx vite build
+
+      - name: Build Linux packages
+        run: npx electron-builder --linux --x64
+
+      - name: Upload AppImage
+        uses: actions/upload-artifact@v4
+        with:
+          name: AppImage
+          path: release/*.AppImage
+
+      - name: Upload Deb
+        uses: actions/upload-artifact@v4
+        with:
+          name: Deb
+          path: release/*.deb
+
+      - name: Create Release
+        if: github.event_name == 'workflow_dispatch'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0.0-kiosk
+          name: "Kiosk Build v1.0.0"
+          body: |
+            ## Scotian Shelf Explorer's Choice - Museum Kiosk Build
+
+            ### Installation
+
+            **AppImage (recommended):**
+            1. Download the `.AppImage` file
+            2. Make it executable: `chmod +x *.AppImage`
+            3. Run: `./Scotian\ Shelf\ Explorers\ Choice-1.0.0.AppImage`
+
+            **Debian/Ubuntu (.deb):**
+            1. Download the `.deb` file
+            2. Install: `sudo dpkg -i scotian-shelf-explorers-choice_1.0.0_amd64.deb`
+            3. Run from applications menu or: `scotian-shelf-explorers-choice`
+
+            ### Features
+            - Fullscreen kiosk mode at 1920x1080
+            - No internet required
+            - Right-click and pinch-to-zoom disabled
+            - 3-minute inactivity auto-reset
+            - Multilingual (English, French, Mi'kmaq)
+          files: |
+            release/*.AppImage
+            release/*.deb
+          draft: false
+          prerelease: false
